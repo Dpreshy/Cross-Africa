@@ -1,5 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
+import { AiFillCaretDown } from "react-icons/ai"
+import {BsCart} from "react-icons/bs"
+import {BiHelpCircle, BiSearch} from "react-icons/bi"
+import {FiMenu} from "react-icons/fi"
 
 const Header = () => {
   return (
@@ -12,28 +16,27 @@ const Header = () => {
           </Logo>
           <Hold>
             <Nav>
-              Categories
-              <span>=</span>
+              <div>Categories</div>
+              <span><AiFillCaretDown /></span>
             </Nav>
             <SearchHold>
               <input placeholder='Search product' />
-              <button>Q</button>
+              <button><BiSearch /></button>
             </SearchHold>
             <Nav>
-              Account
-              <span>=</span>
+              <div> Account</div>
+              <span><AiFillCaretDown /></span>
             </Nav>
             <Nav>
-              Cart
-              <span>=</span>
+              <div> Cart</div>
+              <span><BsCart /></span>
             </Nav>
             <Nav>
-              Help
-              <span>=</span>
+              <div>Help</div>
+              <span><BiHelpCircle /></span>
             </Nav>
             <Nav>
-              Help
-              <span>=</span>
+              <FiMenu size="20px" />
             </Nav>
           </Hold>
         </Wrapper>
@@ -85,9 +88,17 @@ const Hold = styled.div`
 `;
 const Nav = styled.div`
   font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* background-color: gold; */
+  height: 30px;
+  cursor: pointer;
 
   span{
     margin-left: 10px;
+    position: relative;
+    bottom: -3px;
   }
 `;
 const SearchHold = styled.div`
