@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState} from 'react';
 import styled from 'styled-components';
 import { AiFillCaretDown } from "react-icons/ai"
 import {BsCart} from "react-icons/bs"
@@ -6,6 +6,9 @@ import {BiHelpCircle, BiSearch} from "react-icons/bi"
 import {FiMenu} from "react-icons/fi"
 
 const Header = () => {
+
+  const [categories, setCategories] = useState(false)
+  const [account, setAccount] = useState(false)
   return (
     <div>
       <Container>
@@ -15,18 +18,52 @@ const Header = () => {
             <div>Cross Africa</div>
           </Logo>
           <Hold>
-            <Nav>
+            <Nav onMouseOver={ () => {
+              setCategories(true)
+            } } onMouseLeave={ () => {
+              setCategories(false)
+            }}>
               <div>Categories</div>
               <span><AiFillCaretDown /></span>
             </Nav>
+            {
+              categories ? (
+                <Menu onMouseOver={ () => {
+                  setCategories(true)
+                } } onMouseLeave={ () => {
+                  setCategories(false)
+                }}>
+                  <Navs>Electronics</Navs>
+                  <Navs>Mobile Phones</Navs>
+                  <Navs>Clothing & Fashion</Navs>
+                  <Navs>Food & Groceries</Navs>
+                </Menu>
+              ) : null
+            }
             <SearchHold>
               <input placeholder='Search product' />
               <button><BiSearch /></button>
             </SearchHold>
-            <Nav>
+            <Nav onMouseOver={ () => {
+              setAccount(true)
+            } } onMouseLeave={ () => {
+              setAccount(false)
+            }}>
               <div> Account</div>
               <span><AiFillCaretDown /></span>
             </Nav>
+            {
+              account ? (
+                <AcMenu onMouseOver={ () => {
+                  setAccount(true)
+                } } onMouseLeave={ () => {
+                  setAccount(false)
+                }}>
+                  <Navs>Profile</Navs>
+                  <Navs>Log Out</Navs>
+                </AcMenu>
+              ) : null
+            }
             <Nav>
               <div> Cart</div>
               <span><BsCart /></span>
@@ -47,6 +84,57 @@ const Header = () => {
 
 export default Header;
 
+const Navs = styled.div`
+  width: 100%;
+  padding: 10px 0px;
+  /* border-bottom: 1px solid lightgray; */
+  cursor: pointer;
+  text-align: center;
+  font-weight: 600;
+
+  :hover{
+    background-color: lightgray;
+  }
+`;
+const AcMenu = styled.div`
+  width: 210px;
+  height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background-color: white;
+  border: 1px solid #D975C0;
+  /* border: 1px solid blue; */
+  border-radius: 5px;
+
+  position: absolute;
+  top: 60px;
+  right: 300px;
+
+  @media (max-width: 768px){
+    display: none;
+  }
+`;
+const Menu = styled.div`
+  width: 210px;
+  height: 210px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background-color: white;
+  border: 1px solid #D975C0;
+  border-radius: 5px;
+
+  position: absolute;
+  top: 60px;
+  left: 150px;
+
+  @media (max-width: 768px){
+    display: none;
+  }
+`;
 const Container = styled.div`
   width: 100%;
   /* max-width: 2040px; */

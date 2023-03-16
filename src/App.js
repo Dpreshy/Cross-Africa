@@ -1,27 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Header from './Header/Header';
-import LandingPage from './Components/LandingPage/LandingPage';
 import Footer from './Footer/Footer';
+import AllRoutes from './AllRoutes/AllRoutes';
+import LandingPageHead from './Header/LandingPageHead';
 
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 const App = () => {
+
+  const [ show, setShow ] = useState(false);
   return (
-    <BrowserRouter>
-      <Header />
-      <Routes>
-        <Route path="/" element={ <LandingPage /> } />
-      </Routes>
-
+    <div>
+      {
+        show ? (<Header />) :
+          (<LandingPageHead />)
+      }
+      <AllRoutes />
       <Footer />
-
-
-
-      {/* <Routes>
-           <Route path='/' element={<Home/>}/>
-           <Route path='/pairing' element={<Pair/>}/>
-      </Routes> */}
-    </BrowserRouter>
+    </div>
 
 
   );

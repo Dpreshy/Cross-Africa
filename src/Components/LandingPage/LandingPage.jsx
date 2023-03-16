@@ -1,116 +1,60 @@
 import React from "react";
 import styled from "styled-components";
+import Reason from "./Reason";
+import GetStarted from "./GetStarted";
 
 const LandingPage = () => {
-  return (
-      <div>
-          <Container>
-              <Wrapper>
-                  <Head>Buying & Selling made easy accross Africa!</Head>
-                  <Holder>
-                      <Card>
-                          <TextHold>
-                          <Title>Electronics.</Title>
-                          <Content>
-                            Buying made easy, get  TV, home theatre, system and electronics at the comfort of your home.
-                          </Content>
-                          <Button>Buy Now</Button>
-                         </TextHold>
-                      </Card>
-                      <Card>
-                          <TextHold>
-                          <Title>Mobile Phones.</Title>
-                          <Content>
-                          Buying made easy, get used phones, laptops, chargers etc..  at the comfort of your home
-                          </Content>
-                          <Button>Buy Now</Button>
-                         </TextHold>
-                      </Card>
-                      <Card>
-                          <TextHold>
-                          <Title>Clothing & Fashion.</Title>
-                          <Content>
-                          Buying made easy, get Trendy and classic wears at the comfort of your home.
-                          </Content>
-                          <Button>Buy Now</Button>
-                         </TextHold>
-                      </Card>
-                      <Card>
-                          <TextHold>
-                          <Title>Food & Groceries.</Title>
-                          <Content>
-                          Buying made easy, food and groceries are all available, get them all at the comfort of your home.
-                          </Content>
-                          <Button>Buy Now</Button>
-                         </TextHold>
-                      </Card>
-                  </Holder>
-              </Wrapper>
-          </Container>
-    </div>
-  )
-}
+    return (
+        <div>
+            <Container>
+                <Wrapper>
+                    <Hero>
+                        <Title>ANYONE CAN SELL ON CROSS AFRICA</Title>
+                        <Content>Become a merchant and sell to thousands of people across africa</Content>
+                        <Button>Start Selling Today</Button>
+                    </Hero>
+                    <Reason />
+                    <GetStarted />
+                </Wrapper>
+            </Container>
+        </div>
+    )
+};
 
 export default LandingPage;
 
 const Button = styled.button`
-    margin-bottom: 20px;
-    border: 0px;
-    outline: none;
-    background: #EE65CC;
-    padding: 10px 30px;
+    padding: 15px 70px;
+    border: #D975C0;
+    background-color: #D975C0;
+    border-radius: 5px;
     color: white;
     font-weight: 600;
     cursor: pointer;
-`
-const Content = styled.div`
-    font-size: 20px;
-    font-weight: 400;
-    margin-bottom: 20px;
 `;
+const Content = styled.div`
+    font-weight: 600;
+    font-size: 17px;
+    margin-bottom: 15px;
+  text-align: center;
+`
 const Title = styled.div`
     font-size: 35px;
-    font-weight: 500;
-    margin-bottom: 20px;
+    font-weight: 700;
+    margin-bottom: 15px;
+    text-align: center;
 `
-const TextHold = styled.div`
-    /* background-color: gold; */
-    margin-bottom: 20px;
-`;
-const Card = styled.div`
-    width: 400px;
-    height: 650px;
-    color: white;
-    padding: 0px 18px;
-    background-color: #000000c5;
-    margin: 10px;
-
-    display: flex;
-    align-items: flex-end;
-    
-`;
-const Holder = styled.div`
+const Hero = styled.div`
+    /* width: 100%; */
+    background-image: linear-gradient(90deg, #d0ff00, #262626);
+    height: 600px;
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-wrap: wrap;
+    flex-direction: column;
+    color: white;
 `;
-const Head = styled.div`
-    font-size: 20px;
-    font-weight: 700;
-    margin-top: 30px;
-    margin-bottom: 20px;
-    width: 300px;
-    /* color: ; */
-`
-const Wrapper = styled.div`
-    width: 90%;
-    margin-top: 30px;
-`
+const Wrapper = styled.div``;
 const Container = styled.div`
     width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-`;
+`
