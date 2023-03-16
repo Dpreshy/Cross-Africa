@@ -5,6 +5,7 @@ import Category from "../Components/Category/Category";
 import SignUp from "../Components/SigmUpAndSignIn/SignUp";
 import SignIn from "../Components/SigmUpAndSignIn/SignIn";
 import Information from "../Components/Information/Information";
+import Detail from "../MComponent/Detail"
 
 const AllRoutes = () => {
     let element = useRoutes([
@@ -37,6 +38,10 @@ const AllRoutes = () => {
         {
             path: "/information",
             element: <Information />
+        },
+        {
+            path: "/detail",
+            element: <Detail />
         }
     ])
 
