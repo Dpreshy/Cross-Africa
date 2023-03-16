@@ -82,6 +82,7 @@ const Wrapper = styled.div`
   margin-top: 30px;
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
 `;
 const Container = styled.div`
   width: 100%;
