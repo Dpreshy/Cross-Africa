@@ -14,7 +14,7 @@ const Header = () => {
       <Container>
         <Wrapper>
           <Logo>
-            <img src='/logo 1.png' />
+            <img src="/logo 1.png" />
             <div>Cross Africa</div>
           </Logo>
           <Hold>
@@ -24,7 +24,9 @@ const Header = () => {
               setCategories(false)
             }}>
               <div>Categories</div>
-              <span><AiFillCaretDown /></span>
+              <span>
+                <AiFillCaretDown />
+              </span>
             </Nav>
             {
               categories ? (
@@ -41,8 +43,10 @@ const Header = () => {
               ) : null
             }
             <SearchHold>
-              <input placeholder='Search product' />
-              <button><BiSearch /></button>
+              <input placeholder="Search product" />
+              <button>
+                <BiSearch />
+              </button>
             </SearchHold>
             <Nav onMouseOver={ () => {
               setAccount(true)
@@ -50,7 +54,9 @@ const Header = () => {
               setAccount(false)
             }}>
               <div> Account</div>
-              <span><AiFillCaretDown /></span>
+              <span>
+                <AiFillCaretDown />
+              </span>
             </Nav>
             {
               account ? (
@@ -66,11 +72,15 @@ const Header = () => {
             }
             <Nav>
               <div> Cart</div>
-              <span><BsCart /></span>
+              <span>
+                <BsCart />
+              </span>
             </Nav>
             <Nav>
               <div>Help</div>
-              <span><BiHelpCircle /></span>
+              <span>
+                <BiHelpCircle />
+              </span>
             </Nav>
             <Nav>
               <FiMenu size="20px" />
@@ -158,12 +168,12 @@ const Logo = styled.div`
   margin-right: 30px;
   /* margin-bottom: 10px; */
 
-  img{
+  img {
     height: 60px;
     width: 60px;
   }
 
-  div{
+  div {
     font-weight: 700;
     font-size: 20px;
   }
@@ -179,11 +189,11 @@ const Nav = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  /* background-color: gold; */
+  // background-color: gold;
   height: 30px;
   cursor: pointer;
 
-  span{
+  span {
     margin-left: 10px;
     position: relative;
     bottom: -3px;
@@ -192,23 +202,22 @@ const Nav = styled.div`
 const SearchHold = styled.div`
   width: 300px;
   height: 40px;
-  border: 2px solid #D975C0;
-;
+  border: 2px solid #d975c0;
   border-radius: 10px;
   display: flex;
   align-items: center;
   /* justify-content: center; */
-  input{
+  input {
     /* height: 40px; */
     width: 250px;
     outline: none;
     border: 0;
     padding-left: 10px;
   }
-  button{
+  button {
     width: 70px;
     height: 40px;
-    background-color:  #D975C0;
+    background-color: #d975c0;
     border: 0px;
     outline: none;
 

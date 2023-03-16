@@ -4,7 +4,6 @@ import Footer from './Footer/Footer';
 import AllRoutes from './AllRoutes/AllRoutes';
 import LandingPageHead from './Header/LandingPageHead';
 
-
 const App = () => {
 
   const [ show, setShow ] = useState(false);
