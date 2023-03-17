@@ -159,11 +159,13 @@ const Text = styled.div`
     font-size: 17px;
     font-weight: 600;
     width: 250px;
+    margin-bottom: 20px;
 `
 const Title = styled.div`
     text-align: center;
     font-size: 20px;
     font-weight: 700;
+    margin-bottom: 20px;
 `;
 const Wrapper = styled.div`
     width: 450px;
