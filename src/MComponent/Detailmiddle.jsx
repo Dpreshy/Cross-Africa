@@ -166,6 +166,10 @@ const Quantity = styled.div`
   flex-direction: column;
   align-items: flex-start;
   justify-content: space-between;
+
+  @media (max-width: 1100px){
+    align-items: center;
+  }
 `;
 const OptionTitle = styled.div`
   width: 100%;
@@ -199,12 +203,12 @@ const Optionav = styled.div`
   }
 `;
 const Icontest = styled.div`
-  font-size: 17px;
+  font-size: 15px;
   font-weight: 500;
   font-family: poppins;
 `;
 const Icontitle = styled.div`
-  font-size: 2rem;
+  font-size: 25px;
   margin-bottom: 15px;
   font-weight: 500;
   font-family: poppins;
@@ -266,15 +270,19 @@ const Image1 = styled.div`
 `;
 const Imghold = styled.div`
   width: 450px;
+  /* flex: 1; */
   height: 750px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: space-between;
   padding: 50px 0;
+
+  
 `;
 const Others = styled.div`
-  width: 500px;
+  width: 550px;
+  /* flex: 1; */
   height: 750px;
   display: flex;
   flex-direction: column;
@@ -303,6 +311,10 @@ const Middle = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  @media (max-width: 1100px){
+    justify-content: center;
+  }
 `;
 
 const Container = styled.div`
