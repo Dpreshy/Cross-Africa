@@ -6,7 +6,7 @@ import LandingPageHead from './Header/LandingPageHead';
 
 const App = () => {
 
-  const [ show, setShow ] = useState(false);
+  const [ show, setShow ] = useState(true);
   return (
     <div>
       {
@@ -16,8 +16,6 @@ const App = () => {
       <AllRoutes />
       <Footer />
     </div>
-
-
   );
 };
 

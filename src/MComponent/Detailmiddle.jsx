@@ -11,11 +11,10 @@ import {
   BsInfoCircleFill,
 } from "react-icons/bs";
 
-const Detail = () => {
+const Detailmiddle = () => {
   return (
     <Container>
       <Wrapper>
-        <Up></Up>
         <Middle>
           <Imghold>
             <Image1></Image1>
@@ -95,14 +94,12 @@ const Detail = () => {
             </Quantity>
           </Others>
         </Middle>
-        <Down></Down>
       </Wrapper>
     </Container>
   );
 };
 
-export default Detail;
-// const Middle = styled.div``
+export default Detailmiddle;
 const QuantityIncreament = styled.div`
   width: 70px;
   height: 70px;
@@ -164,7 +161,7 @@ const Quantitybutton = styled.div`
 `;
 const Quantity = styled.div`
   width: 100%;
-  height: 215px;
+  height: 195px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -257,37 +254,38 @@ const Select = styled.div`
 
 const Image2 = styled.div`
   width: 450px;
-  height: 270px;
+  height: 330px;
   background-color: burlywood;
   border-radius: 5px;
 `;
 const Image1 = styled.div`
   width: 450px;
-  height: 270px;
+  height: 330px;
   background-color: brown;
   border-radius: 5px;
 `;
 const Imghold = styled.div`
   width: 450px;
-  height: 100%;
+  height: 750px;
   display: flex;
   flex-direction: column;
-  /* background-color: red; */
   align-items: flex-start;
   justify-content: space-between;
+  padding: 50px 0;
 `;
 const Others = styled.div`
   width: 500px;
-  height: 100%;
+  height: 750px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: space-between;
+  padding: 50px 0;
 `;
 
 const Wrapper = styled.div`
-  width: 93%;
-  height: 95%;
+  width: 95%;
+  /* height: 95%; */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -301,20 +299,16 @@ const Up = styled.div`
 const Middle = styled.div`
   width: 100%;
   flex-wrap: wrap;
-  height: 970px;
+  /* height: 970px; */
   display: flex;
   align-items: center;
   justify-content: space-between;
 `;
-const Down = styled.div`
-  width: 100%;
-  height: 70px;
-  border: 2px solid black;
-`;
+
 const Container = styled.div`
   width: 100%;
   /* height: 100vh; */
-  height: 100vh;
+  /* height: 100vh; */
   display: flex;
   align-items: center;
   justify-content: center;

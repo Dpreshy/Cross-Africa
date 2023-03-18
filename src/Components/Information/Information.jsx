@@ -7,13 +7,13 @@ const Information = () => {
       <div>
           <Container>
               <Wrapper>
-                  <Title>Seller Account</Title>
-                  <Text>Please enter every necessary information</Text>
+                  <Title>Business Information</Title>
+                  <Text>Enter every necessary details to create your own seller account</Text>
                   <InputHold>
                        
                         
                         <Hold>
-                            <Name>Phone Number</Name>
+                            <Name>Business owner or legal representative ID type</Name>
                             <HoldInput>
                                 <Input placeholder="Phone Number" />
                             </HoldInput>
@@ -21,20 +21,24 @@ const Information = () => {
                         </Hold>
                         
                         <Hold>
-                            <Name>Confirm Password</Name>
+                            <Name>Upload a copy of your valid ID card</Name>
                             <HoldInput>
-                              <Input placeholder="Confirm Password" type="password" id='pass'/>
-                              <Icon>Q</Icon>
+                              <Input type="file" id='pass'/>
+                              {/* <Icon>Q</Icon> */}
                             </HoldInput>
                             {true ? null : <Error>Error</Error>}
                       </Hold>
                       <Hold>
-                            <Name>Full Name</Name>
+                            <Name>CAC Registration Number</Name>
                             <HoldInput>
                                 <Input placeholder="Full Name" />
                             </HoldInput>
                             {true ? null : <Error>Error</Error>}
-                        </Hold>
+                      </Hold>
+                      <Card>
+                          <InputFile type="file" />
+                          <Image />
+                      </Card>
                       <Button>Continue</Button>
                       <AlText>Already have an account? <NavLink to="/auth/signin" style={{textDecoration: "none"}}><span>LogIn</span></NavLink></AlText>
                   </InputHold>
@@ -46,6 +50,28 @@ const Information = () => {
 
 export default Information
 
+const InputFile = styled.input`
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    /* opacity: 0px; */
+    display: none;
+`
+const Image = styled.img`
+    
+    background-color: gold;
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+`
+const Card = styled.label`
+    width: 220px;
+    height: 220px;
+    border: 1px solid gray;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+`;
 const AlText = styled.div`
     font-size: 13px;
     font-weight: 500;
@@ -116,14 +142,17 @@ const InputHold = styled.div`
 `
 const Text = styled.div`
     text-align: center;
-    font-size: 17px;
+    font-size: 16px;
     font-weight: 600;
-    width: 250px;
+    width: 300px;
+    margin-bottom: 20px;
+
 `
 const Title = styled.div`
     text-align: center;
     font-size: 20px;
     font-weight: 700;
+    margin-bottom: 20px;
 `;
 const Wrapper = styled.div`
     width: 450px;
