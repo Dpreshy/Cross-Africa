@@ -7,6 +7,7 @@ import SignIn from "../SigmUpAndSignIn/SignIn";
 import Information from "../Information/Information";
 import Detail from "../Detail/Detail";
 import Payment from "../Payment/Payment";
+import Review from "../Review/Review";
 
 const AllRoutes = () => {
   let element = useRoutes([
@@ -40,6 +41,11 @@ const AllRoutes = () => {
       path: "/information",
       element: <Information />,
     },
+    {
+      path: "/review",
+      element: <Review />,
+    },
+
     {
       path: "/detail",
       element: <Detail />,
