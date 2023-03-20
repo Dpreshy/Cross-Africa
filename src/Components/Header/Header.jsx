@@ -1,14 +1,13 @@
-import React,{useState} from 'react';
-import styled from 'styled-components';
-import { AiFillCaretDown } from "react-icons/ai"
-import {BsCart} from "react-icons/bs"
-import {BiHelpCircle, BiSearch} from "react-icons/bi"
-import {FiMenu} from "react-icons/fi"
+import React, { useState } from "react";
+import styled from "styled-components";
+import { AiFillCaretDown } from "react-icons/ai";
+import { BsCart } from "react-icons/bs";
+import { BiHelpCircle, BiSearch } from "react-icons/bi";
+import { FiMenu } from "react-icons/fi";
 
 const Header = () => {
-
-  const [categories, setCategories] = useState(false)
-  const [account, setAccount] = useState(false)
+  const [categories, setCategories] = useState(false);
+  const [account, setAccount] = useState(false);
   return (
     <div>
       <Container>
@@ -18,58 +17,66 @@ const Header = () => {
             <div>Cross Africa</div>
           </Logo>
           <Hold>
-            <Nav onMouseOver={ () => {
-              setCategories(true)
-            } } onMouseLeave={ () => {
-              setCategories(false)
-            }}>
+            <Nav
+              onMouseOver={() => {
+                setCategories(true);
+              }}
+              onMouseLeave={() => {
+                setCategories(false);
+              }}
+            >
               <div>Categories</div>
               <span>
                 <AiFillCaretDown />
               </span>
             </Nav>
-            {
-              categories ? (
-                <Menu onMouseOver={ () => {
-                  setCategories(true)
-                } } onMouseLeave={ () => {
-                  setCategories(false)
-                }}>
-                  <Navs>Electronics</Navs>
-                  <Navs>Mobile Phones</Navs>
-                  <Navs>Clothing & Fashion</Navs>
-                  <Navs>Food & Groceries</Navs>
-                </Menu>
-              ) : null
-            }
+            {categories ? (
+              <Menu
+                onMouseOver={() => {
+                  setCategories(true);
+                }}
+                onMouseLeave={() => {
+                  setCategories(false);
+                }}
+              >
+                <Navs>Electronics</Navs>
+                <Navs>Mobile Phones</Navs>
+                <Navs>Clothing & Fashion</Navs>
+                <Navs>Food & Groceries</Navs>
+              </Menu>
+            ) : null}
             <SearchHold>
               <input placeholder="Search product" />
               <button>
                 <BiSearch />
               </button>
             </SearchHold>
-            <Nav onMouseOver={ () => {
-              setAccount(true)
-            } } onMouseLeave={ () => {
-              setAccount(false)
-            }}>
+            <Nav
+              onMouseOver={() => {
+                setAccount(true);
+              }}
+              onMouseLeave={() => {
+                setAccount(false);
+              }}
+            >
               <div> Account</div>
               <span>
                 <AiFillCaretDown />
               </span>
             </Nav>
-            {
-              account ? (
-                <AcMenu onMouseOver={ () => {
-                  setAccount(true)
-                } } onMouseLeave={ () => {
-                  setAccount(false)
-                }}>
-                  <Navs>Profile</Navs>
-                  <Navs>Log Out</Navs>
-                </AcMenu>
-              ) : null
-            }
+            {account ? (
+              <AcMenu
+                onMouseOver={() => {
+                  setAccount(true);
+                }}
+                onMouseLeave={() => {
+                  setAccount(false);
+                }}
+              >
+                <Navs>Profile</Navs>
+                <Navs>Log Out</Navs>
+              </AcMenu>
+            ) : null}
             <Nav>
               <div> Cart</div>
               <span>
@@ -102,7 +109,7 @@ const Navs = styled.div`
   text-align: center;
   font-weight: 600;
 
-  :hover{
+  :hover {
     background-color: lightgray;
   }
 `;
@@ -114,7 +121,7 @@ const AcMenu = styled.div`
   justify-content: center;
   flex-direction: column;
   background-color: white;
-  border: 1px solid #D975C0;
+  border: 1px solid #d975c0;
   /* border: 1px solid blue; */
   border-radius: 5px;
 
@@ -122,7 +129,7 @@ const AcMenu = styled.div`
   top: 60px;
   right: 300px;
 
-  @media (max-width: 768px){
+  @media (max-width: 768px) {
     display: none;
   }
 `;
@@ -134,14 +141,14 @@ const Menu = styled.div`
   justify-content: center;
   flex-direction: column;
   background-color: white;
-  border: 1px solid #D975C0;
+  border: 1px solid #d975c0;
   border-radius: 5px;
 
   position: absolute;
   top: 60px;
   left: 150px;
 
-  @media (max-width: 768px){
+  @media (max-width: 768px) {
     display: none;
   }
 `;
@@ -221,7 +228,7 @@ const SearchHold = styled.div`
     border: 0px;
     outline: none;
 
-    border-top-right-radius: 10px;
-    border-bottom-right-radius: 10px;
+    border-top-right-radius: 7px;
+    border-bottom-right-radius: 7px;
   }
 `;
