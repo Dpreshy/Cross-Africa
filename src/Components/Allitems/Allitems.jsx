@@ -10,4 +10,5 @@ const Allitems = () => {
 };
 
 export default Allitems;
+const Wrapper = styled.div``;
 const Container = styled.div``;
