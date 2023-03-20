@@ -8,6 +8,7 @@ import Information from "../Information/Information";
 import Detail from "../Detail/Detail";
 import Payment from "../Payment/Payment";
 import Review from "../Review/Review";
+import Allitems from "../Allitems/Allitems";
 
 const AllRoutes = () => {
   let element = useRoutes([
@@ -44,6 +45,10 @@ const AllRoutes = () => {
     {
       path: "/review",
       element: <Review />,
+    },
+    {
+      path: "/allitems",
+      element: <Allitems />,
     },
 
     {
