@@ -2,7 +2,7 @@ import React from "react";
 import { AiOutlineCheck } from "react-icons/ai";
 import styled from "styled-components";
 
-const Detailmiddle = () => {
+const Review = () => {
   return (
     <Container>
       <Card>
@@ -22,7 +22,7 @@ const Detailmiddle = () => {
   );
 };
 
-export default Detailmiddle;
+export default Review;
 const Container = styled.div`
   width: 100%;
   height: 40vh;
