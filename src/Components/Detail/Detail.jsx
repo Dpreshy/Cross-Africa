@@ -1,5 +1,5 @@
 import React from "react";
-import Detailmiddle from "../Detailmiddle";
+import Detailmiddle from "./Detailmiddle";
 import Detaildown from "./Detaildown";
 import Detailup from "./Detailup";
 import styled from "styled-components";
