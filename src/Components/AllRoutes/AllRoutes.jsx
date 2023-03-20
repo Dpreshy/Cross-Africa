@@ -9,6 +9,7 @@ import Detail from "../Detail/Detail";
 import Payment from "../Payment/Payment";
 import Review from "../Review/Review";
 import Allitems from "../Allitems/Allitems";
+import ErrorOtp from "../ErrorOtp/ErrorOtp";
 
 const AllRoutes = () => {
   let element = useRoutes([
@@ -49,6 +50,10 @@ const AllRoutes = () => {
     {
       path: "/allitems",
       element: <Allitems />,
+    },
+    {
+      path: "/otperror",
+      element: <ErrorOtp />,
     },
 
     {
