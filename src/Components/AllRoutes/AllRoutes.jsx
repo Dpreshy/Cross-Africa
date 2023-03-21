@@ -10,6 +10,7 @@ import Payment from "../Payment/Payment";
 import Review from "../Review/Review";
 import Allitems from "../Allitems/Allitems";
 import ErrorOtp from "../ErrorOtp/ErrorOtp";
+import Checkout from "../Payment/Checkout";
 
 const AllRoutes = () => {
   let element = useRoutes([
@@ -54,6 +55,10 @@ const AllRoutes = () => {
     {
       path: "/otperror",
       element: <ErrorOtp />,
+    },
+    {
+      path: "/checkout",
+      element: <Checkout />,
     },
 
     {
