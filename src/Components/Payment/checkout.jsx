@@ -54,6 +54,13 @@ const Checkout = () => {
                   <span>Chance</span>
                 </InputCont>
               </InputHold>
+              <InputHold>
+                <Title>Address,Suite etc</Title>
+                <InputCont>
+                  <Input placeholder="email" />
+                  <span>Chance</span>
+                </InputCont>
+              </InputHold>
             </Hold>
           </Left>
           <Right>
