@@ -7,6 +7,7 @@ import SignIn from "../Components/SigmUpAndSignIn/SignIn";
 import Information from "../Components/Information/Information";
 import Detail from "../MComponent/Detail/Detail"
 import Payment from "../Components/Payment/Payment";
+import Shipping from "../Components/Payment/Shipping";
 
 const AllRoutes = () => {
     let element = useRoutes([
@@ -45,9 +46,13 @@ const AllRoutes = () => {
             element: <Detail />
         },
         {
-            path: "payment",
+            path: "/payment",
             element: <Payment/>
-        }
+        },
+        {
+            path: "/shipping",
+            element: <Shipping/>
+        },
     ])
 
     return element
