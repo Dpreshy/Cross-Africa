@@ -40,7 +40,6 @@ const Information = () => {
                           <Image />
                       </Card>
                       <Button>Continue</Button>
-                      <AlText>Already have an account? <NavLink to="/auth/signin" style={{textDecoration: "none"}}><span>LogIn</span></NavLink></AlText>
                   </InputHold>
               </Wrapper>
           </Container>
