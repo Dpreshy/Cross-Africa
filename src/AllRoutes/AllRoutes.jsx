@@ -52,7 +52,7 @@ const AllRoutes = () => {
         {
             path: "/shipping",
             element: <Shipping/>
-        },
+        }
     ])
 
     return element
