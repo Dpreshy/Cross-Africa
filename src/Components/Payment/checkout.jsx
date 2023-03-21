@@ -10,7 +10,7 @@ const Checkout = () => {
           <Left>
             <Hold>
               <InputHold>
-                <Title>Contact</Title>
+                <Title>Contact Information</Title>
                 <InputCont>
                   <Input placeholder="email" />
                   <span>Chance</span>
@@ -46,6 +46,14 @@ const Checkout = () => {
                 </Div>
                 <Button>Complete Order</Button>
               </Buttons>
+
+              <InputHold>
+                <Title>Shipping Address</Title>
+                <InputCont>
+                  <Input placeholder="email" />
+                  <span>Chance</span>
+                </InputCont>
+              </InputHold>
             </Hold>
           </Left>
           <Right>
