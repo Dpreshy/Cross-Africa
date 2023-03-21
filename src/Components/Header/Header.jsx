@@ -89,9 +89,9 @@ const Header = () => {
                 <BiHelpCircle />
               </span>
             </Nav>
-            <Nav>
+            {/* <Nav>
               <FiMenu size="20px" />
-            </Nav>
+            </Nav> */}
           </Hold>
         </Wrapper>
       </Container>
@@ -127,7 +127,8 @@ const AcMenu = styled.div`
 
   position: absolute;
   top: 60px;
-  right: 300px;
+  left: 60%;
+  right: 40%;
 
   @media (max-width: 768px) {
     display: none;
@@ -154,7 +155,7 @@ const Menu = styled.div`
 `;
 const Container = styled.div`
   width: 100%;
-  /* max-width: 2040px; */
+  max-width: 1500px;
   height: 90px;
   display: flex;
   align-items: center;
@@ -189,7 +190,7 @@ const Hold = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 85%;
+  width: 80%;
 `;
 const Nav = styled.div`
   font-weight: 700;
@@ -207,7 +208,7 @@ const Nav = styled.div`
   }
 `;
 const SearchHold = styled.div`
-  width: 300px;
+  width: 400px;
   height: 40px;
   border: 2px solid #d975c0;
   border-radius: 10px;
@@ -216,7 +217,7 @@ const SearchHold = styled.div`
   /* justify-content: center; */
   input {
     /* height: 40px; */
-    width: 250px;
+    width: 350px;
     outline: none;
     border: 0;
     padding-left: 10px;

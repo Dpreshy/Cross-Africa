@@ -1,10 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 import Item from './Item'
-import { FaAngleLeft } from "react-icons/fa"
 
-
-const Payment = () => {
+const Shipping = () => {
   return (
       <div>
           <Container>
@@ -12,41 +10,38 @@ const Payment = () => {
                   <Left>
                       <Hold>
                           <InputHold>
-                              <Title>Contact</Title>
+                              <Title>Confirmation</Title>
                               <InputCont>
-                                  <Input placeholder="email"/>
-                                  <span>Chance</span>
+                                  <Test>Your order will be shipped immediately</Test>
                               </InputCont>
                           </InputHold>
                           <InputHold>
-                              <Title>Address</Title>
+                              <Title>Shipping Update</Title>
                               <InputCont>
-                                  <Input placeholder="Address"/>
-                                  <span>Chance</span>
+                                <Test>You will get shipping and delivery update by email</Test>
                               </InputCont>
                           </InputHold>
                           <InputHold>
-                              <Title>Payment Method</Title>
+                              <Title>Customer Information</Title>
                               <InputCont>
                                     <Dis>
                                         <Cont>
-                                            <Checkbox bg="fff"></Checkbox>
-                                            <PayOn>Pay on delivery</PayOn>
+                                            <Tick>Contact Information</Tick>
+                                            <PayOn>pay@gmail.com</PayOn>
                                         </Cont>
-                                        <Line />  
                                         <Cont>
-                                            <Checkbox bg=""></Checkbox>
-                                            <PayOn>Pay on delivery</PayOn>
+                                            <Tick>Shipping Address</Tick>
+                                            <PayOn>Location</PayOn>
+                                        </Cont>
+                                        <Cont>
+                                            <Tick>Payment Method</Tick>
+                                            <PayOn>Location</PayOn>
                                         </Cont>
                                     </Dis>
                               </InputCont>
                           </InputHold>
                           <Buttons>
-                              <Div>
-                                  <span><FaAngleLeft /></span>
-                                  <div>Return to Information</div>
-                              </Div>
-                              <Button>Complete Order</Button>
+                              <Button>Complete Shipping</Button>
                           </Buttons>
                       </Hold>
                   </Left>
@@ -59,8 +54,13 @@ const Payment = () => {
   )
 }
 
-export default Payment
+export default Shipping
 
+const Test = styled.div`
+    margin-left: 10px;
+    font-weight: 600;
+    color: #363636;
+`
 const Right = styled.div`
     flex: 1;
     height: 100vh;
@@ -84,17 +84,14 @@ const Div = styled.div`
 
     div{
         font-weight: 600;
-        /* margin-left: 10px; */
+        margin-left: 10px;
         color: #3c3c3c;
-    }
-    span{
-        margin-top: 5px;
     }
 `;
 const Buttons = styled.div`
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-end;
     padding: 0px 10px;
     margin-top: 30px;
 `
@@ -105,22 +102,18 @@ const Line = styled.div`
     margin: 10px 0px;
 `;
 const PayOn = styled.div`
-    font-weight: 700;
+    font-weight: 500;
     margin-right: 20px;
 `
-const Checkbox = styled.div`
-    border: 1px solid black;
-    background-color: ${({ bg }) => (bg ? "#D975C0" : "transparent")};
-    border-radius: 50%;
-    height: 25px;
-    width: 25px;
-    cursor: pointer;
+const Tick = styled.div`
+   font-weight: 700;
 `;
 const Cont = styled.div`
     width: 95%;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    margin-bottom: 20px;
 `;
 const Dis = styled.div`
     width: 100%;
@@ -143,7 +136,7 @@ const InputCont = styled.div`
     /* height: 40px; */
     display: flex;
     align-items: center;
-    justify-content: center;
+    /* justify-content: center; */
     border-radius: 5px;
     padding: 10px 0px;
 
