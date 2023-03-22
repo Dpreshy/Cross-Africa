@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Item from "./Item";
-
+import { AiFillCaretDown, AiFillFlag, AiFillCaretLeft } from "react-icons/ai";
 const Checkout = () => {
   return (
     <div>
@@ -11,16 +11,10 @@ const Checkout = () => {
             <Hold>
               <InputHold>
                 <Title>Contact Information</Title>
+                <Text>Email</Text>
                 <InputCont>
                   <Input placeholder="email" />
-                  <span>Chance</span>
-                </InputCont>
-              </InputHold>
-              <InputHold>
-                <Title>Address</Title>
-                <InputCont>
-                  <Input placeholder="Address" />
-                  <span>Chance</span>
+                  {/* <span>Chance</span> */}
                 </InputCont>
               </InputHold>
               <InputHold>
@@ -39,28 +33,91 @@ const Checkout = () => {
                   </Dis>
                 </InputCont>
               </InputHold>
+
+              <InputHold1>
+                <Title>Shipping Address</Title>
+                <Text>Country</Text>
+
+                <Optionav>
+                  {" "}
+                  <div>
+                    <AiFillFlag />
+                  </div>
+                  <span>
+                    <AiFillCaretDown />
+                  </span>
+                </Optionav>
+              </InputHold1>
+              <InputHold2>
+                <Wrap>
+                  <Text>First Name</Text>
+                  <InputCont>
+                    <Input placeholder="First Name" />
+                    {/* <span>Chance</span> */}
+                  </InputCont>
+                </Wrap>
+                <Wrap>
+                  <Text>Last Name</Text>
+                  <InputCont>
+                    <Input placeholder="Last Name" />
+                    {/* <span>Chance</span> */}
+                  </InputCont>
+                </Wrap>
+              </InputHold2>
+              <InputHold1>
+                <Text>Address</Text>
+                <InputCont>
+                  <Input placeholder="Address" />
+                  {/* <span>Chance</span> */}
+                </InputCont>
+              </InputHold1>
+              <InputHold1>
+                <Text>Apartment, Suite etc.... (Optional)</Text>
+                <InputCont>
+                  <Input placeholder="Apartment, Suite etc...." />
+                  {/* <span>Chance</span> */}
+                </InputCont>
+              </InputHold1>
+              <InputHold2>
+                <Wrap1>
+                  <Text>State</Text>
+                  <InputCont>
+                    <Input placeholder="Lagos" />
+                    {/* <span>Chance</span> */}
+                  </InputCont>
+                </Wrap1>
+                <Wrap1>
+                  <Text>LGA</Text>
+                  <InputCont>
+                    <Input placeholder="Ajeromi" />
+                    {/* <span>Chance</span> */}
+                  </InputCont>
+                </Wrap1>
+                <Wrap1>
+                  <Text>Nearest B/Stop</Text>
+                  <InputCont>
+                    <Input placeholder="OJA" />
+                    {/* <span>Chance</span> */}
+                  </InputCont>
+                </Wrap1>
+              </InputHold2>
+
+              <InputHold1>
+                <Text>Phone number</Text>
+                <InputCont>
+                  <Input placeholder="Phone number" />
+                  {/* <span>Chance</span> */}
+                </InputCont>
+              </InputHold1>
               <Buttons>
                 <Div>
-                  <span>=</span>
-                  <div>Return to Information</div>
+                  <span>
+                    <AiFillCaretLeft />
+                  </span>
+                  <div>Return to Cart</div>
                 </Div>
-                <Button>Complete Order</Button>
+                <Button>Continue Shopping</Button>
               </Buttons>
-
-              <InputHold>
-                <Title>Shipping Address</Title>
-                <InputCont>
-                  <Input placeholder="email" />
-                  <span>Chance</span>
-                </InputCont>
-              </InputHold>
-              <InputHold>
-                <Title>Address,Suite etc</Title>
-                <InputCont>
-                  <Input placeholder="email" />
-                  <span>Chance</span>
-                </InputCont>
-              </InputHold>
             </Hold>
           </Left>
           <Right>
@@ -73,11 +130,41 @@ const Checkout = () => {
 };
 
 export default Checkout;
+const Wrap = styled.div`
+  width: 45%;
+`;
+const Wrap1 = styled.div`
+  width: 30%;
+`;
+const Optionav = styled.div`
+  font-weight: 700;
+  width: 95%;
+  padding: 10px 10px;
+  display: flex;
+  border: 1.7px solid grey;
+  border-radius: 5px;
+  align-items: center;
+  justify-content: space-between;
+  // background-color: gold;
+  height: 30px;
 
+  span {
+    margin-left: 10px;
+    position: relative;
+    bottom: -3px;
+    cursor: pointer;
+  }
+  div {
+  }
+`;
+const Text = styled.div`
+  font-size: 15px;
+  font-weight: 500;
+  margin-bottom: 6px;
+`;
 const Right = styled.div`
   flex: 1;
-  height: 100vh;
-  border-left: 3px solid lightgray;
+
   /* background-color: blue; */
 `;
 const Button = styled.button`
@@ -107,6 +194,10 @@ const Buttons = styled.div`
   justify-content: space-between;
   padding: 0px 10px;
   margin-top: 30px;
+
+  span {
+    margin-top: 5px;
+  }
 `;
 const Line = styled.div`
   width: 100%;
@@ -144,7 +235,7 @@ const Input = styled.input`
   height: 30px;
   border: 0px;
   outline: none;
-  margin-left: 10px;
+  /* margin-right: 20px; */
 `;
 const InputCont = styled.div`
   border: 1px solid gray;
@@ -166,12 +257,22 @@ const InputCont = styled.div`
   }
 `;
 const Title = styled.div`
-  font-size: 18px;
-  font-weight: 600;
-  margin-bottom: 10px;
+  font-size: 21px;
+  font-weight: bold;
+  margin-bottom: 14px;
 `;
 const InputHold = styled.div`
-  margin: 10px;
+  margin-bottom: 50px;
+`;
+const InputHold1 = styled.div`
+  margin-bottom: 20px;
+`;
+const InputHold2 = styled.div`
+  margin-bottom: 20px;
+  display: flex;
+
+  justify-content: space-between;
+  align-items: center;
 `;
 const Hold = styled.div`
   width: 90%;
@@ -179,7 +280,7 @@ const Hold = styled.div`
 `;
 const Left = styled.div`
   flex: 1;
-  height: 100vh;
+  border-right: 2px solid lightgray;
   display: flex;
   justify-content: center;
   /* background-color: gold; */
