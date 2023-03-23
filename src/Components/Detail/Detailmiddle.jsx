@@ -17,8 +17,12 @@ const Detailmiddle = () => {
       <Wrapper>
         <Middle>
           <Imghold>
-            <Image1></Image1>
-            <Image2></Image2>
+            <Image1>
+              <img src="/Airpod1.png" />
+            </Image1>
+            <Image2>
+              <img src="/Frame 1.png" />
+            </Image2>
           </Imghold>
           <Others>
             <Select>
@@ -167,7 +171,7 @@ const Quantity = styled.div`
   align-items: flex-start;
   justify-content: space-between;
 
-  @media (max-width: 1100px){
+  @media (max-width: 1100px) {
     align-items: center;
   }
 `;
@@ -261,12 +265,25 @@ const Image2 = styled.div`
   height: 330px;
   background-color: burlywood;
   border-radius: 5px;
+  img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 5px;
+  }
 `;
 const Image1 = styled.div`
   width: 450px;
   height: 330px;
   background-color: brown;
   border-radius: 5px;
+  img {
+    height: 100%;
+    width: 100%;
+    border-radius: 5px;
+
+    object-fit: cover;
+  }
 `;
 const Imghold = styled.div`
   width: 450px;
@@ -277,8 +294,6 @@ const Imghold = styled.div`
   align-items: flex-start;
   justify-content: space-between;
   padding: 50px 0;
-
-  
 `;
 const Others = styled.div`
   width: 550px;
@@ -312,7 +327,7 @@ const Middle = styled.div`
   align-items: center;
   justify-content: space-between;
 
-  @media (max-width: 1100px){
+  @media (max-width: 1100px) {
     justify-content: center;
   }
 `;

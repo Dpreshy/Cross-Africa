@@ -25,7 +25,9 @@ const Detaildown = () => {
           <Downtitle>Mobiles</Downtitle>
           <Cardhold>
             <Card>
-              <Image></Image>
+              <Image>
+                <img src="/Frame 1.png" />
+              </Image>
               <Name>
                 {" "}
                 Mac Book Pro
@@ -37,7 +39,9 @@ const Detaildown = () => {
               <Price>#450,000</Price>
             </Card>
             <Card>
-              <Image></Image>
+              <Image>
+                <img src="/Frame 113.png" />
+              </Image>
               <Name>
                 {" "}
                 Samsung S4
@@ -49,7 +53,9 @@ const Detaildown = () => {
               <Price>#250,000</Price>
             </Card>
             <Card>
-              <Image></Image>
+              <Image>
+                <img src="/Frame 112.png" />
+              </Image>
               <Name>
                 {" "}
                 Iphone X
@@ -83,6 +89,13 @@ const Image = styled.div`
   border-radius: 5px;
   width: 250px;
   height: 260px;
+
+  img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 5px;
+  }
 `;
 const Name = styled.div`
   font-size: 13px;

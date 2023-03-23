@@ -9,7 +9,9 @@ const Allitems = () => {
         <Downtitle>Mobiles</Downtitle>
         <Cardhold>
           <Card>
-            <Image></Image>
+            <Image>
+              <img src="/Frame 1.png" />
+            </Image>
             <Name>
               {" "}
               Iphone X
@@ -21,7 +23,9 @@ const Allitems = () => {
             <Price>#140,000</Price>
           </Card>
           <Card>
-            <Image></Image>
+            <Image>
+              <img src="/Frame 1.png" />
+            </Image>
             <Name>
               {" "}
               Mac Book Pro
@@ -33,7 +37,9 @@ const Allitems = () => {
             <Price>#450,000</Price>
           </Card>
           <Card>
-            <Image></Image>
+            <Image>
+              <img src="/Frame 1.png" />
+            </Image>
             <Name>
               {" "}
               Samsung S4
@@ -53,7 +59,9 @@ const Allitems = () => {
         <Downtitle>Home Appliances</Downtitle>
         <Cardhold>
           <Card>
-            <Image></Image>
+            <Image>
+              <img src="/Frame 1.png" />
+            </Image>
             <Name>
               {" "}
               Iphone X
@@ -65,7 +73,9 @@ const Allitems = () => {
             <Price>#140,000</Price>
           </Card>
           <Card>
-            <Image></Image>
+            <Image>
+              <img src="/Frame 1.png" />
+            </Image>
             <Name>
               {" "}
               Mac Book Pro
@@ -77,7 +87,9 @@ const Allitems = () => {
             <Price>#450,000</Price>
           </Card>
           <Card>
-            <Image></Image>
+            <Image>
+              <img src="/Frame 1.png" />
+            </Image>
             <Name>
               {" "}
               Samsung S4
@@ -97,7 +109,9 @@ const Allitems = () => {
         <Downtitle>Accessories</Downtitle>
         <Cardhold>
           <Card>
-            <Image></Image>
+            <Image>
+              <img src="/Frame 1.png" />
+            </Image>
             <Name>
               {" "}
               Iphone X
@@ -109,7 +123,9 @@ const Allitems = () => {
             <Price>#140,000</Price>
           </Card>
           <Card>
-            <Image></Image>
+            <Image>
+              <img src="/Frame 1.png" />
+            </Image>
             <Name>
               {" "}
               Mac Book Pro
@@ -121,7 +137,9 @@ const Allitems = () => {
             <Price>#450,000</Price>
           </Card>
           <Card>
-            <Image></Image>
+            <Image>
+              <img src="/Frame 1.png" />
+            </Image>
             <Name>
               {" "}
               Samsung S4
@@ -141,7 +159,9 @@ const Allitems = () => {
         <Downtitle>Clothings</Downtitle>
         <Cardhold>
           <Card>
-            <Image></Image>
+            <Image>
+              <img src="/Frame 1.png" />
+            </Image>
             <Name>
               {" "}
               Iphone X
@@ -153,7 +173,9 @@ const Allitems = () => {
             <Price>#140,000</Price>
           </Card>
           <Card>
-            <Image></Image>
+            <Image>
+              <img src="/Frame 1.png" />
+            </Image>
             <Name>
               {" "}
               Mac Book Pro
@@ -165,7 +187,9 @@ const Allitems = () => {
             <Price>#450,000</Price>
           </Card>
           <Card>
-            <Image></Image>
+            <Image>
+              <img src="/Frame 1.png" />
+            </Image>
             <Name>
               {" "}
               Samsung S4
@@ -215,6 +239,12 @@ const Image = styled.div`
   border-radius: 5px;
   width: 250px;
   height: 260px;
+  img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 5px;
+  }
 `;
 const Name = styled.div`
   font-size: 13px;
