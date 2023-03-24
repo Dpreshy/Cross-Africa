@@ -24,7 +24,7 @@ const Allitems = () => {
           </Card>
           <Card>
             <Image>
-              <img src="/Frame 1.png" />
+              <img src="/Frame 113.png" />
             </Image>
             <Name>
               {" "}
@@ -38,7 +38,7 @@ const Allitems = () => {
           </Card>
           <Card>
             <Image>
-              <img src="/Frame 1.png" />
+              <img src="/Airpod1.png" />
             </Image>
             <Name>
               {" "}
@@ -60,7 +60,7 @@ const Allitems = () => {
         <Cardhold>
           <Card>
             <Image>
-              <img src="/Frame 1.png" />
+              <img src="/blender 1.png" />
             </Image>
             <Name>
               {" "}
@@ -74,7 +74,7 @@ const Allitems = () => {
           </Card>
           <Card>
             <Image>
-              <img src="/Frame 1.png" />
+              <img src="/FAN 2.png" />
             </Image>
             <Name>
               {" "}
@@ -88,7 +88,7 @@ const Allitems = () => {
           </Card>
           <Card>
             <Image>
-              <img src="/Frame 1.png" />
+              <img src="/dryer 1.png" />
             </Image>
             <Name>
               {" "}
@@ -110,7 +110,7 @@ const Allitems = () => {
         <Cardhold>
           <Card>
             <Image>
-              <img src="/Frame 1.png" />
+              <img src="/tv 4 1.png" />
             </Image>
             <Name>
               {" "}
@@ -124,7 +124,7 @@ const Allitems = () => {
           </Card>
           <Card>
             <Image>
-              <img src="/Frame 1.png" />
+              <img src="/Frame 2.png" />
             </Image>
             <Name>
               {" "}
@@ -138,7 +138,7 @@ const Allitems = () => {
           </Card>
           <Card>
             <Image>
-              <img src="/Frame 1.png" />
+              <img src="/Frame 112.png" />
             </Image>
             <Name>
               {" "}
@@ -156,11 +156,11 @@ const Allitems = () => {
         </Button>
       </Wrapper>
       <Wrapper>
-        <Downtitle>Clothings</Downtitle>
+        <Downtitle>Foodstuffs</Downtitle>
         <Cardhold>
           <Card>
             <Image>
-              <img src="/Frame 1.png" />
+              <img src="/Frame 115.png" />
             </Image>
             <Name>
               {" "}
@@ -174,7 +174,7 @@ const Allitems = () => {
           </Card>
           <Card>
             <Image>
-              <img src="/Frame 1.png" />
+              <img src="/semo 2 2.png" />
             </Image>
             <Name>
               {" "}
@@ -188,7 +188,7 @@ const Allitems = () => {
           </Card>
           <Card>
             <Image>
-              <img src="/Frame 1.png" />
+              <img src="/pepsi 1.png" />
             </Image>
             <Name>
               {" "}
@@ -237,7 +237,7 @@ const Downtitle = styled.div`
 const Image = styled.div`
   background-color: #cdc8c8;
   border-radius: 5px;
-  width: 250px;
+  width: 220px;
   height: 260px;
   img {
     height: 100%;
