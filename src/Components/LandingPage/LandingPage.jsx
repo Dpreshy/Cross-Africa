@@ -47,17 +47,18 @@ const Title = styled.div`
   text-align: center;
 `;
 const Hero = styled.div`
-  /* width: 100%; */
-  background-image: url("/Frame 114.png");
+  width: 100%;
   height: 600px;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
   color: white;
-  opacity: 0.8;
-  -webkit-backdrop-filter: blur(5px);
-  backdrop-filter: blur(5px);
+  /* opacity: 0.8; */
+  /* -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(5px); */
+  /* background-color: #f4caca; */
+  background-image: url("/Frame 1.png");
 `;
 const Wrapper = styled.div``;
 const Container = styled.div`
