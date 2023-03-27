@@ -160,7 +160,7 @@ const Allitems = () => {
         <Cardhold>
           <Card>
             <Image>
-              <img src="/Frame 115.png" />
+              <img src="../Frame 115.png" />
             </Image>
             <Name>
               {" "}
