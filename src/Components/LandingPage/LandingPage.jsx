@@ -54,11 +54,14 @@ const Hero = styled.div`
   justify-content: center;
   flex-direction: column;
   color: white;
-  /* opacity: 0.8; */
-  /* -webkit-backdrop-filter: blur(5px);
-  backdrop-filter: blur(5px); */
+  backdrop-filter: blur(12px);
   /* background-color: #f4caca; */
-  background-image: url("/Frame 1.png");
+  background-image: linear-gradient(
+      to bottom,
+      rgba(23, 23, 24, 0.52),
+      rgba(9, 0, 8, 0.73)
+    ),
+    url("/Frame 114.png");
 `;
 const Wrapper = styled.div``;
 const Container = styled.div`
