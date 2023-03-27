@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 
-const Businessinfo = () => {
+const Businessinfo2 = () => {
   return (
     <div>
       <Container>
@@ -13,49 +13,26 @@ const Businessinfo = () => {
           </Text>
           <InputHold>
             <Hold>
-              <Name>Shop Name *</Name>
+              <Name>Business owner or legal representative ID type</Name>
               <HoldInput>
                 <Input />
               </HoldInput>
               {true ? null : <Error>Error</Error>}
             </Hold>
             <Hold>
-              <Name>Postal code/Zip code</Name>
+              <Name>Upload a copy of your valid ID card</Name>
               <HoldInput>
                 <Input />
               </HoldInput>
               {true ? null : <Error>Error</Error>}
             </Hold>
             <Hold>
-              <Name>Address *</Name>
+              <Name> CAC Registration Number</Name>
               <HoldInput>
                 <Input />
               </HoldInput>
               {true ? null : <Error>Error</Error>}
             </Hold>
-            <Hold>
-              <Name>Address 2</Name>
-              <HoldInput>
-                <Input />
-              </HoldInput>
-              {true ? null : <Error>Error</Error>}
-            </Hold>
-            <Hold>
-              <Name>City / Town</Name>
-              <HoldInput>
-                <Input />
-              </HoldInput>
-              {true ? null : <Error>Error</Error>}
-            </Hold>
-            <Hold>
-              <Name>What country are you shipping from?</Name>
-              <HoldInput>
-                <Input />
-                <Icon>Q</Icon>
-              </HoldInput>
-              {true ? null : <Error>Error</Error>}
-            </Hold>
-
             <Button>Continue</Button>
           </InputHold>
         </Wrapper>
@@ -64,7 +41,7 @@ const Businessinfo = () => {
   );
 };
 
-export default Businessinfo;
+export default Businessinfo2;
 
 const AlText = styled.div`
   font-size: 13px;
