@@ -9,7 +9,7 @@ const Businessinfo2 = () => {
         <Wrapper>
           <Title>Business Information </Title>
           <Text>
-            Enter every necessary details to create your own seller account{" "}
+            Enter every necessary details to create your own seller account
           </Text>
           <InputHold>
             <Hold>
