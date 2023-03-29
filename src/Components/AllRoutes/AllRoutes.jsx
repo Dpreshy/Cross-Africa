@@ -11,6 +11,7 @@ import Review from "../Review/Review";
 import Allitems from "../Allitems/Allitems";
 import ErrorOtp from "../ErrorOtp/ErrorOtp";
 import Checkout from "../Payment/Checkout";
+import Dashboard from "../SigmUpAndSignIn/Dashboard";
 
 const AllRoutes = () => {
   let element = useRoutes([
@@ -64,6 +65,10 @@ const AllRoutes = () => {
     {
       path: "/detail",
       element: <Detail />,
+    },
+    {
+      path: "/dashboard",
+      element: <Dashboard />,
     },
     {
       path: "/payment",
