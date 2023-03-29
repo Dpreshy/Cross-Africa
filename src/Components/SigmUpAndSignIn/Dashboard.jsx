@@ -16,6 +16,7 @@ export default Dashboard;
 const Wrap = styled.div`
   width: 100%;
   background-color: darkgray;
+  height: 400px;
 `;
 const Container = styled.div`
   display: flex;
