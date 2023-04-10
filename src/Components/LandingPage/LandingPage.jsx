@@ -64,6 +64,7 @@ const Hero = styled.div`
     url("/Frame 114.png");
 `;
 const Wrapper = styled.div``;
+
 const Container = styled.div`
   width: 100%;
 `;
