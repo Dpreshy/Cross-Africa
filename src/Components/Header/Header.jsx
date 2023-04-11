@@ -200,6 +200,10 @@ const Hold = styled.div`
   @media (max-width: 660px){
     justify-content: flex-end;
   }
+  width: 80%;
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 const Bar = styled.div`
     display: flex;
