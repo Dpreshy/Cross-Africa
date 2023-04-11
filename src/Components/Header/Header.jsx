@@ -191,6 +191,9 @@ const Hold = styled.div`
   align-items: center;
   justify-content: space-between;
   width: 80%;
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 const Nav = styled.div`
   font-weight: 700;
