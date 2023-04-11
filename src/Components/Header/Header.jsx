@@ -89,9 +89,9 @@ const Header = () => {
                 <BiHelpCircle />
               </span>
             </Nav>
-            {/* <Nav>
+            <Bar>
               <FiMenu size="20px" />
-            </Nav> */}
+            </Bar>
           </Hold>
         </Wrapper>
       </Container>
@@ -129,7 +129,7 @@ const AcMenu = styled.div`
   top: 60px;
   left: 60%;
   right: 40%;
-
+  z-index: 1111;
   @media (max-width: 768px) {
     display: none;
   }
@@ -148,6 +148,7 @@ const Menu = styled.div`
   position: absolute;
   top: 60px;
   left: 150px;
+  z-index: 1111;
 
   @media (max-width: 768px) {
     display: none;
@@ -155,7 +156,6 @@ const Menu = styled.div`
 `;
 const Container = styled.div`
   width: 100%;
-  max-width: 1500px;
   height: 90px;
   display: flex;
   align-items: center;
@@ -166,6 +166,7 @@ const Container = styled.div`
 const Wrapper = styled.div`
   width: 95%;
   display: flex;
+  justify-content: space-between;
 `;
 const Logo = styled.div`
   height: 70px;
@@ -174,6 +175,8 @@ const Logo = styled.div`
   justify-content: center;
   flex-direction: column;
   margin-right: 30px;
+  flex: 0.2 0.3 auto;
+  /* background: gold; */
   /* margin-bottom: 10px; */
 
   img {
@@ -190,11 +193,24 @@ const Hold = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  /* width: 85%; */
+  flex: 1 0 auto;
+  /* background-color: gold; */
+
+  @media (max-width: 660px){
+    justify-content: flex-end;
+  }
   width: 80%;
   @media (max-width: 768px) {
     display: none;
   }
 `;
+const Bar = styled.div`
+    display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 20px;
+`
 const Nav = styled.div`
   font-weight: 700;
   display: flex;
@@ -203,12 +219,29 @@ const Nav = styled.div`
   // background-color: gold;
   height: 30px;
   cursor: pointer;
+  margin-left: 10px;
 
   span {
     margin-left: 10px;
     position: relative;
     bottom: -3px;
   }
+  :nth-child(1){
+    @media (max-width: 1000px){
+      display: none;
+    }
+  }
+  :nth-child(3){
+    @media (max-width: 1000px){
+      display: none;
+    }
+  }
+  /* :nth-child(1){
+    @media (max-width: 1000px){
+      display: none;
+    }
+  } */
+   
 `;
 const SearchHold = styled.div`
   width: 400px;
@@ -234,5 +267,9 @@ const SearchHold = styled.div`
 
     border-top-right-radius: 7px;
     border-bottom-right-radius: 7px;
+  }
+
+  @media (max-width: 660px){
+    width: 250px;
   }
 `;

@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components"
+import { NavLink } from "react-router-dom";
 
 
 const GetStarted = () => {
@@ -9,7 +10,7 @@ const GetStarted = () => {
               <Wrapper>
                     <Title>GET STARTED TODAY</Title>
                     <Content>Join the fast, trusted and best selling platformin Africa</Content>
-                    <Button>Start Selling Today</Button>
+                    <Button to="/auth">Start Selling Today</Button>
               </Wrapper>
           </Container>
     </div>
@@ -18,13 +19,14 @@ const GetStarted = () => {
 
 export default GetStarted;
 
-const Button = styled.button`
+const Button = styled(NavLink)`
     padding: 15px 70px;
     border: #D975C0;
     background-color: #D975C0;
     border-radius: 5px;
     color: white;
     font-weight: 600;
+    text-decoration: none;
     cursor: pointer;
 `;
 const Content = styled.div`

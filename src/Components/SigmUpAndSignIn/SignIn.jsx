@@ -1,44 +1,79 @@
 import React from 'react'
 import styled from "styled-components"
 import { NavLink } from 'react-router-dom'
+import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai"
 import { useState } from 'react';
 
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useForm } from "react-hook-form";
+import { useMutation } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
+import { logInUser } from '../Api/Api'
+
 const SignIn = () => {
+    const navigate = useNavigate();
+    const userSchema = yup.object({
+        email: yup.string().email("this is not a valid email").required("This field cannot be empty"),
+        password: yup.string().required("This field cannot be empty"),
+    }).required()
 
     // const [show, setShow] = useState(false)
+    const [ Switch, setSwitch ] = useState(true)
+    const switchIcon = Switch === true ? false : true
+    
+    const {
+        handleSubmit,
+        formState: { errors },
+        reset,
+        register,
+      } = useForm({
+        resolver: yupResolver(userSchema),
+      });
+    
+      const create = useMutation({
+        mutationKey: [ "createseler" ],
+        mutationFn: logInUser,
+
+        onSuccess: (res) => {
+            console.log(res);
+            // navigate("/auth/signin")
+        },
+
+        onError: (error) => {
+            console.log(error.message)
+        }
+    })
+
+    const onSubmit = handleSubmit((value) => {
+        create.mutate(value)
+    })
   return (
       <div>
           <Container>
               <Wrapper>
                   <Title>Seller Account</Title>
                   <Text>Please enter every necessary information</Text>
-                  <InputHold>
+                  <InputHold onSubmit={onSubmit}>
                         <Hold>
                             <Name>Email Address</Name>
                             <HoldInput>
-                                <Input placeholder="Email Address" type="email" />
+                                <Input placeholder="Email Address" type="email" {...register("email")}/>
                             </HoldInput>
                             {true ? null : <Error>Error</Error>}
                         </Hold>
                         <Hold>
                             <Name>Password</Name>
                             <HoldInput>
-                              <Input placeholder="Password" type="password" id='pass'/>
-                              <Icon onClick={ () => {
-                                  let check = document.getElementById("pass")
-                                  if (check.type === "password") {
-                                      check.type = "text"
-                                  } else {
-                                      check.type = "password"
-                                  }
-                              }}>Q</Icon>
+                              <Input placeholder="Password" type={Switch ? "password" : "text"} id='pass' {...register("password")}/>
+                              <Icon onClick={ ()=>{ setSwitch(switchIcon)}}>{ Switch === false ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}</Icon>
                             </HoldInput>
                             {true ? null : <Error>Error</Error>}
                       </Hold>
                       <PassHold>
                           Forget Password?
                       </PassHold>
-                      <Button>Log In</Button>
+                      <Button type='submit'>Log In</Button>
                       <Button>Continue as a Guest</Button>
                       <AlText>Don't have an account? <NavLink to="/auth/signin" style={{textDecoration: "none"}}><span>Sign Up</span></NavLink></AlText>
                   </InputHold>
@@ -118,7 +153,7 @@ const Name = styled.div`
 const Hold = styled.div`
     margin-bottom: 10px;
 `;
-const InputHold = styled.div`
+const InputHold = styled.form`
     width: 400px;
     display: flex;
     align-items: center;

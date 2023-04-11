@@ -1,81 +1,119 @@
-import React from 'react'
+import React, { useRef, useState } from 'react'
 import styled from "styled-components"
 import { NavLink } from 'react-router-dom'
+import PhoneInput from "react-phone-number-input"
+import 'react-phone-number-input/style.css'
+import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai"
+
+import { createUser } from '../Api/Api'
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useForm } from "react-hook-form";
+import { useMutation } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
+    const [ value, setValue ] = useState()
+    const [ Switch, setSwitch ] = useState(true)
+    const switchIcon = Switch === true ? false: true
+    const navigate = useNavigate();
+    const userSchema = yup.object({
+        firstName: yup.string().required("This field cannot be empty"),
+        lastName: yup.string().required("This field cannot be empty"),
+        email: yup.string().email("this is not a valid email").required("This field cannot be empty"),
+        phoneNum: yup.number().required("This field cannot be empty"),
+        companyName: yup.string().required("This field cannot be empty"),
+        password: yup.string().required("This field cannot be empty"),
+        confirmPassword:yup
+        .string()
+        .oneOf([ yup.ref("password"), null ], "Password must match")
+    }).required()
+
+    const {
+        handleSubmit,
+        formState: { errors },
+        reset,
+        register,
+      } = useForm({
+        resolver: yupResolver(userSchema),
+      });
+    
+    const create = useMutation({
+        mutationKey: [ "createseler" ],
+        mutationFn: createUser,
+
+        onSuccess: (res) => {
+            console.log(res);
+            navigate("/auth/signin")
+        },
+
+        onError: (error) => {
+            console.log(error.message)
+        }
+    })
+
+    const onSubmit = handleSubmit((value) => {
+        create.mutate(value)
+    })
   return (
       <div>
           <Container>
               <Wrapper>
                   <Title>Seller Account</Title>
                   <Text>Please enter every necessary information</Text>
-                  <InputHold>
+                  <InputHold onSubmit={onSubmit}>
                         <Hold>
                             <Name>Full Name</Name>
-                            <HoldInput>
-                                <Input placeholder="Full Name" />
+                            <HoldInput style={{border: `${errors?.firstName ? "1px solid red" : "1px solid lightgray"}`}}>
+                              <Input placeholder="Full Name" {...register("firstName")} />
                             </HoldInput>
-                            {true ? null : <Error>Error</Error>}
+                          <Error>{errors?.firstName && errors?.firstName?.message }</Error>
                         </Hold>
                         <Hold>
                             <Name>Last Name</Name>
-                            <HoldInput>
-                                <Input placeholder="Last Name" />
+                            <HoldInput style={{border: `${errors?.firstName ? "1px solid red" : "1px solid lightgray"}`}}>
+                                <Input placeholder="Last Name" {...register("lastName")} />
                             </HoldInput>
-                            {true ? null : <Error>Error</Error>}
+                            <Error>{errors?.lastName && errors?.lastName?.message }</Error>
                         </Hold>
                         <Hold>
                             <Name>Email Address</Name>
-                            <HoldInput>
-                                <Input placeholder="Email Address" />
+                            <HoldInput style={{border: `${errors?.firstName ? "1px solid red" : "1px solid lightgray"}`}}>
+                                <Input placeholder="Email Address" {...register("email")}/>
                             </HoldInput>
-                            {true ? null : <Error>Error</Error>}
+                            <Error>{errors?.email && errors?.email?.message }</Error>
                         </Hold>
                         <Hold>
                             <Name>Company Name</Name>
-                            <HoldInput>
-                                <Input placeholder="Company Name" />
+                            <HoldInput style={{border: `${errors?.firstName ? "1px solid red" : "1px solid lightgray"}`}}>
+                                <Input placeholder="Company Name" {...register("companyName")}/>
                             </HoldInput>
-                            {true ? null : <Error>Error</Error>}
+                            <Error>{errors?.companyName && errors?.companyName?.message }</Error>
                         </Hold>
                         <Hold>
                             <Name>Phone Number</Name>
-                            <HoldInput>
-                                <Input placeholder="Phone Number" />
+                            <HoldInput style={{border: `${errors?.firstName ? "1px solid red" : "1px solid lightgray"}`}}>
+                                <PhoneInput className='phone' defaultCountry='NG' {...register("phoneNum")} placeholder="Phone Number" value={value} onChange={setValue}/>
                             </HoldInput>
-                            {true ? null : <Error>Error</Error>}
+                            <Error>{errors?.phoneNum && errors?.phoneNum?.message }</Error>
                         </Hold>
                         <Hold>
                             <Name>Password</Name>
-                            <HoldInput>
-                              <Input placeholder="Password" type="password" id='pass'/>
-                              <Icon onClick={ () => {
-                                  let check = document.getElementById("pass")
-                                  if (check.type === "password") {
-                                      check.type = "text"
-                                  } else {
-                                      check.type = "password"
-                                  }
-                              }}>Q</Icon>
+                            <HoldInput style={{border: `${errors?.firstName ? "1px solid red" : "1px solid lightgray"}`}}>
+                              <Input placeholder="Password" type={Switch ? "password" : "text"} id='pass' {...register("password")} />
+                              <Icon onClick={ ()=>{ setSwitch(switchIcon)}}>{ Switch === false ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}</Icon>
                             </HoldInput>
-                            {true ? null : <Error>Error</Error>}
+                            <Error>{errors?.password && errors?.password?.message }</Error>
                         </Hold>
-                        <Hold>
+                        <Hold >
                             <Name>Confirm Password</Name>
-                            <HoldInput>
-                              <Input placeholder="Confirm Password" type="password" id='pass'/>
-                              <Icon onClick={ () => {
-                                  let check = document.getElementById("pass")
-                                  if (check.type === "password") {
-                                      check.type = "text"
-                                  } else {
-                                      check.type = "password"
-                                  }
-                              }}>Q</Icon>
+                            <HoldInput style={{border: `${errors?.firstName ? "1px solid red" : "1px solid lightgray"}`}}>
+                              <Input placeholder="Confirm Password" type={Switch ? "password" : "text"} id='pass' {...register("confirmPassword")}/>
+                              <Icon onClick={ ()=>{ setSwitch(switchIcon)}}>{ Switch === false ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}</Icon>
                             </HoldInput>
-                            {true ? null : <Error>Error</Error>}
+                            <Error>{errors?.confirmPassword && errors?.confirmPassword?.message }</Error>
                       </Hold>
-                      <Button>Continue</Button>
+                      <Button type='submit'>Continue</Button>
                       <AlText>Already have an account? <NavLink to="/auth/signin" style={{textDecoration: "none"}}><span>LogIn</span></NavLink></AlText>
                   </InputHold>
               </Wrapper>
@@ -129,6 +167,13 @@ const HoldInput = styled.div`
     align-items: center;
     justify-content: center;
     padding-left: 10px;
+
+    .PhoneInputInput{
+        width: 300px;
+        height: 30px;
+        outline: none;
+        border: 0px;
+    }
 `;
 const Input = styled.input`
     width: 100%;
@@ -147,7 +192,7 @@ const Name = styled.div`
 const Hold = styled.div`
     margin-bottom: 10px;
 `;
-const InputHold = styled.div`
+const InputHold = styled.form`
     width: 400px;
     display: flex;
     align-items: center;
