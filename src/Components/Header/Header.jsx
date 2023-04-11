@@ -156,7 +156,6 @@ const Menu = styled.div`
 `;
 const Container = styled.div`
   width: 100%;
-  max-width: 1500px;
   height: 90px;
   display: flex;
   align-items: center;
@@ -167,6 +166,7 @@ const Container = styled.div`
 const Wrapper = styled.div`
   width: 95%;
   display: flex;
+  justify-content: space-between;
 `;
 const Logo = styled.div`
   height: 70px;
@@ -175,7 +175,7 @@ const Logo = styled.div`
   justify-content: center;
   flex-direction: column;
   margin-right: 30px;
-  flex: 0.2 0.3 60px;
+  flex: 0.2 0.3 auto;
   /* background: gold; */
   /* margin-bottom: 10px; */
 
@@ -194,8 +194,8 @@ const Hold = styled.div`
   align-items: center;
   justify-content: space-between;
   /* width: 85%; */
-  flex: 1 0 130px;
-  background-color: gold;
+  flex: 1 0 auto;
+  /* background-color: gold; */
 
   @media (max-width: 660px){
     justify-content: flex-end;
@@ -205,6 +205,7 @@ const Bar = styled.div`
     display: flex;
   align-items: center;
   justify-content: center;
+  margin-left: 20px;
 `
 const Nav = styled.div`
   font-weight: 700;
@@ -214,16 +215,29 @@ const Nav = styled.div`
   // background-color: gold;
   height: 30px;
   cursor: pointer;
+  margin-left: 10px;
 
   span {
     margin-left: 10px;
     position: relative;
     bottom: -3px;
   }
-
+  :nth-child(1){
     @media (max-width: 1000px){
       display: none;
     }
+  }
+  :nth-child(3){
+    @media (max-width: 1000px){
+      display: none;
+    }
+  }
+  /* :nth-child(1){
+    @media (max-width: 1000px){
+      display: none;
+    }
+  } */
+   
 `;
 const SearchHold = styled.div`
   width: 400px;
@@ -252,6 +266,6 @@ const SearchHold = styled.div`
   }
 
   @media (max-width: 660px){
-    width: 70%;
+    width: 250px;
   }
 `;

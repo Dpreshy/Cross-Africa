@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import Reason from "./Reason";
 import GetStarted from "./GetStarted";
+import {NavLink} from "react-router-dom"
 
 const LandingPage = () => {
   return (
@@ -13,7 +14,7 @@ const LandingPage = () => {
             <Content>
               Become a merchant and sell to thousands of people across africa
             </Content>
-            <Button>Start Selling Today</Button>
+            <Button to="/auth">Start Selling Today</Button>
           </Hero>
           <Reason />
           <GetStarted />
@@ -25,13 +26,14 @@ const LandingPage = () => {
 
 export default LandingPage;
 
-const Button = styled.button`
+const Button = styled(NavLink)`
   padding: 15px 70px;
   border: #d975c0;
   background-color: #d975c0;
   border-radius: 5px;
   color: white;
   font-weight: 600;
+  text-decoration: none;
   cursor: pointer;
 `;
 const Content = styled.div`

@@ -29,10 +29,14 @@ const AllRoutes = () => {
       ],
     },
     {
-      path: "/auth",
+      path: "/:auth",
       children: [
         {
           index: true,
+          element: <SignUp />,
+        },
+        {
+          path: "user",
           element: <SignUp />,
         },
         {
