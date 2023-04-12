@@ -12,87 +12,39 @@ const Productpage = () => {
         <Buttom>
           <Head>
             <Th>
-              <HoldHead>
-                Category{" "}
-                <span>
-                  <FaLongArrowAltUp />
-                  <FaLongArrowAltDown color="lightgray" />
-                </span>
-              </HoldHead>
+              <HoldHead>Product </HoldHead>
             </Th>
             <Th>
-              <HoldHead>
-                Customer{" "}
-                <span>
-                  <FaLongArrowAltUp color="lightgray" />
-                  <FaLongArrowAltDown color="lightgray" />
-                </span>
-              </HoldHead>
+              <HoldHead>Tag </HoldHead>
             </Th>
             <Th>
-              <HoldHead>
-                Expense Date{" "}
-                <span>
-                  <FaLongArrowAltUp color="lightgray" />
-                  <FaLongArrowAltDown color="lightgray" />
-                </span>
-              </HoldHead>
+              <HoldHead>Created</HoldHead>
             </Th>
             <Th>
-              <HoldHead>
-                Notes{" "}
-                <span>
-                  <FaLongArrowAltUp color="lightgray" />
-                  <FaLongArrowAltDown color="lightgray" />
-                </span>
-              </HoldHead>
+              <HoldHead>Aval / Qty </HoldHead>
             </Th>
             <Th>
-              <HoldHead>
-                Amount{" "}
-                <span>
-                  <FaLongArrowAltUp color="lightgray" />
-                  <FaLongArrowAltDown color="lightgray" />
-                </span>
-              </HoldHead>
+              <HoldHead>Active </HoldHead>
             </Th>
+
             <Th>
-              <HoldHead>
-                Status{" "}
-                <span>
-                  <FaLongArrowAltUp color="lightgray" />
-                  <FaLongArrowAltDown color="lightgray" />
-                </span>
-              </HoldHead>
-            </Th>
-            <Th>
-              <HoldHead>
-                Action{" "}
-                <span>
-                  <FaLongArrowAltUp color="lightgray" />
-                  <FaLongArrowAltDown color="lightgray" />
-                </span>
-              </HoldHead>{" "}
+              <HoldHead>Action </HoldHead>{" "}
             </Th>
           </Head>
           <Body>
-            <Td>Advertising</Td>
             <Td>
               <UserHold>
                 <span>
                   <Image />
                 </span>
-                Barbara Moore
+                Palazzo jean S/M
               </UserHold>
             </Td>
+            <Td>101</Td>
+
             <Td>18 Nov 2020</Td>
-            <Td>This is now approved...</Td>
-            <Td>$22.2 </Td>
-            <Td>
-              <Button bd="" cl="ff">
-                Approved
-              </Button>{" "}
-            </Td>
+            <Td>0 / 0</Td>
+            <Td>toogle </Td>
             <Td>
               <Hold>
                 <NavLink to="/editExpense" style={{ textDecoration: "none" }}>
@@ -103,12 +55,12 @@ const Productpage = () => {
                     Edit
                   </Button>
                 </NavLink>
-                <Button bd="ff" cl="">
+                {/* <Button bd="ff" cl="">
                   <span>
                     <BsTrash />
                   </span>
                   Delete
-                </Button>
+                </Button> */}
               </Hold>
             </Td>
           </Body>
@@ -139,7 +91,7 @@ const Container = styled.div`
 const Image = styled.img`
   width: 40px;
   height: 40px;
-  border-radius: 50%;
+  border-radius: 5px;
   background-color: gold;
   margin-right: 10px;
 `;
@@ -176,14 +128,16 @@ const Td = styled.td`
   padding: 10px 15px;
   font-size: 16px;
   font-weight: 400;
+  border-left: 1.5px solid #d0d1d2;
 `;
 const Th = styled.th`
-  padding: 10px 10px;
+  padding: 10px 15px;
   background-color: #f8f9fa;
   color: #1b2559;
   font-size: 18px;
   font-weight: 600;
-  text-align: start;
+  /* text-align: center; */
+  border-left: 1.5px solid #d0d1d2;
   // border: 1px solid black;
 `;
 const Head = styled.tr`
