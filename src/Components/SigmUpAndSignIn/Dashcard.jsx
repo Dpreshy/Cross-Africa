@@ -103,11 +103,14 @@ const Top = styled.div`
   border-radius: 5px 5px 0 0;
 `;
 const Container = styled.div`
-  width: 300px;
+  width: 360px;
   height: 400px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  @media (max-width: 320px) {
+    width: 300px;
+  }
   flex-direction: column;
-  margin: 10px 30px;
+  margin: 20px 20px;
 `;
