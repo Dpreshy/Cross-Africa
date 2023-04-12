@@ -40,28 +40,277 @@ const Productpage = () => {
                 Palazzo jean S/M
               </UserHold>
             </Td>
-            <Td>101</Td>
-
-            <Td>18 Nov 2020</Td>
-            <Td>0 / 0</Td>
-            <Td>toogle </Td>
             <Td>
-              <Hold>
-                <NavLink to="/editExpense" style={{ textDecoration: "none" }}>
-                  <Button bd="fff" cl="ff">
-                    <span>
-                      <FaRegEdit />
-                    </span>
-                    Edit
-                  </Button>
-                </NavLink>
-                {/* <Button bd="ff" cl="">
+              {" "}
+              <HoldHead>101</HoldHead>
+            </Td>
+
+            <Td>
+              {" "}
+              <HoldHead>18 Nov 2020 </HoldHead>{" "}
+            </Td>
+            <Td>
+              <HoldHead>0 / 0 </HoldHead>
+            </Td>
+            <Td>
+              {" "}
+              <HoldHead>toogle</HoldHead>{" "}
+            </Td>
+            <Td>
+              <HoldHead>
+                {" "}
+                <Hold>
+                  <NavLink to="/editExpense" style={{ textDecoration: "none" }}>
+                    <Button bd="fff" cl="ff">
+                      <span>
+                        <FaRegEdit />
+                      </span>
+                      Edit
+                    </Button>
+                  </NavLink>
+                  {/* <Button bd="ff" cl="">
                   <span>
                     <BsTrash />
                   </span>
                   Delete
                 </Button> */}
-              </Hold>
+                </Hold>
+              </HoldHead>
+            </Td>
+          </Body>
+          <Body>
+            <Td>
+              <UserHold>
+                <span>
+                  <Image />
+                </span>
+                Palazzo jean S/M
+              </UserHold>
+            </Td>
+            <Td>
+              {" "}
+              <HoldHead>101</HoldHead>
+            </Td>
+
+            <Td>
+              {" "}
+              <HoldHead>18 Nov 2020 </HoldHead>{" "}
+            </Td>
+            <Td>
+              <HoldHead>0 / 0 </HoldHead>
+            </Td>
+            <Td>
+              {" "}
+              <HoldHead>toogle</HoldHead>{" "}
+            </Td>
+            <Td>
+              <HoldHead>
+                {" "}
+                <Hold>
+                  <NavLink to="/editExpense" style={{ textDecoration: "none" }}>
+                    <Button bd="fff" cl="ff">
+                      <span>
+                        <FaRegEdit />
+                      </span>
+                      Edit
+                    </Button>
+                  </NavLink>
+                  {/* <Button bd="ff" cl="">
+                  <span>
+                    <BsTrash />
+                  </span>
+                  Delete
+                </Button> */}
+                </Hold>
+              </HoldHead>
+            </Td>
+          </Body>
+          <Body>
+            <Td>
+              <UserHold>
+                <span>
+                  <Image />
+                </span>
+                Palazzo jean S/M
+              </UserHold>
+            </Td>
+            <Td>
+              {" "}
+              <HoldHead>101</HoldHead>
+            </Td>
+
+            <Td>
+              {" "}
+              <HoldHead>18 Nov 2020 </HoldHead>{" "}
+            </Td>
+            <Td>
+              <HoldHead>0 / 0 </HoldHead>
+            </Td>
+            <Td>
+              {" "}
+              <HoldHead>toogle</HoldHead>{" "}
+            </Td>
+            <Td>
+              <HoldHead>
+                {" "}
+                <Hold>
+                  <NavLink to="/editExpense" style={{ textDecoration: "none" }}>
+                    <Button bd="fff" cl="ff">
+                      <span>
+                        <FaRegEdit />
+                      </span>
+                      Edit
+                    </Button>
+                  </NavLink>
+                  {/* <Button bd="ff" cl="">
+                  <span>
+                    <BsTrash />
+                  </span>
+                  Delete
+                </Button> */}
+                </Hold>
+              </HoldHead>
+            </Td>
+          </Body>
+          <Body>
+            <Td>
+              <UserHold>
+                <span>
+                  <Image />
+                </span>
+                Palazzo jean S/M
+              </UserHold>
+            </Td>
+            <Td>
+              {" "}
+              <HoldHead>101</HoldHead>
+            </Td>
+
+            <Td>
+              {" "}
+              <HoldHead>18 Nov 2020 </HoldHead>{" "}
+            </Td>
+            <Td>
+              <HoldHead>0 / 0 </HoldHead>
+            </Td>
+            <Td>
+              {" "}
+              <HoldHead>toogle</HoldHead>{" "}
+            </Td>
+            <Td>
+              <HoldHead>
+                {" "}
+                <Hold>
+                  <NavLink to="/editExpense" style={{ textDecoration: "none" }}>
+                    <Button bd="fff" cl="ff">
+                      <span>
+                        <FaRegEdit />
+                      </span>
+                      Edit
+                    </Button>
+                  </NavLink>
+                  {/* <Button bd="ff" cl="">
+                  <span>
+                    <BsTrash />
+                  </span>
+                  Delete
+                </Button> */}
+                </Hold>
+              </HoldHead>
+            </Td>
+          </Body>
+          <Body>
+            <Td>
+              <UserHold>
+                <span>
+                  <Image />
+                </span>
+                Palazzo jean S/M
+              </UserHold>
+            </Td>
+            <Td>
+              {" "}
+              <HoldHead>101</HoldHead>
+            </Td>
+
+            <Td>
+              {" "}
+              <HoldHead>18 Nov 2020 </HoldHead>{" "}
+            </Td>
+            <Td>
+              <HoldHead>0 / 0 </HoldHead>
+            </Td>
+            <Td>
+              {" "}
+              <HoldHead>toogle</HoldHead>{" "}
+            </Td>
+            <Td>
+              <HoldHead>
+                {" "}
+                <Hold>
+                  <NavLink to="/editExpense" style={{ textDecoration: "none" }}>
+                    <Button bd="fff" cl="ff">
+                      <span>
+                        <FaRegEdit />
+                      </span>
+                      Edit
+                    </Button>
+                  </NavLink>
+                  {/* <Button bd="ff" cl="">
+                  <span>
+                    <BsTrash />
+                  </span>
+                  Delete
+                </Button> */}
+                </Hold>
+              </HoldHead>
+            </Td>
+          </Body>
+          <Body>
+            <Td>
+              <UserHold>
+                <span>
+                  <Image />
+                </span>
+                Palazzo jean S/M
+              </UserHold>
+            </Td>
+            <Td>
+              {" "}
+              <HoldHead>101</HoldHead>
+            </Td>
+
+            <Td>
+              {" "}
+              <HoldHead>18 Nov 2020 </HoldHead>{" "}
+            </Td>
+            <Td>
+              <HoldHead>0 / 0 </HoldHead>
+            </Td>
+            <Td>
+              {" "}
+              <HoldHead>toogle</HoldHead>{" "}
+            </Td>
+            <Td>
+              <HoldHead>
+                {" "}
+                <Hold>
+                  <NavLink to="/editExpense" style={{ textDecoration: "none" }}>
+                    <Button bd="fff" cl="ff">
+                      <span>
+                        <FaRegEdit />
+                      </span>
+                      Edit
+                    </Button>
+                  </NavLink>
+                  {/* <Button bd="ff" cl="">
+                  <span>
+                    <BsTrash />
+                  </span>
+                  Delete
+                </Button> */}
+                </Hold>
+              </HoldHead>
             </Td>
           </Body>
         </Buttom>
