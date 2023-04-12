@@ -160,7 +160,7 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: white;
+  background-color: #383333;
   border-bottom: 1px solid lightgray;
 `;
 const Wrapper = styled.div`
@@ -197,7 +197,7 @@ const Hold = styled.div`
   flex: 1 0 auto;
   /* background-color: gold; */
 
-  @media (max-width: 660px){
+  @media (max-width: 660px) {
     justify-content: flex-end;
   }
   width: 80%;
@@ -206,11 +206,11 @@ const Hold = styled.div`
   }
 `;
 const Bar = styled.div`
-    display: flex;
+  display: flex;
   align-items: center;
   justify-content: center;
   margin-left: 20px;
-`
+`;
 const Nav = styled.div`
   font-weight: 700;
   display: flex;
@@ -226,13 +226,13 @@ const Nav = styled.div`
     position: relative;
     bottom: -3px;
   }
-  :nth-child(1){
-    @media (max-width: 1000px){
+  :nth-child(1) {
+    @media (max-width: 1000px) {
       display: none;
     }
   }
-  :nth-child(3){
-    @media (max-width: 1000px){
+  :nth-child(3) {
+    @media (max-width: 1000px) {
       display: none;
     }
   }
@@ -241,7 +241,6 @@ const Nav = styled.div`
       display: none;
     }
   } */
-   
 `;
 const SearchHold = styled.div`
   width: 400px;
@@ -269,7 +268,7 @@ const SearchHold = styled.div`
     border-bottom-right-radius: 7px;
   }
 
-  @media (max-width: 660px){
+  @media (max-width: 660px) {
     width: 250px;
   }
 `;

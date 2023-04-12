@@ -12,6 +12,7 @@ import Allitems from "../Allitems/Allitems";
 import ErrorOtp from "../ErrorOtp/ErrorOtp";
 import Checkout from "../Payment/Checkout";
 import Dashboard from "../SigmUpAndSignIn/Dashboard";
+import Productpage from "../SigmUpAndSignIn/Productpage";
 
 const AllRoutes = () => {
   let element = useRoutes([
@@ -56,6 +57,10 @@ const AllRoutes = () => {
     {
       path: "/allitems",
       element: <Allitems />,
+    },
+    {
+      path: "/product",
+      element: <Productpage />,
     },
     {
       path: "/otperror",

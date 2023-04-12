@@ -20,15 +20,17 @@ export default Dashboard;
 // const Container = styled.div``
 // const Container = styled.div``
 const Wrap = styled.div`
-  width: 95%;
-  height: 400px;
-  min-height: 830px;
+  width: 91%;
   border-top: 1.8px solid grey;
   padding: 30px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
+  @media (max-width: 768px) {
+    display: flex;
+    justify-content: center;
+  }
 `;
 const Container = styled.div`
   display: flex;
