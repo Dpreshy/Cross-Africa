@@ -2,14 +2,23 @@ import React from "react";
 import styled from "styled-components";
 import { FaRegEdit } from "react-icons/fa";
 import { BsTrash } from "react-icons/bs";
+import { BiSearch } from "react-icons/bi";
 import { NavLink } from "react-router-dom";
-import { FaLongArrowAltDown, FaLongArrowAltUp } from "react-icons/fa";
 
 const Productpage = () => {
   return (
     <Container>
       <Wrapper>
         <Buttom>
+          <Header>
+            <Text>Live Products</Text>
+            <Search>
+              <input placeholder="Search by name or brand" />
+              <button>
+                <BiSearch />
+              </button>
+            </Search>
+          </Header>
           <Head>
             <Th>
               <HoldHead>Product </HoldHead>
@@ -321,6 +330,46 @@ const Productpage = () => {
 
 export default Productpage;
 
+const Header = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0;
+`;
+const Search = styled.div`
+  width: 400px;
+  height: 40px;
+  border: 2px solid #d975c0;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  /* justify-content: center; */
+  input {
+    /* height: 40px; */
+    width: 350px;
+    outline: none;
+    border: 0;
+    padding-left: 10px;
+  }
+  button {
+    width: 70px;
+    height: 40px;
+    background-color: #d975c0;
+    border: 0px;
+    outline: none;
+
+    border-top-right-radius: 7px;
+    border-bottom-right-radius: 7px;
+  }
+
+  @media (max-width: 660px) {
+    width: 250px;
+  }
+`;
+const Text = styled.div`
+  border-bottom: 2px solid blue;
+`;
+// const Wrapper = styled.div``
 const Wrapper = styled.div`
   width: 95%;
   overflow-x: scroll;
@@ -391,6 +440,7 @@ const Th = styled.th`
 `;
 const Head = styled.tr`
   border-bottom: 1px solid lightgray;
+  border-top: 5.5px solid #d975c0;
 `;
 const Body = styled.tr`
   border-bottom: 1px solid lightgray;
