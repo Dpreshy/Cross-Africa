@@ -21,8 +21,6 @@ export default Dashboard;
 // const Container = styled.div``
 const Wrap = styled.div`
   width: 95%;
-  height: 400px;
-  min-height: 830px;
   border-top: 1.8px solid grey;
   padding: 30px;
   display: flex;
