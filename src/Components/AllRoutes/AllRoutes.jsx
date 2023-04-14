@@ -8,9 +8,12 @@ import Information from "../Information/Information";
 import Detail from "../Detail/Detail";
 import Payment from "../Payment/Payment";
 import Review from "../Review/Review";
+import Accreview from "../Review/Accreview";
 import Allitems from "../Allitems/Allitems";
 import ErrorOtp from "../ErrorOtp/ErrorOtp";
 import Checkout from "../Payment/Checkout";
+import Shipping from "../Payment/Shipping";
+import Finishshipping from "../Payment/Finishshipping";
 import Dashboard from "../SigmUpAndSignIn/Dashboard";
 import Productpage from "../SigmUpAndSignIn/Productpage";
 
@@ -55,6 +58,10 @@ const AllRoutes = () => {
       element: <Review />,
     },
     {
+      path: "/acct-review",
+      element: <Accreview />,
+    },
+    {
       path: "/allitems",
       element: <Allitems />,
     },
@@ -69,6 +76,14 @@ const AllRoutes = () => {
     {
       path: "/checkout",
       element: <Checkout />,
+    },
+    {
+      path: "/finishshipping",
+      element: <Shipping />,
+    },
+    {
+      path: "/shipping",
+      element: <Finishshipping />,
     },
 
     {

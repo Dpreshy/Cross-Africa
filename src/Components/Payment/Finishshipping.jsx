@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import Item from "./Item";
 import { AiFillCaretDown, AiFillFlag, AiFillCaretLeft } from "react-icons/ai";
-const Checkout = () => {
+const Finishshipping = () => {
   return (
     <div>
       <Container>
@@ -129,7 +129,7 @@ const Checkout = () => {
   );
 };
 
-export default Checkout;
+export default Finishshipping;
 const Wrap = styled.div`
   width: 45%;
 `;
