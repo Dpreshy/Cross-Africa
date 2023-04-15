@@ -15,7 +15,7 @@ const Review = () => {
           <br /> received and will be reviewed <br />
           shortly.
         </Text>
-        <Button to="/dashboard">
+        <Button to="/seller-dashboard">
           <button>Start Selling</button>
         </Button>
       </Card>

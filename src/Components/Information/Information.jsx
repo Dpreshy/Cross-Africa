@@ -60,7 +60,7 @@ const Information = () => {
                   <InputHold onSubmit={handleSubmit} type="multipart/form-data">
                         <Hold>
                             <Name>Business owner or legal representative ID type</Name>
-                            <HoldInput  style={{border: `${IDtype === "Select ID type" ? "1px solid red" : "1px solid lightgray"}`}}>
+                            <HoldInput>
                               {/* <Input placeholder="Phone Number" /> */ }
                               <Select value={IDtype} onChange={e=>{setIDtype(e.target.value)}}>
                                   <option>Select ID type</option>
@@ -68,26 +68,23 @@ const Information = () => {
                                   <option>BVN</option>
                               </Select>
                             </HoldInput>
-                            <Error>{IDtype === "Select ID type" ? "This field cannot be empty": null }</Error>
                         </Hold>
                         
                         <Hold>
                             <Name>Upload a copy of your valid ID card</Name>
-                            <HoldInput tyle={{border: `${Docs === "" ? "1px solid red" : "1px solid lightgray"}`}}>
+                            <HoldInput>
                               <Input type="file" id='pass' onChange={handleDocs}/>
                               {/* <Icon>Q</Icon> */}
                           </HoldInput>
-                          <Error>{Docs === "" ? "This field cannot be empty": null }</Error>
                       </Hold>
                       <Hold>
                             <Name>CAC Registration Number</Name>
-                            <HoldInput  style={{border: `${CACNumber === "" ? "1px solid red" : "1px solid lightgray"}`}}>
+                            <HoldInput>
                               <Input
                                   placeholder="NIN OR BVN"
                                   type='number'
                                   value={ CACNumber } onChange={ (e) => { setCACNumber(e.target.value); } } />
                             </HoldInput>
-                          <Error>{CACNumber === "" ? "This field cannot be empty": null }</Error>
                       </Hold>
                       <Card>
                           <InputFile type="file" onChange={handleImage}/>

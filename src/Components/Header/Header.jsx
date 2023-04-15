@@ -4,6 +4,7 @@ import { AiFillCaretDown } from "react-icons/ai";
 import { BsCart } from "react-icons/bs";
 import { BiHelpCircle, BiSearch } from "react-icons/bi";
 import { FiMenu } from "react-icons/fi";
+import { NavLink } from "react-router-dom";
 
 const Header = () => {
   const [categories, setCategories] = useState(false);
@@ -82,7 +83,7 @@ const Header = () => {
 
               <NavLink to="/detail" style={{ textDecoration: "none" }}>
                 <span>
-                  <BsCart />
+                  <BsCart color="black"/>
                 </span>
               </NavLink>
             </Nav>
@@ -163,7 +164,7 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #383333;
+  /* background-color: #383333; */
   border-bottom: 1px solid lightgray;
 `;
 const Wrapper = styled.div`

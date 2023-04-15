@@ -35,7 +35,7 @@ export const personalInfo = async ({id, gender, DateOfBirth, shippingFrom}) => {
     })
 }
 export const businessInfo = async ({id, address, address2, shippingFrom,codePostal,shopName,city}) => {
-    await axios.patch(`${baseURL}/api/seler/${id}/updateuser`, {address, address2, shippingFrom,postalCode,shopName,city}).then(res => {
+    await axios.patch(`${baseURL}/api/seler/${id}/updateuser`, {address, address2, shippingFrom,codePostal,shopName,city}).then(res => {
         console.log(res.data)
     })
 }
