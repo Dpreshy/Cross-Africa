@@ -10,6 +10,7 @@ import Payment from "../Components/Payment/Payment";
 import Shipping from "../Components/Payment/Shipping";
 import Checkout from "../Components/Payment/Checkout";
 import Dashboard from "../Components/SigmUpAndSignIn/Dashboard";
+import Productpage from "../Components/SigmUpAndSignIn/Productpage";
 
 const AllRoutes = () => {
   let element = useRoutes([
@@ -46,6 +47,10 @@ const AllRoutes = () => {
     {
       path: "/dashboard",
       element: <Dashboard />,
+    },
+    {
+      path: "/product",
+      element: <Productpage />,
     },
     {
       path: "/detail",

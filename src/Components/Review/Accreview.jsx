@@ -3,7 +3,7 @@ import { AiOutlineCheck } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-const Review = () => {
+const Accreview = () => {
   return (
     <Container>
       <Card>
@@ -11,26 +11,24 @@ const Review = () => {
           <AiOutlineCheck fontSize="50px" color="green" />
         </Icon>
         <Text>
-          Account Information has been
-          <br /> received and will be reviewed <br />
-          shortly.
+          You have successfully created
+          <br /> an account
         </Text>
-        <Button to="/dashboard">
-          <button>Start Selling</button>
+        <Button to="/business">
+          <button>Continue</button>
         </Button>
       </Card>
     </Container>
   );
 };
 
-export default Review;
+export default Accreview;
 const Container = styled.div`
   width: 100%;
   height: 42vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  /* margin-top: 30px; */
   padding-top: 80px;
 `;
 const Card = styled.div`

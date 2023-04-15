@@ -43,8 +43,6 @@ const Uniheader = () => {
               <AiFillCaretDown />
             </span>
           </Hold>
-        </Up>
-        <Down>
           <Hold>
             <span>
               <AiOutlineUpload fontSize="25px" color="#47390f" />
@@ -72,7 +70,36 @@ const Uniheader = () => {
               <AiFillCaretDown />
             </span>
           </Hold>
-        </Down>
+        </Up>
+        {/* <Down>
+          <Hold>
+            <span>
+              <AiOutlineUpload fontSize="25px" color="#47390f" />
+            </span>
+            <Text>Upload Items</Text>
+            <span>
+              <AiFillCaretDown />
+            </span>
+          </Hold>
+          <Hold>
+            <span>
+              <AiOutlineTransaction fontSize="25px" color="gray" />
+            </span>
+            <Text>Transactions</Text>
+            <span>
+              <AiFillCaretDown />
+            </span>
+          </Hold>
+          <Hold>
+            <span>
+              <AiOutlineTool fontSize="25px" color="#123456" />
+            </span>
+            <Text>Settings</Text>
+            <span>
+              <AiFillCaretDown />
+            </span>
+          </Hold>
+        </Down> */}
       </Wrap>
     </Container>
   );
@@ -89,6 +116,7 @@ const Hold = styled.div`
   height: 40px;
   border-radius: 50px;
   padding: 0 20px;
+  margin: 30px 100px;
   span {
     position: relative;
     bottom: -3px;
@@ -124,11 +152,8 @@ const Down = styled.div`
 `;
 const Up = styled.div`
   width: 95%;
-  min-height: 150px;
-  height: 75px;
   padding: 0 10px;
   display: flex;
-
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
@@ -139,19 +164,18 @@ const Up = styled.div`
 `;
 const Wrap = styled.div`
   width: 100%;
-  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
+  padding: 20px 0;
 `;
 const Container = styled.div`
   width: 100%;
-  height: 150px;
-  min-height: 300px;
-
+  /* height: 60px; */
+  margin-top: 80px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 20px;
+  /* margin-bottom: 20px; */
 `;

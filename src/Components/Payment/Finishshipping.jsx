@@ -3,32 +3,17 @@ import styled from "styled-components";
 import Item from "./Item";
 import { AiOutlineCheck } from "react-icons/ai";
 
-const Shipping = () => {
+const Finishhipping = () => {
   return (
     <div>
       <Container>
         <Wrapper>
           <Left>
-            <Tup>
-              <Icon>
-                <AiOutlineCheck fontSize="32px" color="white" />
-              </Icon>
-              <Font>
-                <Fonttext>
-                  {" "}
-                  Order <span>05432</span>
-                </Fonttext>
-                <Fonttitle>
-                  {" "}
-                  Thank you <span>Manel</span>
-                </Fonttitle>
-              </Font>
-            </Tup>
             <Hold>
               <InputHold>
-                <Title>Confirmation</Title>
+                <Title>Contact</Title>
                 <InputCont>
-                  <Test>Your order will be shipped immediately</Test>
+                  <Test>You@example.com</Test>
                 </InputCont>
               </InputHold>
               <InputHold>
@@ -72,7 +57,7 @@ const Shipping = () => {
   );
 };
 
-export default Shipping;
+export default Finishhipping;
 
 const Tup = styled.div`
   display: flex;

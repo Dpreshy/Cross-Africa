@@ -8,14 +8,18 @@ import Information from "../Information/Information";
 import Detail from "../Detail/Detail";
 import Payment from "../Payment/Payment";
 import Review from "../Review/Review";
+import Accreview from "../Review/Accreview";
 import Allitems from "../Allitems/Allitems";
 import ErrorOtp from "../ErrorOtp/ErrorOtp";
 import Checkout from "../Payment/Checkout";
+import Shipping from "../Payment/Shipping";
+import Finishshipping from "../Payment/Finishshipping";
 import Dashboard from "../SigmUpAndSignIn/Dashboard";
 import Otppage from "../OtpPage/Otppage";
 import Bankdetails from "../SigmUpAndSignIn/Bankdetails";
 import Businessinfo from "../SigmUpAndSignIn/Businessinfo";
 import PersonalInfo from "../SigmUpAndSignIn/PersonalInfo";
+import Productpage from "../SigmUpAndSignIn/Productpage";
 
 const AllRoutes = () => {
   let element = useRoutes([
@@ -74,8 +78,16 @@ const AllRoutes = () => {
       element: <Review />,
     },
     {
+      path: "/acct-review",
+      element: <Accreview />,
+    },
+    {
       path: "/allitems",
       element: <Allitems />,
+    },
+    {
+      path: "/product",
+      element: <Productpage />,
     },
     {
       path: "/otperror",
@@ -84,6 +96,14 @@ const AllRoutes = () => {
     {
       path: "/checkout",
       element: <Checkout />,
+    },
+    {
+      path: "/finishshipping",
+      element: <Shipping />,
+    },
+    {
+      path: "/shipping",
+      element: <Finishshipping />,
     },
 
     {

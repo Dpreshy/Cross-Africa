@@ -1,17 +1,17 @@
 import React from "react";
 import styled from "styled-components";
-const Dashcard = () => {
+const Dashcard = ({ pr, da, ti, bg }) => {
   return (
     <Container>
-      <Top>
-        <Text>Today</Text>
-        <Title>Mar 16</Title>
+      <Top bg={bg}>
+        <Text>{ti}</Text>
+        <Title>{da}</Title>
       </Top>
       <Bottom>
         <Up>
           <Uptop>
             <Sales>Sales</Sales>
-            <Price>$100,000</Price>
+            <Price>{pr}</Price>
           </Uptop>
           <Upbottom>
             <Left>
@@ -28,7 +28,36 @@ const Dashcard = () => {
             </Right>
           </Upbottom>
         </Up>
-        <Down></Down>
+        <Down>
+          <Upbottom>
+            <Left>
+              <Unit>Pending</Unit>
+              <No>
+                <div>10</div>
+              </No>
+            </Left>
+            <Right>
+              <Unit>Cancel Order</Unit>
+              <No>
+                <div>20</div>
+              </No>
+            </Right>
+          </Upbottom>{" "}
+          <Upbottom>
+            <Left>
+              <Unit>LIve Products</Unit>
+              <No>
+                <div>10</div>
+              </No>
+            </Left>
+            <Right>
+              <Unit>Aprroved product</Unit>
+              <No>
+                <div>20</div>
+              </No>
+            </Right>
+          </Upbottom>
+        </Down>
       </Bottom>
     </Container>
   );
@@ -77,7 +106,12 @@ const Up = styled.div`
 `;
 const Down = styled.div`
   border-bottom: 1.5px solid grey;
-  height: 150px;
+  height: 110px;
+  padding: 15px 15px;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: space-between;
 `;
 const Title = styled.div`
   font-weight: lighter;
@@ -89,25 +123,30 @@ const Text = styled.div`
 `;
 const Bottom = styled.div`
   width: 100%;
-  height: 350px;
+  height: 310px;
   background-color: #f5f5f5;
   padding-bottom: 10px;
   border-radius: 0 0 5px 5px;
 `;
 const Top = styled.div`
-  width: 90%;
+  width: 91%;
   height: 40px;
-  background-color: #3d3dee;
+  /* background-color: #3d3dee; */
+  background-color: ${({ bg }) => bg};
+  /* background-color: ${({ bg }) => (bg ? "#3d3dee" : "grey")}; */
   color: white;
   padding: 5px 15px;
   border-radius: 5px 5px 0 0;
 `;
 const Container = styled.div`
-  width: 300px;
-  height: 400px;
+  width: 360px;
+  height: 365px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  @media (max-width: 320px) {
+    width: 300px;
+  }
   flex-direction: column;
-  margin: 10px 30px;
+  margin: 20px 20px;
 `;

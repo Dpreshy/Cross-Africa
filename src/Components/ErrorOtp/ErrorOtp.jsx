@@ -26,7 +26,7 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 30px;
+  padding-top: 80px;
 `;
 const Card = styled.div`
   width: 280px;
