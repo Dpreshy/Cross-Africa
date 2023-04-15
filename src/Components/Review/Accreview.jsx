@@ -1,5 +1,6 @@
 import React from "react";
 import { AiOutlineCheck } from "react-icons/ai";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const Accreview = () => {
@@ -13,7 +14,7 @@ const Accreview = () => {
           You have successfully created
           <br /> an account
         </Text>
-        <Button>
+        <Button to="/business">
           <button>Continue</button>
         </Button>
       </Card>
@@ -42,7 +43,7 @@ const Card = styled.div`
   padding: 25px 0;
 `;
 const Icon = styled.div``;
-const Button = styled.div`
+const Button = styled(Link)`
   width: 40%;
   button {
     flex: 1;

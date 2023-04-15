@@ -33,7 +33,9 @@ const Businessinfo2 = () => {
               </HoldInput>
               {true ? null : <Error>Error</Error>}
             </Hold>
-            <Button>Continue</Button>
+            <NavLink to="/bankdetails" style={{ textDecoration: "none" }}>
+              <Button>Continue</Button>
+            </NavLink>
           </InputHold>
         </Wrapper>
       </Container>

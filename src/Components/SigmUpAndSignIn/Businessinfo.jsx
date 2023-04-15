@@ -56,7 +56,9 @@ const Businessinfo = () => {
               {true ? null : <Error>Error</Error>}
             </Hold>
 
-            <Button>Continue</Button>
+            <NavLink to="/business2" style={{ textDecoration: "none" }}>
+              <Button>Continue</Button>
+            </NavLink>
           </InputHold>
         </Wrapper>
       </Container>

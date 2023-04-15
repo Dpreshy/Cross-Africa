@@ -1,8 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 import Item from "./Item";
-import { AiFillCaretDown, AiFillFlag, AiFillCaretLeft } from "react-icons/ai";
-const Finishshipping = () => {
+import { AiOutlineCheck } from "react-icons/ai";
+
+const Finishhipping = () => {
   return (
     <div>
       <Container>
@@ -10,113 +11,40 @@ const Finishshipping = () => {
           <Left>
             <Hold>
               <InputHold>
-                <Title>Contact Information</Title>
-                <Text>Email</Text>
+                <Title>Contact</Title>
                 <InputCont>
-                  <Input placeholder="email" />
-                  {/* <span>Chance</span> */}
+                  <Test>You@example.com</Test>
                 </InputCont>
               </InputHold>
               <InputHold>
-                <Title>Payment Method</Title>
+                <Title>Shipping Update</Title>
+                <InputCont>
+                  <Test>
+                    You will get shipping and delivery update by email
+                  </Test>
+                </InputCont>
+              </InputHold>
+              <InputHold>
+                <Title>Customer Information</Title>
                 <InputCont>
                   <Dis>
                     <Cont>
-                      <Checkbox bg="fff"></Checkbox>
-                      <PayOn>Pay on delivery</PayOn>
+                      <Tick>Contact Information</Tick>
+                      <PayOn>pay@gmail.com</PayOn>
                     </Cont>
-                    <Line />
                     <Cont>
-                      <Checkbox bg=""></Checkbox>
-                      <PayOn>Pay on delivery</PayOn>
+                      <Tick>Shipping Address</Tick>
+                      <PayOn>Location</PayOn>
+                    </Cont>
+                    <Cont>
+                      <Tick>Payment Method</Tick>
+                      <PayOn>Location</PayOn>
                     </Cont>
                   </Dis>
                 </InputCont>
               </InputHold>
-
-              <InputHold1>
-                <Title>Shipping Address</Title>
-                <Text>Country</Text>
-
-                <Optionav>
-                  {" "}
-                  <div>
-                    <AiFillFlag />
-                  </div>
-                  <span>
-                    <AiFillCaretDown />
-                  </span>
-                </Optionav>
-              </InputHold1>
-              <InputHold2>
-                <Wrap>
-                  <Text>First Name</Text>
-                  <InputCont>
-                    <Input placeholder="First Name" />
-                    {/* <span>Chance</span> */}
-                  </InputCont>
-                </Wrap>
-                <Wrap>
-                  <Text>Last Name</Text>
-                  <InputCont>
-                    <Input placeholder="Last Name" />
-                    {/* <span>Chance</span> */}
-                  </InputCont>
-                </Wrap>
-              </InputHold2>
-              <InputHold1>
-                <Text>Address</Text>
-                <InputCont>
-                  <Input placeholder="Address" />
-                  {/* <span>Chance</span> */}
-                </InputCont>
-              </InputHold1>
-              <InputHold1>
-                <Text>Apartment, Suite etc.... (Optional)</Text>
-                <InputCont>
-                  <Input placeholder="Apartment, Suite etc...." />
-                  {/* <span>Chance</span> */}
-                </InputCont>
-              </InputHold1>
-              <InputHold2>
-                <Wrap1>
-                  <Text>State</Text>
-                  <InputCont>
-                    <Input placeholder="Lagos" />
-                    {/* <span>Chance</span> */}
-                  </InputCont>
-                </Wrap1>
-                <Wrap1>
-                  <Text>LGA</Text>
-                  <InputCont>
-                    <Input placeholder="Ajeromi" />
-                    {/* <span>Chance</span> */}
-                  </InputCont>
-                </Wrap1>
-                <Wrap1>
-                  <Text>Nearest B/Stop</Text>
-                  <InputCont>
-                    <Input placeholder="OJA" />
-                    {/* <span>Chance</span> */}
-                  </InputCont>
-                </Wrap1>
-              </InputHold2>
-
-              <InputHold1>
-                <Text>Phone number</Text>
-                <InputCont>
-                  <Input placeholder="Phone number" />
-                  {/* <span>Chance</span> */}
-                </InputCont>
-              </InputHold1>
               <Buttons>
-                <Div>
-                  <span>
-                    <AiFillCaretLeft />
-                  </span>
-                  <div>Return to Cart</div>
-                </Div>
-                <Button>Continue Shopping</Button>
+                <Button>Complete Shipping</Button>
               </Buttons>
             </Hold>
           </Left>
@@ -129,42 +57,43 @@ const Finishshipping = () => {
   );
 };
 
-export default Finishshipping;
-const Wrap = styled.div`
-  width: 45%;
-`;
-const Wrap1 = styled.div`
-  width: 30%;
-`;
-const Optionav = styled.div`
-  font-weight: 700;
-  width: 95%;
-  padding: 10px 10px;
-  display: flex;
-  border: 1.7px solid grey;
-  border-radius: 5px;
-  align-items: center;
-  justify-content: space-between;
-  // background-color: gold;
-  height: 30px;
+export default Finishhipping;
 
-  span {
-    margin-left: 10px;
-    position: relative;
-    bottom: -3px;
-    cursor: pointer;
-  }
-  div {
-  }
+const Tup = styled.div`
+  display: flex;
+  padding: 0 10px;
 `;
-const Text = styled.div`
-  font-size: 15px;
+const Icon = styled.div`
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #d975c0;
+  border-radius: 7px;
+`;
+const Font = styled.div`
+  padding: 3px 10px;
+`;
+const Fonttext = styled.div`
+  font-weight: lighter;
+  font-size: 12px;
+`;
+const Fonttitle = styled.div`
   font-weight: 500;
-  margin-bottom: 6px;
+  font-size: 14px;
+  margin-top: 6px;
+`;
+// const Test = styled.div``
+const Test = styled.div`
+  margin-left: 10px;
+  font-weight: 600;
+  color: #363636;
 `;
 const Right = styled.div`
   flex: 1;
-
+  height: 100vh;
+  border-left: 3px solid lightgray;
   /* background-color: blue; */
 `;
 const Button = styled.button`
@@ -191,13 +120,9 @@ const Div = styled.div`
 const Buttons = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
   padding: 0px 10px;
   margin-top: 30px;
-
-  span {
-    margin-top: 5px;
-  }
 `;
 const Line = styled.div`
   width: 100%;
@@ -206,22 +131,18 @@ const Line = styled.div`
   margin: 10px 0px;
 `;
 const PayOn = styled.div`
-  font-weight: 700;
+  font-weight: 500;
   margin-right: 20px;
 `;
-const Checkbox = styled.div`
-  border: 1px solid black;
-  background-color: ${({ bg }) => (bg ? "#D975C0" : "transparent")};
-  border-radius: 50%;
-  height: 25px;
-  width: 25px;
-  cursor: pointer;
+const Tick = styled.div`
+  font-weight: 700;
 `;
 const Cont = styled.div`
   width: 95%;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-bottom: 20px;
 `;
 const Dis = styled.div`
   width: 100%;
@@ -235,7 +156,7 @@ const Input = styled.input`
   height: 30px;
   border: 0px;
   outline: none;
-  /* margin-right: 20px; */
+  margin-left: 10px;
 `;
 const InputCont = styled.div`
   border: 1px solid gray;
@@ -243,7 +164,7 @@ const InputCont = styled.div`
   /* height: 40px; */
   display: flex;
   align-items: center;
-  justify-content: center;
+  /* justify-content: center; */
   border-radius: 5px;
   padding: 10px 0px;
 
@@ -257,22 +178,12 @@ const InputCont = styled.div`
   }
 `;
 const Title = styled.div`
-  font-size: 21px;
-  font-weight: bold;
-  margin-bottom: 14px;
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 10px;
 `;
 const InputHold = styled.div`
-  margin-bottom: 50px;
-`;
-const InputHold1 = styled.div`
-  margin-bottom: 20px;
-`;
-const InputHold2 = styled.div`
-  margin-bottom: 20px;
-  display: flex;
-
-  justify-content: space-between;
-  align-items: center;
+  margin: 10px;
 `;
 const Hold = styled.div`
   width: 90%;
@@ -280,8 +191,10 @@ const Hold = styled.div`
 `;
 const Left = styled.div`
   flex: 1;
-  border-right: 2px solid lightgray;
+  height: 90vh;
+
   display: flex;
+  flex-direction: column;
   justify-content: center;
   /* background-color: gold; */
 `;
