@@ -71,15 +71,15 @@ const AllRoutes = () => {
           path: "personalInfo",
           element: <PersonalInfo />,
         },
+        {
+          path: "review",
+          element: <Review />,
+        },
+        {
+          path: "acct-review",
+          element: <Accreview />,
+        },
       ],
-    },
-    {
-      path: "/review",
-      element: <Review />,
-    },
-    {
-      path: "/acct-review",
-      element: <Accreview />,
     },
     {
       path: "/allitems",

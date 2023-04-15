@@ -1,21 +1,22 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 import { bankDetail } from "../Api/Api";
 import { useMutation } from "@tanstack/react-query";
 
 const Bankdetails = () => {
+  const navigate = useNavigate();
   const [bankName,setBankName] = useState("")
   const [accountName,setaccountName] = useState("")
-  const [accountNumber,setaccountNumber] = useState("")
+  const [ accountNumber, setaccountNumber ] = useState("")
 
   const create = useMutation({
     // mutationKey: ["seller"],
     mutationFn: bankDetail,
     onSuccess: (res) => {
         console.log(res);
-        navigate("/auth/bankdetails")
+        navigate("/auth/review")
     },
 
     onError: (error) => {
@@ -32,7 +33,7 @@ const Bankdetails = () => {
 
       create.mutate({ id, bankName,accountName,accNumber})
   }
-  console.log(accountNumber)
+  // console.log(accountNumber)
 
   if (create.status === "loading") return <h1>Loading...</h1>
   return (
@@ -44,7 +45,7 @@ const Bankdetails = () => {
             Enter every necessary details to create
             <br /> your own seller account{" "}
           </Text>
-          <InputHold>
+          <InputHold onSubmit={handleSubmit}>
             <Hold>
               <Name>Bank</Name>
               <HoldInput>
@@ -56,19 +57,15 @@ const Bankdetails = () => {
               <HoldInput>
                 <Input placeholder="Account Name" value={accountName} onChange={(e)=> setaccountName(e.target.value)}/>
               </HoldInput>
-              {true ? null : <Error>Error</Error>}
             </Hold>
             <Hold>
               <Name>Account Number</Name>
               <HoldInput>
                 <Input placeholder="Account Number" type="number" value={accountNumber} onChange={(e)=> setaccountNumber(e.target.value)}/>
               </HoldInput>
-              {true ? null : <Error>Error</Error>}
             </Hold>
 
-            <NavLink to="/review" style={{ textDecoration: "none" }}>
-              <Button>Continue</Button>
-            </NavLink>
+              <Button type="submit">Continue</Button>
           </InputHold>
         </Wrapper>
       </Container>
@@ -130,7 +127,7 @@ const Name = styled.div`
 const Hold = styled.div`
   margin-bottom: 10px;
 `;
-const InputHold = styled.div`
+const InputHold = styled.form`
   width: 400px;
   display: flex;
   align-items: center;

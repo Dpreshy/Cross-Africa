@@ -35,7 +35,9 @@ const Wrap = styled.div`
   padding: 30px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
+  /* background-color: gold; */
+
   flex-wrap: wrap;
   @media (max-width: 768px) {
     display: flex;
@@ -45,6 +47,7 @@ const Wrap = styled.div`
 const Container = styled.div`
   display: flex;
   align-items: center;
+  justify-content: center;
   flex-direction: column;
   width: 100%;
 `;

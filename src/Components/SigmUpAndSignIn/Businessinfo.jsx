@@ -42,7 +42,7 @@ const Businessinfo = () => {
     mutationFn: businessInfo,
     onSuccess: (res) => {
         console.log(res);
-        navigate("/auth/businessinfo")
+        navigate("/auth/information")
     },
 
     onError: (error) => {
@@ -111,9 +111,6 @@ const check = JSON.parse(localStorage.getItem("seller"))
             </Hold>
 
             <Button type="submit">Continue</Button>
-            <NavLink to="/business2" style={{ textDecoration: "none" }}>
-              <Button>Continue</Button>
-            </NavLink>
           </InputHold>
         </Wrapper>
       </Container>
