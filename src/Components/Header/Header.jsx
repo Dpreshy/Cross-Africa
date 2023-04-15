@@ -79,9 +79,12 @@ const Header = () => {
             ) : null}
             <Nav>
               <div> Cart</div>
-              <span>
-                <BsCart />
-              </span>
+
+              <NavLink to="/detail" style={{ textDecoration: "none" }}>
+                <span>
+                  <BsCart />
+                </span>
+              </NavLink>
             </Nav>
             <Nav>
               <div>Help</div>

@@ -142,6 +142,7 @@ const Uptext = styled.div`
 const Down = styled.div`
   width: 94%;
   /* height: 350px; */
+
   border: 1.8px solid black;
   padding: 0 30px;
   border-radius: 3px;

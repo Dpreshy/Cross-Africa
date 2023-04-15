@@ -16,6 +16,9 @@ import Shipping from "../Payment/Shipping";
 import Finishshipping from "../Payment/Finishshipping";
 import Dashboard from "../SigmUpAndSignIn/Dashboard";
 import Productpage from "../SigmUpAndSignIn/Productpage";
+import Businessinfo from "../SigmUpAndSignIn/Businessinfo";
+import Bankdetails from "../SigmUpAndSignIn/Bankdetails";
+import Businessinfo2 from "../SigmUpAndSignIn/Businessinfo2";
 
 const AllRoutes = () => {
   let element = useRoutes([
@@ -56,6 +59,18 @@ const AllRoutes = () => {
     {
       path: "/review",
       element: <Review />,
+    },
+    {
+      path: "/bankdetails",
+      element: <Bankdetails />,
+    },
+    {
+      path: "/business",
+      element: <Businessinfo />,
+    },
+    {
+      path: "/business2",
+      element: <Businessinfo2 />,
     },
     {
       path: "/acct-review",
