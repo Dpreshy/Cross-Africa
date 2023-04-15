@@ -1,11 +1,14 @@
-import React, { useState,useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
-import { AiFillCaretDown } from "react-icons/ai"
-import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { NavLink, useNavigate } from 'react-router-dom'
-import { businessInfo } from "../Api/Api";
+import { useState,useEffect } from "react";
+import { AiFillCaretDown } from "react-icons/ai"
 
-const Businessinfo = () => {
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { personalInfo } from "../Api/Api";
+
+const PersonalInfo = () => {
+  
   const countryData = [
     {
       name: "NIgeria",
@@ -19,14 +22,16 @@ const Businessinfo = () => {
   const navigate = useNavigate()
   const [ selectCountry, setSelectCountry ] = useState(countryData)
   let [ findCountry, setFindCountry ] = useState(0)
-  const [ address, setaddress ] = useState(""); 
-  const [ address2, setaddress2 ] = useState("Default"); 
-  const [ postalCode, setpostalCode] = useState("123456");
-  const [ shopName, setshopName] = useState("");
-  const [ city, setcity] = useState("");
-  const [ shippingFrom, setshippingFrom ] = useState("");
+  let [ checkState, setCheckState ] = useState(false)
+  const [ gender, setgender ] = useState(""); 
+  const [ DateOfBirth, setDateOfBirth ] = useState(""); 
+  const [ country, setcountry ] = useState("");
   
-
+  const changedState = () => {
+    if (checkState === true) return setCheckState(() => checkState = false)
+    setCheckState(() => checkState = true)
+    
+  }
   const returnCountry = () => {
     setFindCountry(() => findCountry + 1)
     if (findCountry >= selectCountry.length - 1) {
@@ -35,11 +40,11 @@ const Businessinfo = () => {
   }
 
   const getCountryName = () => {
-    setshippingFrom(selectCountry[findCountry].name)
+    setcountry(selectCountry[findCountry].name)
   }
   const create = useMutation({
     // mutationKey: ["seller"],
-    mutationFn: businessInfo,
+    mutationFn: personalInfo,
     onSuccess: (res) => {
         console.log(res);
         navigate("/auth/businessinfo")
@@ -57,60 +62,54 @@ const check = JSON.parse(localStorage.getItem("seller"))
   const handleSubmit = (value) => {
     value.preventDefault()
     const id = check._id
-    const codePostal = parseInt(postalCode)
 
-    create.mutate({id, address, address2, shippingFrom,codePostal,shopName,city})
+    create.mutate({id, gender, DateOfBirth, country})
   }
   if (create.status === "loading") return <h1>Loading...</h1>
-  console.log(shippingFrom)
+  // console.log(country)
+
+ 
   return (
     <div>
       <Container>
         <Wrapper>
-          <Title>Business Information </Title>
+          <Title>Personal Details </Title>
           <Text>
-            Enter every necessary details to create your own seller account{" "}
+           Almost there, just few more details
           </Text>
           <InputHold onSubmit={handleSubmit}>
             <Hold>
-              <Name>Shop Name *</Name>
+              <Name>Date of Birth</Name>
               <HoldInput>
-                <Input value={shopName} onChange={(e)=> setshopName(e.target.value)}/>
+                <Input
+                  placeholder="04/19/1999"
+                  type="date"
+                  value={ DateOfBirth }
+                  onChange={(e)=>{setDateOfBirth(e.target.value)}}
+                />
               </HoldInput>
             </Hold>
             <Hold>
-              <Name>Postal code/Zip code</Name>
+              <Name>Gender</Name>
               <HoldInput>
-                <Input type="number" value={postalCode} onChange={(e)=> setpostalCode(e.target.value)}/>
+                <Select value={gender} onChange={e=>{setgender(e.target.value)}}>
+                    <option>Select</option>
+                    <option>Male</option>
+                    <option>Female</option>
+                    <option>Other</option>
+                </Select>
               </HoldInput>
             </Hold>
             <Hold>
-              <Name>Address *</Name>
+              <Name>Country</Name>
               <HoldInput>
-                <Input value={address} onChange={(e)=> setaddress(e.target.value)}/>
-              </HoldInput>
-            </Hold>
-            <Hold>
-              <Name>Address 2</Name>
-              <HoldInput>
-                <Input value={address2} onChange={(e)=> setaddress2(e.target.value)}/>
-              </HoldInput>
-            </Hold>
-            <Hold>
-              <Name>City / Town</Name>
-              <HoldInput>
-                <Input value={city} onChange={(e)=> setcity(e.target.value)}/>
-              </HoldInput>
-            </Hold>
-            <Hold>
-              <Name>What country are you shipping from?</Name>
-              <HoldInput>
-                <Image src={ selectCountry[findCountry].flag} />
+                <Image src={ selectCountry[ findCountry ].flag } />
                 <Icon onClick={returnCountry}><AiFillCaretDown /></Icon>
               </HoldInput>
             </Hold>
-
-            <Button type="submit">Continue</Button>
+            { !checkState ? <Button bg="fff" disabled={ true}>Continue</Button> : <Button bg="" type="submit">Continue</Button>}
+            {/* <Button>Continue</Button> */}
+            <AlText> <InputCheck type="checkbox" onClick={changedState}/>Don't have an account? <span>Terms and Conditions</span></AlText>
           </InputHold>
         </Wrapper>
       </Container>
@@ -118,8 +117,27 @@ const check = JSON.parse(localStorage.getItem("seller"))
   );
 };
 
-export default Businessinfo;
+export default PersonalInfo;
 
+const Select = styled.select`
+    width: 100%;
+    height: 30px;
+    outline: none;
+    border: 0px;
+`
+const InputCheck = styled.input`
+  margin-right: 10px;
+  cursor: pointer;
+`;
+const AlText = styled.div`
+    font-size: 13px;
+    font-weight: 500;
+
+    span{
+        color: #ec00b1;
+        cursor: pointer;
+    }
+`;
 const Image = styled.img`
   width: 40px;
 `;
@@ -127,9 +145,9 @@ const Button = styled.button`
   width: 360px;
   height: 50px;
   border: 0px;
-  background-color: #ec00b1;
+  background-color:${({ bg }) => (bg === "" ? "#D975C0" : "#c4c4c4")};
   border-radius: 5px;
-  color: white;
+  color: ${({ bg }) => (bg === "" ? "white" : "black")};
   font-weight: 600;
   font-size: 20px;
   cursor: pointer;
@@ -157,21 +175,16 @@ const HoldInput = styled.div`
   align-items: center;
   justify-content: space-between;
   padding: 0px 10px;
+
+  /* input{
+    display: none;
+  } */
 `;
 const Input = styled.input`
   width: 100%;
   height: 30px;
   outline: none;
   border: 0px;
-  /* margin-bottom: 5px; */
-  /* padding-left: 10px;
-    padding-right: 10px; */
-    ::-webkit-outer-spin-button{
-    appearance: none;
-  }
-  ::-webkit-inner-spin-button{
-    appearance: none;
-  }
 `;
 const Name = styled.div`
   font-size: 15px;

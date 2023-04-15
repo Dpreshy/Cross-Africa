@@ -12,15 +12,19 @@ import Allitems from "../Allitems/Allitems";
 import ErrorOtp from "../ErrorOtp/ErrorOtp";
 import Checkout from "../Payment/Checkout";
 import Dashboard from "../SigmUpAndSignIn/Dashboard";
+import Otppage from "../OtpPage/Otppage";
+import Bankdetails from "../SigmUpAndSignIn/Bankdetails";
+import Businessinfo from "../SigmUpAndSignIn/Businessinfo";
+import PersonalInfo from "../SigmUpAndSignIn/PersonalInfo";
 
 const AllRoutes = () => {
   let element = useRoutes([
     {
-      path: "/",
+      path: "/seller",
       element: <LandingPage />,
     },
     {
-      path: "/category",
+      path: "/",
       children: [
         {
           index: true,
@@ -29,7 +33,7 @@ const AllRoutes = () => {
       ],
     },
     {
-      path: "/:auth",
+      path: "/auth",
       children: [
         {
           index: true,
@@ -43,11 +47,27 @@ const AllRoutes = () => {
           path: "signin",
           element: <SignIn />,
         },
+        {
+          path: "verify",
+          element: <Otppage />,
+        },
+        {
+          path: "information",
+          element: <Information />,
+        },
+        {
+          path: "bankdetails",
+          element: <Bankdetails />,
+        },
+        {
+          path: "businessinfo",
+          element: <Businessinfo />,
+        },
+        {
+          path: "personalInfo",
+          element: <PersonalInfo />,
+        },
       ],
-    },
-    {
-      path: "/information",
-      element: <Information />,
     },
     {
       path: "/review",
@@ -71,7 +91,7 @@ const AllRoutes = () => {
       element: <Detail />,
     },
     {
-      path: "/dashboard",
+      path: "/seller-dashboard",
       element: <Dashboard />,
     },
     {

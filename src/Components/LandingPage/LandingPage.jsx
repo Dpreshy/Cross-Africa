@@ -2,11 +2,14 @@ import React from "react";
 import styled from "styled-components";
 import Reason from "./Reason";
 import GetStarted from "./GetStarted";
-import {NavLink} from "react-router-dom"
+import { NavLink } from "react-router-dom"
+import LandingPageHead from "../Header/LandingPageHead";
 
 const LandingPage = () => {
   return (
-    <div>
+    <>
+      {/* <LandingPageHead /> */}
+      <div>
       <Container>
         <Wrapper>
           <Hero>
@@ -21,6 +24,7 @@ const LandingPage = () => {
         </Wrapper>
       </Container>
     </div>
+    </>
   );
 };
 
@@ -56,7 +60,7 @@ const Hero = styled.div`
   justify-content: center;
   flex-direction: column;
   color: white;
-  backdrop-filter: blur(12px);
+  /* z-index: -1; */
   /* background-color: #f4caca; */
   background-image: linear-gradient(
       to bottom,

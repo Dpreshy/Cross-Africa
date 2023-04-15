@@ -7,7 +7,7 @@ import { useState } from 'react';
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import { logInUser } from '../Api/Api'
 
@@ -32,12 +32,12 @@ const SignIn = () => {
       });
     
       const create = useMutation({
-        mutationKey: [ "createseler" ],
+        mutationKey: [ "seller" ],
         mutationFn: logInUser,
 
         onSuccess: (res) => {
             console.log(res);
-            // navigate("/auth/signin")
+            navigate("/auth/verify")
         },
 
         onError: (error) => {
@@ -48,6 +48,8 @@ const SignIn = () => {
     const onSubmit = handleSubmit((value) => {
         create.mutate(value)
     })
+
+    if (create.status === "loading") return <h1>Loading...</h1>
   return (
       <div>
           <Container>
@@ -57,18 +59,18 @@ const SignIn = () => {
                   <InputHold onSubmit={onSubmit}>
                         <Hold>
                             <Name>Email Address</Name>
-                            <HoldInput>
+                            <HoldInput style={{border: `${errors?.email ? "1px solid red" : "1px solid lightgray"}`}}>
                                 <Input placeholder="Email Address" type="email" {...register("email")}/>
                             </HoldInput>
-                            {true ? null : <Error>Error</Error>}
+                            <Error>{errors?.email && errors?.email?.message }</Error>
                         </Hold>
                         <Hold>
                             <Name>Password</Name>
-                            <HoldInput>
+                            <HoldInput  style={{border: `${errors?.password ? "1px solid red" : "1px solid lightgray"}`}}>
                               <Input placeholder="Password" type={Switch ? "password" : "text"} id='pass' {...register("password")}/>
                               <Icon onClick={ ()=>{ setSwitch(switchIcon)}}>{ Switch === false ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}</Icon>
                             </HoldInput>
-                            {true ? null : <Error>Error</Error>}
+                            <Error>{errors?.password && errors?.password?.message }</Error>
                       </Hold>
                       <PassHold>
                           Forget Password?

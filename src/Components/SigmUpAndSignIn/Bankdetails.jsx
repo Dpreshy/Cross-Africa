@@ -1,8 +1,40 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 
+import { bankDetail } from "../Api/Api";
+import { useMutation } from "@tanstack/react-query";
+
 const Bankdetails = () => {
+  const [bankName,setBankName] = useState("")
+  const [accountName,setaccountName] = useState("")
+  const [accountNumber,setaccountNumber] = useState("")
+
+  const create = useMutation({
+    // mutationKey: ["seller"],
+    mutationFn: bankDetail,
+    onSuccess: (res) => {
+        console.log(res);
+        navigate("/auth/bankdetails")
+    },
+
+    onError: (error) => {
+        console.log(error.message)
+    }
+  })
+
+  const check = JSON.parse(localStorage.getItem("seller"))
+
+  const handleSubmit = (e) => {
+      e.preventDefault()
+    const id = check._id
+    const accNumber = parseInt(accountNumber)
+
+      create.mutate({ id, bankName,accountName,accNumber})
+  }
+  console.log(accountNumber)
+
+  if (create.status === "loading") return <h1>Loading...</h1>
   return (
     <div>
       <Container>
@@ -14,30 +46,22 @@ const Bankdetails = () => {
           </Text>
           <InputHold>
             <Hold>
-              <Name>Full Name</Name>
-              <HoldInput>
-                <Input placeholder="Full Name" />
-              </HoldInput>
-              {true ? null : <Error>Error</Error>}
-            </Hold>
-            <Hold>
               <Name>Bank</Name>
               <HoldInput>
-                <Input placeholder="Bank" />
+                <Input placeholder="Bank" value={bankName} onChange={(e)=> setBankName(e.target.value)}/>
               </HoldInput>
-              {true ? null : <Error>Error</Error>}
             </Hold>
             <Hold>
               <Name>Account Name</Name>
               <HoldInput>
-                <Input placeholder="Account Name" />
+                <Input placeholder="Account Name" value={accountName} onChange={(e)=> setaccountName(e.target.value)}/>
               </HoldInput>
               {true ? null : <Error>Error</Error>}
             </Hold>
             <Hold>
               <Name>Account Number</Name>
               <HoldInput>
-                <Input placeholder="Account Number" />
+                <Input placeholder="Account Number" type="number" value={accountNumber} onChange={(e)=> setaccountNumber(e.target.value)}/>
               </HoldInput>
               {true ? null : <Error>Error</Error>}
             </Hold>
@@ -89,6 +113,12 @@ const Input = styled.input`
   /* margin-bottom: 5px; */
   /* padding-left: 10px;
     padding-right: 10px; */
+  ::-webkit-outer-spin-button{
+    appearance: none;
+  }
+  ::-webkit-inner-spin-button{
+    appearance: none;
+  }
 `;
 const Name = styled.div`
   font-size: 15px;

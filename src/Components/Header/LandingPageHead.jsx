@@ -44,7 +44,7 @@ const Container = styled.div`
   background-color: transparent;
   position: fixed;
   left: 0px;
-  z-index: 1111;
+  /* z-index: 1111; */
 `;
 const Wrapper = styled.div`
   width: 95%;

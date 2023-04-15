@@ -1,6 +1,7 @@
 import React from "react";
 import { AiFillInfoCircle, AiOutlineCheck } from "react-icons/ai";
 import styled from "styled-components";
+import { NavLink } from "react-router-dom";
 
 const ErrorOtp = () => {
   return (
@@ -10,7 +11,7 @@ const ErrorOtp = () => {
           <AiFillInfoCircle fontSize="50px" color="red" />
         </Icon>
         <Text>Incorrect OTP number, please try again</Text>
-        <Button>
+        <Button to="/auth/verify">
           <button>Try again</button>
         </Button>
       </Card>
@@ -21,7 +22,7 @@ const ErrorOtp = () => {
 export default ErrorOtp;
 const Container = styled.div`
   width: 100%;
-  height: 42vh;
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -39,7 +40,7 @@ const Card = styled.div`
   padding: 25px 0;
 `;
 const Icon = styled.div``;
-const Button = styled.div`
+const Button = styled(NavLink)`
   width: 40%;
   button {
     flex: 1;
