@@ -24,100 +24,98 @@ import Productpage from "../SigmUpAndSignIn/Productpage";
 const AllRoutes = () => {
   let element = useRoutes([
     {
-      path: "/seller",
-      element: <LandingPage />,
-    },
-    {
       path: "/",
       children: [
         {
           index: true,
           element: <Category />,
         },
+        {
+          path: "/auth",
+          children: [
+            {
+              index: true,
+              element: <SignUp />,
+            },
+            {
+              path: "user",
+              element: <SignUp />,
+            },
+            {
+              path: "signin",
+              element: <SignIn />,
+            },
+            {
+              path: "verify",
+              element: <Otppage />,
+            },
+            {
+              path: "information",
+              element: <Information />,
+            },
+            {
+              path: "bankdetails",
+              element: <Bankdetails />,
+            },
+            {
+              path: "businessinfo",
+              element: <Businessinfo />,
+            },
+            {
+              path: "personalInfo",
+              element: <PersonalInfo />,
+            },
+            {
+              path: "review",
+              element: <Review />,
+            },
+            {
+              path: "acct-review",
+              element: <Accreview />,
+            },
+          ],
+        },
+        {
+          path: "/allitems",
+          element: <Allitems />,
+        },
+        {
+          path: "/product",
+          element: <Productpage />,
+        },
+        {
+          path: "/otperror",
+          element: <ErrorOtp />,
+        },
+        {
+          path: "/checkout",
+          element: <Checkout />,
+        },
+        {
+          path: "/finishshipping",
+          element: <Shipping />,
+        },
+        {
+          path: "/shipping",
+          element: <Finishshipping />,
+        },
+    
+        {
+          path: "/detail",
+          element: <Detail />,
+        },
+        {
+          path: "/seller-dashboard",
+          element: <Dashboard />,
+        },
+        {
+          path: "/payment",
+          element: <Payment />,
+        },
       ],
     },
-    {
-      path: "/auth",
-      children: [
-        {
-          index: true,
-          element: <SignUp />,
-        },
-        {
-          path: "user",
-          element: <SignUp />,
-        },
-        {
-          path: "signin",
-          element: <SignIn />,
-        },
-        {
-          path: "verify",
-          element: <Otppage />,
-        },
-        {
-          path: "information",
-          element: <Information />,
-        },
-        {
-          path: "bankdetails",
-          element: <Bankdetails />,
-        },
-        {
-          path: "businessinfo",
-          element: <Businessinfo />,
-        },
-        {
-          path: "personalInfo",
-          element: <PersonalInfo />,
-        },
-        {
-          path: "review",
-          element: <Review />,
-        },
-        {
-          path: "acct-review",
-          element: <Accreview />,
-        },
-      ],
-    },
-    {
-      path: "/allitems",
-      element: <Allitems />,
-    },
-    {
-      path: "/product",
-      element: <Productpage />,
-    },
-    {
-      path: "/otperror",
-      element: <ErrorOtp />,
-    },
-    {
-      path: "/checkout",
-      element: <Checkout />,
-    },
-    {
-      path: "/finishshipping",
-      element: <Shipping />,
-    },
-    {
-      path: "/shipping",
-      element: <Finishshipping />,
-    },
-
-    {
-      path: "/detail",
-      element: <Detail />,
-    },
-    {
-      path: "/seller-dashboard",
-      element: <Dashboard />,
-    },
-    {
-      path: "/payment",
-      element: <Payment />,
-    },
+  
+  
   ]);
 
   return element;

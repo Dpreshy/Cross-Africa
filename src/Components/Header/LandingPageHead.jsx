@@ -4,15 +4,6 @@ import { useParams } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 
 const LandingPageHead = () => {
-  const [remove, setRemove] = useState(true);
-  const { auth } = useParams();
-  console.log(auth);
-  const myRef = useRef(null);
-  const change = () => {
-    if (remove === true) {
-      const setValue = (myRef.current.style.display = "none");
-    }
-  };
 
   return (
     <div>
@@ -22,9 +13,8 @@ const LandingPageHead = () => {
             <img src="/logo 1.png" />
             <div>Cross Africa</div>
           </Logo>
-          <Hold ref={myRef}>
+          <Hold>
             <Button
-              onClick={change}
               to="/auth"
               bd=""
               bg="ffff"
@@ -33,9 +23,9 @@ const LandingPageHead = () => {
             >
               Sign Up
             </Button>
-            {/* <Button to="/auth/signin" bd="fgf" bg="" hbg="fff" hbd="">
+            <Button to="/auth/signin" bd="fgf" bg="" hbg="fff" hbd="">
               Log In
-            </Button> */}
+            </Button>
           </Hold>
         </Wrapper>
       </Container>
@@ -47,7 +37,7 @@ export default LandingPageHead;
 
 const Container = styled.div`
   width: 100%;
-  background-color: #f8ecf5;
+  /* background-color: #f8ecf5; */
   /* max-width: 2040px; */
   height: 85px;
   display: flex;
@@ -89,7 +79,7 @@ const Hold = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  width: 270px;
+  width: 350px;
 `;
 const Button = styled(NavLink)`
   padding: 10px 40px;
@@ -101,6 +91,7 @@ const Button = styled(NavLink)`
   cursor: pointer;
   transition: all 345ms ease-in;
   text-decoration: none;
+  margin: 10px;
 
   :hover {
     background-color: ${({ hbg }) => (hbg === "" ? "transparent" : "#D975C0")};
