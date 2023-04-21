@@ -4,16 +4,20 @@ import AllRoutes from "./Components/AllRoutes/AllRoutes";
 import LandingPageHead from "./Components/Header/LandingPageHead";
 import { useParams } from 'react-router-dom'
 import Footer from "./Components/Footer/Footer"
+import { Routes, Route } from "react-router-dom";
+import LandingPage from "./Components/LandingPage/LandingPage";
+import PageRouting from "./Components/PageRouting";
 
 const App = () => {
-  const [ show, setShow ] = useState(true);
-  const { id } = useParams()
-  console.log(id)
+  // const [ show, setShow ] = useState(true)
   return (
     <div>
-      {show ? <Header /> : <LandingPageHead />}
+      {/* {show ? <Header /> : <LandingPageHead />} */}
+      <Routes>
+        <Route path="/*" element={ <PageRouting />} />
+        <Route path="/seller-page" element={ <LandingPage />} />
+      </Routes>
       
-      <AllRoutes />
       <Footer />
     </div>
   );

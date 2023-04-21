@@ -8,7 +8,7 @@ import LandingPageHead from "../Header/LandingPageHead";
 const LandingPage = () => {
   return (
     <>
-      {/* <LandingPageHead /> */}
+      <LandingPageHead />
       <div>
       <Container>
         <Wrapper>
