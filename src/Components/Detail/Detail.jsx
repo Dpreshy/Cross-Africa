@@ -2,6 +2,7 @@ import React from "react";
 import Detailmiddle from "./Detailmiddle";
 import Detaildown from "./Detaildown";
 import Detailup from "./Detailup";
+import DetailProduct from "./DetailProduct";
 import styled from "styled-components";
 
 const Detail = () => {
@@ -11,6 +12,7 @@ const Detail = () => {
         <Detailup />
         <Detailmiddle />
         <Detaildown />
+        <DetailProduct />
       </Wrapper>
     </Container>
   );

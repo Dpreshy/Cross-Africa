@@ -10,17 +10,23 @@ const OtpPage = () => {
   const navigate = useNavigate()
 
   const [otp, setOtp] = useState("");
-  const check = JSON.parse(localStorage.getItem("seller"))
+  const check = JSON.parse(localStorage.getItem("user"))
   
   const sendOTP = useMutation({
     mutationFn: verifyUser,
     onSuccess: () => {
       if (check.isSeller === true) {
-        if (check.address != "") {
+        if (check.completed === true) {
           navigate("/seller-dashboard")
         }
         navigate("/auth/personalinfo")
-      } else {
+      } if (check.isAdmin === true){
+        navigate("/admin-dashboard")
+      }
+      if (check.completed === true) {
+        navigate("/seller-dashboard")
+      }
+      else {
         navigate("/")
       }
     }

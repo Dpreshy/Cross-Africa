@@ -6,19 +6,9 @@ import { AiFillCaretDown } from "react-icons/ai"
 
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { personalInfo } from "../Api/Api";
+import countryData from "../data"
 
 const PersonalInfo = () => {
-  
-  const countryData = [
-    {
-      name: "NIgeria",
-      flag: "https://cdn-icons-png.flaticon.com/512/8603/8603374.png"
-    },
-    {
-      name: "Ghana",
-      flag: "https://cdn-icons-png.flaticon.com/512/8603/8603142.png"
-    },
-  ]
   const navigate = useNavigate()
   const [ selectCountry, setSelectCountry ] = useState(countryData)
   let [ findCountry, setFindCountry ] = useState(0)
@@ -57,7 +47,7 @@ const PersonalInfo = () => {
   useEffect(() => {
     getCountryName()
   },[findCountry])
-const check = JSON.parse(localStorage.getItem("seller"))
+const check = JSON.parse(localStorage.getItem("user"))
 
   const handleSubmit = (value) => {
     value.preventDefault()
@@ -65,7 +55,7 @@ const check = JSON.parse(localStorage.getItem("seller"))
 
     create.mutate({id, gender, DateOfBirth, country})
   }
-  if (create.status === "loading") return <h1>Loading...</h1>
+  // if (create.status === "loading") return <h1>Loading...</h1>
   // console.log(country)
 
  
@@ -107,7 +97,7 @@ const check = JSON.parse(localStorage.getItem("seller"))
                 <Icon onClick={returnCountry}><AiFillCaretDown /></Icon>
               </HoldInput>
             </Hold>
-            { !checkState ? <Button bg="fff" disabled={ true}>Continue</Button> : <Button bg="" type="submit">Continue</Button>}
+            { !checkState ? <Button bg="fff" disabled={ true }>Continue</Button> : <Button bg="" type="submit">{create.status === "loading"? "Loading...": "Continue" }</Button>}
             {/* <Button>Continue</Button> */}
             <AlText> <InputCheck type="checkbox" onClick={changedState}/>Don't have an account? <span>Terms and Conditions</span></AlText>
           </InputHold>
@@ -160,10 +150,6 @@ const Error = styled.div`
   color: #ff0000;
 `;
 const Icon = styled.div`
-  width: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   cursor: pointer;
 `;
 const HoldInput = styled.div`
@@ -174,7 +160,7 @@ const HoldInput = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0px 10px;
+  padding: 0px 5px;
 
   /* input{
     display: none;
