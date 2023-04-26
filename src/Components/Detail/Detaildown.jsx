@@ -20,54 +20,7 @@ const Detaildown = () => {
             <br /> which makes data processing a lot smoother and efficient.
           </Uptext>
         </Up>
-        <Middle> You May Also Like</Middle>
-        <Down>
-          <Downtitle>Mobiles</Downtitle>
-          <Cardhold>
-            <Card>
-              <Image>
-                <img src="/Frame 1.png" />
-              </Image>
-              <Name>
-                {" "}
-                Mac Book Pro
-                <span>
-                  {" "}
-                  <BsCart />
-                </span>
-              </Name>
-              <Price>#450,000</Price>
-            </Card>
-            <Card>
-              <Image>
-                <img src="/Frame 113.png" />
-              </Image>
-              <Name>
-                {" "}
-                Samsung S4
-                <span>
-                  {" "}
-                  <BsCart />
-                </span>
-              </Name>
-              <Price>#250,000</Price>
-            </Card>
-            <Card>
-              <Image>
-                <img src="/Frame 112.png" />
-              </Image>
-              <Name>
-                {" "}
-                Iphone X
-                <span>
-                  {" "}
-                  <BsCart />
-                </span>
-              </Name>
-              <Price>#140,000</Price>
-            </Card>
-          </Cardhold>
-        </Down>
+        
       </Wrapper>
     </Container>
   );
@@ -155,11 +108,12 @@ const Middle = styled.div`
 
 const Wrapper = styled.div`
   width: 95%;
-  height: 595px;
+  /* height: 595px; */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
+  margin-bottom: 40px;
 `;
 const Container = styled.div`
   width: 100%;

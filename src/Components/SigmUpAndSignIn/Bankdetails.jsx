@@ -24,18 +24,19 @@ const Bankdetails = () => {
     }
   })
 
-  const check = JSON.parse(localStorage.getItem("seller"))
+  const check = JSON.parse(localStorage.getItem("user"))
 
   const handleSubmit = (e) => {
       e.preventDefault()
     const id = check._id
+    const completed = true
     const accNumber = parseInt(accountNumber)
 
-      create.mutate({ id, bankName,accountName,accNumber})
+      create.mutate({ id, bankName,accountName,accNumber,completed})
   }
   // console.log(accountNumber)
 
-  if (create.status === "loading") return <h1>Loading...</h1>
+  // if (create.status === "loading") return <h1>Loading...</h1>
   return (
     <div>
       <Container>
@@ -65,7 +66,7 @@ const Bankdetails = () => {
               </HoldInput>
             </Hold>
 
-              <Button type="submit">Continue</Button>
+            <Button type="submit">{create.status === "Loading..." ? "Loadding": "Continue" }</Button>
           </InputHold>
         </Wrapper>
       </Container>

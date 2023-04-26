@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { NavLink } from "react-router-dom";
 
 const Category = () => {
   return (
@@ -17,11 +18,11 @@ const Category = () => {
                   Buying made easy, get TV, home theatre, system and electronics
                   at the comfort of your home.
                 </Content>
-                <Button>Buy Now</Button>
+                <Button to="/electronics">Buy Now</Button>
               </TextHold>
             </Card>
             <Card>
-              {/* <img src="/Frame 2.png" /> */}
+              {/* <img src="/Frame 2.png" /> [ "phone", "food and groceries", "clothing and fashion", "electronics" ]*/}
 
               <TextHold>
                 <Title>Mobile Phones.</Title>
@@ -29,7 +30,7 @@ const Category = () => {
                   Buying made easy, get used phones, laptops, chargers etc.. at
                   the comfort of your home
                 </Content>
-                <Button>Buy Now</Button>
+                <Button to="/phone">Buy Now</Button>
               </TextHold>
             </Card>
             <Card>
@@ -41,7 +42,7 @@ const Category = () => {
                   Buying made easy, get Trendy and classic wears at the comfort
                   of your home.
                 </Content>
-                <Button>Buy Now</Button>
+                <Button to="clothing">Buy Now</Button>
               </TextHold>
             </Card>
             <Card>
@@ -53,7 +54,7 @@ const Category = () => {
                   Buying made easy, food and groceries are all available, get
                   them all at the comfort of your home.
                 </Content>
-                <Button>Buy Now</Button>
+                <Button to="/food">Buy Now</Button>
               </TextHold>
             </Card>
           </Holder>
@@ -65,7 +66,7 @@ const Category = () => {
 
 export default Category;
 
-const Button = styled.button`
+const Button = styled(NavLink)`
   margin-bottom: 20px;
   border: 0px;
   outline: none;
@@ -74,6 +75,7 @@ const Button = styled.button`
   color: white;
   font-weight: 600;
   cursor: pointer;
+  text-decoration: none;
 `;
 const Content = styled.div`
   font-size: 20px;

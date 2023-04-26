@@ -8,14 +8,14 @@ export const createUser = async({fullName,lastName,email,companyName, phoneNum, 
 }
 
 export const logInUser = async({email,password}) => {
-    await axios.post(`${baseURL}/api/seler/login`, { email, password }).then(res => {
-        localStorage.setItem("seller", JSON.stringify(res.data.data))
+    await axios.post(`${baseURL}/api/user/login`, { email, password }).then(res => {
+        localStorage.setItem("user", JSON.stringify(res.data.data))
         alert(res.data.token)
     });
 };
 
 export const verifyUser = async ({id, otp}) => {
-    await axios.patch(`${baseURL}/api/seler/${id}/verify`, {otp} ).then(res => {
+    await axios.patch(`${baseURL}/api/user/${id}/verify`, {otp} ).then(res => {
         console.log(res.data)
     })
 };
@@ -39,8 +39,8 @@ export const businessInfo = async ({id, address, address2, shippingFrom,codePost
         console.log(res.data)
     })
 }
-export const bankDetail = async ({ id, bankName,accountName,accNumber}) => {
-    await axios.patch(`${baseURL}/api/seler/${id}/updateuser`, {bankName,accountName,accNumber}).then(res => {
+export const bankDetail = async ({ id, bankName,accountName,accNumber,completed}) => {
+    await axios.patch(`${baseURL}/api/seler/${id}/updateuser`, {bankName,accountName,accNumber,completed}).then(res => {
         console.log(res.data)
     })
 }

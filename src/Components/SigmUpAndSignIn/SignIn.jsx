@@ -49,7 +49,7 @@ const SignIn = () => {
         create.mutate(value)
     })
 
-    if (create.status === "loading") return <h1>Loading...</h1>
+    // if () return <h1>Loading...</h1>
   return (
       <div>
           <Container>
@@ -75,8 +75,8 @@ const SignIn = () => {
                       <PassHold>
                           Forget Password?
                       </PassHold>
-                      <Button type='submit'>Log In</Button>
-                      <Button>Continue as a Guest</Button>
+                      <Button type='submit'>{ create.status === "loading" ? "Loading..." : "Log In"}</Button>
+                      {/* <Button>Continue as a Guest</Button> */}
                       <AlText>Don't have an account? <NavLink to="/auth/signin" style={{textDecoration: "none"}}><span>Sign Up</span></NavLink></AlText>
                   </InputHold>
               </Wrapper>

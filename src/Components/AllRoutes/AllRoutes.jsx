@@ -1,6 +1,5 @@
 import React from "react";
 import { useRoutes } from "react-router-dom";
-import LandingPage from "../LandingPage/LandingPage";
 import Category from "../Category/Category";
 import SignUp from "../SigmUpAndSignIn/SignUp";
 import SignIn from "../SigmUpAndSignIn/SignIn";
@@ -13,13 +12,17 @@ import Allitems from "../Allitems/Allitems";
 import ErrorOtp from "../ErrorOtp/ErrorOtp";
 import Checkout from "../Payment/Checkout";
 import Shipping from "../Payment/Shipping";
-import Finishshipping from "../Payment/Finishshipping";
 import Dashboard from "../SigmUpAndSignIn/Dashboard";
 import Otppage from "../OtpPage/Otppage";
 import Bankdetails from "../SigmUpAndSignIn/Bankdetails";
 import Businessinfo from "../SigmUpAndSignIn/Businessinfo";
 import PersonalInfo from "../SigmUpAndSignIn/PersonalInfo";
-import Productpage from "../SigmUpAndSignIn/Productpage";
+import Products from "../Products/Products";
+import Private from "../Private"
+import LiveProduct from "../Products/LiveProduct";
+import SoldProduct from "../Products/SoldProduct";
+import RejectedProduct from "../Products/RejectedProduct";
+import AllOrders from "../OrderPages/AllOrders"
 
 const AllRoutes = () => {
   let element = useRoutes([
@@ -73,20 +76,17 @@ const AllRoutes = () => {
               path: "acct-review",
               element: <Accreview />,
             },
+            {
+              path: "otperror",
+              element: <ErrorOtp />,
+            },
           ],
         },
         {
-          path: "/allitems",
+          path: "/:id",
           element: <Allitems />,
         },
-        {
-          path: "/product",
-          element: <Productpage />,
-        },
-        {
-          path: "/otperror",
-          element: <ErrorOtp />,
-        },
+        
         {
           path: "/checkout",
           element: <Checkout />,
@@ -95,22 +95,19 @@ const AllRoutes = () => {
           path: "/finishshipping",
           element: <Shipping />,
         },
-        {
-          path: "/shipping",
-          element: <Finishshipping />,
-        },
     
         {
           path: "/detail",
           element: <Detail />,
         },
         {
-          path: "/seller-dashboard",
-          element: <Dashboard />,
-        },
-        {
           path: "/payment",
-          element: <Payment />,
+          children: [
+            {
+              index: true,
+              element: <Payment />,
+            }
+          ]
         },
       ],
     },

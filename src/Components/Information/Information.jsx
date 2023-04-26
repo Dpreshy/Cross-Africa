@@ -36,7 +36,7 @@ const Information = () => {
             console.log(error.message)
         }
       })
-    const check = JSON.parse(localStorage.getItem("seller"))
+    const check = JSON.parse(localStorage.getItem("user"))
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -50,7 +50,7 @@ const Information = () => {
         create.mutate({id,formData})
     }
 
-    if (create.status === "loading") return <h1>Loading...</h1>
+    // if (create.status === "loading") return <h1>Loading...</h1>
   return (
       <div>
           <Container>
@@ -90,7 +90,7 @@ const Information = () => {
                           <InputFile type="file" onChange={handleImage}/>
                           <Image src={ image} />
                       </Card>
-                      <Button type='submit'>Continue</Button>
+                      <Button type='submit'>{create.status === "loading" ? "Loading...": "Continue" }</Button>
                   </InputHold>
               </Wrapper>
           </Container>

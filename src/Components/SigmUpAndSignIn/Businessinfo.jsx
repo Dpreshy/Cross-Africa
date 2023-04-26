@@ -4,6 +4,7 @@ import { AiFillCaretDown } from "react-icons/ai"
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { NavLink, useNavigate } from 'react-router-dom'
 import { businessInfo } from "../Api/Api";
+import countryData from "../data"
 
 const Businessinfo = () => {
   const countryData = [
@@ -52,7 +53,7 @@ const Businessinfo = () => {
   useEffect(() => {
     getCountryName()
   },[findCountry])
-const check = JSON.parse(localStorage.getItem("seller"))
+const check = JSON.parse(localStorage.getItem("user"))
 
   const handleSubmit = (value) => {
     value.preventDefault()
@@ -61,7 +62,7 @@ const check = JSON.parse(localStorage.getItem("seller"))
 
     create.mutate({id, address, address2, shippingFrom,codePostal,shopName,city})
   }
-  if (create.status === "loading") return <h1>Loading...</h1>
+  // if (create.status === "loading") return <h1>Loading...</h1>
   console.log(shippingFrom)
   return (
     <div>
@@ -110,7 +111,7 @@ const check = JSON.parse(localStorage.getItem("seller"))
               </HoldInput>
             </Hold>
 
-            <Button type="submit">Continue</Button>
+            <Button type="submit">{create.status === "loading" ? "Loading...": "Continue" }</Button>
           </InputHold>
         </Wrapper>
       </Container>

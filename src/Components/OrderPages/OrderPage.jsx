@@ -5,23 +5,20 @@ import { NavLink } from "react-router-dom";
 import {
   AiFillCaretDown,
 } from "react-icons/ai";
+import "../../App.css"
 
-const Productpage = ({ avatar, index, name, price, tag, created, quantity, active, rejected }) => {
+const OrderPage = ({ avatar, index, order_No, price, pending_days, created, delivery_status, payment_method }) => {
   const [ edit, setEdit ] = useState(false);
   console.log(edit)
   return (
           <Body key={index}>
-            <Td>
-              <UserHold>
-                <span>
-            <Image src={ avatar} />
-                </span>
-               {name}
-              </UserHold>
-            </Td>
-            {tag && <Td>
+            {order_No && <Td>
               {" "}
-        <HoldHead>{tag }</HoldHead>
+        <HoldHead>{order_No }</HoldHead>
+            </Td>}
+            {pending_days && <Td>
+              {" "}
+        <HoldHead>{pending_days }</HoldHead>
             </Td>}
 
             {created && <Td>
@@ -30,62 +27,20 @@ const Productpage = ({ avatar, index, name, price, tag, created, quantity, activ
             </Td>}
             {price && <Td>
         <HoldHead>{ price}</HoldHead>{" "}
+      </Td> }
+      { payment_method && <Td>
+        <HoldHead>{ payment_method }</HoldHead>
+      </Td> }
+           {delivery_status &&  <Td>
+        <HoldHead className={`${delivery_status}`}>{ delivery_status}</HoldHead>
             </Td>}
-           {quantity &&  <Td>
-        <HoldHead>{ quantity}</HoldHead>
-            </Td>}
-          {rejected &&   <Td>
-        <HoldHead>{ rejected}</HoldHead>
-      </Td>
-      }
-           {active === true &&  <Td>
-        <HoldHead>
-        <Box bg="fff">
-            <Round />
-            <span>ON</span>
-          </Box> 
-        </HoldHead>
-            </Td>}
-           {active === false &&  <Td>
-        <HoldHead>
-        <Box bg="">
-                <span>OFF</span>
-                <Round2 />
-          </Box>
-        </HoldHead>
-            </Td>}
-            <Td>
-              <HoldHead >
-                {" "}
-                <Edit onClick={() => {
-                  setEdit(true);
-                }}>
-                  <Button>
-                    Edit
-                  </Button>
-                  <span>
-                    <AiFillCaretDown />
-                  </span>
-          </Edit>
-          {edit ? (
-              <Menu
-                onClick={() => {
-                  setEdit(false);
-                }}
-              >
-                <NavLink  to="/seller-dashboard/edit-image"><Navs>Edit Image</Navs></NavLink>
-                <NavLink  to="/seller-dashboard/edit-image"><Navs>Edit Context</Navs></NavLink>
-                <Navs>Delete</Navs>
-              </Menu>
-            ) : null}
-        </HoldHead>
-       
-            </Td>
+      
+           
           </Body>
   );
 };
 
-export default Productpage;
+export default OrderPage;
 
 const Navs = styled.div`
   width: 100%;

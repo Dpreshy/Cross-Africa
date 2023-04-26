@@ -1,9 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import {
-  AiFillBoxPlot,
   AiFillCaretDown,
-  AiFillCompass,
   AiFillTags,
   AiOutlineCompass,
   AiOutlineTool,
@@ -11,12 +9,17 @@ import {
   AiOutlineUpload,
   AiTwotoneContainer,
 } from "react-icons/ai";
+import { NavLink } from "react-router-dom";
 const Uniheader = () => {
+  const [products, setproducts] = useState(false);
+  const [orders, setorders] = useState(false);
   return (
     <Container>
       <Wrap>
         <Up>
-          <Hold>
+          <Hold  onClick={() => {
+                setproducts(true);
+              }}>
             <span>
               <AiTwotoneContainer fontSize="25px" color="#9661cb" />
             </span>
@@ -25,7 +28,21 @@ const Uniheader = () => {
               <AiFillCaretDown />
             </span>
           </Hold>
-          <Hold>
+          {products ? (
+              <Menu
+                onClick={() => {
+                  setproducts(false);
+                }}
+              >
+                <Navs to="/seller-dashboard/all-product">All Products</Navs>
+                <Navs to="/seller-dashboard/live-product">Live Products</Navs>
+                <Navs to="/seller-dashboard/sold-product">Sold Out</Navs>
+                <Navs to="/seller-dashboard/rejected-product">Rejected Products</Navs>
+              </Menu>
+            ) : null}
+          <Hold onClick={() => {
+                setorders(true);
+              }}>
             <span>
               <AiFillTags fontSize="25px" color="brown" />
             </span>
@@ -34,6 +51,18 @@ const Uniheader = () => {
               <AiFillCaretDown />
             </span>
           </Hold>
+          {orders ? (
+              <OrderMenu
+                onClick={() => {
+                  setorders(false);
+                }}
+              >
+                <Navs to="/seller-dashboard/all-orders">All Orders</Navs>
+                <Navs to="/seller-dashboard/pending">Pending Orders</Navs>
+                <Navs to="/seller-dashboard/all-product">Ready to Ship</Navs>
+                <Navs to="/seller-dashboard/deliverd">Shipped</Navs>
+              </OrderMenu>
+            ) : null}
           <Hold>
             <span>
               <AiOutlineCompass fontSize="25px" color="#c05f3e" />
@@ -71,35 +100,6 @@ const Uniheader = () => {
             </span>
           </Hold>
         </Up>
-        {/* <Down>
-          <Hold>
-            <span>
-              <AiOutlineUpload fontSize="25px" color="#47390f" />
-            </span>
-            <Text>Upload Items</Text>
-            <span>
-              <AiFillCaretDown />
-            </span>
-          </Hold>
-          <Hold>
-            <span>
-              <AiOutlineTransaction fontSize="25px" color="gray" />
-            </span>
-            <Text>Transactions</Text>
-            <span>
-              <AiFillCaretDown />
-            </span>
-          </Hold>
-          <Hold>
-            <span>
-              <AiOutlineTool fontSize="25px" color="#123456" />
-            </span>
-            <Text>Settings</Text>
-            <span>
-              <AiFillCaretDown />
-            </span>
-          </Hold>
-        </Down> */}
       </Wrap>
     </Container>
   );
@@ -107,6 +107,52 @@ const Uniheader = () => {
 
 export default Uniheader;
 // const Container = styled.div``
+const Navs = styled(NavLink)`
+  width: 100%;
+  padding: 10px 0px;
+  /* border-bottom: 1px solid lightgray; */
+  cursor: pointer;
+  text-align: center;
+  font-weight: 600;
+  text-decoration: none;
+  color: black;
+
+  :hover {
+    background-color: lightgray;
+  }
+`;
+const OrderMenu = styled.div`
+  width: 200px;
+  height: 210px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background-color: white;
+  border: 1px solid #d975c0;
+  border-radius: 5px;
+
+  position: absolute;
+  top: 215px;
+  right: 80px;
+  z-index: 1111;
+`;
+const Menu = styled.div`
+  width: 200px;
+  height: 210px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background-color: white;
+  border: 1px solid #d975c0;
+  border-radius: 5px;
+
+  position: absolute;
+  top: 215px;
+  left: 100px;
+  z-index: 1111;
+`;
 const Text = styled.div`
   font-size: 12px;
   font-weight: 700;
@@ -173,7 +219,7 @@ const Wrap = styled.div`
 const Container = styled.div`
   width: 100%;
   /* height: 60px; */
-  margin-top: 80px;
+  margin-top: 30px;
   display: flex;
   align-items: center;
   justify-content: center;
