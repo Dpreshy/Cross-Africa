@@ -12,17 +12,12 @@ import Allitems from "../Allitems/Allitems";
 import ErrorOtp from "../ErrorOtp/ErrorOtp";
 import Checkout from "../Payment/Checkout";
 import Shipping from "../Payment/Shipping";
-import Dashboard from "../SigmUpAndSignIn/Dashboard";
 import Otppage from "../OtpPage/Otppage";
 import Bankdetails from "../SigmUpAndSignIn/Bankdetails";
 import Businessinfo from "../SigmUpAndSignIn/Businessinfo";
 import PersonalInfo from "../SigmUpAndSignIn/PersonalInfo";
-import Products from "../Products/Products";
-import Private from "../Private"
-import LiveProduct from "../Products/LiveProduct";
-import SoldProduct from "../Products/SoldProduct";
-import RejectedProduct from "../Products/RejectedProduct";
-import AllOrders from "../OrderPages/AllOrders"
+import Featured from "../Allitems/Featured";
+import Cart from "../Payment/Cart";
 
 const AllRoutes = () => {
   let element = useRoutes([
@@ -88,6 +83,11 @@ const AllRoutes = () => {
         },
         
         {
+          path: "/featured",
+          element: <Featured />,
+        },
+        
+        {
           path: "/checkout",
           element: <Checkout />,
         },
@@ -95,9 +95,13 @@ const AllRoutes = () => {
           path: "/finishshipping",
           element: <Shipping />,
         },
+        {
+          path: "/cart",
+          element: <Cart />,
+        },
     
         {
-          path: "/detail",
+          path: "/detail/:id",
           element: <Detail />,
         },
         {

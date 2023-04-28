@@ -3,7 +3,7 @@
 }
 
 .pagination {
-  width: 95%;
+  /* width: 85%; */
   /* height: 40px; */
   display: flex;
   justify-content: flex-start;

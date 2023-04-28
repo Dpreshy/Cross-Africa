@@ -4,15 +4,12 @@ import Productpage from '../SigmUpAndSignIn/Productpage'
 import styled  from 'styled-components'
 import { useQuery, useQueryClient } from '@tanstack/react-query'
 import { sellerProducts } from '../Api/ProductApi'
-import { useParams } from "react-router-dom"
 import moment from 'moment'
-import { FaRegEdit } from "react-icons/fa";
-import { BsTrash } from "react-icons/bs";
-import { BiSearch } from "react-icons/bi";
-import { NavLink } from "react-router-dom";
 import Data from "./Data"
 import ReactPaginate from 'react-paginate'
 import "../../App.css"
+import Search from '../Search'
+import { BiSearch } from "react-icons/bi";
 
 const LiveProduct = () => {
 
@@ -37,6 +34,16 @@ const LiveProduct = () => {
   }
   console.log(data)
 
+  const [ query, setQuery ] = useState("")
+  console.log(query)
+  const keys = ["name", "brand","tag"]
+
+  const search = (data) => {
+      return data?.filter((item) =>
+          keys.some((key)=> item[key]?.toLowerCase().includes(query))
+      )
+  }
+  const searchData = search(currentPageData)
 
   var nf = Intl.NumberFormat()
   return (
@@ -45,13 +52,17 @@ const LiveProduct = () => {
       <Wrapper>
       <Buttom>
           <Header>
-            <Text>All Products</Text>
-            <Search>
-              <input placeholder="Search by name or brand" />
-              <button>
-                <BiSearch />
-              </button>
-            </Search>
+            <Text>Live Products</Text>
+            <SerachHold>
+          <input
+              placeholder="Search by name or brand"
+              value={ query }
+              onChange={e=> setQuery(e.target.value)}
+          />
+            <button onClick={search}>
+            <BiSearch />
+            </button>
+        </SerachHold>
           </Header>
           <Head>
             <Th>
@@ -95,62 +106,15 @@ const LiveProduct = () => {
         nextLinkClassName={"pagination_link"}
         disabledClassName={ "pagination_link_disable" }
         activeClassName={"pagination_link_active"}
-        // renderOnZeroPageCount={ null }
+        renderOnZeroPageCount={ null }
       />
-      {/* <ButtonHold>
-        <Button onClick={prePage}>Previous</Button>
-        {
-          numbers.map((n, i) => {
-            <Div  className={`${currentPage === n ? "active" : ""}`} key={i}>
-              <a href='#' onClick={()=>changeCPage(n)}>{n}</a>
-            </Div>
-          })
-        }
-        <Button onClick={nextPage}>Next</Button>
-     </ButtonHold> */}
     </Container>
   )
 }
 
 export default LiveProduct
 
-const Div = styled.div`
-  width: 50px;
-
-  
-`
-const Button = styled.button`
-  padding: 10px 30px;
-  background-color: white;
-  border: 1px solid lightgray;
-  margin: 10px;
-  cursor: pointer;
-`;
-const ButtonHold = styled.div`
-  .active{
-    color: black
-  }
-`
-const Wrapper = styled.div`
-  width: 90%;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  scroll-behavior: smooth;
-`;
-const Container = styled.div`
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-`
-const Header = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 10px 0;
-`;
-const Search = styled.div`
+const SerachHold = styled.div`
   width: 400px;
   height: 40px;
   border: 2px solid #d975c0;
@@ -179,7 +143,27 @@ const Search = styled.div`
   @media (max-width: 660px) {
     width: 250px;
   }
+`
+const Wrapper = styled.div`
+  width: 90%;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
 `;
+const Container = styled.div`
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+`
+const Header = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0;
+`;
+
 const Text = styled.div`
   border-bottom: 2px solid blue;
 `;

@@ -13,10 +13,12 @@ import { NavLink } from "react-router-dom";
 const Uniheader = () => {
   const [products, setproducts] = useState(false);
   const [orders, setorders] = useState(false);
+  const [completed, setcompleted] = useState(false);
   return (
     <Container>
       <Wrap>
         <Up>
+          <Div>
           <Hold  onClick={() => {
                 setproducts(true);
               }}>
@@ -58,12 +60,14 @@ const Uniheader = () => {
                 }}
               >
                 <Navs to="/seller-dashboard/all-orders">All Orders</Navs>
-                <Navs to="/seller-dashboard/pending">Pending Orders</Navs>
-                <Navs to="/seller-dashboard/all-product">Ready to Ship</Navs>
-                <Navs to="/seller-dashboard/deliverd">Shipped</Navs>
+                <Navs to="/seller-dashboard/pending-orders">Pending Orders</Navs>
+                <Navs to="/seller-dashboard/ready-to-ship">Ready to Ship</Navs>
+                <Navs to="/seller-dashboard/shipped">Shipped</Navs>
               </OrderMenu>
             ) : null}
-          <Hold>
+          <Hold onClick={ () => {
+            setcompleted(true)
+          }}>
             <span>
               <AiOutlineCompass fontSize="25px" color="#c05f3e" />
             </span>
@@ -72,6 +76,20 @@ const Uniheader = () => {
               <AiFillCaretDown />
             </span>
           </Hold>
+          {completed ? (
+              <CompletedMenu
+                onClick={() => {
+                  setcompleted(false);
+                }}
+              >
+                <Navs to="/seller-dashboard/all-orders">Delivard</Navs>
+                <Navs to="/seller-dashboard/pending-orders">Cancled</Navs>
+                <Navs to="/seller-dashboard/ready-to-ship">Ready to Ship</Navs>
+                <Navs to="/seller-dashboard/shipped">Shipped</Navs>
+              </CompletedMenu>
+            ) : null}
+          </Div>
+          <Div>
           <Hold>
             <span>
               <AiOutlineUpload fontSize="25px" color="#47390f" />
@@ -99,6 +117,7 @@ const Uniheader = () => {
               <AiFillCaretDown />
             </span>
           </Hold>
+         </Div>
         </Up>
       </Wrap>
     </Container>
@@ -106,7 +125,20 @@ const Uniheader = () => {
 };
 
 export default Uniheader;
-// const Container = styled.div``
+
+const Div = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 10px;
+  width: 100%;
+
+  @media (max-width: 600px){
+    flex-direction: column;
+  }
+
+  /* flex-wrap: wrap; */
+`
 const Navs = styled(NavLink)`
   width: 100%;
   padding: 10px 0px;
@@ -121,6 +153,30 @@ const Navs = styled(NavLink)`
     background-color: lightgray;
   }
 `;
+const CompletedMenu = styled.div`
+  width: 200px;
+  height: 210px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background-color: white;
+  border: 1px solid #d975c0;
+  border-radius: 5px;
+
+  position: absolute;
+  top: 200px;
+  right: 30px;
+  z-index: 1111;
+
+  @media (max-width: 768px){
+    top: 215px;
+  }
+  @media (max-width: 600px){
+    right: 30px;
+    top: 380px;
+  }
+`;
 const OrderMenu = styled.div`
   width: 200px;
   height: 210px;
@@ -133,9 +189,22 @@ const OrderMenu = styled.div`
   border-radius: 5px;
 
   position: absolute;
-  top: 215px;
-  right: 80px;
+  top: 200px;
+  right: 500px;
+  /* left: 150px; */
   z-index: 1111;
+
+  @media (max-width: 900px){
+    right: 300px;
+  }
+  @media (max-width: 768px){
+    right: 300px;
+    top: 215px;
+  }
+  @media (max-width: 600px){
+    right: 30px;
+    top: 290px;
+  }
 `;
 const Menu = styled.div`
   width: 200px;
@@ -149,9 +218,14 @@ const Menu = styled.div`
   border-radius: 5px;
 
   position: absolute;
-  top: 215px;
-  left: 100px;
+  top: 200px;
+  left: 40px;
   z-index: 1111;
+
+  @media (max-width: 768px){
+    top: 215px;
+  }
+ 
 `;
 const Text = styled.div`
   font-size: 12px;
@@ -162,7 +236,8 @@ const Hold = styled.div`
   height: 40px;
   border-radius: 50px;
   padding: 0 20px;
-  margin: 30px 100px;
+  /* margin: 30px 100px; */
+  /* background-color: black; */
   span {
     position: relative;
     bottom: -3px;
@@ -197,12 +272,13 @@ const Down = styled.div`
   }
 `;
 const Up = styled.div`
-  width: 95%;
-  padding: 0 10px;
+  /* background-color: gold; */
+  width: 90%;
+  /* padding: 0 10px; */
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   @media (max-width: 768px) {
     display: flex;
     justify-content: center;

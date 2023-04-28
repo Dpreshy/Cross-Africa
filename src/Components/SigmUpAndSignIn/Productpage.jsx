@@ -179,7 +179,7 @@ const UserHold = styled.div`
   cursor: pointer;
 `;
 const Td = styled.td`
-  padding: 10px 15px;
+  padding: 10px 10px;
   font-size: 16px;
   font-weight: 400;
   border-left: 1.5px solid #d0d1d2;
