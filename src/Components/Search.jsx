@@ -1,12 +1,25 @@
-import React from 'react'
-import styled from 'styled-components'
+import React, { useState } from 'react'
 import { BiSearch } from "react-icons/bi";
+import styled from 'styled-components';
 
-const Search = () => {
+const Search = ({ data }) => {
+    const [ query, setQuery ] = useState()
+    console.log(query)
+    const keys = ["name", "brand","tag"]
+
+    const search = () => {
+        return data.filter((item) =>
+            keys.some((key)=> item[key].t.includes(query))
+        )
+    }
   return (
         <SerachHold>
-            <input placeholder="Search by name or brand" />
-            <button>
+          <input
+              placeholder="Search by name or brand"
+              value={ query }
+              onChange={e=> setQuery(e.target.value)}
+          />
+            <button onClick={search}>
             <BiSearch />
             </button>
         </SerachHold>

@@ -1,31 +1,28 @@
 import React,{useState} from 'react'
 import Uniheader from '../SigmUpAndSignIn/Uniheader'
-import Productpage from '../SigmUpAndSignIn/Productpage'
 import styled  from 'styled-components'
 import { useQuery, useQueryClient } from '@tanstack/react-query'
-import { sellerProducts } from '../Api/ProductApi'
-import { useParams } from "react-router-dom"
+import { orders } from '../Api/OrderApi'
 import moment from 'moment'
-import { FaRegEdit } from "react-icons/fa";
-import { BsTrash } from "react-icons/bs";
 import { BiSearch } from "react-icons/bi";
-import { NavLink } from "react-router-dom";
-import Data from "./Data"
 import ReactPaginate from 'react-paginate'
 import "../../App.css"
-import Search from '../Search'
+import OrderPage from './OrderPage'
+// import Search from '../Search'
 
-const SoldProduct = () => {
+const PendingOrders = () => {
 
   const user = JSON.parse(localStorage.getItem("user"));
   const queryCLient = useQueryClient()
   
+
   const userID = user._id
   const {data} = useQuery({
-    queryKey: ["posts"],
-    queryFn: () => sellerProducts(userID)
+    queryKey: ["orders"],
+    queryFn: orders
   })
-  const myData = data.filter((el)=> el.active === false)
+
+const myData = data?.filter((el)=> el.delivery_status === "shipped")
   
   const [ currentPage, setCurrentPage ] = useState(0)
   const recordPage = 6
@@ -39,7 +36,7 @@ const SoldProduct = () => {
 
   const [ query, setQuery ] = useState("")
   console.log(query)
-  const keys = ["name", "brand","tag"]
+  const keys = ["order_No", "delivery_status"]
 
   const search = (data) => {
       return data?.filter((item) =>
@@ -55,7 +52,7 @@ const SoldProduct = () => {
       <Wrapper>
       <Buttom>
           <Header>
-            <Text>Sold Out</Text>
+            <Text>Shipped</Text>
             <SerachHold>
           <input
               placeholder="Search by name or brand"
@@ -69,37 +66,33 @@ const SoldProduct = () => {
           </Header>
           <Head>
             <Th>
-              <HoldHead>Product </HoldHead>
+              <HoldHead>Order Number </HoldHead>
             </Th>
             <Th>
-              <HoldHead>Tag </HoldHead>
+              <HoldHead>Pending Days</HoldHead>
             </Th>
             <Th>
-              <HoldHead>Created</HoldHead>
+              <HoldHead>Order Date</HoldHead>
             </Th>
             <Th>
               <HoldHead>Price</HoldHead>
             </Th>
             <Th>
-              <HoldHead>Aval / Qty </HoldHead>
+              <HoldHead>Payment Method</HoldHead>
             </Th>
             <Th>
-              <HoldHead>Active </HoldHead>
-            </Th>
-
-            <Th>
-              <HoldHead>Action </HoldHead>{" "}
+              <HoldHead>Status </HoldHead>
             </Th>
         </Head>
         {
-            currentPageData?.map((props,index) => (
-              <Productpage index={ index } key={ index } avatar={ props?.avatar[ 0 ].url } name={ props.name } tag={ props.tag_No } created={ moment(props.createdAt).format("D MMM YYYY") } quantity={ props.quantity } active={ props.active } price={ nf.format(props.price)} />
+            searchData?.map((props,index) => (
+              <OrderPage index={ index } key={ index }  delivery_status={ props.delivery_status } order_No={ props.order_No } created={ moment(props.createdAt).format("D MMM YYYY") } payment_method={ props.payment_method } pending_days={ props.pending_days } price={ nf.format(props.price)} />
             ))
       }
         </Buttom>
       </Wrapper>
       <ReactPaginate
-        // breakLabel="..."
+        breakLabel="..."
         previousLabel="Previous"
         nextLabel="Next"
         pageCount={ pageCount }
@@ -109,13 +102,13 @@ const SoldProduct = () => {
         nextLinkClassName={"pagination_link"}
         disabledClassName={ "pagination_link_disable" }
         activeClassName={"pagination_link_active"}
-        // renderOnZeroPageCount={ null }
+        renderOnZeroPageCount={ null }
       />
     </Container>
   )
 }
 
-export default SoldProduct
+export default PendingOrders
 
 const SerachHold = styled.div`
   width: 400px;
@@ -194,8 +187,8 @@ const Head = styled.tr`
 const Buttom = styled.table`
   width: 78rem;
   /* padding: 0px 20px; */
-  text-align: center;
+  /* text-align: center; */
   border-collapse: collapse;
   border-spacing: 0;
-  /* overflow-x: scroll; */
+  overflow-x: auto;
 `;

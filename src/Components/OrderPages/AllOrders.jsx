@@ -8,8 +8,9 @@ import { BiSearch } from "react-icons/bi";
 import ReactPaginate from 'react-paginate'
 import "../../App.css"
 import OrderPage from './OrderPage'
+import Search from '../Search'
 
-const Products = () => {
+const AllOrders = () => {
 
   const user = JSON.parse(localStorage.getItem("user"));
   const queryCLient = useQueryClient()
@@ -31,6 +32,16 @@ const Products = () => {
   }
   console.log(data)
 
+  const [ query, setQuery ] = useState("")
+  console.log(query)
+  const keys = ["order_No", "delivery_status"]
+
+  const search = (data) => {
+      return data?.filter((item) =>
+          keys.some((key)=> item[key]?.toLowerCase().includes(query))
+      )
+  }
+  const searchData = search(currentPageData)
 
   var nf = Intl.NumberFormat()
   return (
@@ -39,13 +50,17 @@ const Products = () => {
       <Wrapper>
       <Buttom>
           <Header>
-            <Text>All Products</Text>
-            <Search>
-              <input placeholder="Search by name or brand" />
-              <button>
-                <BiSearch />
-              </button>
-            </Search>
+            <Text>All Orders</Text>
+            <SerachHold>
+          <input
+              placeholder="Search by name or brand"
+              value={ query }
+              onChange={e=> setQuery(e.target.value)}
+          />
+            <button onClick={search}>
+            <BiSearch />
+            </button>
+        </SerachHold>
           </Header>
           <Head>
             <Th>
@@ -68,7 +83,7 @@ const Products = () => {
             </Th>
         </Head>
         {
-            currentPageData?.map((props,index) => (
+            searchData?.map((props,index) => (
               <OrderPage index={ index } key={ index }  delivery_status={ props.delivery_status } order_No={ props.order_No } created={ moment(props.createdAt).format("D MMM YYYY") } payment_method={ props.payment_method } pending_days={ props.pending_days } price={ nf.format(props.price)} />
             ))
       }
@@ -87,60 +102,13 @@ const Products = () => {
         activeClassName={"pagination_link_active"}
         renderOnZeroPageCount={ null }
       />
-      {/* <ButtonHold>
-        <Button onClick={prePage}>Previous</Button>
-        {
-          numbers.map((n, i) => {
-            <Div  className={`${currentPage === n ? "active" : ""}`} key={i}>
-              <a href='#' onClick={()=>changeCPage(n)}>{n}</a>
-            </Div>
-          })
-        }
-        <Button onClick={nextPage}>Next</Button>
-     </ButtonHold> */}
     </Container>
   )
 }
 
-export default Products
+export default AllOrders
 
-const Div = styled.div`
-  width: 50px;
-
-  
-`
-const Button = styled.button`
-  padding: 10px 30px;
-  background-color: white;
-  border: 1px solid lightgray;
-  margin: 10px;
-  cursor: pointer;
-`;
-const ButtonHold = styled.div`
-  .active{
-    color: black
-  }
-`
-const Wrapper = styled.div`
-  width: 90%;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  scroll-behavior: smooth;
-`;
-const Container = styled.div`
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-`
-const Header = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 10px 0;
-`;
-const Search = styled.div`
+const SerachHold = styled.div`
   width: 400px;
   height: 40px;
   border: 2px solid #d975c0;
@@ -169,6 +137,25 @@ const Search = styled.div`
   @media (max-width: 660px) {
     width: 250px;
   }
+`
+const Wrapper = styled.div`
+  width: 90%;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+`;
+const Container = styled.div`
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+`
+const Header = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0;
 `;
 const Text = styled.div`
   border-bottom: 2px solid blue;
@@ -198,7 +185,7 @@ const Head = styled.tr`
 const Buttom = styled.table`
   width: 78rem;
   /* padding: 0px 20px; */
-  text-align: center;
+  /* text-align: center; */
   border-collapse: collapse;
   border-spacing: 0;
   /* overflow-x: scroll; */
