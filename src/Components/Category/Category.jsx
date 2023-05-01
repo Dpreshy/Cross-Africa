@@ -1,7 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import { NavLink } from "react-router-dom";
-import Image1 from "../Assets/pepsi 1.png"
 
 const Category = () => {
   return (
@@ -10,53 +8,55 @@ const Category = () => {
         <Wrapper>
           <Head>Buying & Selling made easy accross Africa!</Head>
           <Holder>
-            <Card img={Image1}>
-              {/* <img src="/tv 4 1.png" /> */}
-
-              <TextHold>
-                <Title>Electronics.</Title>
-                <Content>
-                  Buying made easy, get TV, home theatre, system and electronics
-                  at the comfort of your home.
-                </Content>
-                <Button to="/allitems">Buy Now</Button>
-              </TextHold>
+            <Card>
+              <Imaged>
+                <TextHold>
+                  <Title>Electronics.</Title>
+                  <Content>
+                    Buying made easy, get TV, home theatre, system and
+                    electronics at the comfort of your home.
+                  </Content>
+                  <Button>Buy Now</Button>
+                </TextHold>
+              </Imaged>
             </Card>
-            <Card img={Image1}>
-              {/* <img src="/Frame 2.png" /> [ "phone", "food and groceries", "clothing and fashion", "electronics" ]*/}
+            <Card>
+              {/* <img src="/Frame 2.png" /> */}
 
-              <TextHold>
-                <Title>Mobile Phones.</Title>
-                <Content>
-                  Buying made easy, get used phones, laptops, chargers etc.. at
-                  the comfort of your home
-                </Content>
-                <Button to="/allitems">Buy Now</Button>
-              </TextHold>
+              <Images>
+                <TextHold>
+                  <Title>Mobile Phones.</Title>
+                  <Content>
+                    Buying made easy, get used phones, laptops, chargers etc..
+                    at the comfort of your home
+                  </Content>
+                  <Button>Buy Now</Button>
+                </TextHold>
+              </Images>
             </Card>
-            <Card img={Image1}>
-              {/* <img src="../Frame 115.png" /> */}
-
-              <TextHold>
-                <Title>Clothing & Fashion.</Title>
-                <Content>
-                  Buying made easy, get Trendy and classic wears at the comfort
-                  of your home.
-                </Content>
-                <Button to="/allitems">Buy Now</Button>
-              </TextHold>
+            <Card>
+              <Imagee>
+                <TextHold>
+                  <Title>Clothing & Fashion.</Title>
+                  <Content>
+                    Buying made easy, get Trendy and classic wears at the
+                    comfort of your home.
+                  </Content>
+                  <Button>Buy Now</Button>
+                </TextHold>
+              </Imagee>
             </Card>
-            <Card img={Image1}>
-              {/* <img src="/pepsi 1.png" /> */}
-
-              <TextHold>
-                <Title>Food & Groceries.</Title>
-                <Content>
-                  Buying made easy, food and groceries are all available, get
-                  them all at the comfort of your home.
-                </Content>
-                <Button to="/allitems">Buy Now</Button>
-              </TextHold>
+            <Card>
+              <Image>
+                <TextHold>
+                  <Title>Food & Groceries.</Title>
+                  <Content>
+                    Buying made easy, food and groceries are all available, get
+                    them all at the comfort of your home.
+                  </Content>
+                  <Button>Buy Now</Button>
+                </TextHold>
+              </Image>
             </Card>
           </Holder>
         </Wrapper>
@@ -67,7 +67,7 @@ const Category = () => {
 
 export default Category;
 
-const Button = styled(NavLink)`
+const Button = styled.button`
   margin-bottom: 20px;
   border: 0px;
   outline: none;
@@ -76,13 +76,81 @@ const Button = styled(NavLink)`
   color: white;
   font-weight: 600;
   cursor: pointer;
-  text-decoration: none;
+`;
+const Image = styled.div`
+  width: 100%;
+  height: 100%;
+  color: white;
+  padding: 0px 18px;
+  margin: 0 -17px;
+  display: flex;
+  align-items: flex-end;
+  background-image: linear-gradient(
+      to bottom,
+      rgba(61, 61, 62, 0.52),
+      rgba(2, 2, 2, 0.73)
+    ),
+    url("/Frame 115.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+`;
+const Imaged = styled.div`
+  width: 100%;
+  height: 100%;
+  color: white;
+  padding: 0px 18px;
+  margin: 0 -17px;
+  display: flex;
+  align-items: flex-end;
+  background-image: linear-gradient(
+      to bottom,
+      rgba(61, 61, 62, 0.52),
+      rgba(2, 2, 2, 0.73)
+    ),
+    url("/Frame 112.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+`;
+const Images = styled.div`
+  width: 100%;
+  height: 100%;
+  color: white;
+  padding: 0px 18px;
+  margin: 0 -17px;
+  display: flex;
+  align-items: flex-end;
+  background-image: linear-gradient(
+      to bottom,
+      rgba(61, 61, 62, 0.52),
+      rgba(2, 2, 2, 0.73)
+    ),
+    url("/Frame 113.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+`;
+const Imagee = styled.div`
+  width: 100%;
+  height: 100%;
+  color: white;
+  padding: 0px 18px;
+  margin: 0 -17px;
+  display: flex;
+  align-items: flex-end;
+  background-image: linear-gradient(
+      to bottom,
+      rgba(61, 61, 62, 0.52),
+      rgba(2, 2, 2, 0.73)
+    ),
+    url("/Frame 114.png");
+  background-repeat: no-repeat;
+  background-size: cover;
 `;
 const Content = styled.div`
   font-size: 20px;
   font-weight: 400;
   margin-bottom: 20px;
 `;
+
 const Title = styled.div`
   font-size: 35px;
   font-weight: 500;
@@ -91,15 +159,12 @@ const Title = styled.div`
 const TextHold = styled.div`
   /* background-color: gold; */
   margin-bottom: 20px;
-  /* background-image: url(${props => props.img}); */
 `;
 const Card = styled.div`
   width: 400px;
   height: 650px;
   color: white;
   padding: 0px 18px;
-  background-color: #201f1cd4;
-  background-image: url(${({img}) => (img)});
   margin: 10px;
 
   display: flex;
