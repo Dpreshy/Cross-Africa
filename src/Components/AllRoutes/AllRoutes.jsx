@@ -18,6 +18,7 @@ import Businessinfo from "../SigmUpAndSignIn/Businessinfo";
 import PersonalInfo from "../SigmUpAndSignIn/PersonalInfo";
 import Featured from "../Allitems/Featured";
 import Cart from "../Payment/Cart";
+import Categories from "../Allitems/Categories"
 
 const AllRoutes = () => {
   let element = useRoutes([
@@ -78,13 +79,17 @@ const AllRoutes = () => {
           ],
         },
         {
-          path: "/:id",
+          path: "/allitems",
           element: <Allitems />,
         },
         
         {
           path: "/featured",
           element: <Featured />,
+        },
+        {
+          path: "/:id",
+          element: <Categories />,
         },
         
         {

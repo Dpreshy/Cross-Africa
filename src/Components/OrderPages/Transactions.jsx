@@ -8,9 +8,9 @@ import { BiSearch } from "react-icons/bi";
 import ReactPaginate from 'react-paginate'
 import "../../App.css"
 import OrderPage from './OrderPage'
-// import Search from '../Search'
+import Search from '../Search'
 
-const Shipped = () => {
+const AllOrders = () => {
 
   const user = JSON.parse(localStorage.getItem("user"));
   const queryCLient = useQueryClient()
@@ -21,14 +21,12 @@ const Shipped = () => {
     queryKey: ["orders"],
     queryFn: orders
   })
-
-const myData = data?.filter((el)=> el.delivery_status === "shipped")
   
   const [ currentPage, setCurrentPage ] = useState(0)
   const recordPage = 6
   const lastIndex = currentPage * recordPage
-  const pageCount = Math.ceil(myData?.length / recordPage)
-  const currentPageData = myData?.slice(lastIndex, lastIndex + recordPage)
+  const pageCount = Math.ceil(data?.length / recordPage)
+  const currentPageData = data?.slice(lastIndex, lastIndex + recordPage)
   const changeCPage = ({selected}) => {
     setCurrentPage(selected)
   }
@@ -50,9 +48,8 @@ const myData = data?.filter((el)=> el.delivery_status === "shipped")
       <Container>
       <Uniheader />
       <Wrapper>
-      <Buttom>
-          <Header>
-            <Text>Shipped</Text>
+      <Header>
+            <Text>Transactions</Text>
             <SerachHold>
           <input
               placeholder="Search by name or brand"
@@ -64,24 +61,29 @@ const myData = data?.filter((el)=> el.delivery_status === "shipped")
             </button>
         </SerachHold>
           </Header>
+      <Buttom>
+          
           <Head>
             <Th>
-              <HoldHead>Order Number </HoldHead>
+              <HoldHead>Date</HoldHead>
             </Th>
             <Th>
-              <HoldHead>Pending Days</HoldHead>
+              <HoldHead>Tag</HoldHead>
             </Th>
             <Th>
-              <HoldHead>Order Date</HoldHead>
+              <HoldHead>Product</HoldHead>
             </Th>
             <Th>
               <HoldHead>Price</HoldHead>
             </Th>
             <Th>
-              <HoldHead>Payment Method</HoldHead>
+              <HoldHead>QTY</HoldHead>
             </Th>
             <Th>
-              <HoldHead>Status </HoldHead>
+              <HoldHead>Amount </HoldHead>
+            </Th>
+            <Th>
+              <HoldHead>Action </HoldHead>
             </Th>
         </Head>
         {
@@ -108,7 +110,7 @@ const myData = data?.filter((el)=> el.delivery_status === "shipped")
   )
 }
 
-export default Shipped
+export default AllOrders
 
 const SerachHold = styled.div`
   width: 400px;
@@ -190,5 +192,5 @@ const Buttom = styled.table`
   /* text-align: center; */
   border-collapse: collapse;
   border-spacing: 0;
-  overflow-x: auto;
+  /* overflow-x: scroll; */
 `;

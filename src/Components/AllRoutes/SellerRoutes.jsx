@@ -14,6 +14,14 @@ import Uploads from "../Uploads/Uploads";
 import Uploadimg from "../Uploads/Uploadimg";
 import Variation from "../Uploads/Variation";
 import Uploadsuccess from "../Review/Uploadsuccess";
+import Delivered from "../OrderPages/Delivered";
+import Cancelled from "../OrderPages/Cancelled";
+import Failed from "../OrderPages/Failed";
+import Returned from "../OrderPages/Returned";
+import UploadCloths from "../Uploads/UploadCloths";
+import UploadElectronics from "../Uploads/uploadElectronics";
+import UploadFood from "../Uploads/UploadFood";
+import Transactions from "../OrderPages/Transactions"
 
 const AllRoutes = () => {
     let element = useRoutes([
@@ -53,6 +61,10 @@ const AllRoutes = () => {
                 element: <Private><ReadyToShip /></Private>,
               },
               {
+                path: "transactions",
+                element: <Private><Transactions /></Private>,
+              },
+              {
                 path: "shipped",
                 element: <Private><Shipped /></Private>,
               },
@@ -65,12 +77,40 @@ const AllRoutes = () => {
                 element: <Private><Uploadimg /></Private>,
               },
               {
+                path: "upload-cloths",
+                element: <Private><UploadCloths /></Private>,
+              },
+              {
+                path: "upload-electronics",
+                element: <Private><UploadElectronics /></Private>,
+              },
+              {
+                path: "upload-foods",
+                element: <Private><UploadFood /></Private>,
+              },
+              {
                 path: "variation",
                 element: <Private><Variation /></Private>,
               },
               {
                 path: "success",
                 element: <Private><Uploadsuccess /></Private>,
+              },
+              {
+                path: "delivered-orders",
+                element: <Private><Delivered /></Private>,
+              },
+              {
+                path: "cancelled-orders",
+                element: <Private><Cancelled /></Private>,
+              },
+              {
+                path: "failed-orders",
+                element: <Private><Failed /></Private>,
+              },
+              {
+                path: "returned-orders",
+                element: <Private><Returned /></Private>,
               },
             ]
         },

@@ -10,7 +10,7 @@ import "../../App.css"
 import OrderPage from './OrderPage'
 // import Search from '../Search'
 
-const Shipped = () => {
+const Cancelled = () => {
 
   const user = JSON.parse(localStorage.getItem("user"));
   const queryCLient = useQueryClient()
@@ -22,7 +22,7 @@ const Shipped = () => {
     queryFn: orders
   })
 
-const myData = data?.filter((el)=> el.delivery_status === "shipped")
+const myData = data?.filter((el)=> el.delivery_status === "cancelled")
   
   const [ currentPage, setCurrentPage ] = useState(0)
   const recordPage = 6
@@ -52,7 +52,7 @@ const myData = data?.filter((el)=> el.delivery_status === "shipped")
       <Wrapper>
       <Buttom>
           <Header>
-            <Text>Shipped</Text>
+            <Text>Cancelled</Text>
             <SerachHold>
           <input
               placeholder="Search by name or brand"
@@ -108,7 +108,7 @@ const myData = data?.filter((el)=> el.delivery_status === "shipped")
   )
 }
 
-export default Shipped
+export default Cancelled
 
 const SerachHold = styled.div`
   width: 400px;

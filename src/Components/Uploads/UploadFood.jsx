@@ -5,10 +5,10 @@ import styled from "styled-components";
 import Uniheader from "../SigmUpAndSignIn/Uniheader";
 import { useState } from "react";
 import { useMutation,useQueryClient } from "@tanstack/react-query";
-import { createProduct } from "../Api/ProductApi";
+import { uploadFoods } from "../Api/ProductApi";
 import { useNavigate } from "react-router-dom";
 
-const Uploadimg = () => {
+const UploadFood = () => {
   const [ image, setImage ] = useState(""); 
   const [ image2, setImage2 ] = useState(""); 
   const [ image3, setImage3 ] = useState(""); 
@@ -17,11 +17,9 @@ const Uploadimg = () => {
   const [ avatar3, setAvatar3 ] = useState("");
   const [ name, setname ] = useState("");
   const [ brand, setbrand ] = useState("");
-  const [ ram, setRam ] = useState("");
-  const [ condition, setcondition ] = useState("");
   const [ description, setdescription ] = useState("");
   const [ price, setprice ] = useState();
-  const [ category, setcategory ] = useState("phone");
+  const [ category, setcategory ] = useState("food");
   const [ Error, setError ] = useState(false);
   const navigate = useNavigate()
 
@@ -45,7 +43,7 @@ const Uploadimg = () => {
   };
 
   const create = useMutation({
-    mutationFn: createProduct,
+    mutationFn: uploadFoods,
     onSuccess: () => {
         navigate(`/seller-dashboard/variation`)
     },
@@ -74,13 +72,11 @@ const handleSubmit = (e) => {
   }
     const formData = new FormData
     formData.append("name", name)
-    formData.append("ram", ram)
-    formData.append("condition", condition)
     formData.append("brand", brand)
     formData.append("description", description)
-    formData.append("category", category)
     formData.append("price", price)
-    avatar3 ? formData.append("avatar", avatar) : null
+    formData.append("category", category)
+    avatar ? formData.append("avatar", avatar) : null
     avatar2 ? formData.append("avatar", avatar2) : null
     avatar3 ? formData.append("avatar", avatar3) : null
 
@@ -126,29 +122,11 @@ const handleSubmit = (e) => {
               <span>kindly specify brand of product</span>
             </Input>
           </Inputcont>
-          <Inputcont>
-            <Tag>RAM*</Tag>
-            <Input>
-              <input placeholder="RAM" value={ ram} onChange={(e)=> setRam(e.target.value)}/>
-              <span>kindly specify RAM of product</span>
-            </Input>
-          </Inputcont>
-          <Inputcont>
+                  <Inputcont>
             <Tag>Price*</Tag>
             <Input>
-              <input placeholder="price" type="number" value={ price} onChange={(e)=> setprice(e.target.value)}/>
-              <span>kindly specify RAM of product</span>
-            </Input>
-          </Inputcont>
-          <Inputcont>
-            <Tag>Condition*</Tag>
-            <Input>
-              <select placeholder="Select condition" value={ condition } onChange={ (e) => setcondition(e.target.value) } >
-                <option>Select Condition</option>
-                <option>New</option>
-                <option>Used</option>
-              </select>
-              <span>kindly specify condition of product</span>
+              <input placeholder="Price" value={ price} onChange={(e)=> setprice(e.target.value)}/>
+              <span>kindly specify price of product</span>
             </Input>
           </Inputcont>
           <Inputcont>
@@ -167,7 +145,7 @@ const handleSubmit = (e) => {
   );
 };
 
-export default Uploadimg;
+export default UploadFood;
 
 const InputFile = styled.input`
     width: 100%;

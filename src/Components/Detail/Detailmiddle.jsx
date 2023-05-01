@@ -11,19 +11,20 @@ import {
   BsInfoCircleFill,
 } from "react-icons/bs";
 
-const Detailmiddle = () => {
+const Detailmiddle = ({avatar}) => {
   return (
     <Container>
       <Wrapper>
         <Middle>
-          <Imghold>
+          {
+            avatar?.map((props,index) => (
+              <Imghold key={index}>
             <Image1>
-              <img src="/Airpod1.png" />
+              <img src={props.url} />
             </Image1>
-            <Image2>
-              <img src="/Frame 1.png" />
-            </Image2>
           </Imghold>
+            ))
+          }
           <Others>
             <Select>
               <Option>
@@ -277,6 +278,7 @@ const Image1 = styled.div`
   height: 330px;
   background-color: brown;
   border-radius: 5px;
+  margin: 10px;
   img {
     height: 100%;
     width: 100%;
@@ -288,11 +290,6 @@ const Image1 = styled.div`
 const Imghold = styled.div`
   width: 450px;
   /* flex: 1; */
-  height: 750px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: space-between;
   padding: 50px 0;
 `;
 const Others = styled.div`
