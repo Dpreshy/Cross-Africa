@@ -2,22 +2,14 @@ import React from "react";
 import styled from "styled-components";
 import { BsCart } from "react-icons/bs";
 
-const Detaildown = () => {
+const Detaildown = ({description}) => {
   return (
     <Container>
       <Wrapper>
         <Up>
           <Uptitle>Product Details</Uptitle>
           <Uptext>
-            Perfect for Listening, Easy to Operate Long-lasting Battery with
-            Type-C for fast and flexible charging 30hrs battery life with <br />
-            charging case <br />
-            <br /> Super-fast connection. Thanks to BT 5.0 technology and
-            dual-channel transmission, your XE22 will be instantly connected
-            within a <br />
-            10m radius.With the XE22, playing games or watching movies is now
-            more enjoyable than ever - thanks to a 60ms super-low latency
-            <br /> which makes data processing a lot smoother and efficient.
+            {description}
           </Uptext>
         </Up>
         
