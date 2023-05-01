@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Detailmiddle from "./Detailmiddle";
 import Detaildown from "./Detaildown";
 import Detailup from "./Detailup";
@@ -11,19 +11,35 @@ import { useParams } from "react-router-dom";
 const Detail = () => {
   const {id} = useParams()
 
-  const {data} = useQuery({
+  const [cart, setCart] = useState([])
+  const { data } = useQuery({
     queryKey: [ "products", id ],
     queryFn: ()=> getSingleProduct(id),
   })
 
   console.log(data)
   var nf = Intl.NumberFormat()
+
+  const handleCart = (item) => {
+    const check = cart.find((el)=> el._id === item._id)
+    if (check) {
+      setCart(cart.map((el) => el.id === item.id ? 
+      {...check, qty: check.qty + 1}: item
+      ))
+    } else {
+      setCart([...cart, {...item, qty: 1}])
+    }
+    console.log(item)
+
+  }
+  console.log(cart)
+
   return (
     <Container>
       <Wrapper>
         <Detailup name={ data?.name } price={ nf.format(data?.price) } />
-        <Detailmiddle avatar={data?.avatar}/>
-        <Detaildown />
+        <Detailmiddle avatar={ data?.avatar } add={ handleCart } data={ data} />
+        <Detaildown description={ data?.description} />
         <DetailProduct />
       </Wrapper>
     </Container>

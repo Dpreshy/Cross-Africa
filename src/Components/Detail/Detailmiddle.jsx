@@ -11,7 +11,7 @@ import {
   BsInfoCircleFill,
 } from "react-icons/bs";
 
-const Detailmiddle = ({avatar}) => {
+const Detailmiddle = ({avatar,add,data}) => {
   return (
     <Container>
       <Wrapper>
@@ -94,7 +94,7 @@ const Detailmiddle = ({avatar}) => {
                 <QuantityDecreament>-</QuantityDecreament>
               </Quantitycreament>
               <Quantitybutton>
-                <button>Add To Cart</button>
+                <button onClick={()=> add(data)}>Add To Cart</button>
               </Quantitybutton>
             </Quantity>
           </Others>
