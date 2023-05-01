@@ -82,15 +82,16 @@ const Uniheader = () => {
                   setcompleted(false);
                 }}
               >
-                <Navs to="/seller-dashboard/all-orders">Delivard</Navs>
-                <Navs to="/seller-dashboard/pending-orders">Cancled</Navs>
-                <Navs to="/seller-dashboard/ready-to-ship">Ready to Ship</Navs>
-                <Navs to="/seller-dashboard/shipped">Shipped</Navs>
+                <Navs to="/seller-dashboard/delivered-orders">Delivard</Navs>
+                <Navs to="/seller-dashboard/cancelled-orders">Cancelled</Navs>
+                <Navs to="/seller-dashboard/failed-orders">Failed</Navs>
+                <Navs to="/seller-dashboard/returned-orders">Returned</Navs>
               </CompletedMenu>
             ) : null}
           </Div>
           <Div>
-          <Hold>
+            <NavLink to="/seller-dashboard/uploads" style={{textDecoration: "none", color: "black"}}>
+            <Hold>
             <span>
               <AiOutlineUpload fontSize="25px" color="#47390f" />
             </span>
@@ -99,15 +100,18 @@ const Uniheader = () => {
               <AiFillCaretDown />
             </span>
           </Hold>
-          <Hold>
-            <span>
-              <AiOutlineTransaction fontSize="25px" color="gray" />
-            </span>
-            <Text>Transactions</Text>
-            <span>
-              <AiFillCaretDown />
-            </span>
-          </Hold>
+          </NavLink>
+          <NavLink to="/seller-dashboard/transactions" style={{textDecoration: "none", color: "black"}}>
+            <Hold>
+              <span>
+                <AiOutlineTransaction fontSize="25px" color="gray" />
+              </span>
+              <Text>Transactions</Text>
+              <span>
+                <AiFillCaretDown />
+              </span>
+            </Hold>
+          </NavLink>
           <Hold>
             <span>
               <AiOutlineTool fontSize="25px" color="#123456" />

@@ -2,7 +2,10 @@ import React from 'react'
 import styled from 'styled-components'
 
 const Slider = ({ myRef }) => {
-    const user = JSON.parse(localStorage.getItem("user"));
+  const user = JSON.parse(localStorage.getItem("user"));
+  const removeUser = () => {
+    localStorage.removeItem("user")
+  }
   return (
       <div>
           <Menu ref={myRef}>
@@ -20,7 +23,7 @@ const Slider = ({ myRef }) => {
               <br />
              { user ? (<>
                    {/* <Navs>Profile</Navs> */}
-                  <Navs>Log Out</Navs>
+                  <Navs onClick={removeUser}>Log Out</Navs>
                   </>) : (<>
                     <Navs>Create Account</Navs>
                 <Navs>Create Seller</Navs>

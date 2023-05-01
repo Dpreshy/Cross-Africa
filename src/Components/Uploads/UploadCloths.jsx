@@ -5,24 +5,24 @@ import styled from "styled-components";
 import Uniheader from "../SigmUpAndSignIn/Uniheader";
 import { useState } from "react";
 import { useMutation,useQueryClient } from "@tanstack/react-query";
-import { createProduct } from "../Api/ProductApi";
+import { uploadCloths } from "../Api/ProductApi";
 import { useNavigate } from "react-router-dom";
 
-const Uploadimg = () => {
-  const [ image, setImage ] = useState(""); 
-  const [ image2, setImage2 ] = useState(""); 
-  const [ image3, setImage3 ] = useState(""); 
+const UploadCloths = () => {
+  const [ image, setImage ] = useState(); 
+  const [ image2, setImage2 ] = useState(); 
+  const [ image3, setImage3 ] = useState(); 
   const [ avatar, setAvatar ] = useState(""); 
   const [ avatar2, setAvatar2 ] = useState(""); 
   const [ avatar3, setAvatar3 ] = useState("");
   const [ name, setname ] = useState("");
   const [ brand, setbrand ] = useState("");
-  const [ ram, setRam ] = useState("");
-  const [ condition, setcondition ] = useState("");
+  const [ type, settype ] = useState("");
+  const [ gender, setgender ] = useState("");
   const [ description, setdescription ] = useState("");
   const [ price, setprice ] = useState();
-  const [ category, setcategory ] = useState("phone");
   const [ Error, setError ] = useState(false);
+  const [ category, setcategory ] = useState("clothing");
   const navigate = useNavigate()
 
   const handleImage = (e) => {
@@ -45,7 +45,7 @@ const Uploadimg = () => {
   };
 
   const create = useMutation({
-    mutationFn: createProduct,
+    mutationFn: uploadCloths,
     onSuccess: () => {
         navigate(`/seller-dashboard/variation`)
     },
@@ -55,6 +55,7 @@ const Uploadimg = () => {
     }
   })
 const check = JSON.parse(localStorage.getItem("user"))
+console.log(name.length)
 
 const handleSubmit = (e) => {
   e.preventDefault()
@@ -74,13 +75,13 @@ const handleSubmit = (e) => {
   }
     const formData = new FormData
     formData.append("name", name)
-    formData.append("ram", ram)
-    formData.append("condition", condition)
+    formData.append("type", type)
+    formData.append("gender", gender)
     formData.append("brand", brand)
     formData.append("description", description)
-    formData.append("category", category)
     formData.append("price", price)
-    avatar3 ? formData.append("avatar", avatar) : null
+    formData.append("category", category)
+    avatar ? formData.append("avatar", avatar) : null
     avatar2 ? formData.append("avatar", avatar2) : null
     avatar3 ? formData.append("avatar", avatar3) : null
 
@@ -96,7 +97,8 @@ const handleSubmit = (e) => {
             <Box style={Error ? {border: "1px solid red"}: null}>
               {avatar ? null : <Icon fontSize="25px" />}
               <InputFile type="file" onChange={ handleImage } />
-              {avatar ? <Image src={ image} /> : null}
+              { avatar ? <Image src={ image } /> : null }
+              
             </Box>
             <Box style={Error ? {border: "1px solid red"}: null}>
             {avatar2 ? null : <Icon fontSize="25px" />}
@@ -127,28 +129,28 @@ const handleSubmit = (e) => {
             </Input>
           </Inputcont>
           <Inputcont>
-            <Tag>RAM*</Tag>
+            <Tag>Type*</Tag>
             <Input>
-              <input placeholder="RAM" value={ ram} onChange={(e)=> setRam(e.target.value)}/>
-              <span>kindly specify RAM of product</span>
+              <input placeholder="type" value={ type} onChange={(e)=> settype(e.target.value)}/>
+              <span>kindly specify type of product</span>
             </Input>
           </Inputcont>
           <Inputcont>
+            <Tag>Gender*</Tag>
+            <Input>
+              <select placeholder="Select condition" value={ gender } onChange={ (e) => setgender(e.target.value) } >
+                <option>Select Gender</option>
+                <option>Male</option>
+                <option>Female</option>
+              </select>
+              <span>kindly specify gender of product</span>
+            </Input>
+                  </Inputcont>
+                  <Inputcont>
             <Tag>Price*</Tag>
             <Input>
-              <input placeholder="price" type="number" value={ price} onChange={(e)=> setprice(e.target.value)}/>
-              <span>kindly specify RAM of product</span>
-            </Input>
-          </Inputcont>
-          <Inputcont>
-            <Tag>Condition*</Tag>
-            <Input>
-              <select placeholder="Select condition" value={ condition } onChange={ (e) => setcondition(e.target.value) } >
-                <option>Select Condition</option>
-                <option>New</option>
-                <option>Used</option>
-              </select>
-              <span>kindly specify condition of product</span>
+              <input placeholder="Price" value={ price} onChange={(e)=> setprice(e.target.value)}/>
+              <span>kindly specify price of product</span>
             </Input>
           </Inputcont>
           <Inputcont>
@@ -167,7 +169,7 @@ const handleSubmit = (e) => {
   );
 };
 
-export default Uploadimg;
+export default UploadCloths;
 
 const InputFile = styled.input`
     width: 100%;

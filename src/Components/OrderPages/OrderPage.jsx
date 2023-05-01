@@ -7,12 +7,12 @@ import {
 } from "react-icons/ai";
 import "../../App.css"
 
-const OrderPage = ({ avatar, index, order_No, price, pending_days, created, delivery_status, payment_method }) => {
+const OrderPage = ({ avatar, index, order_No, price, pending_days, created, delivery_status, payment_method,tag_No, name,payment_status,quantity,amount }) => {
   const [ edit, setEdit ] = useState(false);
   console.log(edit)
   return (
-          <Body key={index}>
-            {order_No && <Td>
+          <Body key={index} >
+            {order_No && <Td style={{backgroundColor: "gold"}}>
               {" "}
         <HoldHead>{order_No }</HoldHead>
             </Td>}
@@ -25,11 +25,32 @@ const OrderPage = ({ avatar, index, order_No, price, pending_days, created, deli
               {" "}
         <HoldHead>{ created}</HoldHead>{" "}
             </Td>}
+            {tag_No && <Td>
+              {" "}
+        <HoldHead>{ tag_No}</HoldHead>{" "}
+            </Td>}
+            {avatar && <Td>
+              <UserHold>
+                <span>
+            <Image src={ avatar} />
+                </span>
+               {name}
+              </UserHold>
+            </Td>}
             {price && <Td>
         <HoldHead>{ price}</HoldHead>{" "}
       </Td> }
+            {quantity && <Td>
+        <HoldHead>{ quantity}</HoldHead>{" "}
+      </Td> }
       { payment_method && <Td>
         <HoldHead>{ payment_method }</HoldHead>
+      </Td> }
+      { amount && <Td>
+        <HoldHead>{ amount }</HoldHead>
+      </Td> }
+      { payment_status && <Td>
+        <HoldHead>{ payment_status }</HoldHead>
       </Td> }
            {delivery_status &&  <Td>
         <HoldHead className={`${delivery_status}`}>{ delivery_status}</HoldHead>
@@ -42,51 +63,7 @@ const OrderPage = ({ avatar, index, order_No, price, pending_days, created, deli
 
 export default OrderPage;
 
-const Navs = styled.div`
-  width: 100%;
-  padding: 10px 0px;
-  /* border-bottom: 1px solid lightgray; */
-  cursor: pointer;
-  text-align: center;
-  font-weight: 600;
-  text-decoration: none;
-  color: black;
-`;
-const Menu = styled.div`
-  width: 150px;
-  height: 150px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  background-color: white;
-  border: 1px solid #d975c0;
-  border-radius: 5px;
 
-  position: sticky;
-  bottom: -120px;
-  right: 40px;
-  /* z-index: 11; */
-`;
-const Edit = styled.div`
-  display: flex;
-  align-items: flex-end;
-`;
-const Box = styled.div`
-  width: 100px;
-  height: 40px;
-  background-color: ${({bg})=> (bg ? "#0ebb0e": "red")};
-  border-radius: 5px;
-  display: flex;
-  align-items: center;
-  font-size: 18px;
-  font-weight: 700;
-  color: white;
-
-  span{
-    margin-left: 10px;
-  }
-`;
 const Round2 = styled.div`
   width: 50px;
   height: 40px;

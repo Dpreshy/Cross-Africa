@@ -14,7 +14,7 @@ const Uploadsuccess = () => {
           You have successfully
           <br /> uploaded an item, your <br /> product will be approved soon.
         </Text>
-        <Button to="/dashboard">
+        <Button to="/seller-dashboard">
           <button>Dashboard</button>
         </Button>
       </Card>
@@ -41,6 +41,7 @@ const Card = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 25px 0;
+  margin-bottom: 50px;
 `;
 const Icon = styled.div``;
 const Button = styled(Link)`

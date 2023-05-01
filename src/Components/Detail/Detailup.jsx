@@ -6,7 +6,7 @@ import {
   AiFillStar,
   AiOutlineArrowRight,
 } from "react-icons/ai";
-const Detailup = () => {
+const Detailup = ({name,price}) => {
   return (
     <Container>
       <Wrapper>
@@ -25,11 +25,10 @@ const Detailup = () => {
           </Navs>
         </Nav>
         <Name>
-          Power Pod Bluetooth Wireless Ear Bud /<br /> Headphones 6D Stereo
-          Earpóds
+          {name}
         </Name>
         <Rating></Rating>
-        <Price>#30,000</Price>
+        <Price>₦{ price}</Price>
       </Wrapper>
     </Container>
   );

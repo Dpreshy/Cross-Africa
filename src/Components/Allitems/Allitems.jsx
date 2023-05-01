@@ -2,208 +2,85 @@ import React from "react";
 import styled from "styled-components";
 import { BsCart } from "react-icons/bs";
 
+import { getAllProduct } from "../Api/ProductApi";
+import ItemsCard from "./ItemsCard"
+import { useQuery } from "@tanstack/react-query";
+import { useState } from "react";
+import { NavLink } from "react-router-dom";
 const Allitems = () => {
+
+  const { data } = useQuery({
+    queryKey: [ "products" ],
+    queryFn: getAllProduct
+    
+  })
+  const [ currentPage, setCurrentPage ] = useState(0)
+
+  const recordPage = 8
+  const lastIndex = currentPage * recordPage
+  const currentPageData = data?.slice(lastIndex, lastIndex + recordPage)
+
+  const filteredData = currentPageData?.filter((el) => el.category === "phone")
+  const filteredElectronics = currentPageData?.filter((el) => el.category === "electronics")
+  const filteredFood = currentPageData?.filter((el) => el.category === "food")
+  const filteredCloths = currentPageData?.filter((el) => el.category === "clothing")
+  // console.log(filteredData)
+  var nf = Intl.NumberFormat()
   return (
     <Container>
       <Wrapper>
         <Downtitle>Mobiles</Downtitle>
         <Cardhold>
-          <Card>
-            <Image>
-              <img src="/Frame 1.png" />
-            </Image>
-            <Name>
-              {" "}
-              Iphone X
-              <span>
-                {" "}
-                <BsCart />
-              </span>
-            </Name>
-            <Price>#140,000</Price>
-          </Card>
-          <Card>
-            <Image>
-              <img src="/Frame 113.png" />
-            </Image>
-            <Name>
-              {" "}
-              Mac Book Pro
-              <span>
-                {" "}
-                <BsCart />
-              </span>
-            </Name>
-            <Price>#450,000</Price>
-          </Card>
-          <Card>
-            <Image>
-              <img src="/Airpod1.png" />
-            </Image>
-            <Name>
-              {" "}
-              Samsung S4
-              <span>
-                {" "}
-                <BsCart />
-              </span>
-            </Name>
-            <Price>#250,000</Price>
-          </Card>
-        </Cardhold>
-        <Button>
+        {
+        filteredData?.map((props, index) => (
+          <ItemsCard id={ props._id } name={ props.name } price={ nf.format(props?.price) } img={ props?.avatar[0].url} />
+        ))
+        }
+      </Cardhold>
+        <Button to="/phone">
           <button>See All</button>
         </Button>
       </Wrapper>
       <Wrapper>
         <Downtitle>Home Appliances</Downtitle>
         <Cardhold>
-          <Card>
-            <Image>
-              <img src="/blender 1.png" />
-            </Image>
-            <Name>
-              {" "}
-              Iphone X
-              <span>
-                {" "}
-                <BsCart />
-              </span>
-            </Name>
-            <Price>#140,000</Price>
-          </Card>
-          <Card>
-            <Image>
-              <img src="/FAN 2.png" />
-            </Image>
-            <Name>
-              {" "}
-              Mac Book Pro
-              <span>
-                {" "}
-                <BsCart />
-              </span>
-            </Name>
-            <Price>#450,000</Price>
-          </Card>
-          <Card>
-            <Image>
-              <img src="/dryer 1.png" />
-            </Image>
-            <Name>
-              {" "}
-              Samsung S4
-              <span>
-                {" "}
-                <BsCart />
-              </span>
-            </Name>
-            <Price>#250,000</Price>
-          </Card>
-        </Cardhold>
-        <Button>
+          
+        {
+        filteredElectronics?.map((props, index) => (
+          <ItemsCard id={ props._id } name={ props.name } price={ nf.format(props?.price) } img={ props?.avatar[0].url} />
+        ))
+        }
+      </Cardhold>
+        <Button to="/electronics">
           <button>See All</button>
         </Button>
       </Wrapper>
       <Wrapper>
         <Downtitle>Accessories</Downtitle>
         <Cardhold>
-          <Card>
-            <Image>
-              <img src="/tv 4 1.png" />
-            </Image>
-            <Name>
-              {" "}
-              Iphone X
-              <span>
-                {" "}
-                <BsCart />
-              </span>
-            </Name>
-            <Price>#140,000</Price>
-          </Card>
-          <Card>
-            <Image>
-              <img src="/Frame 2.png" />
-            </Image>
-            <Name>
-              {" "}
-              Mac Book Pro
-              <span>
-                {" "}
-                <BsCart />
-              </span>
-            </Name>
-            <Price>#450,000</Price>
-          </Card>
-          <Card>
-            <Image>
-              <img src="/Frame 112.png" />
-            </Image>
-            <Name>
-              {" "}
-              Samsung S4
-              <span>
-                {" "}
-                <BsCart />
-              </span>
-            </Name>
-            <Price>#250,000</Price>
-          </Card>
+          
+          {
+          filteredCloths?.map((props, index) => (
+            <ItemsCard id={ props._id } name={ props.name } price={ nf.format(props?.price) } img={ props?.avatar[0].url} />
+          ))
+          }
         </Cardhold>
-        <Button>
+        <Button to="/clothing">
           <button>See All</button>
         </Button>
       </Wrapper>
       <Wrapper>
         <Downtitle>Foodstuffs</Downtitle>
         <Cardhold>
-          <Card>
-            <Image>
-              <img src="../Frame 115.png" />
-            </Image>
-            <Name>
-              {" "}
-              Iphone X
-              <span>
-                {" "}
-                <BsCart />
-              </span>
-            </Name>
-            <Price>#140,000</Price>
-          </Card>
-          <Card>
-            <Image>
-              <img src="/semo 2 2.png" />
-            </Image>
-            <Name>
-              {" "}
-              Mac Book Pro
-              <span>
-                {" "}
-                <BsCart />
-              </span>
-            </Name>
-            <Price>#450,000</Price>
-          </Card>
-          <Card>
-            <Image>
-              <img src="/pepsi 1.png" />
-            </Image>
-            <Name>
-              {" "}
-              Samsung S4
-              <span>
-                {" "}
-                <BsCart />
-              </span>
-            </Name>
-            <Price>#250,000</Price>
-          </Card>
+          {
+          filteredFood?.map((props, index) => (
+            <ItemsCard id={ props._id } name={ props.name } price={ nf.format(props?.price) } img={ props?.avatar[0].url} />
+          ))
+          }
         </Cardhold>
-        <Button>
-          <button>See All</button>
-        </Button>
+          <Button to="/food">
+            <button>See All</button>
+          </Button>
       </Wrapper>
     </Container>
   );
@@ -234,57 +111,25 @@ const Downtitle = styled.div`
   font-weight: 700;
   margin-bottom: 7px;
 `;
-const Image = styled.div`
-  background-color: #cdc8c8;
-  border-radius: 5px;
-  width: 220px;
-  height: 260px;
-  img {
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
-    border-radius: 5px;
-  }
-`;
-const Name = styled.div`
-  font-size: 13px;
-  font-weight: 500;
-  span {
-    margin-left: 10px;
-    position: relative;
-    bottom: -2px;
-    color: #d975c0;
-  }
-`;
-const Price = styled.div`
-  font-size: 13px;
-  font-weight: 500;
-`;
 const Cardhold = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
+  overflow-x: auto;
 `;
-const Card = styled.div`
-  width: 280px;
-  height: 300px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: space-between;
-`;
+
 const Wrapper = styled.div`
   width: 90%;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   border: 1.9px solid #d975c0;
   padding: 0 10px;
   margin: 20px 0;
   border-radius: 5px;
+
+  
 `;
 const Container = styled.div`
   width: 100%;

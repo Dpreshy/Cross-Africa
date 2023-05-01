@@ -4,13 +4,25 @@ import Detaildown from "./Detaildown";
 import Detailup from "./Detailup";
 import DetailProduct from "./DetailProduct";
 import styled from "styled-components";
+import { getSingleProduct } from "../Api/ProductApi";
+import { useQuery } from "@tanstack/react-query";
+import { useParams } from "react-router-dom";
 
 const Detail = () => {
+  const {id} = useParams()
+
+  const {data} = useQuery({
+    queryKey: [ "products", id ],
+    queryFn: ()=> getSingleProduct(id),
+  })
+
+  console.log(data)
+  var nf = Intl.NumberFormat()
   return (
     <Container>
       <Wrapper>
-        <Detailup />
-        <Detailmiddle />
+        <Detailup name={ data?.name } price={ nf.format(data?.price) } />
+        <Detailmiddle avatar={data?.avatar}/>
         <Detaildown />
         <DetailProduct />
       </Wrapper>
