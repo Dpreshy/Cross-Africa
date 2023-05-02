@@ -4,6 +4,7 @@ import Reason from "./Reason";
 import GetStarted from "./GetStarted";
 import { NavLink } from "react-router-dom"
 import LandingPageHead from "../Header/LandingPageHead";
+import Footer from "../Footer/Footer";
 
 const LandingPage = () => {
   return (
@@ -23,6 +24,7 @@ const LandingPage = () => {
           <GetStarted />
         </Wrapper>
       </Container>
+      <Footer />
     </div>
     </>
   );

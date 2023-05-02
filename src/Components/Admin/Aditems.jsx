@@ -153,11 +153,13 @@ const Wrapper = styled.div`
   flex-direction: column;
   border-radius: 2px;
   background-color: #f3f6f8;
+  margin-top: 40px;
 `;
 const Container = styled.div`
-  width: 95%;
+  width: 100%;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
-  padding: 50px 23px;
+  /* justify-content: flex-start; */
+  /* padding: 50px 23px; */
+  /* background-color: gold; */
 `;

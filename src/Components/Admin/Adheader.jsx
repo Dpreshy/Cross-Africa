@@ -85,14 +85,14 @@ const SearchHold = styled.div`
 const Wrapper = styled.div`
   width: 90%;
   height: 100%;
-  border-bottom: 1.9px solid grey;
+  /* border-bottom: 1.9px solid grey; */
   display: flex;
   align-items: center;
   justify-content: space-between;
   /* padding: 0 10px; */
 `;
 const Container = styled.div`
-  width: 82%;
+  width: calc(100% - 230px);
   height: 70px;
   border-bottom: 1.9px solid grey;
   display: flex;
@@ -101,7 +101,9 @@ const Container = styled.div`
   position: fixed;
   /* padding-bottom: 160px; */
   /* position: absolute; */
+  right: 0px;
   top: 0px;
+  background-color: white;
   @media (max-width: 660px) {
     display: none;
   }

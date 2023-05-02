@@ -4,31 +4,19 @@ import Dashboard from "../SigmUpAndSignIn/Dashboard";
 import Adheader from "./Adheader";
 import Sidenav from "./Sidenav";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Adsettings from "./Adsettings";
-import Adpersonal from "./Adpersonal";
-import Adpasswordchange from "./Adpasswordchange";
-import Adcustomer from "./Adcustomer";
-import Adorder from "./Adorder";
-import Aditems from "./Aditems";
-import Adorderhistory from "./Adorderhistory";
 import Merchantrequest from "./Merchantrequest";
+import AdmineRoutes from "../AllRoutes/AdminRoutes"
 
 const Adpage = () => {
   return (
     <Container>
       <Side>
         <Sidenav />
+        <Adheader />
       </Side>
       <Main>
-        <Adheader />
-        <Merchantrequest />
-        <Adorder />
-        <Aditems />
-        <Adcustomer />
-        <Adorderhistory />
-        <Adsettings />
-        <Adpersonal />
-        <Adpasswordchange />
+        <AdmineRoutes />
+        {/* <Merchantrequest />  */}
       </Main>
     </Container>
   );
@@ -43,28 +31,29 @@ const Container = styled.div`
 `;
 const Side = styled.div`
   width: 230px;
+  flex: 0.8;
   height: 100vh;
   background-color: #f262aa;
   border-top-right-radius: 20px;
   position: fixed;
+  z-index: 1111;
   @media (max-width: 768px) {
     width: 90px;
   }
   /* position: fixed; */
 `;
 const Main = styled.div`
-  width: calc(100% - 230px);
+  width: calc(100vw - 250px);
   display: flex;
-  @media (max-width: 768px) {
-    width: calc(100% - 90px);
-  }
+ 
   align-items: center;
   flex-direction: column;
-  justify-content: space-between;
-  /* padding-right: 100px; */
+  justify-content: center;
   position: absolute;
   right: 0px;
-  /* min-height: calc(100vh - 60px); */
-  display: flex;
-  justify-content: center;
+  /* background-color: blue; */
+  @media (max-width: 768px) {
+    /* width: 100%; */
+    display: none;
+  }
 `;

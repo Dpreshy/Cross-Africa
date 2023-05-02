@@ -75,7 +75,7 @@ const Price = styled.div`
     font-weight: 400;
   font-size: 14px;
     color: #68d0f3;
- - }
+  }
 `;
 const Sales = styled.div`
   font-weight: 500;
