@@ -10,7 +10,7 @@ import Review from "../Review/Review";
 import Accreview from "../Review/Accreview";
 import Allitems from "../Allitems/Allitems";
 import ErrorOtp from "../ErrorOtp/ErrorOtp";
-import Checkout from "../Payment/Checkout";
+import Checkout from "../Payment/checkout";
 import Shipping from "../Payment/Shipping";
 import Otppage from "../OtpPage/Otppage";
 import Bankdetails from "../SigmUpAndSignIn/Bankdetails";
@@ -19,6 +19,7 @@ import PersonalInfo from "../SigmUpAndSignIn/PersonalInfo";
 import Featured from "../Allitems/Featured";
 import Cart from "../Payment/Cart";
 import Categories from "../Allitems/Categories"
+import Finishshipping from "../Payment/Finishshipping"
 
 const AllRoutes = () => {
   let element = useRoutes([
@@ -99,6 +100,10 @@ const AllRoutes = () => {
         {
           path: "/finishshipping",
           element: <Shipping />,
+        },
+        {
+          path: "/ready-to-ship",
+          element: <Finishshipping />,
         },
         {
           path: "/cart",

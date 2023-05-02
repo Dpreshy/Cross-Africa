@@ -1,5 +1,6 @@
 import axios from "axios";
-const baseURL = "http://localhost:5000";
+// const baseURL = "http://localhost:5000";
+const baseURL = "https://crossbackend.onrender.com";
 
 export const sellerProducts = async (id) => {
     // console.log(id);

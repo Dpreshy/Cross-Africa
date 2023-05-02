@@ -1,4 +1,5 @@
 import React from 'react'
+import { NavLink } from 'react-router-dom';
 import styled from 'styled-components'
 
 const Slider = ({ myRef }) => {
@@ -9,10 +10,10 @@ const Slider = ({ myRef }) => {
   return (
       <div>
           <Menu ref={myRef}>
-                <Navs>Electronics</Navs>
-                <Navs>Mobile Phones</Navs>
-                <Navs>Clothing & Fashion</Navs>
-                <Navs>Food & Groceries</Navs>
+          <NavLink to="/electronics" style={{textDecoration: "none"}}><Navs>Electronics</Navs></NavLink>
+                <NavLink to="/phone" style={{textDecoration: "none"}}><Navs>Mobile Phones</Navs></NavLink>
+                <NavLink to="/clothing" style={{textDecoration: "none"}}><Navs>Clothing & Fashion</Navs></NavLink>
+                <NavLink to="/food" style={{textDecoration: "none"}}><Navs>Food & Groceries</Navs></NavLink>
               <br />
               <br />
               <br />

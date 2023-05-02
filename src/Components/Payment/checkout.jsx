@@ -6,13 +6,18 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from "react-router-dom";
 import countryData from "../data"
 import { useState } from "react";
+import { useMutation } from "@tanstack/react-query";
+import { placeOrder } from "../Api/OrderApi";
+import { useEffect } from "react";
 
 const Checkout = () => {
   const navigate = useNavigate()
   var nf = Intl.NumberFormat()
+  const cartData = useSelector((state) => state.reducers.cartItem)
+  const quantity = useSelector((state) => state.reducers.qty)
+  const totalPrice = cartData?.reduce((price, item) => price + item.qty * item.price, 0)
   const [ selectCountry, setSelectCountry ] = useState(countryData)
   let [ findCountry, setFindCountry ] = useState(0)
-  let [ checkState, setCheckState ] = useState(false)
   const [ email, setemail ] = useState(""); 
   const [ firstName, setfirstName ] = useState(""); 
   const [ country, setcountry ] = useState("");
@@ -23,16 +28,16 @@ const Checkout = () => {
   const [ Localgovt, setLocalgovt ] = useState("");
   const [ nearestBusStop, setnearestBusStop ] = useState("");
   const [ phone_No, setphone_No ] = useState("");
+  const [change, setChange] = useState(false)
+  const [payment_Method, setPayment_Method] = useState("Payment before delivery")
+  const [product, setProduct] = useState([])
   
-  const cartData = useSelector((state) => state.reducers.cartItem)
-  // console.log(cartData)
-  const totalPrice = cartData?.reduce((price, item) => price + item.qty * item.price, 0)
-  console.log(totalPrice)
-  const changedState = () => {
-    if (checkState === true) return setCheckState(() => checkState = false)
-    setCheckState(() => checkState = true)
-    
-  }
+const productOrdered=()=>{
+  const Data = cartData.map((el)=> el._id)
+  setProduct(Data)
+}
+  console.log(product)
+
   const returnCountry = () => {
     setFindCountry(() => findCountry + 1)
     if (findCountry >= selectCountry.length - 1) {
@@ -41,34 +46,41 @@ const Checkout = () => {
   }
 
   const getCountryName = () => {
-    setcountry(selectCountry[findCountry].name)
+      setcountry(selectCountry[findCountry].name)
   }
   const create = useMutation({
     // mutationKey: ["seller"],
-    mutationFn: personalInfo,
-    onSuccess: (res) => {
-        console.log(res);
-        navigate("/auth/businessinfo")
+    mutationFn: placeOrder,
+    onSuccess: () => {
+        navigate("/ready-to-ship")
     },
 
     onError: (error) => {
         console.log(error.message)
     }
   })
+  console.log(payment_Method)
+
+  const handleSubmit = (e)=>{
+    e.preventDefault()
+
+    create.mutate({firstName: firstName,lastName: lastName,email: email,phone_No: phone_No,payment_method: payment_Method,country: country, Localgovt: Localgovt, state:state, apartment: apartment, nearestBusStop: nearestBusStop, products: product,subtotal: totalPrice, total:quantity})
+  }
   useEffect(() => {
     getCountryName()
+    productOrdered()
   },[findCountry])
   return (
     <div>
       <Container>
         <Wrapper>
           <Left>
-            <Hold>
+            <Hold onSubmit={handleSubmit}>
               <InputHold>
                 <Title>Contact Information</Title>
                 <Text>Email</Text>
                 <InputCont>
-                  <Input placeholder="email"  value={shopName} onChange={(e)=> setshopName(e.target.value)}/>
+                  <Input placeholder="email"  value={email} onChange={(e)=> setemail(e.target.value)}/>
                   {/* <span>Chance</span> */}
                 </InputCont>
               </InputHold>
@@ -76,15 +88,37 @@ const Checkout = () => {
                 <Title>Payment Method</Title>
                 <InputCont>
                   <Dis>
-                    <Cont>
+                   {
+                    change ?  <Cont onClick={()=>{
+                      setChange(false)
+                      setPayment_Method("Payment before delivery")
+                    }}>
                       <Checkbox bg="fff"></Checkbox>
-                      <PayOn>Pay on delivery</PayOn>
-                    </Cont>
-                    <Line />
-                    <Cont>
+                      <PayOn>Payment on delivery</PayOn>
+                    </Cont> :  <Cont onClick={()=>{
+                      setChange(true)
+                      setPayment_Method("Payment on delivery")
+                    }}>
                       <Checkbox bg=""></Checkbox>
-                      <PayOn>Pay on delivery</PayOn>
+                      <PayOn>Payment on delivery</PayOn>
                     </Cont>
+                   }
+                    <Line />
+                    {
+                    change ?   <Cont onClick={()=>{
+                      setChange(false)
+                      setPayment_Method("Payment before delivery")
+                    }}>
+                      <Checkbox bg=""></Checkbox>
+                      <PayOn>Payment before delivery</PayOn>
+                    </Cont> :   <Cont onClick={()=>{
+                      setChange(true)
+                      setPayment_Method("Payment on delivery")
+                    }}>
+                      <Checkbox bg="fff"></Checkbox>
+                      <PayOn>Payment before delivery</PayOn>
+                    </Cont>
+                   }
                   </Dis>
                 </InputCont>
               </InputHold>
@@ -95,26 +129,22 @@ const Checkout = () => {
 
                 <Optionav>
                   {" "}
-                  <div>
-                    <AiFillFlag />
-                  </div>
-                  <span>
-                    <AiFillCaretDown />
-                  </span>
+                  <Image src={ selectCountry[findCountry].flag} />
+                <Icon onClick={returnCountry}><AiFillCaretDown /></Icon>
                 </Optionav>
               </InputHold1>
               <InputHold2>
                 <Wrap>
                   <Text>First Name</Text>
                   <InputCont>
-                    <Input placeholder="First Name"  value={shopName} onChange={(e)=> setshopName(e.target.value)}/>
+                    <Input placeholder="First Name"  value={firstName} onChange={(e)=> setfirstName(e.target.value)}/>
                     {/* <span>Chance</span> */}
                   </InputCont>
                 </Wrap>
                 <Wrap>
                   <Text>Last Name</Text>
                   <InputCont>
-                    <Input placeholder="Last Name"  value={shopName} onChange={(e)=> setshopName(e.target.value)}/>
+                    <Input placeholder="Last Name"  value={lastName} onChange={(e)=> setlastName(e.target.value)}/>
                     {/* <span>Chance</span> */}
                   </InputCont>
                 </Wrap>
@@ -122,14 +152,14 @@ const Checkout = () => {
               <InputHold1>
                 <Text>Address</Text>
                 <InputCont>
-                  <Input placeholder="Address"  value={shopName} onChange={(e)=> setshopName(e.target.value)}/>
+                  <Input placeholder="Address"  value={address} onChange={(e)=> setaddress(e.target.value)}/>
                   {/* <span>Chance</span> */}
                 </InputCont>
               </InputHold1>
               <InputHold1>
                 <Text>Apartment, Suite etc.... (Optional)</Text>
                 <InputCont>
-                  <Input placeholder="Apartment, Suite etc...."  value={shopName} onChange={(e)=> setshopName(e.target.value)}/>
+                  <Input placeholder="Apartment, Suite etc...."  value={apartment} onChange={(e)=> setapartment(e.target.value)}/>
                   {/* <span>Chance</span> */}
                 </InputCont>
               </InputHold1>
@@ -137,21 +167,21 @@ const Checkout = () => {
                 <Wrap1>
                   <Text>State</Text>
                   <InputCont>
-                    <Input placeholder="Lagos"  value={shopName} onChange={(e)=> setshopName(e.target.value)}/>
+                    <Input placeholder="Lagos"  value={state} onChange={(e)=> setstate(e.target.value)}/>
                     {/* <span>Chance</span> */}
                   </InputCont>
                 </Wrap1>
                 <Wrap1>
                   <Text>LGA</Text>
                   <InputCont>
-                    <Input placeholder="Ajeromi"  value={shopName} onChange={(e)=> setshopName(e.target.value)}/>
+                    <Input placeholder="Ajeromi"  value={Localgovt} onChange={(e)=> setLocalgovt(e.target.value)}/>
                     {/* <span>Chance</span> */}
                   </InputCont>
                 </Wrap1>
                 <Wrap1>
                   <Text>Nearest B/Stop</Text>
                   <InputCont>
-                    <Input placeholder="OJA"  value={shopName} onChange={(e)=> setshopName(e.target.value)}/>
+                    <Input placeholder="OJA"  value={nearestBusStop} onChange={(e)=> setnearestBusStop(e.target.value)}/>
                     {/* <span>Chance</span> */}
                   </InputCont>
                 </Wrap1>
@@ -160,7 +190,7 @@ const Checkout = () => {
               <InputHold1>
                 <Text>Phone number</Text>
                 <InputCont>
-                  <Input placeholder="Phone number"  value={shopName} onChange={(e)=> setshopName(e.target.value)}/>
+                  <Input placeholder="Phone number"  value={phone_No} onChange={(e)=> setphone_No(e.target.value)}/>
                   {/* <span>Chance</span> */}
                 </InputCont>
               </InputHold1>
@@ -171,7 +201,7 @@ const Checkout = () => {
                   </span>
                   <div onClick={()=>{navigate(-1)}}>Return to Cart</div>
                 </Div>
-                <Button>Continue Shopping</Button>
+                <Button type="submit">Continue Shopping</Button>
               </Buttons>
             </Hold>
           </Left>
@@ -189,6 +219,17 @@ const Checkout = () => {
 };
 
 export default Checkout;
+
+const Image = styled.img`
+  width: 40px;
+`;
+const Icon = styled.div`
+  width: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+`;
 const Wrap = styled.div`
   width: 45%;
 `;
@@ -224,6 +265,9 @@ const Text = styled.div`
 const Right = styled.div`
   flex: 1;
 
+  @media (max-width: 768px ){
+    display: none;
+  }
   /* background-color: blue; */
 `;
 const Button = styled.button`
