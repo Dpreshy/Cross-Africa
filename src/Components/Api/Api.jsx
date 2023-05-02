@@ -1,5 +1,6 @@
 import axios from "axios";
-const baseURL = "http://localhost:5000";
+// const baseURL = "http://localhost:5000";
+const baseURL = "https://crossbackend.onrender.com";
 
 export const createUser = async({fullName,lastName,email,companyName, phoneNum, password}) => {
     await axios.post(`${baseURL}/api/seler/register`, { fullName, lastName, email, companyName, phoneNum, password }).then(res => {
