@@ -9,7 +9,10 @@ import { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { placeOrder } from "../Api/OrderApi";
 import { useEffect } from "react";
+import axios from "axios";
 
+const baseURL = "http://localhost:5000";
+// const baseURL = "https://crossbackend.onrender.com";
 const Checkout = () => {
   const navigate = useNavigate()
   var nf = Intl.NumberFormat()
@@ -27,8 +30,10 @@ const Checkout = () => {
   const [ state, setstate ] = useState("");
   const [ Localgovt, setLocalgovt ] = useState("");
   const [ nearestBusStop, setnearestBusStop ] = useState("");
-  const [ phone_No, setphone_No ] = useState("");
-  const [change, setChange] = useState(false)
+  const [ phone_No, setphone_No ] = useState();
+  const [ change, setChange ] = useState(false)
+  const [ Error, setError ] = useState(false);
+  
   const [payment_Method, setPayment_Method] = useState("Payment before delivery")
   const [product, setProduct] = useState([])
   
@@ -36,7 +41,6 @@ const productOrdered=()=>{
   const Data = cartData.map((el)=> el._id)
   setProduct(Data)
 }
-  console.log(product)
 
   const returnCountry = () => {
     setFindCountry(() => findCountry + 1)
@@ -49,11 +53,16 @@ const productOrdered=()=>{
       setcountry(selectCountry[findCountry].name)
   }
   const create = useMutation({
-    // mutationKey: ["seller"],
-    mutationFn: placeOrder,
-    onSuccess: () => {
+    mutationKey: ["order"],
+    mutationFn: async ({firstName,lastName,email,order_No,payment_method,country, Localgovt, state, apartment, nearestBusStop,products,subtotal, total}) => {
+      // console.log(id);
+      await axios.post(`${baseURL}/api/order/create`,{firstName,lastName,email,order_No,payment_method,country, Localgovt, state, apartment, nearestBusStop,products,subtotal, total}).then((res)=>{
         navigate("/ready-to-ship")
-    },
+        localStorage.setItem("order", JSON.stringify(res.data.data))
+      }).catch((err)=>{
+          console.log(err)
+      })
+  },
 
     onError: (error) => {
         console.log(error.message)
@@ -63,8 +72,23 @@ const productOrdered=()=>{
 
   const handleSubmit = (e)=>{
     e.preventDefault()
-
-    create.mutate({firstName: firstName,lastName: lastName,email: email,phone_No: phone_No,payment_method: payment_Method,country: country, Localgovt: Localgovt, state:state, apartment: apartment, nearestBusStop: nearestBusStop, products: product,subtotal: totalPrice, total:quantity})
+    if (
+      firstName.length == 0 ||
+      lastName.length == 0 ||
+      email.length == 0 ||
+      country.length == 0 ||
+      Localgovt.length == 0 ||
+      !payment_Method ||
+      state.length == 0 ||
+      apartment.length == 0 ||
+      nearestBusStop.length == 0 ||
+      product.length == 0 ||
+      apartment.length == 0
+    ) {
+      setError(true)
+      alert("All inputs most be filed ")
+    }
+    create.mutate({firstName: firstName,lastName: lastName,email: email,order_No: phone_No,payment_method: payment_Method,country: country, Localgovt: Localgovt, state:state, apartment: apartment, nearestBusStop: nearestBusStop, products: product,subtotal: totalPrice, total:quantity})
   }
   useEffect(() => {
     getCountryName()
@@ -190,7 +214,7 @@ const productOrdered=()=>{
               <InputHold1>
                 <Text>Phone number</Text>
                 <InputCont>
-                  <Input placeholder="Phone number"  value={phone_No} onChange={(e)=> setphone_No(e.target.value)}/>
+                  <Input placeholder="Phone number" type="number"  value={phone_No} onChange={(e)=> setphone_No(e.target.value)}/>
                   {/* <span>Chance</span> */}
                 </InputCont>
               </InputHold1>
@@ -201,7 +225,7 @@ const productOrdered=()=>{
                   </span>
                   <div onClick={()=>{navigate(-1)}}>Return to Cart</div>
                 </Div>
-                <Button type="submit">Continue Shopping</Button>
+                <Button type="submit" >Continue Shopping</Button>
               </Buttons>
             </Hold>
           </Left>

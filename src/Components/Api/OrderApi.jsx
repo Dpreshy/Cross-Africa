@@ -1,6 +1,6 @@
 import axios from "axios";
-// const baseURL = "http://localhost:5000";
-const baseURL = "https://crossbackend.onrender.com";
+const baseURL = "http://localhost:5000";
+// const baseURL = "https://crossbackend.onrender.com";
 
 export const orders = async (id) => {
     // console.log(id);
@@ -8,10 +8,11 @@ export const orders = async (id) => {
 
     return response.data.data
 }
-export const placeOrder = async ({firstName,lastName,email,phone_No,payment_method,country, Localgovt, state, apartment, nearestBusStop,products,subtotal, total}) => {
+export const placeOrder = async ({firstName,lastName,email,order_No,payment_method,country, Localgovt, state, apartment, nearestBusStop,products,subtotal, total}) => {
     // console.log(id);
-    await axios.post(`${baseURL}/api/order/create`,{firstName,lastName,email,phone_No,payment_method,country, Localgovt, state, apartment, nearestBusStop,products,subtotal, total}).then((res)=>{
-        console.log(res)
+    await axios.post(`${baseURL}/api/order/create`, { firstName, lastName, email, order_No, payment_method, country, Localgovt, state, apartment, nearestBusStop, products, subtotal, total }).then((res) => {
+        
+        return res.data.data
     }).catch((err)=>{
         console.log(err)
     })
