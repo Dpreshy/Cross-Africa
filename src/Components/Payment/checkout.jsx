@@ -2,7 +2,62 @@ import React from "react";
 import styled from "styled-components";
 import Item from "./Item";
 import { AiFillCaretDown, AiFillFlag, AiFillCaretLeft } from "react-icons/ai";
+import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from "react-router-dom";
+import countryData from "../data"
+import { useState } from "react";
+
 const Checkout = () => {
+  const navigate = useNavigate()
+  var nf = Intl.NumberFormat()
+  const [ selectCountry, setSelectCountry ] = useState(countryData)
+  let [ findCountry, setFindCountry ] = useState(0)
+  let [ checkState, setCheckState ] = useState(false)
+  const [ email, setemail ] = useState(""); 
+  const [ firstName, setfirstName ] = useState(""); 
+  const [ country, setcountry ] = useState("");
+  const [ lastName, setlastName ] = useState("");
+  const [ address, setaddress ] = useState("");
+  const [ apartment, setapartment ] = useState("");
+  const [ state, setstate ] = useState("");
+  const [ Localgovt, setLocalgovt ] = useState("");
+  const [ nearestBusStop, setnearestBusStop ] = useState("");
+  const [ phone_No, setphone_No ] = useState("");
+  
+  const cartData = useSelector((state) => state.reducers.cartItem)
+  // console.log(cartData)
+  const totalPrice = cartData?.reduce((price, item) => price + item.qty * item.price, 0)
+  console.log(totalPrice)
+  const changedState = () => {
+    if (checkState === true) return setCheckState(() => checkState = false)
+    setCheckState(() => checkState = true)
+    
+  }
+  const returnCountry = () => {
+    setFindCountry(() => findCountry + 1)
+    if (findCountry >= selectCountry.length - 1) {
+      setFindCountry(()=> findCountry = 0)
+    }
+  }
+
+  const getCountryName = () => {
+    setcountry(selectCountry[findCountry].name)
+  }
+  const create = useMutation({
+    // mutationKey: ["seller"],
+    mutationFn: personalInfo,
+    onSuccess: (res) => {
+        console.log(res);
+        navigate("/auth/businessinfo")
+    },
+
+    onError: (error) => {
+        console.log(error.message)
+    }
+  })
+  useEffect(() => {
+    getCountryName()
+  },[findCountry])
   return (
     <div>
       <Container>
@@ -13,7 +68,7 @@ const Checkout = () => {
                 <Title>Contact Information</Title>
                 <Text>Email</Text>
                 <InputCont>
-                  <Input placeholder="email" />
+                  <Input placeholder="email"  value={shopName} onChange={(e)=> setshopName(e.target.value)}/>
                   {/* <span>Chance</span> */}
                 </InputCont>
               </InputHold>
@@ -52,14 +107,14 @@ const Checkout = () => {
                 <Wrap>
                   <Text>First Name</Text>
                   <InputCont>
-                    <Input placeholder="First Name" />
+                    <Input placeholder="First Name"  value={shopName} onChange={(e)=> setshopName(e.target.value)}/>
                     {/* <span>Chance</span> */}
                   </InputCont>
                 </Wrap>
                 <Wrap>
                   <Text>Last Name</Text>
                   <InputCont>
-                    <Input placeholder="Last Name" />
+                    <Input placeholder="Last Name"  value={shopName} onChange={(e)=> setshopName(e.target.value)}/>
                     {/* <span>Chance</span> */}
                   </InputCont>
                 </Wrap>
@@ -67,14 +122,14 @@ const Checkout = () => {
               <InputHold1>
                 <Text>Address</Text>
                 <InputCont>
-                  <Input placeholder="Address" />
+                  <Input placeholder="Address"  value={shopName} onChange={(e)=> setshopName(e.target.value)}/>
                   {/* <span>Chance</span> */}
                 </InputCont>
               </InputHold1>
               <InputHold1>
                 <Text>Apartment, Suite etc.... (Optional)</Text>
                 <InputCont>
-                  <Input placeholder="Apartment, Suite etc...." />
+                  <Input placeholder="Apartment, Suite etc...."  value={shopName} onChange={(e)=> setshopName(e.target.value)}/>
                   {/* <span>Chance</span> */}
                 </InputCont>
               </InputHold1>
@@ -82,21 +137,21 @@ const Checkout = () => {
                 <Wrap1>
                   <Text>State</Text>
                   <InputCont>
-                    <Input placeholder="Lagos" />
+                    <Input placeholder="Lagos"  value={shopName} onChange={(e)=> setshopName(e.target.value)}/>
                     {/* <span>Chance</span> */}
                   </InputCont>
                 </Wrap1>
                 <Wrap1>
                   <Text>LGA</Text>
                   <InputCont>
-                    <Input placeholder="Ajeromi" />
+                    <Input placeholder="Ajeromi"  value={shopName} onChange={(e)=> setshopName(e.target.value)}/>
                     {/* <span>Chance</span> */}
                   </InputCont>
                 </Wrap1>
                 <Wrap1>
                   <Text>Nearest B/Stop</Text>
                   <InputCont>
-                    <Input placeholder="OJA" />
+                    <Input placeholder="OJA"  value={shopName} onChange={(e)=> setshopName(e.target.value)}/>
                     {/* <span>Chance</span> */}
                   </InputCont>
                 </Wrap1>
@@ -105,7 +160,7 @@ const Checkout = () => {
               <InputHold1>
                 <Text>Phone number</Text>
                 <InputCont>
-                  <Input placeholder="Phone number" />
+                  <Input placeholder="Phone number"  value={shopName} onChange={(e)=> setshopName(e.target.value)}/>
                   {/* <span>Chance</span> */}
                 </InputCont>
               </InputHold1>
@@ -114,14 +169,18 @@ const Checkout = () => {
                   <span>
                     <AiFillCaretLeft />
                   </span>
-                  <div>Return to Cart</div>
+                  <div onClick={()=>{navigate(-1)}}>Return to Cart</div>
                 </Div>
                 <Button>Continue Shopping</Button>
               </Buttons>
             </Hold>
           </Left>
           <Right>
-            <Item />
+            {
+              cartData?.map((props, index) => (
+                <Item index={ index } name={ props.name } price={ nf.format(props.price) } shippingFee={ props?.shippingFee } totalPrice={ nf.format(totalPrice) } subtotal={nf.format(props.price * props.qty)} qty={ props.qty } id={ props._id} />
+              ))
+            }
           </Right>
         </Wrapper>
       </Container>
@@ -274,7 +333,7 @@ const InputHold2 = styled.div`
   justify-content: space-between;
   align-items: center;
 `;
-const Hold = styled.div`
+const Hold = styled.form`
   width: 90%;
   margin-top: 20px;
 `;

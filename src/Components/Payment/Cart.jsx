@@ -11,8 +11,15 @@ import {
 import { AiFillAlipayCircle, AiOutlinePayCircle } from "react-icons/ai";
 import { BsPaypal } from "react-icons/bs";
 import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from 'react-redux';
 
 const Cart = () => {
+
+  const cartData = useSelector((state) => state.reducers.cartItem)
+  const totalPrice = cartData?.reduce((price, item)=> price + item.qty * item.price, 0)
+  // console.log(cartData)
+
+  var nf = Intl.NumberFormat()
   return (
     <div>
       <Container>
@@ -28,26 +35,29 @@ const Cart = () => {
               </Price>
             </Tag>
           </Top>
-          <Middle>
-            <Tag>
-              <Image>
-                <img src="/Frame 113.png" />
-                <span>
-                  Power pod bluetooth Wireless ear bud / Headphones 6D stereo
-                  earpods
-                </span>
-              </Image>
-              <Price>
-                <span>₦30,000</span>
-                <div>3</div>
-                <span>₦30,000</span>
-              </Price>
-            </Tag>
-          </Middle>
+          {
+            cartData?.map((props) => (
+              <Middle key={props._id}>
+              <Tag>
+                <Image>
+                  <img src={props?.avatar[0].url} />
+                  <span>
+                   {props?.name}
+                  </span>
+                </Image>
+                <Price>
+                    <span>₦{props.price }</span>
+                    <div>{ props.qty}</div>
+                  <span>₦{nf.format(props.qty * props.price) }</span>
+                </Price>
+              </Tag>
+            </Middle>
+            ))
+         }
           <Down>
             <Hold>
               <span>SUBTOTAL</span>
-              <div>₦30,000</div>
+              <div>₦{nf.format(totalPrice) }</div>
               <Link to="/checkout">
                 <Button> Checkout</Button>
               </Link>

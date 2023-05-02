@@ -6,6 +6,7 @@ import { BiHelpCircle, BiSearch } from "react-icons/bi";
 import { FiMenu } from "react-icons/fi";
 import { NavLink } from "react-router-dom";
 import Slider from "./Slider";
+import { useSelector, useDispatch } from 'react-redux';
 
 const Header = () => {
   const [categories, setCategories] = useState(false);
@@ -13,8 +14,9 @@ const Header = () => {
   const [menuChange, setMenuChange] = useState(false)
   const user = JSON.parse(localStorage.getItem("user"));
   const myRef = useRef()
+  const cartData = useSelector((state) => state.reducers.cartItem)
 
-  console.log(menuChange)
+  // console.log(cartData)
   const change = () => {
     myRef.current.style.left = "0px"
     setMenuChange(true)
@@ -102,9 +104,10 @@ const Header = () => {
             <Nav>
               <div> Cart</div>
 
-              <NavLink to="/detail" style={{ textDecoration: "none" }}>
+              <NavLink to="/cart" style={{ textDecoration: "none" }}>
                 <span>
-                  <BsCart color="black"/>
+                  <BsCart color="black" />
+                  <Round>{ cartData.length > 0 ? cartData.length : null }</Round>
                 </span>
               </NavLink>
             </Nav>
@@ -130,6 +133,22 @@ const Header = () => {
 
 export default Header;
 
+const Round = styled.div`
+  color: white;
+  position: absolute;
+  font-size: 10px;
+  font-weight: 500;
+  background-color: red;
+  border-radius: 50%;
+  /* padding: 5px; */
+  width: 12px;
+  height: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: -5px;
+  right: -5px;
+`;
 const Navs = styled.div`
   width: 100%;
   padding: 10px 0px;

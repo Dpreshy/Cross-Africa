@@ -1,18 +1,18 @@
 import React from "react";
 import styled from "styled-components";
 
-const Item = () => {
+const Item = ({index, name, price, shippingFee, totalPrice, subtotal,qty, id }) => {
   return (
     <div>
-      <Hold>
+      <Hold key={id}>
         <Content>
           <Left>
-            <Circle>1</Circle>
+            <Circle>{qty }</Circle>
             <Image src="/Frame 1.png" />
           </Left>
           <Right>
-            <Title>Hear Pod</Title>
-            <Price>₦30,000</Price>
+            <Title>{name }</Title>
+            <Price>₦{ price}</Price>
           </Right>
         </Content>
         <Line />
@@ -20,11 +20,11 @@ const Item = () => {
           <Cont>
             <Div>
               <Title2>Subtotal</Title2>
-              <Price>₦30,000</Price>
+              <Price>₦{ subtotal}</Price>
             </Div>
             <Div>
               <Title2>Shipping Fee</Title2>
-              <Price>₦30,000</Price>
+              <Price>₦{ shippingFee}</Price>
             </Div>
           </Cont>
         </Content>
@@ -33,7 +33,7 @@ const Item = () => {
           <Cont>
             <Div>
               <Title2>Total</Title2>
-              <Price>₦60,000</Price>
+              <Price>₦{ totalPrice}</Price>
             </Div>
           </Cont>
         </Content>
