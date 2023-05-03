@@ -11,8 +11,8 @@ import { placeOrder } from "../Api/OrderApi";
 import { useEffect } from "react";
 import axios from "axios";
 
-// const baseURL = "http://localhost:5000";
-const baseURL = "https://crossbackend.onrender.com";
+const baseURL = "http://localhost:5000";
+// const baseURL = "https://crossbackend.onrender.com";
 const Checkout = () => {
   const navigate = useNavigate()
   var nf = Intl.NumberFormat()
@@ -35,12 +35,13 @@ const Checkout = () => {
   const [ Error, setError ] = useState(false);
   
   const [payment_Method, setPayment_Method] = useState("Payment before delivery")
-  const [product, setProduct] = useState([])
+  const [products, setProducts] = useState([])
   
 const productOrdered=()=>{
-  const Data = cartData.map((el)=> el._id)
-  setProduct(Data)
-}
+  const Data = cartData.map((el)=> ({productID: el._id, qty: el.qty}))
+  setProducts(Data)
+  }
+  // console.log(products)
 
   const returnCountry = () => {
     setFindCountry(() => findCountry + 1)
@@ -54,10 +55,11 @@ const productOrdered=()=>{
   }
   const create = useMutation({
     mutationKey: ["order"],
-    mutationFn: async ({firstName,lastName,email,order_No,payment_method,country, Localgovt, state, apartment, nearestBusStop,products,subtotal, total}) => {
+    mutationFn: async ({firstName,lastName,email,order_No,payment_method,country, Localgovt, state, apartment, nearestBusStop,products,subtotal, totalQty,address}) => {
       // console.log(id);
-      await axios.post(`${baseURL}/api/order/create`,{firstName,lastName,email,order_No,payment_method,country, Localgovt, state, apartment, nearestBusStop,products,subtotal, total}).then((res)=>{
-        navigate("/ready-to-ship")
+      await axios.post(`${baseURL}/api/order/create`,{firstName,lastName,email,order_No,payment_method,country, Localgovt, state, apartment, nearestBusStop,products,subtotal, totalQty,address}).then((res)=>{
+        navigate("/finishshipping")
+        console.log(res.data)
         localStorage.setItem("order", JSON.stringify(res.data.data))
       }).catch((err)=>{
           console.log(err)
@@ -65,7 +67,7 @@ const productOrdered=()=>{
   },
 
     onError: (error) => {
-        console.log(error.message)
+        console.log(error)
     }
   })
   console.log(payment_Method)
@@ -82,13 +84,13 @@ const productOrdered=()=>{
       state.length == 0 ||
       apartment.length == 0 ||
       nearestBusStop.length == 0 ||
-      product.length == 0 ||
+      products.length == 0 ||
       apartment.length == 0
     ) {
       setError(true)
       alert("All inputs most be filed ")
     }
-    create.mutate({firstName: firstName,lastName: lastName,email: email,order_No: phone_No,payment_method: payment_Method,country: country, Localgovt: Localgovt, state:state, apartment: apartment, nearestBusStop: nearestBusStop, products: product,subtotal: totalPrice, total:quantity})
+    create.mutate({firstName: firstName,lastName: lastName,email: email,order_No: phone_No,payment_method: payment_Method,country: country, Localgovt: Localgovt, state:state, apartment: apartment, nearestBusStop: nearestBusStop, products:products,subtotal: totalPrice, totalQty:quantity, address: address})
   }
   useEffect(() => {
     getCountryName()

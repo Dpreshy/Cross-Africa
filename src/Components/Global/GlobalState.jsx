@@ -1,5 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
+// import { useState } from 'react';
 
+// let id = "id"
+// console.log(id)
 const initialState = {
     user: null,
     product: [],
@@ -21,6 +24,7 @@ const GlobalState = createSlice({
 
         addToCart: (state, { payload }) => {
             const check = state.cartItem.findIndex((el) => el._id === payload._id);
+            let cart = []
 
             if (check >= 0) {
                 state.cartItem[ check ].qty += 1;
@@ -42,6 +46,11 @@ const GlobalState = createSlice({
             }
             state.qty -= 1;
             state.totalPrice -= payload.price;
+        },
+
+        removeAllCart: (state) => {
+            state.cartItem = [];
+            state.qty = 0
         },
 
         total: (state, { payload }) => {
@@ -71,6 +80,6 @@ const GlobalState = createSlice({
     }
 });
 
-export const { signOut, addProduct, addToCart, removeCart } = GlobalState.actions;
+export const { signOut, addProduct, addToCart, removeCart,removeAllCart } = GlobalState.actions;
 
 export default GlobalState.reducer;
