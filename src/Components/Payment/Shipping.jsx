@@ -1,20 +1,46 @@
 import React from "react";
 import styled from "styled-components";
-import Item from "./Item";
+import ItemsData from "./ItemsData";
 import { AiOutlineCheck } from "react-icons/ai";
 import { getOneOrder } from "../Api/OrderApi";
 import { useQuery } from "@tanstack/react-query";
+import { purchasedProduct } from "../Api/ProductApi";
+import { useMutation } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
+import { removeAllCart } from "../Global/GlobalState";
+import { useDispatch, useSelector } from "react-redux";
 
 const Shipping = () => {
-  
+  const dispatch = useDispatch();
+  const navigate = useNavigate()
   const orderData = JSON.parse(localStorage.getItem("order"))
-  const id = orderData._id
+  const cartItem = useSelector((state) => state.reducers.cartItem)
+  const id = orderData?._id
   const {data} = useQuery({
     queryKey: ["order", id],
     queryFn: ()=>getOneOrder(id)
   })
+  var nf = Intl.NumberFormat()
 
-  console.log(data)
+  // console.log(data)
+  const updateStatus = useMutation({
+    mutationKey: [ "products"],
+    mutationFn: purchasedProduct,
+    
+    onSuccess: () => {
+      navigate("/allitems")
+    dispatch(removeAllCart(cartItem))
+      localStorage.removeItem("order")
+    }
+  })
+  const productID = orderData?.products?.map((el)=> el?.productID)
+  // console.log(cartItem)
+  const qty = orderData?.products?.map((el)=> el?.qty)
+  // console.log(qty)
+
+  const updateFunc = () => {
+    updateStatus.mutate({ids: productID, quantities: qty})
+}
   return (
     <div>
       <Container>
@@ -27,11 +53,11 @@ const Shipping = () => {
               <Font>
                 <Fonttext>
                   {" "}
-                  Order <span>05432</span>
+                  Order <span>{data?.order_No }</span>
                 </Fonttext>
                 <Fonttitle>
                   {" "}
-                  Thank you <span>Manel</span>
+                  Thank you <span>{data?.firstName }</span>
                 </Fonttitle>
               </Font>
             </Tup>
@@ -56,26 +82,41 @@ const Shipping = () => {
                   <Dis>
                     <Cont>
                       <Tick>Contact Information</Tick>
-                      <PayOn>pay@gmail.com</PayOn>
+                      <PayOn>{data?.email }</PayOn>
                     </Cont>
                     <Cont>
                       <Tick>Shipping Address</Tick>
-                      <PayOn>Location</PayOn>
+                      <PayOn>{ data?.address }</PayOn>
                     </Cont>
                     <Cont>
                       <Tick>Payment Method</Tick>
-                      <PayOn>Location</PayOn>
+                      <PayOn>{ data?.payment_method}</PayOn>
                     </Cont>
                   </Dis>
                 </InputCont>
               </InputHold>
               <Buttons>
-                <Button>Complete Shipping</Button>
+                <Button onClick={updateFunc}>Complete Shipping</Button>
               </Buttons>
+              
             </Hold>
           </Left>
           <Right>
-            <Item />
+            {
+              data?.products?.map((props,index) => (
+                
+                <ItemsData index={ index } totalPrice={ nf.format(data?.subtotal) } subtotal={data?.totalQty } props={props} />
+              ))
+            }
+          <Content>
+          <Cont2>
+            <Div2>
+              <Title2>Total</Title2>
+              <Price>₦{ nf.format(data?.subtotal) }</Price>
+            </Div2>
+          </Cont2>
+        </Content>
+        <Line2 />
           </Right>
         </Wrapper>
       </Container>
@@ -85,6 +126,36 @@ const Shipping = () => {
 
 export default Shipping;
 
+const Cont2 = styled.div``;
+const Div2 = styled.div`
+  width: 250px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* background-color: gold; */
+  margin: 10px 0px;
+`;
+const Price = styled.div`
+  font-weight: 700;
+`;
+const Title2 = styled.div`
+  font-size: 18px;
+  font-weight: 600;
+  /* margin-bottom: 10px; */
+`;
+const Line2 = styled.div`
+  width: 100%;
+  background-color: lightgray;
+  height: 2px;
+  margin: 10px 0px;
+`;
+const Content = styled.div`
+  display: flex;
+  align-items: center;
+  /* justify-content: center; */
+  width: 90%;
+  margin-left: 15px;
+`;
 const Tup = styled.div`
   display: flex;
   padding: 0 10px;
@@ -121,6 +192,10 @@ const Right = styled.div`
   height: 100vh;
   border-left: 3px solid lightgray;
   /* background-color: blue; */
+
+  @media (max-width: 700px){
+    display: none;
+  }
 `;
 const Button = styled.button`
   padding: 15px 20px;

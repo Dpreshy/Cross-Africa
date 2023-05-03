@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import Item from "./Item";
 import {
@@ -15,9 +15,10 @@ import { useSelector, useDispatch } from 'react-redux';
 
 const Cart = () => {
 
+const [QTY, setQTY] = useState()
+
   const cartData = useSelector((state) => state.reducers.cartItem)
   const totalPrice = cartData?.reduce((price, item)=> price + item.qty * item.price, 0)
-  // console.log(cartData)
 
   var nf = Intl.NumberFormat()
   return (
@@ -39,7 +40,7 @@ const Cart = () => {
             cartData?.map((props) => (
               <Middle key={props._id}>
               <Tag>
-                <Image>
+                  <Image>
                   <img src={props?.avatar[0].url} />
                   <span>
                    {props?.name}
