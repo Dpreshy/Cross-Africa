@@ -20,23 +20,23 @@ const AllRoutes = () => {
           element: <AdminDashboard />
         },
         {
-            path: "user",
+            path: "/user",
             element: <Adsignup />,
           },
         {
-            path: "order-detail",
+            path: "/order-detail/:id",
             element: <OrderDetail />,
           },
         {
-            path: "customer-detail",
+            path: "/customer-detail/:id",
             element: <CustomersDetail />,
           },
         {
-            path: "settings",
+            path: "/settings",
             element: <Settings />,
           },
           {
-            path: "login",
+            path: "/login",
             element: <Adlogin />,
           },
       ],

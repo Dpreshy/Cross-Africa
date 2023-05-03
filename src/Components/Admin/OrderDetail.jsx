@@ -5,15 +5,15 @@ import Aditems from './Aditems'
 
 const OrderDetail = () => {
   return (
-    <div>
         <Container>
         <Adorder />
         <Aditems />
         </Container>
-    </div>
   )
 }
 
 export default OrderDetail
 
-const Container = styled.div``
+const Container = styled.div`
+  width: 95%;
+`

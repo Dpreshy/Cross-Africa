@@ -25,7 +25,7 @@ const Sidenav = () => {
         <Side>
           {/* <Text>Menu</Text> */}
           <Wrap>
-            <Hold to="/dashboard">
+            <Hold to="/admin-dashboard">
               <MdDashboard color="#0c0c0c" cursor="pointer" />
               <Write>Dashboard</Write>
             </Hold>

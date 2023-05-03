@@ -26,22 +26,30 @@ export const userInformation = async ({ id, formData }) => {
         "content-type": "multipart/form-data",
     }
     await axios.patch(`${baseURL}/api/seler/${id}/update`, formData, config).then(res => {
-        console.log(res.data)
+        // console.log(res.data)
     })
 }
 
-export const personalInfo = async ({id, gender, DateOfBirth, shippingFrom}) => {
-    await axios.patch(`${baseURL}/api/seler/${id}/updateuser`, {gender, DateOfBirth, shippingFrom}).then(res => {
-        console.log(res.data)
+export const personalInfo = async ({id, gender, DateOfBirth, country}) => {
+    await axios.patch(`${baseURL}/api/seler/${id}/updateuser`, {gender, DateOfBirth, country}).then(res => {
+        // console.log(res.data)
     })
 }
 export const businessInfo = async ({id, address, address2, shippingFrom,codePostal,shopName,city}) => {
     await axios.patch(`${baseURL}/api/seler/${id}/updateuser`, {address, address2, shippingFrom,codePostal,shopName,city}).then(res => {
-        console.log(res.data)
+        // console.log(res.data)
     })
 }
 export const bankDetail = async ({ id, bankName,accountName,accNumber,completed}) => {
     await axios.patch(`${baseURL}/api/seler/${id}/updateuser`, {bankName,accountName,accNumber,completed}).then(res => {
-        console.log(res.data)
+        // console.log(res.data)
     })
+}
+export const getUser = async () => {
+    const response = await axios.get(`${baseURL}/api/user`).then(res => {
+        // console.log(res.data)
+        return res.data.data
+    })
+
+    return response
 }

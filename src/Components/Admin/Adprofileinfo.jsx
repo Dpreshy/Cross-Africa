@@ -1,8 +1,17 @@
 import React from "react";
 import styled from "styled-components";
 import { BiPhone } from "react-icons/bi";
+import { getOneOrder } from "../Api/OrderApi";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { useParams } from "react-router-dom";
 
 const Adprofileinfo = () => {
+
+  const {id} = useParams()
+  const {data} = useQuery({
+    queryKey: ["order", id],
+    queryFn: ()=>getOneOrder(id)
+  })
   return (
     <Container>
       <Wrapper>
@@ -71,7 +80,7 @@ const Price = styled.div`
     font-weight: 400;
   font-size: 14px;
     color: #68d0f3;
- - }
+  }
 `;
 const Sales = styled.div`
   font-weight: 500;

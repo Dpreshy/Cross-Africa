@@ -1,10 +1,8 @@
 import React,{useState} from 'react'
 import styled  from 'styled-components'
 import { useQuery, useQueryClient } from '@tanstack/react-query'
-import { orders } from '../../Api/OrderApi'
+import { getAllProduct } from '../../Api/ProductApi'
 import moment from 'moment'
-import { BiSearch } from "react-icons/bi";
-import ReactPaginate from 'react-paginate'
 import "../../../App.css"
 import OrderPage from './OrderPage'
 
@@ -16,8 +14,8 @@ const AllOrders = () => {
 
   const userID = user?._id
   const {data} = useQuery({
-    queryKey: ["orders"],
-    queryFn: orders
+    queryKey: ["products"],
+    queryFn: getAllProduct
   })
   
   const [ currentPage, setCurrentPage ] = useState(0)
@@ -28,10 +26,9 @@ const AllOrders = () => {
   const changeCPage = ({selected}) => {
     setCurrentPage(selected)
   }
-  console.log(data)
+  // console.log(data)
 
   const [ query, setQuery ] = useState("")
-  console.log(query)
   const keys = ["order_No", "delivery_status"]
 
 //   const search = (data) => {
@@ -77,7 +74,7 @@ const AllOrders = () => {
         </Head>
         {
             currentPageData?.map((props,index) => (
-              <OrderPage index={ index } key={ index }  delivery_status={ props.delivery_status } order_No={ props.order_No } created={ moment(props.createdAt).format("D MMM YYYY") } payment_method={ props.payment_method } pending_days={ props.pending_days } total={ nf.format(props.total)} />
+              <OrderPage index={ index } id={props._id} isSeller={props?.user?.isSeller} status={ props.status } tag_No={ props.tag_No } created={ moment(props.createdAt).format("D MMM YYYY") } price={ nf.format(props.price)} category={props.category} firstName={props?.user?.firstName} lastName={props?.user?.lastName} country={props?.user?.shippingFrom}/>
             ))
       }
         </Buttom>

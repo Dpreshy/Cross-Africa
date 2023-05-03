@@ -1,0 +1,40 @@
+.pending{
+    padding: 10px 30px;
+    border: 0px;
+    outline: none;
+    font-size: 18px;
+    font-weight: 600;
+    color: white;
+    background-color: rgb(209, 41, 209);
+    border-radius: 5px;
+}
+.cancled{
+    padding: 10px 30px;
+    border: 0px;
+    outline: none;
+    font-size: 18px;
+    font-weight: 600;
+    color: white;
+    background-color: rgb(209, 94, 41);
+    border-radius: 5px;
+}
+.approved{
+    padding: 10px 30px;
+    border: 0px;
+    outline: none;
+    font-size: 18px;
+    font-weight: 600;
+    color: white;
+    background-color: rgb(89, 209, 41);
+    border-radius: 5px;
+}
+.hold{
+    padding: 10px 30px;
+    border: 0px;
+    outline: none;
+    font-size: 18px;
+    font-weight: 600;
+    color: white;
+    background-color: rgba(255, 107, 230, 0.877);
+    border-radius: 5px;
+}

@@ -24,11 +24,11 @@ const Settings = styled.div`
   padding: 8px 0;
 `;
 const Wrapper = styled.div`
-  width: 95%;
+  width: 100%;
 `;
 
 const Container = styled.div`
-  width: 100%;
+  /* width: 100%; */
   display: flex;
   align-items: center;
   justify-content: center;
