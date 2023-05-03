@@ -77,7 +77,7 @@ const AllOrders = () => {
         </Head>
         {
             currentPageData?.map((props,index) => (
-              <OrderPage index={ index } key={ index }  delivery_status={ props.delivery_status } order_No={ props.order_No } created={ moment(props.createdAt).format("D MMM YYYY") } payment_method={ props.payment_method } pending_days={ props.pending_days } total={ nf.format(props.total)} />
+              <OrderPage index={ index } key={ index }  delivery_status={ props.delivery_status } order_No={ props.order_No } created={ moment(props.createdAt).format("D MMM YYYY") } payment_method={ props.payment_method } pending_days={ props.pending_days } total={ nf.format(props.subtotal)} firstName={props.firstName} lastName={props.lastName} country={props?.country}/>
             ))
       }
         </Buttom>

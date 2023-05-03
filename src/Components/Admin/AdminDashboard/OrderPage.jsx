@@ -7,7 +7,7 @@ import {
 } from "react-icons/ai";
 import "../../../App.css"
 
-const OrderPage = ({ avatar, index, order_No, price, created, delivery_status, payment_method,tag_No, name,payment_status,quantity,amount,country,address }) => {
+const OrderPage = ({ avatar, index, order_No, price, created, delivery_status, payment_method,tag_No, name,payment_status,quantity,amount,country,address,total,firstName, lastName }) => {
   const [ edit, setEdit ] = useState(false);
   console.log(edit)
   return (
@@ -33,12 +33,12 @@ const OrderPage = ({ avatar, index, order_No, price, created, delivery_status, p
                {name}
               </UserHold>
             </Td>}
-            {name && <Td>
+            {firstName && <Td>
               <UserHold>
                 <span>
-            <Img>DY</Img>
+            <Img>{firstName.charAt(1) + lastName.charAt(1)}</Img>
                 </span>
-               {name}
+               {firstName}
               </UserHold>
             </Td>}
             
@@ -84,6 +84,9 @@ const Img = styled.div`
   border-radius: 50%;
   background-color: #d1d0cb;
   margin-right: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 const Image = styled.img`
   width: 50px;
