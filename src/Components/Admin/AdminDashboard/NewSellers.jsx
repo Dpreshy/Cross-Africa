@@ -1,12 +1,12 @@
 import React,{useState} from 'react'
 import styled  from 'styled-components'
 import { useQuery, useQueryClient } from '@tanstack/react-query'
-import { orders } from '../../Api/OrderApi'
 import moment from 'moment'
 import { BiSearch } from "react-icons/bi";
 import ReactPaginate from 'react-paginate'
 import "../../../App.css"
 import OrderPage from './OrderPage'
+import { getUser } from '../../Api/Api';
 
 const NewSellers = () => {
 
@@ -16,22 +16,22 @@ const NewSellers = () => {
 
   const userID = user?._id
   const {data} = useQuery({
-    queryKey: ["orders"],
-    queryFn: orders
+    queryKey: ["users"],
+    queryFn: getUser
   })
   
+  const seller = data?.filter((el)=> el.isSeller === true)
   const [ currentPage, setCurrentPage ] = useState(0)
   const recordPage = 6
   const lastIndex = currentPage * recordPage
-  const pageCount = Math.ceil(data?.length / recordPage)
-  const currentPageData = data?.slice(lastIndex, lastIndex + recordPage)
+  const pageCount = Math.ceil(seller?.length / recordPage)
+  const currentPageData = seller?.slice(lastIndex, lastIndex + recordPage)
   const changeCPage = ({selected}) => {
     setCurrentPage(selected)
   }
-  console.log(data)
+  // console.log(seller)
 
   const [ query, setQuery ] = useState("")
-  console.log(query)
   const keys = ["order_No", "delivery_status"]
 
 //   const search = (data) => {
@@ -54,7 +54,7 @@ const NewSellers = () => {
         
           <Head>
             <Th>
-              <HoldHead>Order Number </HoldHead>
+              <HoldHead>No. </HoldHead>
             </Th>
             <Th>
               <HoldHead>Country</HoldHead>
@@ -74,7 +74,7 @@ const NewSellers = () => {
         </Head>
         {
             currentPageData?.map((props,index) => (
-              <OrderPage index={ index } key={ index }  delivery_status={ props.delivery_status } order_No={ props.order_No } created={ moment(props.createdAt).format("D MMM YYYY") } payment_method={ props.payment_method } pending_days={ props.pending_days } total={ nf.format(props.total)} />
+              <OrderPage index={ index } id={props._id} isSeller={props.isSeller} address={props?.address} order_No={ props.phoneNum } created={ moment(props.createdAt).format("D MMM YYYY") }firstName={props.firstName} lastName={props.lastName} country={props?.country} status={props?.status}/>
             ))
       }
         </Buttom>

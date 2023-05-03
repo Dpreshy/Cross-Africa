@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { FaRegEdit } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
@@ -6,23 +6,33 @@ import {
   AiFillCaretDown,
 } from "react-icons/ai";
 import "../../../App.css"
-
-const OrderPage = ({ avatar, index, order_No, price, created, delivery_status, payment_method,tag_No, name,payment_status,quantity,amount,country,address,total,firstName, lastName }) => {
+import countryData from "../../data"
+import "../style.css"
+const OrderPage = ({ avatar, index, order_No, price, created, delivery_status, payment_method,tag_No, name,payment_status,quantity,amount,country,address,total,firstName, lastName, category, status, id,isSeller}) => {
   const [ edit, setEdit ] = useState(false);
-  console.log(edit)
+  const [userCoubtry, setCountry] = useState({})
+  const check = ()=>{
+    setCountry(countryData?.find((el)=> el.name === country))
+  }
+  // console.log(isSeller)
+  // console.log(userCoubtry)
+
+  useEffect(()=>{
+    check()
+  },[])
   return (
           <Body key={index} >
             {tag_No && <Td>
               {" "}
         <HoldHead>{ tag_No}</HoldHead>{" "}
             </Td>}
-            {order_No && <Td style={{backgroundColor: "gold"}}>
+            {order_No && <Td>
               {" "}
         <HoldHead>{order_No }</HoldHead>
             </Td>}
             {country && <Td>
               {" "}
-        <HoldHead>{country }</HoldHead>
+        <HoldHead><img src={userCoubtry?.flag } /></HoldHead>
             </Td>}
             
             {avatar && <Td>
@@ -34,12 +44,17 @@ const OrderPage = ({ avatar, index, order_No, price, created, delivery_status, p
               </UserHold>
             </Td>}
             {firstName && <Td>
-              <UserHold>
+              {isSeller ? <UserHold to={`/admin-dashboard/merchant-detail/${id}`}>
                 <span>
-            <Img>{firstName.charAt(1) + lastName.charAt(1)}</Img>
+            <Img>{firstName?.charAt(1).toUpperCase() + lastName?.charAt(1).toUpperCase()}</Img>
                 </span>
-               {firstName}
-              </UserHold>
+               {firstName +" "+ lastName}
+              </UserHold> : <UserHold to={`/admin-dashboard/order-detail/${id}`}>
+                <span>
+            <Img>{firstName?.charAt(1).toUpperCase() + lastName?.charAt(1).toUpperCase()}</Img>
+                </span>
+               {firstName +" "+ lastName}
+              </UserHold>}
             </Td>}
             
             {quantity && <Td>
@@ -57,18 +72,31 @@ const OrderPage = ({ avatar, index, order_No, price, created, delivery_status, p
       { payment_status && <Td>
         <HoldHead>{ payment_status }</HoldHead>
       </Td> }
+      {status && <Td>
+              {" "}
+        <HoldHead><button className={`${status}`}>{ status}</button></HoldHead>{" "}
+            </Td>}
       {address && <Td>
               {" "}
         <HoldHead>{ address}</HoldHead>{" "}
+            </Td>}
+            {total && <Td>
+        <HoldHead>{ total}</HoldHead>{" "}
+      </Td> }
+      {category && <Td>
+              {" "}
+        <HoldHead>{ category}</HoldHead>{" "}
             </Td>}
       {created && <Td>
               {" "}
         <HoldHead>{ created}</HoldHead>{" "}
             </Td>}
+      {price && <Td>
+              {" "}
+        <HoldHead>{ price}</HoldHead>{" "}
+            </Td>}
           
-            {total && <Td>
-        <HoldHead>{ total}</HoldHead>{" "}
-      </Td> }
+            
       
            
           </Body>
@@ -87,12 +115,13 @@ const Img = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  font-weight: 600;
 `;
 const Image = styled.img`
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  background-color: gold;
+  background-color: white;
   margin-right: 10px;
 `;
 const Button = styled.div`
@@ -111,13 +140,18 @@ const HoldHead = styled.div`
   align-items: center;
   justify-content: space-between;
   /* color: #0dbb0d; */
+  img{
+    width: 40px;
+  }
 `;
-const UserHold = styled.div`
+const UserHold = styled(NavLink)`
   display: flex;
   align-items: center;
+  text-decoration: none;
+  color: black;
 
   :hover {
-    color: blue;
+    color: #ff00ea;
   }
   cursor: pointer;
 `;

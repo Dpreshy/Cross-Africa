@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React,{useEffect, useState} from 'react'
 import styled  from 'styled-components'
 import { useQuery, useQueryClient } from '@tanstack/react-query'
 import { orders } from '../../Api/OrderApi'
@@ -7,12 +7,13 @@ import { BiSearch } from "react-icons/bi";
 import ReactPaginate from 'react-paginate'
 import "../../../App.css"
 import OrderPage from './OrderPage'
+import countryData from "../../data"
 
 const AllOrders = () => {
 
   const user = JSON.parse(localStorage.getItem("user"));
   const queryCLient = useQueryClient()
-  
+
 
   const userID = user?._id
   const {data} = useQuery({
@@ -21,17 +22,17 @@ const AllOrders = () => {
   })
   
   const [ currentPage, setCurrentPage ] = useState(0)
-  const recordPage = 6
+  const recordPage = 8
   const lastIndex = currentPage * recordPage
   const pageCount = Math.ceil(data?.length / recordPage)
   const currentPageData = data?.slice(lastIndex, lastIndex + recordPage)
   const changeCPage = ({selected}) => {
     setCurrentPage(selected)
   }
-  console.log(data)
+  // console.log(data)
 
   const [ query, setQuery ] = useState("")
-  console.log(query)
+  // console.log(query)
   const keys = ["order_No", "delivery_status"]
 
 //   const search = (data) => {
@@ -40,6 +41,7 @@ const AllOrders = () => {
 //       )
 //   }
 //   const searchData = search(currentPageData)
+// console.log()
 
   var nf = Intl.NumberFormat()
   return (
@@ -77,7 +79,7 @@ const AllOrders = () => {
         </Head>
         {
             currentPageData?.map((props,index) => (
-              <OrderPage index={ index } key={ index }  delivery_status={ props.delivery_status } order_No={ props.order_No } created={ moment(props.createdAt).format("D MMM YYYY") } payment_method={ props.payment_method } pending_days={ props.pending_days } total={ nf.format(props.subtotal)} firstName={props.firstName} lastName={props.lastName} country={props?.country}/>
+              <OrderPage index={ index } id={props._id} delivery_status={ props.delivery_status } order_No={ props.order_No } created={ moment(props.createdAt).format("D MMM YYYY") } payment_method={ props.payment_method } pending_days={ props.pending_days } total={ nf.format(props.subtotal)} firstName={props.firstName} lastName={props.lastName} country={props?.country}/>
             ))
       }
         </Buttom>

@@ -146,7 +146,7 @@ const Image = styled.div`
   }
 `;
 const Wrapper = styled.div`
-  width: 700px;
+  width: 95%;
   display: flex;
   align-items: flex-start;
   justify-content: center;
@@ -159,6 +159,7 @@ const Container = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
+  justify-content: center;
   /* justify-content: flex-start; */
   /* padding: 50px 23px; */
   /* background-color: gold; */

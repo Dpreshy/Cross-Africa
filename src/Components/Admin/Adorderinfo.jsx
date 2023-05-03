@@ -1,9 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { BiPhone } from "react-icons/bi";
+import { useParams } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import { getOneOrder } from "../Api/OrderApi";
+import { useEffect } from "react";
+import countryData from "../data"
 
 const Adorderinfo = () => {
+  const {id} = useParams()
+    
+    const {data} = useQuery({
+      queryKey: ["order", id],
+      queryFn: ()=>getOneOrder(id)
+    })
+
+    const [userCoubtry, setCountry] = useState({})
+    const check = ()=>{
+      setCountry(countryData?.find((el)=> el.name === data.country))
+    }
+    console.log(userCoubtry)
+  
+    useEffect(()=>{
+      check()
+    },[])
+    
   return (
+    
     <Container>
       <Wrapper>
         <Profile>
@@ -14,9 +37,9 @@ const Adorderinfo = () => {
             {" "}
             <Image>
               <img src="/Frame 113.png" />
-              <span>Manel Dix</span>
-              <div>Manel@test.com</div>
-              <nav>+2349012075964</nav>
+              <span>{data.firstName + " " + data.lastName}</span>
+              <div>{data.email}</div>
+              <nav>{data.order_No}</nav>
             </Image>
           </Box>
           <Box>
@@ -45,16 +68,16 @@ const Adorderinfo = () => {
             <Info>
               <Uptop>
                 <Sales>Address</Sales>
-                <Price>No 4 Heaven's gate Abraham's Estate</Price>
+                <Price>{data.address}</Price>
               </Uptop>
               <Uptop>
                 <Sales>Country</Sales>
                 <Hold>
-                  <span>
+                  {/* <span>
                     {" "}
                     <BiPhone fontSize="18px" />
-                  </span>
-                  <Write>Nigeria</Write>
+                  </span> */}
+                  <Write><img src={userCoubtry.flag}/></Write>
                 </Hold>
               </Uptop>
             </Info>
@@ -85,12 +108,14 @@ const Uptop = styled.div`
   margin: 10px 0;
 `;
 const Box = styled.div`
-  width: 220px;
+  width: 100%;
+  text-align: center;
   height: 260px;
   border-right: ${({ bd }) => (bd ? "0px" : "1px solid gray")};
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
+  margin: 10px;
   /* background-color: red; */
 `;
 const Profile = styled.div`
@@ -114,6 +139,10 @@ const Tug = styled.div`
 const Write = styled.div`
   cursor: pointer;
   margin-bottom: 8px;
+
+  img{
+    width: 40px;
+  }
 `;
 const Hold = styled.div`
   /* width: 200px; */
@@ -128,6 +157,13 @@ const Hold = styled.div`
   }
 `;
 const Info = styled.div`
+width: 100%;
+/* background-color: gold; */
+display: flex;
+align-items: center;
+justify-content: center;
+flex-direction: column;
+text-align: center;
   font-weight: 500;
   height: 200px;
 
@@ -174,9 +210,9 @@ const Image = styled.div`
   }
 `;
 const Wrapper = styled.div`
-  width: 700px;
+  width: 95%;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
   flex-direction: column;
   border-radius: 2px;
@@ -184,7 +220,8 @@ const Wrapper = styled.div`
 `;
 const Container = styled.div`
   width: 100%;
+  /* background-color: gold; */
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
 `;

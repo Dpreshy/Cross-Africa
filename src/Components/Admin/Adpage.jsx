@@ -43,7 +43,7 @@ const Side = styled.div`
   /* position: fixed; */
 `;
 const Main = styled.div`
-  width: calc(100vw - 250px);
+  width: calc(100vw - 240px);
   display: flex;
  
   align-items: center;

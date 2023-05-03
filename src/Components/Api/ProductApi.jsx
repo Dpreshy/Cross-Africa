@@ -1,6 +1,6 @@
 import axios from "axios";
-const baseURL = "http://localhost:5000";
-// const baseURL = "https://crossbackend.onrender.com";
+// const baseURL = "http://localhost:5000";
+const baseURL = "https://crossbackend.onrender.com";
 
 export const sellerProducts = async (id) => {
     // console.log(id);
@@ -60,7 +60,7 @@ export const addTag = async ({id,tag_No,quantity,startDate,endDate,active}) => {
 
 export const getAllProduct = async () => {
     const res = await axios.get(`${baseURL}/api/product`).then((res) => {
-        
+        console.log(res.data.data)
         return res.data.data
     })
 
