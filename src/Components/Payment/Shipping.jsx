@@ -2,8 +2,19 @@ import React from "react";
 import styled from "styled-components";
 import Item from "./Item";
 import { AiOutlineCheck } from "react-icons/ai";
+import { getOneOrder } from "../Api/OrderApi";
+import { useQuery } from "@tanstack/react-query";
 
 const Shipping = () => {
+  
+  const orderData = JSON.parse(localStorage.getItem("order"))
+  const id = orderData._id
+  const {data} = useQuery({
+    queryKey: ["order", id],
+    queryFn: ()=>getOneOrder(id)
+  })
+
+  console.log(data)
   return (
     <div>
       <Container>
