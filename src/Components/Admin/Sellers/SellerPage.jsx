@@ -1,65 +1,48 @@
 import React,{useState} from 'react'
-import Uniheader from '../SigmUpAndSignIn/Uniheader'
 import styled  from 'styled-components'
 import { useQuery, useQueryClient } from '@tanstack/react-query'
-import { orders } from '../Api/OrderApi'
 import moment from 'moment'
-import { BiSearch } from "react-icons/bi";
 import ReactPaginate from 'react-paginate'
-import "../../App.css"
-import OrderPage from './OrderPage'
-// import Search from '../Search'
+import "../../../App.css"
+import { BiSearch } from "react-icons/bi";
+import Productpage from '../Productpage';
+import { sellerProducts } from '../../Api/ProductApi';
+import { useParams } from 'react-router-dom';
 
-const Returned = () => {
+const Products = () => {
 
-  const user = JSON.parse(localStorage.getItem("user"));
-  const queryCLient = useQueryClient()
-  
-
-  const userID = user._id
+  const {id} = useParams()
   const {data} = useQuery({
-    queryKey: ["orders"],
-    queryFn: orders
+    queryKey: ["posts",id],
+    queryFn: () => sellerProducts(id)
   })
-    const filteredData = data?.filter((el) => {
-    const filteredProducts = el?.products?.filter((e) => e.sellerID === userID)
-    // console.log(filteredProducts)
-    return filteredProducts.length > 0;
-  })
-
-const myData = filteredData?.filter((el)=> el.delivery_status === "returned")
   
   const [ currentPage, setCurrentPage ] = useState(0)
   const recordPage = 6
   const lastIndex = currentPage * recordPage
-  const pageCount = Math.ceil(myData?.length / recordPage)
-  const currentPageData = myData?.slice(lastIndex, lastIndex + recordPage)
+  const pageCount = Math.ceil(data?.length / recordPage)
+  const currentPageData = data?.slice(lastIndex, lastIndex + recordPage)
   const changeCPage = ({selected}) => {
     setCurrentPage(selected)
   }
-  // console.log(data)
+  console.log(data)
 
   const [ query, setQuery ] = useState("")
   // console.log(query)
-  const keys = ["order_No", "delivery_status"]
+  const keys = ["name", "brand","tag"]
 
-  const search = (e) => {
-    const result = e?.filter((item) =>
-   keys.some((key) => {
-      const value = item[key];
-      return typeof value === "string" && value.toLowerCase().includes(query);
-    })
-  );
-  return query ? (result?.length ? result : null) : e
+  const search = (data) => {
+      return data?.filter((item) =>
+          keys.some((key)=> item[key]?.toLowerCase().includes(query))
+      )
   }
   const searchData = search(currentPageData)
-
   var nf = Intl.NumberFormat()
   return (
-      <Container>
-      <Uniheader />
+    <Container>
       <Header>
-            <Text>Returned</Text>
+            <Text>Items</Text>
+            <Text>Items</Text>
             {/* <SerachHold>
           <input
               placeholder="Search by name or brand"
@@ -72,31 +55,36 @@ const myData = filteredData?.filter((el)=> el.delivery_status === "returned")
         </SerachHold> */}
           </Header>
       <Wrapper>
+      
       <Buttom>
           
           <Head>
             <Th>
-              <HoldHead>Order Number </HoldHead>
+              <HoldHead>Product </HoldHead>
             </Th>
             <Th>
-              <HoldHead>Pending Days</HoldHead>
+              <HoldHead>Tag </HoldHead>
             </Th>
             <Th>
-              <HoldHead>Order Date</HoldHead>
+              <HoldHead>Created</HoldHead>
             </Th>
             <Th>
               <HoldHead>Price</HoldHead>
             </Th>
             <Th>
-              <HoldHead>Payment Method</HoldHead>
+              <HoldHead>Aval / Qty </HoldHead>
             </Th>
             <Th>
-              <HoldHead>Status </HoldHead>
+              <HoldHead>Active </HoldHead>
+            </Th>
+
+            <Th>
+              <HoldHead>Action </HoldHead>{" "}
             </Th>
         </Head>
         {
             searchData?.map((props,index) => (
-              <OrderPage index={ index } key={ index }  delivery_status={ props.delivery_status } order_No={ props.order_No } created={ moment(props.createdAt).format("D MMM YYYY") } payment_method={ props.payment_method } pending_days={ props.pending_days } price={ nf.format(props.price)} />
+              <Productpage index={ index } key={ index } avatar={ props?.avatar[ 0 ].url } name={ props.name } tag={ props.tag_No } created={ moment(props.createdAt).format("D MMM YYYY") } quantity={ props.quantity } active={ props.active } price={ nf.format(props.price)} />
             ))
       }
         </Buttom>
@@ -118,7 +106,7 @@ const myData = filteredData?.filter((el)=> el.delivery_status === "returned")
   )
 }
 
-export default Returned
+export default Products
 
 const SerachHold = styled.div`
   width: 400px;
@@ -157,7 +145,8 @@ const Wrapper = styled.div`
   scroll-behavior: smooth;
 `;
 const Container = styled.div`
-    width: 95%;
+    margin-top: 70px;
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -171,7 +160,7 @@ const Header = styled.div`
   padding: 10px 0;
 `;
 const Text = styled.div`
-  border-bottom: 2px solid blue;
+  /* border-bottom: 2px solid blue; */
 `;
 // const Wrapper = styled.div``
 const HoldHead = styled.div`
@@ -192,14 +181,15 @@ const Th = styled.th`
 `;
 const Head = styled.tr`
   border-bottom: 1px solid lightgray;
-  border-top: 5.5px solid #d975c0;
+  border-top: 1px solid #9d9d9d;
   border-right:1px solid lightgray;
+  height: 70px;
 `;
 const Buttom = styled.table`
   width: 78rem;
   /* padding: 0px 20px; */
-  /* text-align: center; */
+  text-align: center;
   border-collapse: collapse;
   border-spacing: 0;
-  overflow-x: auto;
+  /* overflow-x: scroll; */
 `;

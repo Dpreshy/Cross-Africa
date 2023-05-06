@@ -1,107 +1,101 @@
 import React,{useState} from 'react'
-import Uniheader from '../SigmUpAndSignIn/Uniheader'
 import styled  from 'styled-components'
 import { useQuery, useQueryClient } from '@tanstack/react-query'
-import { orders } from '../Api/OrderApi'
 import moment from 'moment'
 import { BiSearch } from "react-icons/bi";
 import ReactPaginate from 'react-paginate'
-import "../../App.css"
-import OrderPage from './OrderPage'
-// import Search from '../Search'
+import "./style.css"
+import Productpage from './Productpage';
 
-const Returned = () => {
+import OrderPage from './AdminDashboard/OrderPage'
+import { getUser } from '../Api/Api';
+import { orders } from '../Api/OrderApi';
 
-  const user = JSON.parse(localStorage.getItem("user"));
-  const queryCLient = useQueryClient()
-  
-
-  const userID = user._id
+const NewSellers = () => {
   const {data} = useQuery({
-    queryKey: ["orders"],
+    queryKey: ["order"],
     queryFn: orders
   })
-    const filteredData = data?.filter((el) => {
-    const filteredProducts = el?.products?.filter((e) => e.sellerID === userID)
-    // console.log(filteredProducts)
-    return filteredProducts.length > 0;
-  })
-
-const myData = filteredData?.filter((el)=> el.delivery_status === "returned")
-  
+    
   const [ currentPage, setCurrentPage ] = useState(0)
-  const recordPage = 6
+  const recordPage = 8
   const lastIndex = currentPage * recordPage
-  const pageCount = Math.ceil(myData?.length / recordPage)
-  const currentPageData = myData?.slice(lastIndex, lastIndex + recordPage)
+  const pageCount = Math.ceil(data?.length / recordPage)
+  const currentPageData = data?.slice(lastIndex, lastIndex + recordPage)
   const changeCPage = ({selected}) => {
     setCurrentPage(selected)
   }
-  // console.log(data)
+  // console.log(seller)
 
   const [ query, setQuery ] = useState("")
-  // console.log(query)
-  const keys = ["order_No", "delivery_status"]
-
+    const keys = [ "firstName","lastName" ]
+    
   const search = (e) => {
     const result = e?.filter((item) =>
-   keys.some((key) => {
-      const value = item[key];
-      return typeof value === "string" && value.toLowerCase().includes(query);
-    })
-  );
-  return query ? (result?.length ? result : null) : e
-  }
+    keys.some((key) => {
+        const value = item[key];
+        return typeof value === "string" && value.toLowerCase().includes(query);
+        })
+    );
+    return query ? (result?.length ? result : null) : e
+    }
+    
   const searchData = search(currentPageData)
+  console.log(searchData)
 
-  var nf = Intl.NumberFormat()
+    var nf = Intl.NumberFormat()
+    
   return (
+      <Align>
+          <Title>Products</Title>
       <Container>
-      <Uniheader />
-      <Header>
-            <Text>Returned</Text>
-            {/* <SerachHold>
+        <Header>
+                  <SerachHold>
+                      <button>
+            <BiSearch />
+            </button>
           <input
               placeholder="Search by name or brand"
               value={ query }
               onChange={e=> setQuery(e.target.value)}
           />
-            <button onClick={search}>
-            <BiSearch />
-            </button>
-        </SerachHold> */}
+        </SerachHold>
           </Header>
       <Wrapper>
+      
       <Buttom>
-          
+        
           <Head>
             <Th>
               <HoldHead>Order Number </HoldHead>
             </Th>
             <Th>
-              <HoldHead>Pending Days</HoldHead>
+              <HoldHead>Country</HoldHead>
             </Th>
             <Th>
-              <HoldHead>Order Date</HoldHead>
+              <HoldHead>Customer</HoldHead>
             </Th>
             <Th>
-              <HoldHead>Price</HoldHead>
+              <HoldHead>Status</HoldHead>
             </Th>
             <Th>
               <HoldHead>Payment Method</HoldHead>
             </Th>
             <Th>
-              <HoldHead>Status </HoldHead>
+              <HoldHead>Total </HoldHead>
+            </Th>
+            <Th>
+              <HoldHead>Date </HoldHead>
             </Th>
         </Head>
         {
             searchData?.map((props,index) => (
-              <OrderPage index={ index } key={ index }  delivery_status={ props.delivery_status } order_No={ props.order_No } created={ moment(props.createdAt).format("D MMM YYYY") } payment_method={ props.payment_method } pending_days={ props.pending_days } price={ nf.format(props.price)} />
+              <OrderPage index={ index } id={props._id} delivery_status={ props.delivery_status } order_No={ props.order_No } created={ moment(props.createdAt).format("D MMM YYYY") } payment_method={ props.payment_method } pending_days={ props.pending_days } total={ nf.format(props.subtotal)} firstName={props.firstName} lastName={props.lastName} country={props?.country}/>
             ))
       }
         </Buttom>
-      </Wrapper>
-      <ReactPaginate
+              </Wrapper>
+              <ReactPaginate
         breakLabel="..."
         previousLabel="Previous"
         nextLabel="Next"
@@ -115,16 +109,26 @@ const myData = filteredData?.filter((el)=> el.delivery_status === "returned")
         renderOnZeroPageCount={ null }
       />
     </Container>
+      </Align>
   )
 }
 
-export default Returned
+export default NewSellers
 
+const Align = styled.div`
+    width: 90%;
+`
+const Title = styled.div`
+    margin-top: 80px;
+    margin-bottom: 50px;
+    font-weight: 700;
+    font-size: 20px;
+`
 const SerachHold = styled.div`
   width: 400px;
   height: 40px;
-  border: 2px solid #d975c0;
-  border-radius: 10px;
+  border: 1px solid #000000;
+  border-radius: 5px;
   display: flex;
   align-items: center;
   /* justify-content: center; */
@@ -134,16 +138,18 @@ const SerachHold = styled.div`
     outline: none;
     border: 0;
     padding-left: 10px;
+    background-color: transparent;
   }
   button {
     width: 70px;
     height: 40px;
-    background-color: #d975c0;
+    background-color: transparent;
     border: 0px;
     outline: none;
 
     border-top-right-radius: 7px;
     border-bottom-right-radius: 7px;
+    cursor: pointer;
   }
 
   @media (max-width: 660px) {
@@ -151,27 +157,29 @@ const SerachHold = styled.div`
   }
 `
 const Wrapper = styled.div`
-  width: 90%;
+  width: 100%;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
 `;
 const Container = styled.div`
-    width: 95%;
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    margin: 20px 0px;
+    background-color: #f6eded;
 `
 const Header = styled.div`
-  width: 90%;
+width: 90%;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 10px 0;
 `;
 const Text = styled.div`
-  border-bottom: 2px solid blue;
+  /* border-bottom: 2px solid blue; */
 `;
 // const Wrapper = styled.div``
 const HoldHead = styled.div`
@@ -182,24 +190,25 @@ const HoldHead = styled.div`
 `;
 const Th = styled.th`
   padding: 10px 15px;
-  background-color: #f8f9fa;
+  /* background-color: #f8f9fa; */
   color: #1b2559;
   font-size: 18px;
   font-weight: 600;
-  /* text-align: center; */
   border-left: 1.5px solid #d0d1d2;
-  // border: 1px solid black;
+  border-bottom: 1.5px solid #d0d1d2;
+
 `;
 const Head = styled.tr`
-  border-bottom: 1px solid lightgray;
-  border-top: 5.5px solid #d975c0;
-  border-right:1px solid lightgray;
+
+  height: 70px;
 `;
 const Buttom = styled.table`
   width: 78rem;
   /* padding: 0px 20px; */
   /* text-align: center; */
-  border-collapse: collapse;
+  /* border-collapse: collapse; */
   border-spacing: 0;
-  overflow-x: auto;
+  border: 1.5px solid #d0d1d2;
+
+  /* overflow-x: scroll; */
 `;

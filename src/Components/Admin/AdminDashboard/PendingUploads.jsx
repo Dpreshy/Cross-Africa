@@ -5,6 +5,7 @@ import { getAllProduct } from '../../Api/ProductApi'
 import moment from 'moment'
 import "../../../App.css"
 import OrderPage from './OrderPage'
+import { NavLink } from 'react-router-dom';
 
 const AllOrders = () => {
 
@@ -43,7 +44,7 @@ const AllOrders = () => {
       <Container>
         <Header>
             <Text>Pending Items Upload</Text>
-            <Text>See All</Text>
+            <NavLink to="/admin-dashboard/products" style={{textDecoration: "none", color: "black"}}><Text>See All</Text></NavLink>
           </Header>
       <Wrapper>
       

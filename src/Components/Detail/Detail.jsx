@@ -14,20 +14,20 @@ const Detail = () => {
   const {id} = useParams()
 
   const dispatch = useDispatch();
-  const [cart, setCart] = useState([])
+  // const [cart, setCart] = useState([])
   const { data } = useQuery({
     queryKey: [ "products", id ],
     queryFn: ()=> getSingleProduct(id),
   })
 
-  console.log(data)
+  // console.log(data)
   var nf = Intl.NumberFormat()
 
   return (
     <Container>
       <Wrapper>
         <Detailup name={ data?.name } price={ nf.format(data?.price) } />
-        <Detailmiddle id={id} avatar={ data?.avatar } data={ data } />
+        <Detailmiddle id={id} qty={data?.quantity} avatar={ data?.avatar } data={ data } />
         <Detaildown description={ data?.description} />
         <DetailProduct />
       </Wrapper>

@@ -2,15 +2,24 @@ import React from "react";
 import styled from "styled-components";
 import Adorderinfo from "./Adorderinfo";
 import Adprofileinfo from "./Adprofileinfo";
+import { useParams } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import { getOneOrder } from "../Api/OrderApi";
 
 const Adorder = () => {
+  const {id} = useParams()
+    
+  const {data} = useQuery({
+    queryKey: ["order", id],
+    queryFn: ()=>getOneOrder(id)
+  })
   return (
     <Container>
       <Wrapper>
         <Settings>
-          Order <span>C00000</span>
+          Order <span>{ data?.order_No}</span>
         </Settings>
-        <Adorderinfo />
+        <Adorderinfo name={ data?.firstName + " " + data?.lastName } email={ data?.email } order_No={ data?.order_No } address={ data?.address } country={ data?.country} />
       </Wrapper>
     </Container>
   );

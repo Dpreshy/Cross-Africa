@@ -7,7 +7,7 @@ import { BiSearch } from "react-icons/bi";
 import ReactPaginate from 'react-paginate'
 import "../../../App.css"
 import OrderPage from './OrderPage'
-import countryData from "../../data"
+import { NavLink } from 'react-router-dom';
 
 const AllOrders = () => {
 
@@ -48,7 +48,7 @@ const AllOrders = () => {
       <Container>
         <Header>
             <Text>Recent Orders</Text>
-            <Text>See All</Text>
+            <NavLink to="/admin-dashboard/orders" style={{textDecoration: "none", color: "black"}}><Text>See All</Text></NavLink>
           </Header>
       <Wrapper>
       

@@ -56,10 +56,10 @@ const Header = () => {
                   setCategories(false);
                 }}
               >
-                <NavLink to="/electronics" style={{textDecoration: "none"}}><Navs>Electronics</Navs></NavLink>
-                <NavLink to="/phone" style={{textDecoration: "none"}}><Navs>Mobile Phones</Navs></NavLink>
-                <NavLink to="/clothing" style={{textDecoration: "none"}}><Navs>Clothing & Fashion</Navs></NavLink>
-                <NavLink to="/food" style={{textDecoration: "none"}}><Navs>Food & Groceries</Navs></NavLink>
+                <NavLink to="/electronics" style={ { textDecoration: "none", width: "100%"}}><Navs>Electronics</Navs></NavLink>
+                <NavLink to="/phone" style={{textDecoration: "none",width: "100%"}}><Navs>Mobile Phones</Navs></NavLink>
+                <NavLink to="/clothing" style={{textDecoration: "none",width: "100%"}}><Navs>Clothing & Fashion</Navs></NavLink>
+                <NavLink to="/food" style={{textDecoration: "none",width: "100%"}}><Navs>Food & Groceries</Navs></NavLink>
               </Menu>
             ) : null}
             <SearchHold>
@@ -95,8 +95,9 @@ const Header = () => {
                    <Navs>Profile</Navs>
                   <Navs>Log Out</Navs>
                   </>) : (<>
-                    <Navs>Create Account</Navs>
-                <Navs>Create Seller</Navs>
+                    
+                <NavLink to="/user-signup" style={{textDecoration: "none",width: "100%"}}><Navs>Create Account</Navs></NavLink>
+                <NavLink to="/seller-page" style={{textDecoration: "none",width: "100%"}}><Navs>Create Seller</Navs></NavLink>
                     </>)
                }
               </AcMenu>
@@ -107,7 +108,8 @@ const Header = () => {
               <NavLink to="/cart" style={{ textDecoration: "none" }}>
                 <span>
                   <BsCart color="black" />
-                  <Round>{ cartData.length > 0 ? cartData.length : null }</Round>
+                  { cartData.length > 0 ? <Round>{ cartData.length}</Round> : null }
+                  
                 </span>
               </NavLink>
             </Nav>
@@ -123,7 +125,9 @@ const Header = () => {
               }
               
             </Bar>
+            <div onClick={returnAgain}>
             <Slider myRef={ myRef} />
+            </div>
           </Hold>
         </Wrapper>
       </Container>
