@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import {NavLink} from "react-router-dom"
 
 const Category = () => {
   return (
@@ -16,7 +17,7 @@ const Category = () => {
                     Buying made easy, get TV, home theatre, system and
                     electronics at the comfort of your home.
                   </Content>
-                  <Button>Buy Now</Button>
+                  <NavLink to="/allitems" style={{textDecoration: "none", color: "white"}}><Button>Buy Now</Button></NavLink>
                 </TextHold>
               </Imaged>
             </Card>
@@ -30,7 +31,7 @@ const Category = () => {
                     Buying made easy, get used phones, laptops, chargers etc..
                     at the comfort of your home
                   </Content>
-                  <Button>Buy Now</Button>
+                  <NavLink to="/allitems" style={{textDecoration: "none", color: "white"}}><Button>Buy Now</Button></NavLink>
                 </TextHold>
               </Images>
             </Card>
@@ -42,7 +43,7 @@ const Category = () => {
                     Buying made easy, get Trendy and classic wears at the
                     comfort of your home.
                   </Content>
-                  <Button>Buy Now</Button>
+                  <NavLink to="/allitems" style={{textDecoration: "none", color: "white"}}><Button>Buy Now</Button></NavLink>
                 </TextHold>
               </Imagee>
             </Card>
@@ -54,7 +55,7 @@ const Category = () => {
                     Buying made easy, food and groceries are all available, get
                     them all at the comfort of your home.
                   </Content>
-                  <Button>Buy Now</Button>
+                  <NavLink to="/allitems" style={{textDecoration: "none", color: "white"}}><Button>Buy Now</Button></NavLink>
                 </TextHold>
               </Image>
             </Card>

@@ -6,15 +6,19 @@ import PageRouting from "./Components/PageRouting";
 import Private from "./Components/Private";
 import SellerRouting from "./Components/SellerRouting";
 import AdminRoutePage from "./Components/AdninRoutePage"
-
+import SignInAdmin from "./Components/Admin/SignInAdmin"
+import SignUpAdmin from "./Components/Admin/SignUpAdmin"
+import AdminPrivate from "./Components/AdminPrivate"
 const App = () => {
   return (
     <div>
       <Routes>
         <Route path="/*" element={ <PageRouting />} />
-        <Route path="/admin-dashboard/*" element={ <AdminRoutePage />} />
-        <Route path="/seller-page/*" element={ <LandingPage />} />
+        <Route path="/admin-dashboard/*" element={ <AdminPrivate><AdminRoutePage /></AdminPrivate>} />
+        <Route path="/seller-page" element={ <LandingPage />} />
         <Route path="/seller-dashboard/*" element={ <Private><SellerRouting /></Private>} />
+        <Route path="/login-admin" element={ <SignInAdmin /> } />
+        <Route path="/signup-admin" element={ <SignUpAdmin /> } />
       </Routes>
       
      

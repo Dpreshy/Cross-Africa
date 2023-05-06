@@ -7,6 +7,7 @@ import ReactPaginate from 'react-paginate'
 import "../../../App.css"
 import OrderPage from './OrderPage'
 import { getUser } from '../../Api/Api';
+import { NavLink } from 'react-router-dom';
 
 const NewSellers = () => {
 
@@ -46,7 +47,7 @@ const NewSellers = () => {
       <Container>
         <Header>
             <Text>New Merchant Request</Text>
-            <Text>See All</Text>
+            <NavLink to="/admin-dashboard/merchants" style={{textDecoration: "none", color: "black"}}><Text>See All</Text></NavLink>
           </Header>
       <Wrapper>
       

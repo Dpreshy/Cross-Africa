@@ -29,30 +29,36 @@ const Sidenav = () => {
               <MdDashboard color="#0c0c0c" cursor="pointer" />
               <Write>Dashboard</Write>
             </Hold>
-            <Hold to="/">
+            <Hold to="/admin-dashboard/product-categories">
               <MdInventory color="#100f0f" cursor="pointer" />
               <Write> Product categories</Write>
             </Hold>
-            <Hold to="/dashboard">
+            <Hold to="/admin-dashboard/merchant">
+              <MdGroup color="#0b0b0b" fontSize="18px" cursor="pointer" />
+              <Write>Merchants</Write>
+            </Hold>
+            <Hold to="/admin-dashboard/customers">
               <MdGroup color="#0b0b0b" fontSize="18px" cursor="pointer" />
               <Write>Customers</Write>
             </Hold>
-            <Hold to="/dashboard">
+            <Hold to="/admin-dashboard/products">
               <FaCube color="#0c0c0c" fontSize="15px" cursor="pointer" />
               <Write>Product</Write>
             </Hold>
-            <Hold to="/dashboard">
+            <Hold to="/admin-dashboard/orders">
               <FaCubes color="#151414" fontSize="18px" cursor="pointer" />
               <Write>Order</Write>
             </Hold>
 
-            <Hold to="/dashboard">
+            <Hold to="/admin-dashboard/settings">
               <MdSettings color="#0a0a0a" fontSize="18px" cursor="pointer" />
               <Write>Settings</Write>
             </Hold>
             <Hold to="/dashboard">
               <TbTransferOut color="#100f0f" fontSize="16px" cursor="pointer" />
-              <Write>Log out</Write>
+              <Write onClick={ () => {
+                localStorage.removeItem("user")
+              }}>Log out</Write>
             </Hold>
           </Wrap>
         </Side>

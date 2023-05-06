@@ -1,25 +1,21 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { BiPhone } from "react-icons/bi";
-import { useParams } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
-import { getOneOrder } from "../Api/OrderApi";
+
 import { useEffect } from "react";
 import countryData from "../data"
 
-const Adorderinfo = () => {
-  const {id} = useParams()
-    
-    const {data} = useQuery({
-      queryKey: ["order", id],
-      queryFn: ()=>getOneOrder(id)
-    })
+const Adorderinfo = ({email, name, order_No, address,country, phoneNum,shippingFrom,address2}) => {
 
     const [userCoubtry, setCountry] = useState({})
+    const [ship, setShip] = useState({})
     const check = ()=>{
-      setCountry(countryData?.find((el)=> el.name === data.country))
+      setCountry(countryData?.find((el)=> el.name === country))
     }
-    console.log(userCoubtry)
+    const check2 = ()=>{
+      setShip(countryData?.find((el)=> el.name === shippingFrom))
+    }
+    // console.log(userCoubtry)
   
     useEffect(()=>{
       check()
@@ -37,39 +33,50 @@ const Adorderinfo = () => {
             {" "}
             <Image>
               <img src="/Frame 113.png" />
-              <span>{data.firstName + " " + data.lastName}</span>
-              <div>{data.email}</div>
-              <nav>{data.order_No}</nav>
+              <span>{name}</span>
+              <div>{email}</div>
+              {order_No && <nav>{order_No}</nav>}
+             {phoneNum &&  <nav>{phoneNum}</nav>}
             </Image>
           </Box>
           <Box>
             <Info>
               <Uptop>
-                <Sales>Last Order</Sales>
+              {order_No && <Sales>Last Order</Sales>}
+                {shippingFrom && <Sales>Address</Sales>}
                 <Price>
-                  3 days ago - <span>C000000</span>
+                  {address}
                 </Price>
               </Uptop>
               <Uptop>
                 <Sales>Total Value order</Sales>
                 <Price>₦ 300,000</Price>
               </Uptop>
-              <Uptop>
+             { shippingFrom && <Uptop>
+                <Sales>Country</Sales>
+                <Price>{ship?.flag }</Price>
+              </Uptop>}
+              {order_No && <Uptop>
                 <Sales>All order info</Sales>
-              </Uptop>
-
+              </Uptop>}
+              {order_No && 
               <Uptop>
                 <Sales>Registered</Sales>
                 <Price>2 months ago</Price>
-              </Uptop>
+              </Uptop>}
+
             </Info>
           </Box>
           <Box bd>
             <Info>
-              <Uptop>
+           { address && <Uptop>
                 <Sales>Address</Sales>
-                <Price>{data.address}</Price>
-              </Uptop>
+                <Price>{address}</Price>
+              </Uptop>}
+              {address2 && <Uptop>
+                <Sales>Address</Sales>
+                <Price>{address2}</Price>
+              </Uptop>}
               <Uptop>
                 <Sales>Country</Sales>
                 <Hold>
@@ -77,7 +84,7 @@ const Adorderinfo = () => {
                     {" "}
                     <BiPhone fontSize="18px" />
                   </span> */}
-                  <Write><img src={userCoubtry.flag}/></Write>
+                  <Write><img src={userCoubtry?.flag}/></Write>
                 </Hold>
               </Uptop>
             </Info>

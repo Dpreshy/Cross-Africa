@@ -33,7 +33,7 @@ const Allitems = () => {
         <Cardhold>
         {
         filteredData?.map((props, index) => (
-          <ItemsCard id={ props._id } name={ props.name } price={ nf.format(props?.price) } img={ props?.avatar[0].url} />
+          <ItemsCard id={ props._id } index={index} name={ props.name } price={ nf.format(props?.price) } img={ props?.avatar[0].url} />
         ))
         }
       </Cardhold>
@@ -47,7 +47,7 @@ const Allitems = () => {
           
         {
         filteredElectronics?.map((props, index) => (
-          <ItemsCard id={ props._id } name={ props.name } price={ nf.format(props?.price) } img={ props?.avatar[0].url} />
+          <ItemsCard id={ props._id } index={index} name={ props.name } price={ nf.format(props?.price) } img={ props?.avatar[0].url} />
         ))
         }
       </Cardhold>
@@ -61,7 +61,7 @@ const Allitems = () => {
           
           {
           filteredCloths?.map((props, index) => (
-            <ItemsCard id={ props._id } name={ props.name } price={ nf.format(props?.price) } img={ props?.avatar[0].url} />
+            <ItemsCard id={ props._id } index={index} name={ props.name } price={ nf.format(props?.price) } img={ props?.avatar[0].url} />
           ))
           }
         </Cardhold>
@@ -74,7 +74,7 @@ const Allitems = () => {
         <Cardhold>
           {
           filteredFood?.map((props, index) => (
-            <ItemsCard id={ props._id } name={ props.name } price={ nf.format(props?.price) } img={ props?.avatar[0].url} />
+            <ItemsCard id={ props._id } index={index} name={ props.name } price={ nf.format(props?.price) } img={ props?.avatar[0].url} />
           ))
           }
         </Cardhold>
@@ -87,18 +87,18 @@ const Allitems = () => {
 };
 
 export default Allitems;
-const Button = styled.div`
+const Button = styled(NavLink)`
   width: 97%;
   padding-bottom: 10px;
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  text-decoration: none;
   button {
-    width: 9%;
     background-color: #d975c0;
     color: white;
     font-size: 12px;
-    padding: 8px 0;
+    padding: 8px 15px;
     font-weight: bold;
     border: 0;
     border-radius: 5px;

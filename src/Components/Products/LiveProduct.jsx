@@ -38,10 +38,14 @@ const LiveProduct = () => {
   console.log(query)
   const keys = ["name", "brand","tag"]
 
-  const search = (data) => {
-      return data?.filter((item) =>
-          keys.some((key)=> item[key]?.toLowerCase().includes(query))
-      )
+  const search = (e) => {
+    const result = e?.filter((item) =>
+   keys.some((key) => {
+      const value = item[key];
+      return typeof value === "string" && value.toLowerCase().includes(query);
+    })
+  );
+  return query ? (result?.length ? result : null) : e
   }
   const searchData = search(currentPageData)
 
@@ -49,9 +53,7 @@ const LiveProduct = () => {
   return (
       <Container>
       <Uniheader />
-      <Wrapper>
-      <Buttom>
-          <Header>
+      <Header>
             <Text>Live Products</Text>
             <SerachHold>
           <input
@@ -64,6 +66,9 @@ const LiveProduct = () => {
             </button>
         </SerachHold>
           </Header>
+      <Wrapper>
+      <Buttom>
+         
           <Head>
             <Th>
               <HoldHead>Product </HoldHead>
@@ -151,13 +156,14 @@ const Wrapper = styled.div`
   scroll-behavior: smooth;
 `;
 const Container = styled.div`
-    width: 100%;
+    width: 95%;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
 `
 const Header = styled.div`
+  width: 90%;
   display: flex;
   align-items: center;
   justify-content: space-between;

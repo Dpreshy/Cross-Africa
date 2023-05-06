@@ -36,10 +36,7 @@ const Adpasswordchange = () => {
                 <Input placeholder="Confirm New Password" />
               </HoldInput>
             </Hold>
-
-            <NavLink to="/personal" style={{ textDecoration: "none" }}>
               <Button>Save Password</Button>
-            </NavLink>
           </Right>
         </InputHold>
       </Wrapper>

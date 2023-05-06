@@ -19,4 +19,11 @@ const Settings = () => {
 
 export default Settings
 
-const Contianer = styled.div``
+const Contianer = styled.div`
+  width: 100%;
+  /* background-color: gold; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+`;

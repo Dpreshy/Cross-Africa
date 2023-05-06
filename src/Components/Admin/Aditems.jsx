@@ -1,49 +1,64 @@
 import React from "react";
 import styled from "styled-components";
 import { BiPhone } from "react-icons/bi";
+import { useParams } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import { getOneOrder } from "../Api/OrderApi";
+import moment from 'moment'
 
 const Aditems = () => {
+  const {id} = useParams()
+    
+  const {data} = useQuery({
+    queryKey: ["order", id],
+    queryFn: ()=>getOneOrder(id)
+  })
+  var nf = Intl.NumberFormat()
   return (
     <Container>
       <Wrapper>
         <Profile>
           <span> Items</span>
-          <div>April 20, 2023 at 9:30pm / 3 items /</div>
-          <button>Paid</button>
+          <div>{moment(data?.createdAt).format('MMMM Do YYYY, h:mm:ss a')} / {data?.products?.length} Items/</div>
+          <button>{data?.payment_status }</button>
           <div>Subtotal of all items</div>
-          <span>₦ 300,000</span>
+          <span>₦{ nf.format(data?.subtotal)}</span>
         </Profile>
         <Tug>
-          <Box>
+          {
+            data?.products?.map((props) => (
+              <Box>
             {" "}
             <Image>
-              <div>C00000</div>
-              <img src="/Frame 113.png" />
-              <span>iphone</span>
-              <nav>₦ 300,000</nav>
-              <nav>3 items</nav>
-              <nav>₦ 300,000</nav>
+              <div>{ props?.productID?.tag_No}</div>
+                  <img src={ props?.productID?.avatar[0]?.url} />
+                  <span>{ props?.productID?.name}</span>
+                  <nav>₦{ nf.format(props?.productID?.price)}</nav>
+                  <nav>{ props.qty} items</nav>
+              <nav>₦{ nf.format(props?.productID?.price * props?.qty)}</nav>
             </Image>
           </Box>
+            ))
+          }
           <Box bd>
             {" "}
             <Wrap>
               <span>Subtotal</span>
-              <nav>₦ 300,000</nav>
+              <nav>₦{ nf.format(data?.subtotal)}</nav>
             </Wrap>
           </Box>
           <Box>
             {" "}
             <Wrap>
               <span>Shipping fee</span>
-              <nav>₦ 300,000</nav>
+              <nav>₦{ nf.format(data?.shippingFee)}</nav>
             </Wrap>
           </Box>
           <Box bd>
             {" "}
             <Wrap>
               <span>Total</span>
-              <nav>₦ 300,000</nav>
+              <nav>₦{ nf.format(data?.subtotal + data?.shippingFee)}</nav>
             </Wrap>
           </Box>
         </Tug>

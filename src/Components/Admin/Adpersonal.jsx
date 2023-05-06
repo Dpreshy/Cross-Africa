@@ -152,12 +152,15 @@ const Name = styled.div`
 `;
 const Hold = styled.div`
   margin-bottom: 10px;
+  flex: 1 0px 140px
+
 `;
 const InputHold = styled.form`
-  width: 900px;
+  width: 90%;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
+  flex-wrap: wrap;
   padding: 15px 3px;
 
   /* background-color: #ec00b1; */
@@ -183,10 +186,8 @@ const Text = styled.div`
 const Wrapper = styled.div`
   width: 100%;
   display: flex;
-  align-items: flex-start;
-  /* background-color: red; */
   justify-content: center;
   flex-direction: column;
   padding: 50px 0;
-  /* border: 1px solid gray; */
+  flex-wrap: wrap;
 `;

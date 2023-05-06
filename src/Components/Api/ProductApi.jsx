@@ -59,12 +59,12 @@ export const addTag = async ({id,tag_No,quantity,startDate,endDate,active}) => {
 };
 
 export const getAllProduct = async () => {
-    const res = await axios.get(`${baseURL}/api/product`).then((res) => {
-        console.log(res.data.data)
+    const response = await axios.get(`${baseURL}/api/product`).then((res) => {
+        // console.log(res.data.data)
         return res.data.data
     })
 
-    return res
+    return response
 }
 export const getSingleProduct = async (id) => {
     // console.log(id)

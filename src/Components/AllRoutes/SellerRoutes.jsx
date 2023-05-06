@@ -196,27 +196,6 @@ const AllRoutes = () => {
             </Private>
           ),
         },
-        {
-          path: "/admin-auth",
-          children: [
-            {
-              index: true,
-              element: <Adsignup />,
-            },
-            {
-              path: "user",
-              element: <Adsignup />,
-            },
-            {
-              path: "login",
-              element: <Adlogin />,
-            },
-          ],
-        },
-        {
-          path: "/admin-page",
-          element: <Adpage />,
-        },
       ],
     },
   ]);

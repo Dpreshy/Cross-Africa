@@ -38,10 +38,10 @@ const Checkout = () => {
   const [products, setProducts] = useState([])
   
 const productOrdered=()=>{
-  const Data = cartData.map((el)=> ({productID: el._id, qty: el.qty}))
+  const Data = cartData.map((el)=> ({productID: el._id, sellerID: el.user,qty: el.qty}))
   setProducts(Data)
   }
-  // console.log(products)
+  // console.log(cartData)
 
   const returnCountry = () => {
     setFindCountry(() => findCountry + 1)
@@ -70,7 +70,7 @@ const productOrdered=()=>{
         console.log(error)
     }
   })
-  console.log(payment_Method)
+  // console.log(payment_Method)
 
   const handleSubmit = (e)=>{
     e.preventDefault()

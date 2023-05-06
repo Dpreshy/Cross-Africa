@@ -8,14 +8,15 @@ import {
 import "../../../App.css"
 import countryData from "../../data"
 import "../style.css"
-const OrderPage = ({ index, order_No, price, created, delivery_status, payment_method,tag_No, name,payment_status,quantity,amount,country,address,total,firstName, lastName, category, status, id,isSeller,items,registerd,avatar}) => {
+const OrderPage = ({ avatar, index, order_No, price, created, delivery_status, payment_method,tag_No, name,payment_status,quantity,amount,country,address,total,firstName, lastName, category, status, id,isSeller, qty}) => {
   const [ edit, setEdit ] = useState(false);
   const [userCoubtry, setCountry] = useState({})
   const check = ()=>{
     setCountry(countryData?.find((el)=> el.name === country))
   }
-  // console.log(isSeller)
-  // console.log(userCoubtry)
+  const productData = qty?.filter((el)=> el.sellerID === id)
+  // console.log(id)
+  // console.log(productData)
 
   useEffect(()=>{
     check()
@@ -34,8 +35,9 @@ const OrderPage = ({ index, order_No, price, created, delivery_status, payment_m
               {" "}
         <HoldHead><img src={userCoubtry?.flag } /></HoldHead>
             </Td>}
-            {name && <Td>
-              <UserHold to={`/admin-dashboard/merchant-detail/${id}`}>
+            
+            {avatar && <Td>
+              <UserHold>
                 <span>
             <Image src={ avatar} />
                 </span>
@@ -69,10 +71,12 @@ const OrderPage = ({ index, order_No, price, created, delivery_status, payment_m
         <HoldHead>{ amount }</HoldHead>
       </Td> }
       { payment_status && <Td>
-        <HoldHead>{ payment_status }</HoldHead>
+        <HoldHead>
+        { payment_status === "paid" ? <button style={{padding: "10px", border: "0px", backgroundColor: "green", color: "white", borderRadius: "5px"}}>Yes</button> : <button style={{padding: "10px", border: "0px", backgroundColor: "lightgray", color: "white", borderRadius: "5px"}}>No</button>}
+        </HoldHead>
       </Td> }
-      { status && <Td>
-        <button className={ `${status}` }>{ status }</button>
+      {status && <Td>
+              {" "}<button className={`${status}`}>{status}</button>
             </Td>}
       {address && <Td>
               {" "}
@@ -81,55 +85,27 @@ const OrderPage = ({ index, order_No, price, created, delivery_status, payment_m
             {total && <Td>
         <HoldHead>{ total}</HoldHead>{" "}
       </Td> }
-      {items && <Td>
-              {" "}
-        <HoldHead>{ items}</HoldHead>{" "}
-            </Td>}
-      {category && <Td>
-              {" "}
-        <HoldHead>{ category}</HoldHead>{" "}
-            </Td>}
       {created && <Td>
               {" "}
         <HoldHead>{ created}</HoldHead>{" "}
             </Td>}
-      {registerd && <Td>
-              {" "}
-        <HoldHead>{ registerd}</HoldHead>{" "}
+      {qty && <Td>
+        { " " }
+        { productData?.map((el => (
+          <HoldHead>{ el.qty}</HoldHead>
+        )))}
+        
             </Td>}
-      {price && <Td>
-              {" "}
-        <HoldHead>{ price}</HoldHead>{" "}
+            {price && <Td>
+        { " " }
+        { productData?.map((el => (
+          <HoldHead>{ el.price}</HoldHead>
+        )))}
+        
             </Td>}
           
             
-           { registerd &&  <Td>
-              <HoldHead >
-                {" "}
-                <Edit onClick={() => {
-                  setEdit(true);
-                }}>
-                  <Button>
-                    Edit
-                  </Button>
-                  <span>
-                    <AiFillCaretDown />
-                  </span>
-          </Edit>
-          {edit ? (
-              <Menu
-                onClick={() => {
-                  setEdit(false);
-                }}
-              >
-                <NavLink  to="/seller-dashboard/edit-image"><Navs>Edit Image</Navs></NavLink>
-                <NavLink  to="/seller-dashboard/edit-image"><Navs>Edit Context</Navs></NavLink>
-                <Navs>Delete</Navs>
-              </Menu>
-            ) : null}
-        </HoldHead>
-       
-            </Td>}
+      
            
           </Body>
   );
@@ -137,36 +113,7 @@ const OrderPage = ({ index, order_No, price, created, delivery_status, payment_m
 
 export default OrderPage;
 
-const Navs = styled.div`
-  width: 100%;
-  padding: 10px 0px;
-  /* border-bottom: 1px solid lightgray; */
-  cursor: pointer;
-  text-align: center;
-  font-weight: 600;
-  text-decoration: none;
-  color: black;
-`;
-const Edit = styled.div`
-  display: flex;
-  align-items: flex-end;
-`;
-const Menu = styled.div`
-  width: 150px;
-  height: 150px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  background-color: white;
-  border: 1px solid #d975c0;
-  border-radius: 5px;
 
-  position: sticky;
-  bottom: -120px;
-  right: 40px;
-  /* z-index: 11; */
-`;
 const Img = styled.div`
   width: 50px;
   height: 50px;
@@ -221,8 +168,6 @@ const Td = styled.td`
   font-size: 16px;
   font-weight: 400;
   border-left: 1.5px solid #d0d1d2;
-  border-bottom: 1.5px solid #d0d1d2;
-
 `;
 const Body = styled.tr`
   border-bottom: 1px solid lightgray;

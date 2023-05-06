@@ -1,15 +1,25 @@
 import axios from "axios";
-// const baseURL = "http://localhost:5000";
-const baseURL = "https://crossbackend.onrender.com";
+const baseURL = "http://localhost:5000";
+// const baseURL = "https://crossbackend.onrender.com";
 
-export const createUser = async({fullName,lastName,email,companyName, phoneNum, password}) => {
-    await axios.post(`${baseURL}/api/seler/register`, { fullName, lastName, email, companyName, phoneNum, password }).then(res => {
+export const createUser = async({firstName,lastName,email,companyName, phoneNum, password}) => {
+    await axios.post(`${baseURL}/api/seler/register`, { firstName, lastName, email, companyName, phoneNum, password }).then(res => {
+        console.log(res);
+    })
+}
+export const createAdmin = async({firstName,lastName,email,phoneNum, password}) => {
+    await axios.post(`${baseURL}/api/user/login`, { firstName, lastName, email, phoneNum, password }).then(res => {
+        console.log(res);
+    })
+}
+export const loginAdmin = async({email, password}) => {
+    await axios.post(`${baseURL}/api/user/registerAdmin`, {email, password }).then(res => {
         console.log(res);
     })
 }
 
 export const logInUser = async({email,password}) => {
-    await axios.post(`${baseURL}/api/user/login`, { email, password }).then(res => {
+    await axios.post(`${baseURL}/api/seler/signInUser`, { email, password }).then(res => {
         localStorage.setItem("user", JSON.stringify(res.data.data))
         alert(res.data.token)
     });
@@ -47,6 +57,14 @@ export const bankDetail = async ({ id, bankName,accountName,accNumber,completed}
 }
 export const getUser = async () => {
     const response = await axios.get(`${baseURL}/api/user`).then(res => {
+        // console.log(res.data)
+        return res.data.data
+    })
+
+    return response
+}
+export const getOneUser = async (id) => {
+    const response = await axios.get(`${baseURL}/api/user/${id}`).then(res => {
         // console.log(res.data)
         return res.data.data
     })

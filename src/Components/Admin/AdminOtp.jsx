@@ -16,15 +16,9 @@ const OtpPage = () => {
   const sendOTP = useMutation({
     mutationFn: verifyUser,
     onSuccess: () => {
-      if (check.isSeller === true) {
-        if (check.completed === true) {
-          navigate("/seller-dashboard")
+        if (check.isAdmin === true) {
+            navigate("/admin-dashboard")
         }
-        navigate("/auth/personalinfo")
-      }
-      if (check.completed === true) {
-        navigate("/seller-dashboard")
-      }
     },
     onError: () => {
       navigate("/auth/otperror")

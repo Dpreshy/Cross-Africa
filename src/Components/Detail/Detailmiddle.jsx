@@ -13,7 +13,7 @@ import {
 import { useSelector, useDispatch } from 'react-redux';
 import { signOut, addProduct, addToCart, removeCart } from "../Global/GlobalState"
 
-const Detailmiddle = ({id, avatar, data }) => {
+const Detailmiddle = ({id, avatar, data, qty }) => {
   const cartData = useSelector((state) => state.reducers.cartItem);
   const cartitem = cartData?.find((el) => el?._id === id)
   const dispatch = useDispatch();
@@ -97,12 +97,12 @@ const Detailmiddle = ({id, avatar, data }) => {
             <Quantity>
               <Quantitytext>Quantity</Quantitytext>
               <Quantitycreament>
-                <QuantityIncreament  onClick={()=> dispatch(addToCart(data))}>+</QuantityIncreament>
+                <QuantityIncreament disabled={cartitem?.qty == qty ? true : false} onClick={()=> dispatch(addToCart(data))}>+</QuantityIncreament>
                 <QuantityFigure>{ cartitem?.qty}</QuantityFigure>
-                <QuantityDecreament onClick={()=> dispatch(removeCart(data))}>-</QuantityDecreament>
+                <QuantityDecreament disabled={cartitem?.qty <= 0 ? true : false} onClick={()=> dispatch(removeCart(data))}>-</QuantityDecreament>
               </Quantitycreament>
               <Quantitybutton>
-                <button onClick={()=> dispatch(addToCart(data))}>Add To Cart</button>
+                <button disabled={cartitem?.qty == qty ? true : false} onClick={()=> dispatch(addToCart(data))}>Add To Cart</button>
               </Quantitybutton>
             </Quantity>
           </Others>
@@ -300,6 +300,11 @@ const Image1 = styled.div`
     border-radius: 5px;
 
     object-fit: cover;
+  }
+
+  @media (max-width: 768px){
+    width: 300px;
+    height: 300px;
   }
 `;
 const Imghold = styled.div`

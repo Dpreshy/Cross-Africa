@@ -9,10 +9,10 @@ import "../../App.css"
 
 const OrderPage = ({ avatar, index, order_No, price, pending_days, created, delivery_status, payment_method,tag_No, name,payment_status,quantity,amount }) => {
   const [ edit, setEdit ] = useState(false);
-  console.log(edit)
+  // console.log(edit)
   return (
           <Body key={index} >
-            {order_No && <Td style={{backgroundColor: "gold"}}>
+            {order_No && <Td>
               {" "}
         <HoldHead>{order_No }</HoldHead>
             </Td>}
@@ -53,7 +53,7 @@ const OrderPage = ({ avatar, index, order_No, price, pending_days, created, deli
         <HoldHead>{ payment_status }</HoldHead>
       </Td> }
            {delivery_status &&  <Td>
-        <HoldHead className={`${delivery_status}`}>{ delivery_status}</HoldHead>
+        <HoldHead><button  className={`${delivery_status}`}>{ delivery_status}</button></HoldHead>
             </Td>}
       
            
@@ -81,7 +81,7 @@ const Image = styled.img`
   width: 100px;
   height: 100px;
   border-radius: 5px;
-  background-color: gold;
+  /* background-color: gold; */
   margin-right: 10px;
 `;
 const Button = styled.div`
