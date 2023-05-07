@@ -11,8 +11,8 @@ import { placeOrder } from "../Api/OrderApi";
 import { useEffect } from "react";
 import axios from "axios";
 
-const baseURL = "http://localhost:5000";
-// const baseURL = "https://crossbackend.onrender.com";
+// const baseURL = "http://localhost:5000";
+const baseURL = "https://crossbackend.onrender.com";
 const Checkout = () => {
   const navigate = useNavigate()
   var nf = Intl.NumberFormat()
