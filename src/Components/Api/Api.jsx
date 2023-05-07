@@ -4,20 +4,20 @@ const baseURL = "http://localhost:5000";
 
 export const createUser = async({firstName,lastName,email,companyName, phoneNum, password}) => {
     await axios.post(`${baseURL}/api/seler/register`, { firstName, lastName, email, companyName, phoneNum, password }).then(res => {
-        console.log(res);
+        // console.log(res);
     })
 }
 export const createAdmin = async({firstName,lastName,email,phoneNum, password}) => {
-    await axios.post(`${baseURL}/api/user/login`, { firstName, lastName, email, phoneNum, password }).then(res => {
+    await axios.post(`${baseURL}/api/user/registerAdmin`, { firstName, lastName, email, phoneNum, password }).then(res => {
         console.log(res);
     })
 }
 export const loginAdmin = async({email, password}) => {
-    await axios.post(`${baseURL}/api/user/registerAdmin`, {email, password }).then(res => {
-        console.log(res);
+    await axios.post(`${baseURL}/api/user/login`, {email, password }).then(res => {
+        localStorage.setItem("user", JSON.stringify(res.data.data))
+        // alert(res.data.token)
     })
 }
-
 export const logInUser = async({email,password}) => {
     await axios.post(`${baseURL}/api/seler/signInUser`, { email, password }).then(res => {
         localStorage.setItem("user", JSON.stringify(res.data.data))
@@ -25,6 +25,11 @@ export const logInUser = async({email,password}) => {
     });
 };
 
+export const verifyUser2 = async ({id, otp}) => {
+    await axios.patch(`${baseURL}/api/user/${id}/verify2`, {otp} ).then(res => {
+        console.log(res.data)
+    })
+};
 export const verifyUser = async ({id, otp}) => {
     await axios.patch(`${baseURL}/api/user/${id}/verify`, {otp} ).then(res => {
         console.log(res.data)
@@ -36,7 +41,9 @@ export const userInformation = async ({ id, formData }) => {
         "content-type": "multipart/form-data",
     }
     await axios.patch(`${baseURL}/api/seler/${id}/update`, formData, config).then(res => {
-        // console.log(res.data)
+        console.log(res.data)
+    }).catch(err => {
+        console.log(err)
     })
 }
 
@@ -57,6 +64,14 @@ export const bankDetail = async ({ id, bankName,accountName,accNumber,completed}
 }
 export const getUser = async () => {
     const response = await axios.get(`${baseURL}/api/user`).then(res => {
+        // console.log(res.data)
+        return res.data.data
+    })
+
+    return response
+}
+export const getCoustomers = async () => {
+    const response = await axios.get(`${baseURL}/api/user/custormers`).then(res => {
         // console.log(res.data)
         return res.data.data
     })

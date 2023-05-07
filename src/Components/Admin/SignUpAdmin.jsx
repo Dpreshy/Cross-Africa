@@ -185,7 +185,7 @@ const SignUp = () => {
                 {errors?.confirmPassword && errors?.confirmPassword?.message}
               </Error>
             </Hold>
-            <Button type='submit'>{ create.status === "loading" ? "Loading..." : "Continue"}</Button>
+            <Button type='submit' disabled={create.status === "loading" ? true: false}>{ create.status === "loading" ? "Loading..." : "Continue"}</Button>
             <AlText>
               Already have an account?{" "}
               <NavLink to="/login-admin" style={{ textDecoration: "none" }}>

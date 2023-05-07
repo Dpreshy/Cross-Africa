@@ -32,12 +32,11 @@ const SignIn = () => {
       });
     
       const create = useMutation({
-        mutationKey: [ "seller" ],
+        mutationKey: [ "Admin" ],
         mutationFn: loginAdmin,
 
         onSuccess: (res) => {
-            console.log(res);
-            navigate("/otp-admin")
+            navigate("/admin-dashboard")
         },
 
         onError: (error) => {
