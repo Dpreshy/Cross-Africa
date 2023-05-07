@@ -9,6 +9,8 @@ import AdminRoutePage from "./Components/AdninRoutePage"
 import SignInAdmin from "./Components/Admin/SignInAdmin"
 import SignUpAdmin from "./Components/Admin/SignUpAdmin"
 import AdminPrivate from "./Components/AdminPrivate"
+import AdminOtp from "./Components/Admin/AdminOtp"
+
 const App = () => {
   return (
     <div>
@@ -19,6 +21,7 @@ const App = () => {
         <Route path="/seller-dashboard/*" element={ <Private><SellerRouting /></Private>} />
         <Route path="/login-admin" element={ <SignInAdmin /> } />
         <Route path="/signup-admin" element={ <SignUpAdmin /> } />
+        <Route path="/otp-admin" element={ <AdminOtp /> } />
       </Routes>
       
      

@@ -3,7 +3,7 @@ import { AiFillInfoCircle, AiOutlineCheck } from "react-icons/ai";
 import styled from "styled-components";
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
-import { verifyUser } from "../Api/Api"
+import { verifyUser2 } from "../Api/Api"
 import OtpInput from 'react-otp-input';
 import "../../App.css"
 
@@ -14,22 +14,22 @@ const OtpPage = () => {
   const check = JSON.parse(localStorage.getItem("user"))
   
   const sendOTP = useMutation({
-    mutationFn: verifyUser,
+    mutationFn: verifyUser2,
     onSuccess: () => {
         if (check.isAdmin === true) {
             navigate("/admin-dashboard")
         }
     },
     onError: () => {
-      navigate("/auth/otperror")
+      navigate("/login-admin")
     }
   })
 
   const handleSubmit = () => {
-    const id = check._id
+    const id = check?._id
     sendOTP.mutate({id, otp})
   }
-  // console.log( check)
+  console.log( check)
   
   return (
     <Container>

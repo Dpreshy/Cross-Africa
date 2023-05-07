@@ -8,7 +8,7 @@ import ReactPaginate from 'react-paginate'
 import "./style.css"
 
 import OrderPage from './AdminDashboard/OrderPage'
-import { getUser } from '../Api/Api';
+import { getCoustomers } from '../Api/Api';
 
 const NewSellers = () => {
 
@@ -19,16 +19,13 @@ const NewSellers = () => {
   const userID = user?._id
   const {data} = useQuery({
     queryKey: ["users"],
-    queryFn: getUser
+    queryFn: getCoustomers
   })
     
     const seller = data?.filter((el) => {
-        if (el.isSeller === false) {
             if (el.isAdmin === false) {
                 return el
             }
-        }
-
         // return el
     })
     console.log(seller)
