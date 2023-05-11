@@ -90,7 +90,7 @@ const Information = () => {
                           <InputFile type="file" onChange={handleImage}/>
                           <Image src={ image} />
                       </Card>
-                      <Button type='submit'>{create.status === "loading" ? "Loading...": "Continue" }</Button>
+                      <Button type='submit' disabled={create.status === "loading" ? true: false}>{ create.status === "loading" ? "Loading..." : "Continue"}</Button>
                   </InputHold>
               </Wrapper>
           </Container>

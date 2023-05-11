@@ -10,8 +10,16 @@ import {
   BsCreditCard2Front,
   BsInfoCircleFill,
 } from "react-icons/bs";
+import { useSelector, useDispatch } from 'react-redux';
+import { signOut, addProduct, addToCart, removeCart } from "../Global/GlobalState"
 
-const Detailmiddle = ({avatar,add,data}) => {
+const Detailmiddle = ({id, avatar, data, qty }) => {
+  const cartData = useSelector((state) => state.reducers.cartItem);
+  const cartitem = cartData?.find((el) => el?._id === id)
+  const dispatch = useDispatch();
+
+  // console.log(cartitem)
+  
   return (
     <Container>
       <Wrapper>
@@ -89,12 +97,12 @@ const Detailmiddle = ({avatar,add,data}) => {
             <Quantity>
               <Quantitytext>Quantity</Quantitytext>
               <Quantitycreament>
-                <QuantityIncreament>+</QuantityIncreament>
-                <QuantityFigure>3</QuantityFigure>
-                <QuantityDecreament>-</QuantityDecreament>
+                <QuantityIncreament disabled={cartitem?.qty == qty ? true : false} onClick={()=> dispatch(addToCart(data))}>+</QuantityIncreament>
+                <QuantityFigure>{ cartitem?.qty}</QuantityFigure>
+                <QuantityDecreament disabled={cartitem?.qty <= 0 ? true : false} onClick={()=> dispatch(removeCart(data))}>-</QuantityDecreament>
               </Quantitycreament>
               <Quantitybutton>
-                <button onClick={()=> add(data)}>Add To Cart</button>
+                <button disabled={cartitem?.qty == qty ? true : false} onClick={()=> dispatch(addToCart(data))}>Add To Cart</button>
               </Quantitybutton>
             </Quantity>
           </Others>
@@ -105,15 +113,17 @@ const Detailmiddle = ({avatar,add,data}) => {
 };
 
 export default Detailmiddle;
-const QuantityIncreament = styled.div`
+const QuantityIncreament = styled.button`
   width: 70px;
   height: 70px;
   border: 1.6px solid grey;
   font-weight: 700;
+  font-size: 20px;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
+  outline: none;
 `;
 const QuantityFigure = styled.div`
   width: 70px;
@@ -123,15 +133,20 @@ const QuantityFigure = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  
 `;
-const QuantityDecreament = styled.div`
+const QuantityDecreament = styled.button`
   width: 70px;
   height: 70px;
   border: 1.6px solid grey;
+  cursor: pointer;
+  font-size: 20px;
   font-weight: 700;
   display: flex;
   align-items: center;
   justify-content: center;
+  outline: none;
+
 `;
 const Quantitytext = styled.div`
   font-size: 22px;
@@ -285,6 +300,11 @@ const Image1 = styled.div`
     border-radius: 5px;
 
     object-fit: cover;
+  }
+
+  @media (max-width: 768px){
+    width: 300px;
+    height: 300px;
   }
 `;
 const Imghold = styled.div`

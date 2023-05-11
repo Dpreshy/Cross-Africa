@@ -2,18 +2,111 @@ import React from "react";
 import styled from "styled-components";
 import Item from "./Item";
 import { AiFillCaretDown, AiFillFlag, AiFillCaretLeft } from "react-icons/ai";
+import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from "react-router-dom";
+import countryData from "../data"
+import { useState } from "react";
+import { useMutation } from "@tanstack/react-query";
+import { placeOrder } from "../Api/OrderApi";
+import { useEffect } from "react";
+import axios from "axios";
+
+// const baseURL = "http://localhost:5000";
+const baseURL = "https://crossbackend.onrender.com";
 const Checkout = () => {
+  const navigate = useNavigate()
+  var nf = Intl.NumberFormat()
+  const cartData = useSelector((state) => state.reducers.cartItem)
+  const quantity = useSelector((state) => state.reducers.qty)
+  const totalPrice = cartData?.reduce((price, item) => price + item.qty * item.price, 0)
+  const [ selectCountry, setSelectCountry ] = useState(countryData)
+  let [ findCountry, setFindCountry ] = useState(0)
+  const [ email, setemail ] = useState(""); 
+  const [ firstName, setfirstName ] = useState(""); 
+  const [ country, setcountry ] = useState("");
+  const [ lastName, setlastName ] = useState("");
+  const [ address, setaddress ] = useState("");
+  const [ apartment, setapartment ] = useState("");
+  const [ state, setstate ] = useState("");
+  const [ Localgovt, setLocalgovt ] = useState("");
+  const [ nearestBusStop, setnearestBusStop ] = useState("");
+  const [ phone_No, setphone_No ] = useState();
+  const [ change, setChange ] = useState(false)
+  const [ Error, setError ] = useState(false);
+  
+  const [payment_Method, setPayment_Method] = useState("Payment before delivery")
+  const [products, setProducts] = useState([])
+  
+const productOrdered=()=>{
+  const Data = cartData.map((el)=> ({productID: el._id, sellerID: el.user,qty: el.qty}))
+  setProducts(Data)
+  }
+  // console.log(cartData)
+
+  const returnCountry = () => {
+    setFindCountry(() => findCountry + 1)
+    if (findCountry >= selectCountry.length - 1) {
+      setFindCountry(()=> findCountry = 0)
+    }
+  }
+
+  const getCountryName = () => {
+      setcountry(selectCountry[findCountry].name)
+  }
+  const create = useMutation({
+    mutationKey: ["order"],
+    mutationFn: async ({firstName,lastName,email,order_No,payment_method,country, Localgovt, state, apartment, nearestBusStop,products,subtotal, totalQty,address}) => {
+      // console.log(id);
+      await axios.post(`${baseURL}/api/order/create`,{firstName,lastName,email,order_No,payment_method,country, Localgovt, state, apartment, nearestBusStop,products,subtotal, totalQty,address}).then((res)=>{
+        navigate("/finishshipping")
+        console.log(res.data)
+        localStorage.setItem("order", JSON.stringify(res.data.data))
+      }).catch((err)=>{
+          console.log(err)
+      })
+  },
+
+    onError: (error) => {
+        console.log(error)
+    }
+  })
+  // console.log(payment_Method)
+
+  const handleSubmit = (e)=>{
+    e.preventDefault()
+    if (
+      firstName.length == 0 ||
+      lastName.length == 0 ||
+      email.length == 0 ||
+      country.length == 0 ||
+      Localgovt.length == 0 ||
+      !payment_Method ||
+      state.length == 0 ||
+      apartment.length == 0 ||
+      nearestBusStop.length == 0 ||
+      products.length == 0 ||
+      apartment.length == 0
+    ) {
+      setError(true)
+      alert("All inputs most be filed ")
+    }
+    create.mutate({firstName: firstName,lastName: lastName,email: email,order_No: phone_No,payment_method: payment_Method,country: country, Localgovt: Localgovt, state:state, apartment: apartment, nearestBusStop: nearestBusStop, products:products,subtotal: totalPrice, totalQty:quantity, address: address})
+  }
+  useEffect(() => {
+    getCountryName()
+    productOrdered()
+  },[findCountry])
   return (
     <div>
       <Container>
         <Wrapper>
           <Left>
-            <Hold>
+            <Hold onSubmit={handleSubmit}>
               <InputHold>
                 <Title>Contact Information</Title>
                 <Text>Email</Text>
                 <InputCont>
-                  <Input placeholder="email" />
+                  <Input placeholder="email"  value={email} onChange={(e)=> setemail(e.target.value)}/>
                   {/* <span>Chance</span> */}
                 </InputCont>
               </InputHold>
@@ -21,15 +114,37 @@ const Checkout = () => {
                 <Title>Payment Method</Title>
                 <InputCont>
                   <Dis>
-                    <Cont>
+                   {
+                    change ?  <Cont onClick={()=>{
+                      setChange(false)
+                      setPayment_Method("Payment before delivery")
+                    }}>
                       <Checkbox bg="fff"></Checkbox>
-                      <PayOn>Pay on delivery</PayOn>
-                    </Cont>
-                    <Line />
-                    <Cont>
+                      <PayOn>Payment on delivery</PayOn>
+                    </Cont> :  <Cont onClick={()=>{
+                      setChange(true)
+                      setPayment_Method("Payment on delivery")
+                    }}>
                       <Checkbox bg=""></Checkbox>
-                      <PayOn>Pay on delivery</PayOn>
+                      <PayOn>Payment on delivery</PayOn>
                     </Cont>
+                   }
+                    <Line />
+                    {
+                    change ?   <Cont onClick={()=>{
+                      setChange(false)
+                      setPayment_Method("Payment before delivery")
+                    }}>
+                      <Checkbox bg=""></Checkbox>
+                      <PayOn>Payment before delivery</PayOn>
+                    </Cont> :   <Cont onClick={()=>{
+                      setChange(true)
+                      setPayment_Method("Payment on delivery")
+                    }}>
+                      <Checkbox bg="fff"></Checkbox>
+                      <PayOn>Payment before delivery</PayOn>
+                    </Cont>
+                   }
                   </Dis>
                 </InputCont>
               </InputHold>
@@ -40,26 +155,22 @@ const Checkout = () => {
 
                 <Optionav>
                   {" "}
-                  <div>
-                    <AiFillFlag />
-                  </div>
-                  <span>
-                    <AiFillCaretDown />
-                  </span>
+                  <Image src={ selectCountry[findCountry].flag} />
+                <Icon onClick={returnCountry}><AiFillCaretDown /></Icon>
                 </Optionav>
               </InputHold1>
               <InputHold2>
                 <Wrap>
                   <Text>First Name</Text>
                   <InputCont>
-                    <Input placeholder="First Name" />
+                    <Input placeholder="First Name"  value={firstName} onChange={(e)=> setfirstName(e.target.value)}/>
                     {/* <span>Chance</span> */}
                   </InputCont>
                 </Wrap>
                 <Wrap>
                   <Text>Last Name</Text>
                   <InputCont>
-                    <Input placeholder="Last Name" />
+                    <Input placeholder="Last Name"  value={lastName} onChange={(e)=> setlastName(e.target.value)}/>
                     {/* <span>Chance</span> */}
                   </InputCont>
                 </Wrap>
@@ -67,14 +178,14 @@ const Checkout = () => {
               <InputHold1>
                 <Text>Address</Text>
                 <InputCont>
-                  <Input placeholder="Address" />
+                  <Input placeholder="Address"  value={address} onChange={(e)=> setaddress(e.target.value)}/>
                   {/* <span>Chance</span> */}
                 </InputCont>
               </InputHold1>
               <InputHold1>
                 <Text>Apartment, Suite etc.... (Optional)</Text>
                 <InputCont>
-                  <Input placeholder="Apartment, Suite etc...." />
+                  <Input placeholder="Apartment, Suite etc...."  value={apartment} onChange={(e)=> setapartment(e.target.value)}/>
                   {/* <span>Chance</span> */}
                 </InputCont>
               </InputHold1>
@@ -82,21 +193,21 @@ const Checkout = () => {
                 <Wrap1>
                   <Text>State</Text>
                   <InputCont>
-                    <Input placeholder="Lagos" />
+                    <Input placeholder="Lagos"  value={state} onChange={(e)=> setstate(e.target.value)}/>
                     {/* <span>Chance</span> */}
                   </InputCont>
                 </Wrap1>
                 <Wrap1>
                   <Text>LGA</Text>
                   <InputCont>
-                    <Input placeholder="Ajeromi" />
+                    <Input placeholder="Ajeromi"  value={Localgovt} onChange={(e)=> setLocalgovt(e.target.value)}/>
                     {/* <span>Chance</span> */}
                   </InputCont>
                 </Wrap1>
                 <Wrap1>
                   <Text>Nearest B/Stop</Text>
                   <InputCont>
-                    <Input placeholder="OJA" />
+                    <Input placeholder="OJA"  value={nearestBusStop} onChange={(e)=> setnearestBusStop(e.target.value)}/>
                     {/* <span>Chance</span> */}
                   </InputCont>
                 </Wrap1>
@@ -105,7 +216,7 @@ const Checkout = () => {
               <InputHold1>
                 <Text>Phone number</Text>
                 <InputCont>
-                  <Input placeholder="Phone number" />
+                  <Input placeholder="Phone number" type="number"  value={phone_No} onChange={(e)=> setphone_No(e.target.value)}/>
                   {/* <span>Chance</span> */}
                 </InputCont>
               </InputHold1>
@@ -114,14 +225,18 @@ const Checkout = () => {
                   <span>
                     <AiFillCaretLeft />
                   </span>
-                  <div>Return to Cart</div>
+                  <div onClick={()=>{navigate(-1)}}>Return to Cart</div>
                 </Div>
-                <Button>Continue Shopping</Button>
+                <Button type="submit" >Continue Shopping</Button>
               </Buttons>
             </Hold>
           </Left>
           <Right>
-            <Item />
+            {
+              cartData?.map((props, index) => (
+                <Item index={ index } name={ props.name } price={ nf.format(props.price) } shippingFee={ props?.shippingFee } totalPrice={ nf.format(totalPrice) } subtotal={nf.format(props.price * props.qty)} qty={ props.qty } id={ props._id} />
+              ))
+            }
           </Right>
         </Wrapper>
       </Container>
@@ -130,6 +245,17 @@ const Checkout = () => {
 };
 
 export default Checkout;
+
+const Image = styled.img`
+  width: 40px;
+`;
+const Icon = styled.div`
+  width: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+`;
 const Wrap = styled.div`
   width: 45%;
 `;
@@ -165,6 +291,9 @@ const Text = styled.div`
 const Right = styled.div`
   flex: 1;
 
+  @media (max-width: 768px ){
+    display: none;
+  }
   /* background-color: blue; */
 `;
 const Button = styled.button`
@@ -274,7 +403,7 @@ const InputHold2 = styled.div`
   justify-content: space-between;
   align-items: center;
 `;
-const Hold = styled.div`
+const Hold = styled.form`
   width: 90%;
   margin-top: 20px;
 `;

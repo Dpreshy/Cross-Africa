@@ -75,7 +75,7 @@ const SignIn = () => {
                       <PassHold>
                           Forget Password?
                       </PassHold>
-                      <Button type='submit'>{ create.status === "loading" ? "Loading..." : "Log In"}</Button>
+                      <Button type='submit' disabled={create.status === "loading" ? true: false}>{ create.status === "loading" ? "Loading..." : "Continue"}</Button>
                       {/* <Button>Continue as a Guest</Button> */}
                       <AlText>Don't have an account? <NavLink to="/auth/signin" style={{textDecoration: "none"}}><span>Sign Up</span></NavLink></AlText>
                   </InputHold>

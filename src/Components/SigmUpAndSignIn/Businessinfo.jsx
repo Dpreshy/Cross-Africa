@@ -7,16 +7,16 @@ import { businessInfo } from "../Api/Api";
 import countryData from "../data"
 
 const Businessinfo = () => {
-  const countryData = [
-    {
-      name: "NIgeria",
-      flag: "https://cdn-icons-png.flaticon.com/512/8603/8603374.png"
-    },
-    {
-      name: "Ghana",
-      flag: "https://cdn-icons-png.flaticon.com/512/8603/8603142.png"
-    },
-  ]
+  // const countryData = [
+  //   {
+  //     name: "NIgeria",
+  //     flag: "https://cdn-icons-png.flaticon.com/512/8603/8603374.png"
+  //   },
+  //   {
+  //     name: "Ghana",
+  //     flag: "https://cdn-icons-png.flaticon.com/512/8603/8603142.png"
+  //   },
+  // ]
   const navigate = useNavigate()
   const [ selectCountry, setSelectCountry ] = useState(countryData)
   let [ findCountry, setFindCountry ] = useState(0)

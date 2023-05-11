@@ -6,6 +6,7 @@ import { BiHelpCircle, BiSearch } from "react-icons/bi";
 import { FiMenu } from "react-icons/fi";
 import { NavLink } from "react-router-dom";
 import Slider from "./Slider";
+import { useSelector, useDispatch } from 'react-redux';
 
 const Header = () => {
   const [categories, setCategories] = useState(false);
@@ -13,8 +14,9 @@ const Header = () => {
   const [menuChange, setMenuChange] = useState(false)
   const user = JSON.parse(localStorage.getItem("user"));
   const myRef = useRef()
+  const cartData = useSelector((state) => state.reducers.cartItem)
 
-  console.log(menuChange)
+  // console.log(cartData)
   const change = () => {
     myRef.current.style.left = "0px"
     setMenuChange(true)
@@ -54,10 +56,10 @@ const Header = () => {
                   setCategories(false);
                 }}
               >
-                <Navs>Electronics</Navs>
-                <Navs>Mobile Phones</Navs>
-                <Navs>Clothing & Fashion</Navs>
-                <Navs>Food & Groceries</Navs>
+                <NavLink to="/electronics" style={ { textDecoration: "none", width: "100%"}}><Navs>Electronics</Navs></NavLink>
+                <NavLink to="/phone" style={{textDecoration: "none",width: "100%"}}><Navs>Mobile Phones</Navs></NavLink>
+                <NavLink to="/clothing" style={{textDecoration: "none",width: "100%"}}><Navs>Clothing & Fashion</Navs></NavLink>
+                <NavLink to="/food" style={{textDecoration: "none",width: "100%"}}><Navs>Food & Groceries</Navs></NavLink>
               </Menu>
             ) : null}
             <SearchHold>
@@ -93,8 +95,9 @@ const Header = () => {
                    <Navs>Profile</Navs>
                   <Navs>Log Out</Navs>
                   </>) : (<>
-                    <Navs>Create Account</Navs>
-                <Navs>Create Seller</Navs>
+                    
+                <NavLink to="/user-signup" style={{textDecoration: "none",width: "100%"}}><Navs>Create Account</Navs></NavLink>
+                <NavLink to="/seller-page" style={{textDecoration: "none",width: "100%"}}><Navs>Create Seller</Navs></NavLink>
                     </>)
                }
               </AcMenu>
@@ -102,9 +105,11 @@ const Header = () => {
             <Nav>
               <div> Cart</div>
 
-              <NavLink to="/detail" style={{ textDecoration: "none" }}>
+              <NavLink to="/cart" style={{ textDecoration: "none" }}>
                 <span>
-                  <BsCart color="black"/>
+                  <BsCart color="black" />
+                  { cartData.length > 0 ? <Round>{ cartData.length}</Round> : null }
+                  
                 </span>
               </NavLink>
             </Nav>
@@ -120,7 +125,9 @@ const Header = () => {
               }
               
             </Bar>
+            <div onClick={returnAgain}>
             <Slider myRef={ myRef} />
+            </div>
           </Hold>
         </Wrapper>
       </Container>
@@ -130,6 +137,22 @@ const Header = () => {
 
 export default Header;
 
+const Round = styled.div`
+  color: white;
+  position: absolute;
+  font-size: 10px;
+  font-weight: 500;
+  background-color: red;
+  border-radius: 50%;
+  /* padding: 5px; */
+  width: 12px;
+  height: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: -5px;
+  right: -5px;
+`;
 const Navs = styled.div`
   width: 100%;
   padding: 10px 0px;

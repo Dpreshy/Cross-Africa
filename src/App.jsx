@@ -14,8 +14,6 @@ const App = () => {
         <Route path="/seller-page" element={ <LandingPage />} />
         <Route path="/seller-dashboard/*" element={ <Private><SellerRouting /></Private>} />
       </Routes>
-      
-      <Footer />
     </div>
   );
 };

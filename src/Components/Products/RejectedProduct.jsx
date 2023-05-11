@@ -41,10 +41,14 @@ const RejectedProduct = () => {
   console.log(query)
   const keys = ["name", "brand","tag"]
 
-  const search = (data) => {
-      return data?.filter((item) =>
-          keys.some((key)=> item[key]?.toLowerCase().includes(query))
-      )
+  const search = (e) => {
+    const result = e?.filter((item) =>
+   keys.some((key) => {
+      const value = item[key];
+      return typeof value === "string" && value.toLowerCase().includes(query);
+    })
+  );
+  return query ? (result?.length ? result : null) : e
   }
   const searchData = search(currentPageData)
 
@@ -52,9 +56,7 @@ const RejectedProduct = () => {
   return (
       <Container>
       <Uniheader />
-      <Wrapper>
-      <Buttom>
-          <Header>
+      <Header>
             <Text>Rejected Products</Text>
             <SerachHold>
           <input
@@ -67,6 +69,9 @@ const RejectedProduct = () => {
             </button>
         </SerachHold>
           </Header>
+      <Wrapper>
+      <Buttom>
+          
           <Head>
             <Th>
               <HoldHead>Product </HoldHead>
@@ -85,7 +90,7 @@ const RejectedProduct = () => {
             </Th>
         </Head>
         {
-            currentPageData?.map((props,index) => (
+            searchData?.map((props,index) => (
                 <Productpage index={ index } key={ index } avatar={ props?.avatar[ 0 ].url } name={ props.name } tag={ props.tag_No } created={ moment(props.createdAt).format("D MMM YYYY") } rejected={ rejected} />
             ))
       }
@@ -147,13 +152,14 @@ const Wrapper = styled.div`
   scroll-behavior: smooth;
 `;
 const Container = styled.div`
-    width: 100%;
+    width: 95%;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
 `
 const Header = styled.div`
+  width: 90%;
   display: flex;
   align-items: center;
   justify-content: space-between;

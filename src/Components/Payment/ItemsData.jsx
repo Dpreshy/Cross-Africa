@@ -1,18 +1,22 @@
 import React from "react";
 import styled from "styled-components";
 
-const Item = ({index, name, price, shippingFee, totalPrice, subtotal,qty, id }) => {
+const ItemData = ({ index, totalPrice, subtotal, props }) => {
+    
+  // const productID = props?.productID?._id
+  // console.log(productID)
+    var nf = Intl.NumberFormat()
   return (
     <div>
-      <Hold key={id}>
+      <Hold key={index}>
         <Content>
           <Left>
-            <Circle>{qty }</Circle>
-            <Image src="/Frame 1.png" />
+            <Circle>{props.qty }</Circle>
+            <Image src={props?.productID?.avatar[0]?.url} />
           </Left>
           <Right>
-            <Title>{name }</Title>
-            <Price>₦{ price}</Price>
+            <Title>{props?.productID?.name }</Title>
+            <Price>₦ { nf.format(props?.productID?.price)}</Price>
           </Right>
         </Content>
         <Line />
@@ -20,30 +24,22 @@ const Item = ({index, name, price, shippingFee, totalPrice, subtotal,qty, id }) 
           <Cont>
             <Div>
               <Title2>Subtotal</Title2>
-              <Price>₦{ subtotal}</Price>
+              <Price>₦{ nf.format(props?.qty * props?.productID?.price)}</Price>
             </Div>
             <Div>
               <Title2>Shipping Fee</Title2>
-              <Price>₦{ shippingFee}</Price>
+              <Price>₦ { nf.format(props?.productID?.shoppingFee)}</Price>
             </Div>
           </Cont>
         </Content>
         <Line />
-        <Content>
-          <Cont>
-            <Div>
-              <Title2>Total</Title2>
-              <Price>₦{ totalPrice}</Price>
-            </Div>
-          </Cont>
-        </Content>
-        <Line />
+        
       </Hold>
     </div>
   );
 };
 
-export default Item;
+export default ItemData;
 
 const Cont = styled.div``;
 const Div = styled.div`
@@ -79,7 +75,7 @@ const Line = styled.div`
 const Image = styled.img`
   width: 100px;
   height: 100px;
-  background-color: gold;
+  background-color: white;
   border-radius: 5px;
   img {
     height: 100%;

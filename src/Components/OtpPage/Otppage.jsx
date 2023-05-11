@@ -5,6 +5,7 @@ import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import { verifyUser } from "../Api/Api"
 import OtpInput from 'react-otp-input';
+import "../../App.css"
 
 const OtpPage = () => {
   const navigate = useNavigate()
@@ -20,15 +21,13 @@ const OtpPage = () => {
           navigate("/seller-dashboard")
         }
         navigate("/auth/personalinfo")
-      } if (check.isAdmin === true){
-        navigate("/admin-dashboard")
       }
       if (check.completed === true) {
         navigate("/seller-dashboard")
       }
-      else {
-        navigate("/")
-      }
+    },
+    onError: () => {
+      navigate("/auth/otperror")
     }
   })
 
@@ -36,7 +35,7 @@ const OtpPage = () => {
     const id = check._id
     sendOTP.mutate({id, otp})
   }
-  console.log( check)
+  // console.log( check)
   
   return (
     <Container>
@@ -48,8 +47,11 @@ const OtpPage = () => {
           value={otp}
           onChange={setOtp}
           numInputs={6}
-          renderSeparator={ <span>-</span> }
-          renderInput={(props) => <input {...props} />}
+          renderSeparator={ <span> </span> }
+          renderInput={ (props) => <input { ...props } /> }
+          containerStyle={"containerStyle"}
+          inputStyle={"inputStyle"}
+          width="70px"
         />
         <Button>
           <button onClick={handleSubmit}>Enter</button>

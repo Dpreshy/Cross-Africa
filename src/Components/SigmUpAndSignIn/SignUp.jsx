@@ -204,9 +204,7 @@ const SignUp = () => {
                 {errors?.confirmPassword && errors?.confirmPassword?.message}
               </Error>
             </Hold>
-            <NavLink to="/acct-review" style={{ textDecoration: "none" }}>
-              <Button type="submit">Continue</Button>
-            </NavLink>
+            <Button type='submit' disabled={create.status === "loading" ? true: false}>{ create.status === "loading" ? "Loading..." : "Continue"}</Button>
             <AlText>
               Already have an account?{" "}
               <NavLink to="/auth/signin" style={{ textDecoration: "none" }}>

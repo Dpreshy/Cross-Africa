@@ -21,25 +21,33 @@ const AllOrders = () => {
     queryKey: ["orders"],
     queryFn: orders
   })
-  
+  const filteredData = data?.filter((el) => {
+    const filteredProducts = el?.products?.filter((e) => e.sellerID === userID)
+    // console.log(filteredProducts)
+    return filteredProducts.length > 0;
+  })
   const [ currentPage, setCurrentPage ] = useState(0)
   const recordPage = 6
   const lastIndex = currentPage * recordPage
-  const pageCount = Math.ceil(data?.length / recordPage)
-  const currentPageData = data?.slice(lastIndex, lastIndex + recordPage)
+  const pageCount = Math.ceil(filteredData?.length / recordPage)
+  const currentPageData = filteredData?.slice(lastIndex, lastIndex + recordPage)
   const changeCPage = ({selected}) => {
     setCurrentPage(selected)
   }
-  console.log(data)
+  // console.log(data)
 
   const [ query, setQuery ] = useState("")
-  console.log(query)
+  // console.log(query)
   const keys = ["order_No", "delivery_status"]
 
-  const search = (data) => {
-      return data?.filter((item) =>
-          keys.some((key)=> item[key]?.toLowerCase().includes(query))
-      )
+  const search = (e) => {
+    const result = e?.filter((item) =>
+   keys.some((key) => {
+      const value = item[key];
+      return typeof value === "string" && value.toLowerCase().includes(query);
+    })
+  );
+  return query ? (result?.length ? result : null) : e
   }
   const searchData = search(currentPageData)
 
@@ -149,13 +157,14 @@ const Wrapper = styled.div`
   scroll-behavior: smooth;
 `;
 const Container = styled.div`
-    width: 100%;
+    width: 95%;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
 `
 const Header = styled.div`
+  width: 90%;
   display: flex;
   align-items: center;
   justify-content: space-between;
