@@ -9,7 +9,7 @@ const Category = () => {
         <Wrapper>
           <Head>Buying & Selling made easy accross Africa!</Head>
           <Holder>
-            <Card>
+            {/* <Card>
               <Imaged>
                 <TextHold>
                   <Title>Electronics.</Title>
@@ -20,7 +20,7 @@ const Category = () => {
                   <NavLink to="/electronics" style={{textDecoration: "none", color: "white"}}><Button>Buy Now</Button></NavLink>
                 </TextHold>
               </Imaged>
-            </Card>
+            </Card> */}
             <Card>
               {/* <img src="/Frame 2.png" /> */}
 
@@ -35,7 +35,7 @@ const Category = () => {
                 </TextHold>
               </Images>
             </Card>
-            <Card>
+            {/* <Card>
               <Imagee>
                 <TextHold>
                   <Title>Clothing & Fashion.</Title>
@@ -46,7 +46,7 @@ const Category = () => {
                   <NavLink to="/clothing" style={{textDecoration: "none", color: "white"}}><Button>Buy Now</Button></NavLink>
                 </TextHold>
               </Imagee>
-            </Card>
+            </Card> */}
             <Card>
               <Image>
                 <TextHold>

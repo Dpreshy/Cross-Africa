@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-const Dashcard = ({ pr, da, ti, bg,liveProducts,pending, approved }) => {
+const Dashcard = ({ pr, da, ti, bg,liveProducts,pending, approved,cancled,orders,returned }) => {
   return (
     <Container>
       <Top bg={bg}>
@@ -17,13 +17,13 @@ const Dashcard = ({ pr, da, ti, bg,liveProducts,pending, approved }) => {
             <Left>
               <Unit>Order/Unit</Unit>
               <No>
-                10 <span>20</span>
+              {orders}
               </No>
             </Left>
             <Right>
               <Unit>Return</Unit>
               <No>
-                <div>20</div>
+                <div>{ returned}</div>
               </No>
             </Right>
           </Upbottom>
@@ -36,12 +36,12 @@ const Dashcard = ({ pr, da, ti, bg,liveProducts,pending, approved }) => {
                 <div>{ pending}</div>
               </No>
             </Left>}
-            <Right>
+            {cancled && <Right>
               <Unit>Cancel Order</Unit>
               <No>
-                <div>20</div>
+                <div>{cancled }</div>
               </No>
-            </Right>
+            </Right>}
           </Upbottom>{" "}
           <Upbottom>
             {liveProducts && <Left>
