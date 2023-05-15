@@ -4,7 +4,7 @@ import styled from "styled-components";
 const ItemData = ({ index, totalPrice, subtotal, props }) => {
     
   // const productID = props?.productID?._id
-  // console.log(productID)
+  // console.log(props)
     var nf = Intl.NumberFormat()
   return (
     <div>
@@ -28,7 +28,7 @@ const ItemData = ({ index, totalPrice, subtotal, props }) => {
             </Div>
             <Div>
               <Title2>Shipping Fee</Title2>
-              <Price>₦ { nf.format(props?.productID?.shoppingFee)}</Price>
+              <Price>₦ { nf.format(props?.productID?.shippingFee)}</Price>
             </Div>
           </Cont>
         </Content>

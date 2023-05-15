@@ -7,6 +7,7 @@ import { FiMenu } from "react-icons/fi";
 import { NavLink } from "react-router-dom";
 import Slider from "./Slider";
 import { useSelector, useDispatch } from 'react-redux';
+import Search from "../Search"
 
 const Header = () => {
   const [categories, setCategories] = useState(false);
@@ -62,12 +63,9 @@ const Header = () => {
                 <NavLink to="/food" style={{textDecoration: "none",width: "100%"}}><Navs>Food & Groceries</Navs></NavLink>
               </Menu>
             ) : null}
-            <SearchHold>
-              <input placeholder="Search product" />
-              <button>
-                <BiSearch />
-              </button>
-            </SearchHold>
+            <MyHold>
+              <Search />
+            </MyHold>
             <Nav
               onMouseOver={() => {
                 setAccount(true);
@@ -96,7 +94,7 @@ const Header = () => {
                   <Navs>Log Out</Navs>
                   </>) : (<>
                     
-                <NavLink to="/user-signup" style={{textDecoration: "none",width: "100%"}}><Navs>Create Account</Navs></NavLink>
+                <NavLink to="/signup-user" style={{textDecoration: "none",width: "100%"}}><Navs>Create Account</Navs></NavLink>
                 <NavLink to="/seller-page" style={{textDecoration: "none",width: "100%"}}><Navs>Create Seller</Navs></NavLink>
                     </>)
                }
@@ -137,6 +135,7 @@ const Header = () => {
 
 export default Header;
 
+const MyHold = styled.div``
 const Round = styled.div`
   color: white;
   position: absolute;
@@ -239,6 +238,17 @@ const Logo = styled.div`
   div {
     font-weight: 700;
     font-size: 20px;
+  }
+
+  @media (max-width: 330px){
+    img{
+      width: 40px;
+      height: 40px;
+    }
+    div{
+      font-weight: 700;
+      font-size: 16px;
+    }
   }
 `;
 const Hold = styled.div`

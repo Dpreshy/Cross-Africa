@@ -5,14 +5,14 @@ import PhoneInput from "react-phone-number-input";
 import "react-phone-number-input/style.css";
 import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai";
 
-import { createUser } from "../Api/Api";
+import { createAdmin } from "../Api/Api";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 
-const SignUp = () => {
+const SignUpUser = () => {
   const [value, setValue] = useState();
   const [Switch, setSwitch] = useState(true);
   const switchIcon = Switch === true ? false : true;
@@ -26,8 +26,8 @@ const SignUp = () => {
         .email("this is not a valid email")
         .required("This field cannot be empty"),
       phoneNum: yup.number().required("This field cannot be empty"),
-      companyName: yup.string().required("This field cannot be empty"),
       password: yup.string().required("This field cannot be empty"),
+      isAdmin: yup.boolean(),
       confirmPassword: yup
         .string()
         .oneOf([yup.ref("password"), null], "Password must match"),
@@ -44,31 +44,32 @@ const SignUp = () => {
   });
 
   const create = useMutation({
-    mutationKey: ["createseler"],
-    mutationFn: createUser,
+    mutationKey: ["createUser"],
+    mutationFn: createAdmin,
 
     onSuccess: (res) => {
       console.log(res);
-      navigate("/auth/signin");
+      navigate("/otp-user");
     },
 
     onError: (error) => {
-      console.log(error.message);
+      alert(error.message)
     },
   });
 
-  const onSubmit = handleSubmit((value) => {
+    const onSubmit = handleSubmit((value) => {
+    value.isAdmin = false
     create.mutate(value);
   });
   return (
     <div>
       <Container>
         <Wrapper>
-          <Title>Seller Account</Title>
+          <Title>Create Account</Title>
           <Text>Please enter every necessary information</Text>
           <InputHold onSubmit={onSubmit}>
             <Hold>
-              <Name>Full Name</Name>
+              <Name>First Name</Name>
               <HoldInput
                 style={{
                   border: `${
@@ -76,7 +77,7 @@ const SignUp = () => {
                   }`,
                 }}
               >
-                <Input placeholder="Full Name" {...register("firstName")} />
+                <Input placeholder="First Name" {...register("firstName")} />
               </HoldInput>
               <Error>{errors?.firstName && errors?.firstName?.message}</Error>
             </Hold>
@@ -105,24 +106,6 @@ const SignUp = () => {
                 <Input placeholder="Email Address" {...register("email")} />
               </HoldInput>
               <Error>{errors?.email && errors?.email?.message}</Error>
-            </Hold>
-            <Hold>
-              <Name>Company Name</Name>
-              <HoldInput
-                style={{
-                  border: `${
-                    errors?.firstName ? "1px solid red" : "1px solid lightgray"
-                  }`,
-                }}
-              >
-                <Input
-                  placeholder="Company Name"
-                  {...register("companyName")}
-                />
-              </HoldInput>
-              <Error>
-                {errors?.companyName && errors?.companyName?.message}
-              </Error>
             </Hold>
             <Hold>
               <Name>Phone Number</Name>
@@ -207,7 +190,7 @@ const SignUp = () => {
             <Button type='submit' disabled={create.status === "loading" ? true: false}>{ create.status === "loading" ? "Loading..." : "Continue"}</Button>
             <AlText>
               Already have an account?{" "}
-              <NavLink to="/auth/signin" style={{ textDecoration: "none" }}>
+              <NavLink to="/login-user" style={{ textDecoration: "none" }}>
                 <span>LogIn</span>
               </NavLink>
             </AlText>
@@ -218,7 +201,7 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default SignUpUser;
 
 const PassHold = styled.div`
     display: flex;

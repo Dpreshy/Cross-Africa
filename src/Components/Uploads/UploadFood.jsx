@@ -59,8 +59,6 @@ const handleSubmit = (e) => {
   const id = check._id
   if (
     name.length == 0 ||
-    type.length == 0 ||
-    gender.length == 0 ||
     brand.length == 0 ||
     description.length == 0 ||
     !price ||
@@ -138,7 +136,7 @@ const handleSubmit = (e) => {
           </Inputcont>
         </Inputhold>
         <Btn>
-            <Button type="submit">Enter Product Variation</Button>
+        <Button type='submit' disabled={create.status === "loading" ? true: false}>{ create.status === "loading" ? "Loading..." : "Enter Product Variation"}</Button>
         </Btn>
       </Wrapper>
     </Container>
@@ -183,10 +181,11 @@ const Btn = styled.div`
 `;
 const Inputcont = styled.div`
   width: 600px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
   padding: 10px 15px;
+
+  @media (max-width: 680px){
+    width: 100%;
+  }
 `;
 const Input = styled.div`
   display: flex;
@@ -220,6 +219,10 @@ const Input = styled.div`
     border-radius: 5px;
     padding: 10px;
   }
+
+  @media (max-width: 680px){
+    width: 100%;
+  }
 `;
 const Tag = styled.div`
   font-size: 15px;
@@ -242,6 +245,10 @@ const Box = styled.label`
     align-items: center;
     justify-content: center;
     cursor: pointer;
+
+  @media (max-width: 450px){
+    height: 100px;
+  }
 `;
 const Top = styled.div`
   width: 97%;

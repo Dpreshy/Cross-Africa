@@ -18,7 +18,7 @@ const Checkout = () => {
   var nf = Intl.NumberFormat()
   const cartData = useSelector((state) => state.reducers.cartItem)
   const quantity = useSelector((state) => state.reducers.qty)
-  const totalPrice = cartData?.reduce((price, item) => price + item.qty * item.price, 0)
+  const totalPrice = cartData?.reduce((price, item) => price + item.qty * item.price + item.shippingFee, 0)
   const [ selectCountry, setSelectCountry ] = useState(countryData)
   let [ findCountry, setFindCountry ] = useState(0)
   const [ email, setemail ] = useState(""); 
@@ -38,7 +38,7 @@ const Checkout = () => {
   const [products, setProducts] = useState([])
   
 const productOrdered=()=>{
-  const Data = cartData.map((el)=> ({productID: el._id, sellerID: el.user,qty: el.qty}))
+  const Data = cartData.map((el)=> ({productID: el._id, sellerID: el.user,qty: el.qty, price: el.price}))
   setProducts(Data)
   }
   // console.log(cartData)

@@ -69,7 +69,7 @@ const Variation = () => {
           </Inputcont>
         </Inputhold>
         <Btn>
-            <Button type="submit">Upload </Button>
+            <Button type='submit' disabled={create.status === "loading" ? true: false}>{ create.status === "loading" ? "Loading..." : "Upload"}</Button>
         </Btn>
       </Wrapper>
     </Container>
