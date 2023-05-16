@@ -77,6 +77,7 @@ const Variation = () => {
 };
 
 export default Variation;
+
 const Title = styled.div`
   padding: 7px 15px;
   font-size: 12px;
@@ -98,19 +99,19 @@ const Btn = styled.div`
   width: 97%;
   display: flex;
   justify-content: flex-start;
-  padding: 13px 15px;
+  padding: 13px 0;
 `;
 const Inputcont = styled.div`
   width: 600px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
   padding: 10px 15px;
+
+  @media (max-width: 680px){
+    width: 100%;
+  }
 `;
 const Input = styled.div`
   display: flex;
   flex-direction: column;
-  /* margin: 0 18px; */
   width: 500px;
   span {
     font-size: 12px;
@@ -125,6 +126,25 @@ const Input = styled.div`
     height: 30px;
     margin-bottom: 5px;
   }
+  select {
+    outline: 0;
+    border: 1.9px solid grey;
+    padding: 5px 10px;
+    border-radius: 4px;
+    height: 40px;
+    margin-bottom: 5px;
+  }
+
+  textarea{
+    height: 300px;
+    resize: none;
+    border-radius: 5px;
+    padding: 10px;
+  }
+
+  @media (max-width: 680px){
+    width: 100%;
+  }
 `;
 const Tag = styled.div`
   font-size: 15px;
@@ -133,7 +153,6 @@ const Tag = styled.div`
 const Inputhold = styled.div`
   width: 100%;
 `;
-
 const Wrapper = styled.form`
   width: 90%;
   display: flex;

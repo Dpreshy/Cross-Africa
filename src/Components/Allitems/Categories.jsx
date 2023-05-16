@@ -23,7 +23,7 @@ const Categories = () => {
   const lastIndex = currentPage * recordPage
   const currentPageData = data?.slice(lastIndex, lastIndex + recordPage)
 
-  const filteredData = currentPageData?.filter((el) => el.category === id)
+  const filteredData = currentPageData?.filter((el) => el.category === id || el.name === id || el.brand === id)
   // console.log(id)
   var nf = Intl.NumberFormat()
   return (

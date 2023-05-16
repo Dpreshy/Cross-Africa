@@ -17,13 +17,7 @@ const OtpPage = () => {
     mutationFn: verifyUser,
     onSuccess: () => {
       if (check.isSeller === true) {
-        if (check.completed === true) {
-          navigate("/seller-dashboard")
-        }
         navigate("/auth/personalinfo")
-      }
-      if (check.completed === true) {
-        navigate("/seller-dashboard")
       }
     },
     onError: () => {

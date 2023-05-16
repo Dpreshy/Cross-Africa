@@ -36,11 +36,11 @@ const SignIn = () => {
         mutationFn: logInUser,
 
         onSuccess: (res) => {
-            console.log(res);
-            navigate("/auth/verify")
+            navigate("/seller-dashboard")
         },
 
         onError: (error) => {
+            // alert(error.message)
             console.log(error.message)
         }
     })
@@ -77,7 +77,7 @@ const SignIn = () => {
                       </PassHold>
                       <Button type='submit' disabled={create.status === "loading" ? true: false}>{ create.status === "loading" ? "Loading..." : "Continue"}</Button>
                       {/* <Button>Continue as a Guest</Button> */}
-                      <AlText>Don't have an account? <NavLink to="/auth/signin" style={{textDecoration: "none"}}><span>Sign Up</span></NavLink></AlText>
+                      <AlText>Don't have an account? <NavLink to="/auth" style={{textDecoration: "none"}}><span>Sign Up</span></NavLink></AlText>
                   </InputHold>
               </Wrapper>
           </Container>

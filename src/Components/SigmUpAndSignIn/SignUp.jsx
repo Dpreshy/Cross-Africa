@@ -49,11 +49,11 @@ const SignUp = () => {
 
     onSuccess: (res) => {
       console.log(res);
-      navigate("/auth/signin");
+      navigate("/auth/verify");
     },
 
     onError: (error) => {
-      console.log(error.message);
+      alert(error.message);
     },
   });
 

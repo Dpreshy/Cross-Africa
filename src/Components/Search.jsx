@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { getAllProduct } from './Api/ProductApi';
 import { NavLink } from 'react-router-dom';
 
-const Search = () => {
+const Search = ({setshow_search}) => {
 
   const { data } = useQuery({
     queryKey: [ "products" ],
@@ -29,12 +29,12 @@ const Search = () => {
       return typeof value === "string" && value.toLowerCase().includes(query);
     })
   );
-  return query ? (result?.length ? result : null) : e
+  return query ? (result?.length ? result : null) : null
   }
   const searchData = search(currentPageData)
   console.log(searchData)
   return (
-    <>
+    <Container>
        <SearchHold>
           <input
               placeholder="Search by name or brand"
@@ -47,14 +47,18 @@ const Search = () => {
       </SearchHold>
       <div>
       {
-        searchData?.map((props, index) => {
-          <Div key={props._id}>
-            <Navs to={ `hr` }>Hello</Navs>
+          searchData?.map((props, index) => (
+            <Div key={props._id} onClick={ () => {
+              setshow_search(false)
+            }}>
+              <Navs to={ `/${props.name}` } onClick={ () => {
+                setQuery("")
+              }}>{props.name }</Navs>
           </Div>
-        })
+        ))
       }
       </div>
-    </>
+    </Container>
   )
 }
 
@@ -65,23 +69,43 @@ const Navs = styled(NavLink)`
   font-weight: 700;
   text-decoration: none;
   color: black;
-  border-bottom: 1px solid lightgray;
-  margin: 10px 0px;
+  /* border-bottom: 1px solid lightgray; */
+  padding: 10px 5px;
 
   :hover{
     color: #d975c0;
+    background-color: lightgray;
+  }
+`
+const Container = styled.div`
+
+  @media (max-width: 768px){
+    width: 100%;
+    display: flex;
+    flex-direction: column;
   }
 `
 const Div = styled.div`
   width: 400px;
-  height: 300px;
+  max-height: 300px;
   background-color: white;
   display: flex;
   flex-direction: column;
   position: absolute;
   top: 100px;
+  border: 1px solid #d975c0;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
 
   overflow-y: auto;
+
+  @media (max-width: 768px){
+    position: relative;
+    top: 20px;
+    width: 100%;
+    border: 0;
+    border-radius: 0px;
+  }
 `
 const SearchHold = styled.div`
   width: 400px;
@@ -90,6 +114,7 @@ const SearchHold = styled.div`
   border-radius: 10px;
   display: flex;
   align-items: center;
+  background-color: white;
   /* justify-content: center; */
   input {
     /* height: 40px; */
@@ -97,6 +122,7 @@ const SearchHold = styled.div`
     outline: none;
     border: 0;
     padding-left: 10px;
+    background-color: transparent;
   }
   button {
     width: 70px;
@@ -109,8 +135,13 @@ const SearchHold = styled.div`
     border-bottom-right-radius: 7px;
   }
 
-  @media (max-width: 660px) {
-    width: 250px;
+  @media (max-width: 768px) {
+    width: 100%;
+    margin-top: 10px;
+
+    input{
+      width: 95%;
+    }
   }
   /* @media (max-width:768px) {
     display: none;

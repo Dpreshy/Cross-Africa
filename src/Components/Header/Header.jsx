@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { AiFillCaretDown } from "react-icons/ai";
 import { BsCart } from "react-icons/bs";
 import { BiHelpCircle, BiSearch } from "react-icons/bi";
-import { FiMenu } from "react-icons/fi";
+import { FiMenu, FiSearch } from "react-icons/fi";
 import { NavLink } from "react-router-dom";
 import Slider from "./Slider";
 import { useSelector, useDispatch } from 'react-redux';
@@ -13,6 +13,7 @@ const Header = () => {
   const [categories, setCategories] = useState(false);
   const [ account, setAccount ] = useState(false);
   const [menuChange, setMenuChange] = useState(false)
+  const [show_search, setshow_search] = useState(false)
   const user = JSON.parse(localStorage.getItem("user"));
   const myRef = useRef()
   const cartData = useSelector((state) => state.reducers.cartItem)
@@ -99,7 +100,16 @@ const Header = () => {
                     </>)
                }
               </AcMenu>
-            ) : null}
+            ) : null }
+            <Nav onClick={ () => {
+              setshow_search(true)
+            }}>
+           
+              <SearchIcon>
+              <div>Search</div>
+              <FiSearch />
+              </SearchIcon>
+            </Nav>
             <Nav>
               <div> Cart</div>
 
@@ -129,13 +139,48 @@ const Header = () => {
           </Hold>
         </Wrapper>
       </Container>
+      {
+        show_search ? <Show>
+          <Search setshow_search={ setshow_search} />
+      </Show> : null
+      }
     </div>
   );
 };
 
 export default Header;
 
-const MyHold = styled.div``
+const Show = styled.div`
+  display: none;
+
+  @media (max-width: 768px){
+    display: flex;
+    justify-content: center;
+    background-color: rgba(0,0,0,0.5);
+    height: 100vh;
+    width: 100%;
+    position: fixed;
+    top: 0px;
+  }
+`;
+const SearchIcon = styled.span`
+  display: none;
+
+  @media (max-width:768px) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    div{
+      margin-right: 10px;
+    }
+  }   
+`
+const MyHold = styled.div`
+  @media (max-width:768px) {
+    display: none;
+  } 
+`
 const Round = styled.div`
   color: white;
   position: absolute;
@@ -240,7 +285,7 @@ const Logo = styled.div`
     font-size: 20px;
   }
 
-  @media (max-width: 330px){
+  @media (max-width: 440px){
     img{
       width: 40px;
       height: 40px;
@@ -248,6 +293,16 @@ const Logo = styled.div`
     div{
       font-weight: 700;
       font-size: 16px;
+    }
+  }
+  @media (max-width: 410px){
+    img{
+      width: 30px;
+      height: 30px;
+    }
+    div{
+      font-weight: 700;
+      font-size: 14px;
     }
   }
 `;
@@ -295,6 +350,12 @@ const Nav = styled.div`
   }
   :nth-child(3) {
     @media (max-width: 1000px) {
+      display: none;
+    }
+  }
+
+  @media (max-width: 410px){
+    div{
       display: none;
     }
   }
