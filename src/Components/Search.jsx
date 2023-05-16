@@ -18,7 +18,7 @@ const Search = ({setshow_search}) => {
   const lastIndex = currentPage * recordPage
   const currentPageData = data?.slice(lastIndex, lastIndex + recordPage)
   const [ query, setQuery ] = useState()
-  console.log(query)
+  // console.log(query)
   const keys = ["name", "brand","category"]
 
     
@@ -26,7 +26,7 @@ const Search = ({setshow_search}) => {
     const result = e?.filter((item) =>
    keys.some((key) => {
       const value = item[key];
-      return typeof value === "string" && value.toLowerCase().includes(query);
+      return typeof value === "string" && value.toLowerCase().includes(query?.toLowerCase());
     })
   );
   return query ? (result?.length ? result : null) : null

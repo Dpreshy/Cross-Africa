@@ -112,7 +112,7 @@ const Uniheader = () => {
               </span>
             </Hold>
             </NavLink>
-            <NavLink to="/seller-dashboard/settings" style={{textDecoration: "none", color: "black"}}>
+            {/* <NavLink to="/seller-dashboard/settings" style={{textDecoration: "none", color: "black"}}>
               <Hold>
                 <span>
                   <AiOutlineTool fontSize="25px" color="#123456" />
@@ -122,7 +122,7 @@ const Uniheader = () => {
                   <AiFillCaretDown />
                 </span>
               </Hold>
-            </NavLink>
+            </NavLink> */}
          </Div>
         </Up>
       </Wrap>

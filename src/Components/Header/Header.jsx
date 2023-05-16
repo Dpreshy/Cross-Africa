@@ -4,7 +4,7 @@ import { AiFillCaretDown } from "react-icons/ai";
 import { BsCart } from "react-icons/bs";
 import { BiHelpCircle, BiSearch } from "react-icons/bi";
 import { FiMenu, FiSearch } from "react-icons/fi";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import Slider from "./Slider";
 import { useSelector, useDispatch } from 'react-redux';
 import Search from "../Search"
@@ -19,6 +19,11 @@ const Header = () => {
   const cartData = useSelector((state) => state.reducers.cartItem)
 
   // console.log(cartData)
+  const navigate = useNavigate()
+  const removeUser = () => {
+    localStorage.removeItem("user")
+    navigate("/")
+  }
   const change = () => {
     myRef.current.style.left = "0px"
     setMenuChange(true)
@@ -91,8 +96,7 @@ const Header = () => {
               >
                 {
                   user ? (<>
-                   <Navs>Profile</Navs>
-                  <Navs>Log Out</Navs>
+                  <Navs onClick={removeUser}>Log Out</Navs>
                   </>) : (<>
                     
                 <NavLink to="/signup-user" style={{textDecoration: "none",width: "100%"}}><Navs>Create Account</Navs></NavLink>
