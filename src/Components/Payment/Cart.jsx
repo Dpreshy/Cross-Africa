@@ -10,58 +10,85 @@ import {
 } from "react-icons/fa";
 import { AiFillAlipayCircle, AiOutlinePayCircle } from "react-icons/ai";
 import { BsPaypal } from "react-icons/bs";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux';
 
 const Cart = () => {
 
-const [QTY, setQTY] = useState()
-
+  const [ QTY, setQTY ] = useState()
+    const navigate = useNavigate()
+    const check = JSON.parse(localStorage.getItem("user"))
   const cartData = useSelector((state) => state.reducers.cartItem)
   const totalPrice = cartData?.reduce((price, item)=> price + item.qty * item.price, 0)
-
+  const change = () => {
+    if (check) {
+      if(totalPrice >= 50000){
+        navigate("/checkout")
+        // alert("he no work")
+      }else{
+        alert("You must have a total price of ₦50,000 to perform this action")
+      }
+    } else {
+      navigate("/auth/signin")
+    }
+  }
+  // console.log(totalPrice)
   var nf = Intl.NumberFormat()
   return (
     <div>
       <Container>
         <Wrapper>
-          <Top>
-            <Text>Shopping Cart</Text>
-            <Tag>
-              <Tags>Item</Tags>
-              <Price>
-                <span>Price </span>
-                <span>Quantity</span>
-                <span>Total Price</span>
-              </Price>
-            </Tag>
-          </Top>
+        <Text>Shopping Cart</Text>
+          <Scroll>
+          <Buttom>
+          <Head>
+              
+              <Th>
+              <HoldHead>Item </HoldHead>
+            </Th>
+              <Th>
+              <HoldHead>Price </HoldHead>
+            </Th>
+              <Th>
+              <HoldHead>Quantity </HoldHead>
+            </Th>
+              <Th>
+              <HoldHead>Total Price </HoldHead>
+            </Th>
+          </Head>
           {
             cartData?.map((props) => (
-              <Middle key={props._id}>
-              <Tag>
-                  <Image>
-                  <img src={props?.avatar[0].url} />
-                  <span>
-                   {props?.name}
-                  </span>
-                </Image>
-                <Price>
-                    <span>₦{props.price }</span>
-                    <div>{ props.qty}</div>
-                  <span>₦{nf.format(props.qty * props.price) }</span>
-                </Price>
-              </Tag>
-            </Middle>
+              <Body key={ props._id }>
+                <Td>
+              <UserHold>
+                <span>
+            <Image src={props?.avatar[0].url} />
+                </span>
+                {props?.name}
+              </UserHold>
+                </Td>
+                <Td>
+              {" "}
+        <HoldHead>₦{nf.format(props.price) }</HoldHead>
+            </Td>
+                <Td>
+              {" "}
+        <HoldHead><div>{ props.qty}</div></HoldHead>
+            </Td>
+                <Td>
+              {" "}
+        <HoldHead>₦{nf.format(props.qty * props.price) }</HoldHead>
+            </Td>
+            </Body>
             ))
          }
+          </Buttom>
+          </Scroll>
           <Down>
             <Hold>
               <span>SUBTOTAL</span>
               <div>₦{nf.format(totalPrice) }</div>
-              <Link to="/checkout">
-                <Button> Checkout</Button>
-              </Link>
+                <Button onClick={change}> Checkout</Button>
               <Icon>
                 <BsPaypal color="#0a223a" fontSize="40px" />
                 <FaAmazonPay fontSize="40px" />
@@ -76,6 +103,64 @@ const [QTY, setQTY] = useState()
 
 export default Cart;
 
+const Image = styled.img`
+  width: 100px;
+  height: 100px;
+  border-radius: 5px;
+  background-color: gold;
+  margin-right: 10px;
+`;
+const UserHold = styled.div`
+  display: flex;
+  align-items: center;
+
+  :hover {
+    color: blue;
+  }
+  cursor: pointer;
+`;
+const Td = styled.td`
+  padding: 10px 10px;
+  font-size: 16px;
+  font-weight: 400;
+`;
+const Body = styled.tr`
+  border-bottom: 1px solid lightgray;
+  border-top: 1px solid lightgray;
+  text-align: center;
+`;
+const HoldHead = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  div {
+    font-size: 13px;
+    font-weight: 500;
+    border: 1.8px solid black;
+    padding: 15px 20px;
+  }
+`;
+const Th = styled.th`
+  padding: 10px 15px;
+  
+  font-size: 18px;
+  font-weight: 600;
+`;
+const Head = styled.tr`
+`;
+const Buttom = styled.table`
+  width: 100%;
+  /* padding: 0px 20px; */
+  text-align: center;
+  border-collapse: collapse;
+  border-spacing: 0;
+`;
+const Scroll = styled.div`
+  width: 90%;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+`;
 const Icon = styled.div`
   width: 130px;
   /* background-color: red; */
@@ -105,73 +190,10 @@ const Hold = styled.div`
     margin: 8px 0;
   }
 `;
-const Price = styled.div`
-  display: flex;
-  /* width: 20%; */
-  display: flex;
-  align-items: center;
-  span {
-    font-size: 13px;
-    font-weight: 500;
-    margin: 15px;
-  }
-
-  div {
-    font-size: 13px;
-    font-weight: 500;
-    border: 1.8px solid black;
-    padding: 15px 20px;
-  }
-`;
-
-const Middle = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-bottom: 1.9px solid grey;
-  padding: 30px 0;
-`;
-const Image = styled.div`
-  width: 380px;
-  display: flex;
-  img {
-    height: 130px;
-    width: 240px;
-    object-fit: cover;
-    border-radius: 5px;
-  }
-
-  span {
-    font-size: 13px;
-    font-weight: 500;
-    padding-left: 10px;
-  }
-`;
 const Text = styled.div`
   font-size: 18px;
   font-weight: 600;
   padding-bottom: 40px;
-`;
-const Tags = styled.div`
-  margin: 10px;
-  font-size: 13px;
-  font-weight: 500;
-`;
-const Tag = styled.div`
-  width: 92%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-`;
-const Top = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  border-bottom: 1.9px solid grey;
-  padding: 20px 0;
 `;
 const Down = styled.div`
   width: 100%;

@@ -7,7 +7,8 @@ const ItemsCard = ({ id, index, name, price,img }) => {
     
     // console.log(id)
     return(
-          <Card key={index}>
+      <>
+      <Card key={index}>
             <Image>
               <img src={img} />
             </Image>
@@ -22,8 +23,9 @@ const ItemsCard = ({ id, index, name, price,img }) => {
                 </span>
               </Div>
             </Name>
-                    <Price>₦{ price}</Price>
+              <Price>₦{ price}</Price>
           </Card>
+      </>
     )
 }
 
@@ -35,15 +37,33 @@ const Div = styled(NavLink)`
   cursor: pointer;
 `
 const Image = styled.div`
-  background-color: #cdc8c8;
-  border-radius: 5px;
+  /* background-color: #cdc8c8; */
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
   width: 220px;
   height: 260px;
   img {
     height: 100%;
     width: 100%;
     object-fit: cover;
-    border-radius: 5px;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+  }
+  @media (max-width: 550px){
+    width: 170px;
+    height: 220px;
+  }
+  @media (max-width: 440px){
+    width: 150px;
+    height: 220px;
+  }
+  @media (max-width: 380px){
+    width: 120px;
+    height: 200px;
+  }
+  @media (max-width: 314px){
+    width: 100px;
+    height: 160px;
   }
 `;
 
@@ -64,11 +84,28 @@ const Price = styled.div`
 `;
 
 const Card = styled.div`
-  width: 280px;
+  width: 220px;
   height: 300px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: space-between;
   margin: 10px;
+
+  @media (max-width: 550px){
+    width: 170px;
+    height: 270px;
+  }
+  @media (max-width: 440px){
+    width: 150px;
+    height: 250px;
+  }
+  @media (max-width: 380px){
+    width: 120px;
+    height: 230px;
+  }
+  @media (max-width: 314px){
+    width: 100px;
+    height: 180px;
+  }
 `;

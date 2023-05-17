@@ -10,10 +10,11 @@ const Slider = ({ myRef }) => {
   return (
       <div>
           <Menu ref={myRef}>
-          <NavLink to="/electronics" style={{textDecoration: "none"}}><Navs>Electronics</Navs></NavLink>
-                <NavLink to="/phone" style={{textDecoration: "none"}}><Navs>Mobile Phones</Navs></NavLink>
-                <NavLink to="/clothing" style={{textDecoration: "none"}}><Navs>Clothing & Fashion</Navs></NavLink>
-                <NavLink to="/food" style={{textDecoration: "none"}}><Navs>Food & Groceries</Navs></NavLink>
+            <Navs to="/electronics">Electronics</Navs>
+            <Navs to="/phone">Mobile Phones</Navs>
+            <Navs to="/clothing">Clothing & Fashion</Navs>
+            <Navs to="/food">Food & Groceries</Navs>
+            <Navs to="/allitems">All Products</Navs>
               <br />
               <br />
               <br />
@@ -23,12 +24,11 @@ const Slider = ({ myRef }) => {
               <br />
               <br />
              { user ? (<>
-                   {/* <Navs>Profile</Navs> */}
-                  <Navs onClick={removeUser}>Log Out</Navs>
-                  </>) : (<>
-                    <Navs>Create Account</Navs>
-                <Navs>Create Seller</Navs>
-                    </>)}
+                  <Navs to="/" onClick={removeUser}>Log Out</Navs>
+        </>) : (<div>
+          <Navs to="/signup-user">Create Account</Navs>
+          <Navs to="/seller-page">Create Seller</Navs>
+                    </div>)}
               </Menu>
     </div>
   )
@@ -40,6 +40,8 @@ const Menu = styled.div`
   width: 250px;
   height: 100vh;
   background-color: white;
+  display: flex;
+  flex-direction: column;
   /* background-color: gold; */
   border-radius: 5px;
 
@@ -49,8 +51,12 @@ const Menu = styled.div`
   left: -1000px;
   z-index: 1;
   transition: all 350ms ease-in-out;
+  div{
+    display: flex;
+    flex-direction: column;
+  }
 `;
-const Navs = styled.div`
+const Navs = styled(NavLink)`
   width: 95%;
   line-height: 4;
   padding-left: 10px;
@@ -58,6 +64,8 @@ const Navs = styled.div`
   cursor: pointer;
   font-weight: 700;
   transition: all 350ms ease-in-out;
+  text-decoration: none;
+  color: black;
   :hover {
     background-color: lightgray;
     padding-left: 0px;

@@ -23,13 +23,13 @@ const Categories = () => {
   const lastIndex = currentPage * recordPage
   const currentPageData = data?.slice(lastIndex, lastIndex + recordPage)
 
-  const filteredData = currentPageData?.filter((el) => el.category === id)
-  console.log(id)
+  const filteredData = currentPageData?.filter((el) => el.category === id || el.name === id || el.brand === id)
+  // console.log(id)
   var nf = Intl.NumberFormat()
   return (
     <Container>
       <Wrapper>
-      <Downtitle>Mobiles</Downtitle>
+        <Downtitle>{ id?.toUpperCase()}</Downtitle>
         <Cardhold>
         {
         filteredData?.map((props, index) => (
@@ -48,6 +48,10 @@ const Downtitle = styled.div`
   font-size: 20px;
   font-weight: 700;
   margin-bottom: 7px;
+
+  @media (max-width: 380px){
+    font-size: 18px;
+  }
 `;
 const Cardhold = styled.div`
   width: 100%;
@@ -55,8 +59,6 @@ const Cardhold = styled.div`
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
-  /* background-color: gold; */
-  /* overflow-x: auto; */
 `;
 
 const Wrapper = styled.div`
@@ -65,7 +67,6 @@ const Wrapper = styled.div`
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
-  /* border: 1.9px solid #d975c0; */
   padding: 0 10px;
   margin: 10px 0;
   border-radius: 5px;

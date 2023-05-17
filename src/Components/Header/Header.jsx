@@ -3,20 +3,27 @@ import styled from "styled-components";
 import { AiFillCaretDown } from "react-icons/ai";
 import { BsCart } from "react-icons/bs";
 import { BiHelpCircle, BiSearch } from "react-icons/bi";
-import { FiMenu } from "react-icons/fi";
-import { NavLink } from "react-router-dom";
+import { FiMenu, FiSearch } from "react-icons/fi";
+import { NavLink, useNavigate } from "react-router-dom";
 import Slider from "./Slider";
 import { useSelector, useDispatch } from 'react-redux';
+import Search from "../Search"
 
 const Header = () => {
   const [categories, setCategories] = useState(false);
   const [ account, setAccount ] = useState(false);
   const [menuChange, setMenuChange] = useState(false)
+  const [show_search, setshow_search] = useState(false)
   const user = JSON.parse(localStorage.getItem("user"));
   const myRef = useRef()
   const cartData = useSelector((state) => state.reducers.cartItem)
 
   // console.log(cartData)
+  const navigate = useNavigate()
+  const removeUser = () => {
+    localStorage.removeItem("user")
+    navigate("/")
+  }
   const change = () => {
     myRef.current.style.left = "0px"
     setMenuChange(true)
@@ -62,12 +69,9 @@ const Header = () => {
                 <NavLink to="/food" style={{textDecoration: "none",width: "100%"}}><Navs>Food & Groceries</Navs></NavLink>
               </Menu>
             ) : null}
-            <SearchHold>
-              <input placeholder="Search product" />
-              <button>
-                <BiSearch />
-              </button>
-            </SearchHold>
+            <MyHold>
+              <Search />
+            </MyHold>
             <Nav
               onMouseOver={() => {
                 setAccount(true);
@@ -92,16 +96,24 @@ const Header = () => {
               >
                 {
                   user ? (<>
-                   <Navs>Profile</Navs>
-                  <Navs>Log Out</Navs>
+                  <Navs onClick={removeUser}>Log Out</Navs>
                   </>) : (<>
                     
-                <NavLink to="/user-signup" style={{textDecoration: "none",width: "100%"}}><Navs>Create Account</Navs></NavLink>
+                <NavLink to="/signup-user" style={{textDecoration: "none",width: "100%"}}><Navs>Create Account</Navs></NavLink>
                 <NavLink to="/seller-page" style={{textDecoration: "none",width: "100%"}}><Navs>Create Seller</Navs></NavLink>
                     </>)
                }
               </AcMenu>
-            ) : null}
+            ) : null }
+            <Nav onClick={ () => {
+              setshow_search(true)
+            }}>
+           
+              <SearchIcon>
+              <div>Search</div>
+              <FiSearch />
+              </SearchIcon>
+            </Nav>
             <Nav>
               <div> Cart</div>
 
@@ -131,12 +143,48 @@ const Header = () => {
           </Hold>
         </Wrapper>
       </Container>
+      {
+        show_search ? <Show>
+          <Search setshow_search={ setshow_search} />
+      </Show> : null
+      }
     </div>
   );
 };
 
 export default Header;
 
+const Show = styled.div`
+  display: none;
+
+  @media (max-width: 768px){
+    display: flex;
+    justify-content: center;
+    background-color: rgba(0,0,0,0.5);
+    height: 100vh;
+    width: 100%;
+    position: fixed;
+    top: 0px;
+  }
+`;
+const SearchIcon = styled.span`
+  display: none;
+
+  @media (max-width:768px) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    div{
+      margin-right: 10px;
+    }
+  }   
+`
+const MyHold = styled.div`
+  @media (max-width:768px) {
+    display: none;
+  } 
+`
 const Round = styled.div`
   color: white;
   position: absolute;
@@ -240,6 +288,27 @@ const Logo = styled.div`
     font-weight: 700;
     font-size: 20px;
   }
+
+  @media (max-width: 440px){
+    img{
+      width: 40px;
+      height: 40px;
+    }
+    div{
+      font-weight: 700;
+      font-size: 16px;
+    }
+  }
+  @media (max-width: 410px){
+    img{
+      width: 30px;
+      height: 30px;
+    }
+    div{
+      font-weight: 700;
+      font-size: 14px;
+    }
+  }
 `;
 const Hold = styled.div`
   display: flex;
@@ -285,6 +354,12 @@ const Nav = styled.div`
   }
   :nth-child(3) {
     @media (max-width: 1000px) {
+      display: none;
+    }
+  }
+
+  @media (max-width: 410px){
+    div{
       display: none;
     }
   }

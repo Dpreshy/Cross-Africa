@@ -22,6 +22,7 @@ import UploadCloths from "../Uploads/UploadCloths";
 import UploadElectronics from "../Uploads/uploadElectronics";
 import UploadFood from "../Uploads/UploadFood";
 import Transactions from "../OrderPages/Transactions";
+import Settings from "../Settings/Settings"
 
 const AllRoutes = () => {
   let element = useRoutes([
@@ -193,6 +194,14 @@ const AllRoutes = () => {
           element: (
             <Private>
               <Returned />
+            </Private>
+          ),
+        },
+        {
+          path: "settings",
+          element: (
+            <Private>
+              <Settings />
             </Private>
           ),
         },

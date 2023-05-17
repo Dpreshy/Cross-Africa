@@ -111,16 +111,18 @@ const Uniheader = () => {
                 <AiFillCaretDown />
               </span>
             </Hold>
-          </NavLink>
-          <Hold>
-            <span>
-              <AiOutlineTool fontSize="25px" color="#123456" />
-            </span>
-            <Text>Settings</Text>
-            <span>
-              <AiFillCaretDown />
-            </span>
-          </Hold>
+            </NavLink>
+            {/* <NavLink to="/seller-dashboard/settings" style={{textDecoration: "none", color: "black"}}>
+              <Hold>
+                <span>
+                  <AiOutlineTool fontSize="25px" color="#123456" />
+                </span>
+                <Text>Settings</Text>
+                <span>
+                  <AiFillCaretDown />
+                </span>
+              </Hold>
+            </NavLink> */}
          </Div>
         </Up>
       </Wrap>

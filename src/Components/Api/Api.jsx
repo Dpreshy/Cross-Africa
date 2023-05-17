@@ -4,15 +4,17 @@ const baseURL = "https://crossbackend.onrender.com";
 
 export const createUser = async({firstName,lastName,email,companyName, phoneNum, password}) => {
     await axios.post(`${baseURL}/api/seler/register`, { firstName, lastName, email, companyName, phoneNum, password }).then(res => {
-        // console.log(res);
+        localStorage.setItem("user", JSON.stringify(res.data.data))
+        alert(res.data.token)
     })
 }
-export const createAdmin = async({firstName,lastName,email,phoneNum, password}) => {
-    await axios.post(`${baseURL}/api/user/registerAdmin`, { firstName, lastName, email, phoneNum, password }).then(res => {
-        console.log(res);
+export const createAdmin = async(value) => {
+    await axios.post(`${baseURL}/api/user/register`, value).then(res => {
+        localStorage.setItem("user", JSON.stringify(res.data.data))
+        alert(res.data.token)
     })
 }
-export const loginAdmin = async({email, password}) => {
+export const loginUser= async({email, password}) => {
     await axios.post(`${baseURL}/api/user/login`, {email, password }).then(res => {
         localStorage.setItem("user", JSON.stringify(res.data.data))
         // alert(res.data.token)

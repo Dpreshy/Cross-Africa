@@ -1,7 +1,7 @@
 import React from "react";
 import { BiFridge } from "react-icons/bi";
 import { FaMobileAlt, FaShirtsinbulk, FaVest } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import Uniheader from "../SigmUpAndSignIn/Uniheader";
 import pic1 from "../Assets/realme 2 pro front.png"
@@ -14,29 +14,21 @@ const Uploads = () => {
     <Container>
       <Uniheader />
       <Wrap>
-        <Cont>
+        <Cont  to="/seller-dashboard/uploading">
           <Image src={pic1 } />
-          <Link to="/seller-dashboard/uploading" style={{ textDecoration: "none", color: "black" }}>
             <span>Mobiles</span>
-          </Link>
         </Cont>
-        <Cont>
+        <Cont to="/seller-dashboard/upload-cloths">
         <Image src={Pic2 } />
-        <Link to="/seller-dashboard/upload-cloths" style={{ textDecoration: "none", color: "black" }}>
             <span>Clothings</span>
-          </Link>
         </Cont>
-        <Cont>
+        <Cont to="/seller-dashboard/upload-electronics">
         <Image src={Pic3 } />
-        <Link to="/seller-dashboard/upload-electronics" style={{ textDecoration: "none", color: "black" }}>
             <span>Electronics</span>
-          </Link>
         </Cont>
-        <Cont>
+        <Cont to="/seller-dashboard/upload-foods">
         <Image src={Pic4 } />
-        <Link to="/seller-dashboard/upload-foods" style={{ textDecoration: "none", color: "black" }}>
             <span>Foods And Groceries</span>
-          </Link>
         </Cont>
       </Wrap>
     </Container>
@@ -49,7 +41,7 @@ const Image = styled.img`
 
 `
 
-const Cont = styled.div`
+const Cont = styled(NavLink)`
   width: 360px;
   height: 365px;
   display: flex;
@@ -58,6 +50,7 @@ const Cont = styled.div`
   background: rgba(47, 128, 237, 0.37);
   box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.25);
   border-radius: 20px;
+  text-decoration: none;
   justify-content: center;
   @media (max-width: 320px) {
     width: 300px;

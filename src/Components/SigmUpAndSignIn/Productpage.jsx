@@ -38,7 +38,7 @@ const Productpage = ({ avatar, index, name, price, tag, created, quantity, activ
         <HoldHead>{ rejected}</HoldHead>
       </Td>
       }
-           {active === true &&  <Td>
+           {quantity > 0 &&  <Td>
         <HoldHead>
         <Box bg="fff">
             <Round />
@@ -46,7 +46,7 @@ const Productpage = ({ avatar, index, name, price, tag, created, quantity, activ
           </Box> 
         </HoldHead>
             </Td>}
-           {active === false &&  <Td>
+           {quantity <= 0 &&  <Td>
         <HoldHead>
         <Box bg="">
                 <span>OFF</span>

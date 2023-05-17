@@ -9,7 +9,7 @@ const Category = () => {
         <Wrapper>
           <Head>Buying & Selling made easy accross Africa!</Head>
           <Holder>
-            <Card>
+            {/* <Card>
               <Imaged>
                 <TextHold>
                   <Title>Electronics.</Title>
@@ -17,10 +17,10 @@ const Category = () => {
                     Buying made easy, get TV, home theatre, system and
                     electronics at the comfort of your home.
                   </Content>
-                  <NavLink to="/allitems" style={{textDecoration: "none", color: "white"}}><Button>Buy Now</Button></NavLink>
+                  <NavLink to="/electronics" style={{textDecoration: "none", color: "white"}}><Button>Buy Now</Button></NavLink>
                 </TextHold>
               </Imaged>
-            </Card>
+            </Card> */}
             <Card>
               {/* <img src="/Frame 2.png" /> */}
 
@@ -31,11 +31,11 @@ const Category = () => {
                     Buying made easy, get used phones, laptops, chargers etc..
                     at the comfort of your home
                   </Content>
-                  <NavLink to="/allitems" style={{textDecoration: "none", color: "white"}}><Button>Buy Now</Button></NavLink>
+                  <NavLink to="/phone" style={{textDecoration: "none", color: "white"}}><Button>Buy Now</Button></NavLink>
                 </TextHold>
               </Images>
             </Card>
-            <Card>
+            {/* <Card>
               <Imagee>
                 <TextHold>
                   <Title>Clothing & Fashion.</Title>
@@ -43,10 +43,10 @@ const Category = () => {
                     Buying made easy, get Trendy and classic wears at the
                     comfort of your home.
                   </Content>
-                  <NavLink to="/allitems" style={{textDecoration: "none", color: "white"}}><Button>Buy Now</Button></NavLink>
+                  <NavLink to="/clothing" style={{textDecoration: "none", color: "white"}}><Button>Buy Now</Button></NavLink>
                 </TextHold>
               </Imagee>
-            </Card>
+            </Card> */}
             <Card>
               <Image>
                 <TextHold>
@@ -55,7 +55,7 @@ const Category = () => {
                     Buying made easy, food and groceries are all available, get
                     them all at the comfort of your home.
                   </Content>
-                  <NavLink to="/allitems" style={{textDecoration: "none", color: "white"}}><Button>Buy Now</Button></NavLink>
+                  <NavLink to="/food" style={{textDecoration: "none", color: "white"}}><Button>Buy Now</Button></NavLink>
                 </TextHold>
               </Image>
             </Card>
