@@ -23,7 +23,6 @@ export const loginUser= async({email, password}) => {
 export const logInUser = async({email,password}) => {
     await axios.post(`${baseURL}/api/seler/signInUser`, { email, password }).then(res => {
         localStorage.setItem("user", JSON.stringify(res.data.data))
-        alert(res.data.token)
     });
 };
 

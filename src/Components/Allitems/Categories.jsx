@@ -24,15 +24,16 @@ const Categories = () => {
   const currentPageData = data?.slice(lastIndex, lastIndex + recordPage)
 
   const filteredData = currentPageData?.filter((el) => el.category === id || el.name === id || el.brand === id)
-  // console.log(id)
+  const myData = filteredData?.filter((el) => el.status === "approved")
+  // console.log(myData)
   var nf = Intl.NumberFormat()
   return (
     <Container>
       <Wrapper>
-        <Downtitle>{ id?.toUpperCase()}</Downtitle>
+        {/* <Downtitle>{ id?.toUpperCase()}</Downtitle> */}
         <Cardhold>
         {
-        filteredData?.map((props, index) => (
+        myData?.map((props, index) => (
           <ItemsCard id={ props._id } name={ props.name } price={ nf.format(props?.price) } img={ props?.avatar[0].url} />
         ))
         }

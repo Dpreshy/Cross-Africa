@@ -38,10 +38,6 @@ const AllRoutes = () => {
               element: <SignUp />,
             },
             {
-              path: "user",
-              element: <SignUp />,
-            },
-            {
               path: "signin",
               element: <SignIn />,
             },

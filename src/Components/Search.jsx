@@ -14,9 +14,10 @@ const Search = ({setshow_search}) => {
   })
   const [ currentPage, setCurrentPage ] = useState(0)
 
+  const filteredData = data?.filter((el)=> el.status === "approved")
   const recordPage = 20
   const lastIndex = currentPage * recordPage
-  const currentPageData = data?.slice(lastIndex, lastIndex + recordPage)
+  const currentPageData = filteredData?.slice(lastIndex, lastIndex + recordPage)
   const [ query, setQuery ] = useState()
   // console.log(query)
   const keys = ["name", "brand","category"]
@@ -32,7 +33,7 @@ const Search = ({setshow_search}) => {
   return query ? (result?.length ? result : null) : null
   }
   const searchData = search(currentPageData)
-  console.log(searchData)
+  // console.log(searchData)
   return (
     <Container>
        <SearchHold>

@@ -99,7 +99,7 @@ const Detailmiddle = ({id, avatar, data, qty }) => {
               <Quantitycreament>
                 <QuantityIncreament onClick={()=> dispatch(addToCart(data))}>+</QuantityIncreament>
                 <QuantityFigure>{ cartitem?.qty}</QuantityFigure>
-                <QuantityDecreament disabled={cartitem?.qty <= 1 ? true : false} onClick={()=> dispatch(removeCart(data))}>-</QuantityDecreament>
+                <QuantityDecreament disabled={cartitem?.qty <= 0 ? true : false} onClick={()=> dispatch(removeCart(data))}>-</QuantityDecreament>
               </Quantitycreament>
               <Quantitybutton>
                 <button onClick={()=> dispatch(addToCart(data))}>Add To Cart</button>

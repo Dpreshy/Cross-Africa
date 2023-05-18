@@ -14,9 +14,10 @@ const DetailProduct = () => {
   })
   const [ currentPage, setCurrentPage ] = useState(0)
 
+  const filteredData = data?.filter((el)=> el.status === "approved")
   const recordPage = 8
   const lastIndex = currentPage * recordPage
-  const currentPageData = data?.slice(lastIndex, lastIndex + recordPage)
+  const currentPageData = filteredData?.slice(lastIndex, lastIndex + recordPage)
   var nf = Intl.NumberFormat()
   return (
       <Container>

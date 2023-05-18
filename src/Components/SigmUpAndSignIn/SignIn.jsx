@@ -40,7 +40,6 @@ const SignIn = () => {
         },
 
         onError: (error) => {
-            // alert(error.message)
             console.log(error.message)
         }
     })

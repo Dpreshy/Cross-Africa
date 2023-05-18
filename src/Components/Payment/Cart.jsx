@@ -29,7 +29,7 @@ const Cart = () => {
         alert("You must have a total price of ₦50,000 to perform this action")
       }
     } else {
-      navigate("/auth/signin")
+      navigate("/login-user")
     }
   }
   // console.log(totalPrice)

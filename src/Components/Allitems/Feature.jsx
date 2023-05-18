@@ -17,9 +17,10 @@ const Feature = () => {
   })
   const [ currentPage, setCurrentPage ] = useState(0)
 
+  const myData = data?.filter((el) => el.status === "approved")
   const recordPage = 8
   const lastIndex = currentPage * recordPage
-  const currentPageData = data?.slice(lastIndex, lastIndex + recordPage)
+  const currentPageData = myData?.slice(lastIndex, lastIndex + recordPage)
   // console.log(data)
   return (
     <Container>

@@ -24,10 +24,10 @@ const Featured = () => {
   const lastIndex = currentPage * recordPage
   const currentPageData = data?.slice(lastIndex, lastIndex + recordPage)
 
-  const filteredData = currentPageData?.filter((el) => el.category === "phone")
-  const filteredElectronics = currentPageData?.filter((el) => el.category === "electronics")
-  const filteredFood = currentPageData?.filter((el) => el.category === "food")
-  const filteredCloths = currentPageData?.filter((el) => el.category === "clothing")
+  const filteredData = currentPageData?.filter((el) => el.category === "phone" && el.status === "approved")
+  const filteredElectronics = currentPageData?.filter((el) => el.category === "electronics" && el.status === "approved")
+  const filteredFood = currentPageData?.filter((el) => el.category === "food" && el.status === "approved")
+  const filteredCloths = currentPageData?.filter((el) => el.category === "clothing" && el.status === "approved")
   // console.log(filteredData)
   var nf = Intl.NumberFormat()
   return (

@@ -38,17 +38,28 @@ const Dashboard = () => {
       return productTotal + (product.price * product.quantity)
     }, 0)
   }, 0);
+  var nf = Intl.NumberFormat()
   return (
     <Container>
       <Uniheader />
       <Wrap>
-        <Dashcard pr={ `₦${totalSales}` } da="Mar 16" ti="Today" bg="#3d3dee" pending={ pending } approved={ approved } liveProducts={ liveProducts } cancled={ cancled } orders={ filteredData?.length } returned={ returned} />
-        <Dashcard pr={`₦${totalSales}`} da="Mar 16" ti="Today" bg="#3d3dee" pending={ pending } approved={ approved } liveProducts={ liveProducts } cancled={ cancled } orders={ filteredData?.length} returned={ returned} />
+        <Dashcard pr={ `₦${totalSales}` } da="Mar 16" ti="Today" bg="#3d3dee" sales={ `₦${nf.format(totalSales)}` } name="Totals Sales"/>
+        <Dashcard pr={ `₦${totalSales}` } da="Mar 16" ti="Today" bg="#3d3dee" sales={ pending }
+        name="Pending Products"/>
+        <Dashcard pr={ `₦${totalSales}` } da="Mar 16" ti="Today" bg="#3d3dee" sales={ liveProducts } name="Live Products"/>
+        <Dashcard pr={ `₦${totalSales}` } da="Mar 16" ti="Today" bg="#3d3dee" sales={ pending }
+        name="Pending Products"/>
         <Dashcard
-          pr={`₦${totalSales}`} da="Mar 16" ti="Today" bg="#3d3dee" pending={ pending } approved={ approved } liveProducts={ liveProducts } cancled={ cancled } orders={ filteredData?.length} returned={ returned}
+          pr={`₦${totalSales}`} da="Mar 16" ti="Today" bg="#3d3dee" sales={ approved } name="Approved Products"
         />
         <Dashcard
-         pr={`₦${totalSales}`} da="Mar 16" ti="Today" bg="#3d3dee" pending={ pending } approved={ approved } liveProducts={ liveProducts } cancled={ cancled } orders={ filteredData?.length} returned={ returned}
+         pr={`₦${totalSales}`} da="Mar 16" ti="Today" bg="#3d3dee" sales={ cancled } name="Cancled Products"
+        />
+        <Dashcard
+         pr={`₦${totalSales}`} da="Mar 16" ti="Today" bg="#3d3dee" sales={ filteredData?.length} name="Orders"
+        />
+        <Dashcard
+         pr={`₦${totalSales}`} da="Mar 16" ti="Today" bg="#3d3dee" sales={ returned} name="Returned Products"
         />
       </Wrap>
     </Container>
@@ -61,17 +72,11 @@ export default Dashboard;
 const Wrap = styled.div`
   width: 87%;
   border-top: 1.8px solid grey;
-  padding: 30px;
+  /* padding: 30px; */
   display: flex;
-  align-items: center;
   justify-content: center;
-  /* background-color: gold; */
-
   flex-wrap: wrap;
-  @media (max-width: 768px) {
-    display: flex;
-    justify-content: center;
-  }
+  background-color: #f7f8f9;
 `;
 const Container = styled.div`
   display: flex;

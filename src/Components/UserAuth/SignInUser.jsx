@@ -53,7 +53,7 @@ const SignInUser = () => {
       <div>
           <Container>
               <Wrapper>
-                  <Title>Admin Account</Title>
+                  <Title>Create Account</Title>
                   <Text>Please enter every necessary information</Text>
                   <InputHold onSubmit={onSubmit}>
                         <Hold>
