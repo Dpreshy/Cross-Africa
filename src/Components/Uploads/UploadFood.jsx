@@ -49,7 +49,7 @@ const UploadFood = () => {
     },
 
     onError: (error) => {
-        console.log(error.message)
+        alert(error.message)
     }
   })
 const check = JSON.parse(localStorage.getItem("user"))
@@ -123,7 +123,7 @@ const handleSubmit = (e) => {
                   <Inputcont>
             <Tag>Price*</Tag>
             <Input>
-              <input placeholder="Price" value={ price} onChange={(e)=> setprice(e.target.value)}/>
+              <input placeholder="Price" type="number" value={ price} onChange={(e)=> setprice(e.target.value)}/>
               <span>kindly specify price of product</span>
             </Input>
           </Inputcont>
