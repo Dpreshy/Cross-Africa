@@ -10,16 +10,21 @@ import {
 } from "react-icons/fa";
 import { AiFillAlipayCircle, AiOutlinePayCircle } from "react-icons/ai";
 import { BsPaypal } from "react-icons/bs";
+import { MdDeleteOutline } from "react-icons/md";
+import { RiAddFill } from "react-icons/ri";
+import { ImMinus } from "react-icons/im";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux';
+import { signOut, addProduct, addToCart, removeCart,removeFromCart } from "../Global/GlobalState"
 
 const Cart = () => {
 
   const [ QTY, setQTY ] = useState()
-    const navigate = useNavigate()
-    const check = JSON.parse(localStorage.getItem("user"))
+  const navigate = useNavigate()
+  const check = JSON.parse(localStorage.getItem("user"))
   const cartData = useSelector((state) => state.reducers.cartItem)
-  const totalPrice = cartData?.reduce((price, item)=> price + item.qty * item.price, 0)
+  const totalPrice = cartData?.reduce((price, item) => price + item.qty * item.price, 0)
+  const dispatch = useDispatch();
   const change = () => {
     if (check) {
       if(totalPrice >= 50000){
@@ -32,67 +37,52 @@ const Cart = () => {
       navigate("/login-user")
     }
   }
-  // console.log(totalPrice)
+  // console.log(cartData)
   var nf = Intl.NumberFormat()
   return (
     <div>
       <Container>
         <Wrapper>
-        <Text>Shopping Cart</Text>
           <Scroll>
-          <Buttom>
-          <Head>
-              
-              <Th>
-              <HoldHead>Item </HoldHead>
-            </Th>
-              <Th>
-              <HoldHead>Price </HoldHead>
-            </Th>
-              <Th>
-              <HoldHead>Quantity </HoldHead>
-            </Th>
-              <Th>
-              <HoldHead>Total Price </HoldHead>
-            </Th>
-          </Head>
-          {
-            cartData?.map((props) => (
-              <Body key={ props._id }>
-                <Td>
-              <UserHold>
-                <span>
-            <Image src={props?.avatar[0].url} />
-                </span>
-                {props?.name}
-              </UserHold>
-                </Td>
-                <Td>
-              {" "}
-        <HoldHead>₦{nf.format(props.price) }</HoldHead>
-            </Td>
-                <Td>
-              {" "}
-        <HoldHead><div>{ props.qty}</div></HoldHead>
-            </Td>
-                <Td>
-              {" "}
-        <HoldHead>₦{nf.format(props.qty * props.price) }</HoldHead>
-            </Td>
-            </Body>
-            ))
-         }
-          </Buttom>
+          <Text>Shopping Cart</Text>
+            {
+              cartData?.map((props,index) => (
+                 <Card key={index}>
+              <Div>
+                <Info>
+                      <Image src={ props.avatar[0].url} />
+                      <Name>{ props.name}</Name>
+                </Info>
+                <Price>₦{nf.format(props.price * props.qty) }</Price>
+              </Div>
+              <Actions>
+                <Remove onClick={() => dispatch(removeFromCart(props))}>
+                  <span><MdDeleteOutline size="20px"/></span>
+                  Remove
+                </Remove>
+                <Show>
+                  <But
+                    onClick={ () => dispatch(addToCart(props)) }
+                  ><RiAddFill fontWeight="700"/></But>
+                      <span>{props.qty }</span>
+                  <But
+                    onClick={ () => dispatch(removeCart(props)) }
+                  ><ImMinus /></But>
+            </Show> 
+              </Actions>
+            </Card>
+              ))
+           }
           </Scroll>
           <Down>
             <Hold>
               <span>SUBTOTAL</span>
               <div>₦{nf.format(totalPrice) }</div>
                 <Button onClick={change}> Checkout</Button>
-              <Icon>
+              {/* <Icon>
                 <BsPaypal color="#0a223a" fontSize="40px" />
                 <FaAmazonPay fontSize="40px" />
-              </Icon>
+              </Icon> */}
             </Hold>
           </Down>
         </Wrapper>
@@ -103,63 +93,96 @@ const Cart = () => {
 
 export default Cart;
 
-const Image = styled.img`
-  width: 100px;
-  height: 100px;
-  border-radius: 5px;
-  background-color: gold;
-  margin-right: 10px;
-`;
-const UserHold = styled.div`
-  display: flex;
-  align-items: center;
+const But = styled.button`
+  padding: 10px 15px;
+  border: 0px;
+  border-radius: 2px;
+  outline: none;
 
-  :hover {
-    color: blue;
-  }
-  cursor: pointer;
-`;
-const Td = styled.td`
-  padding: 10px 10px;
-  font-size: 16px;
-  font-weight: 400;
-`;
-const Body = styled.tr`
-  border-bottom: 1px solid lightgray;
-  border-top: 1px solid lightgray;
-  text-align: center;
-`;
-const HoldHead = styled.div`
+  background-color: #e8559e;
+  color: white;
+  cursor: pointer
+`
+const Show = styled.div`
+  width: 140px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  div {
-    font-size: 13px;
-    font-weight: 500;
-    border: 1.8px solid black;
-    padding: 15px 20px;
+  margin-bottom: 10px;
+
+`;
+const Remove = styled.div`
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+  font-size: 15px;
+  color: #e8559e;
+  cursor: pointer;
+  span{
+    margin-right: 5px;
+  }
+`
+const Actions = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+const Price = styled.div`
+  font-size: 17px;
+  font-weight: 700;
+
+  @media (max-width: 768px){
+    font-size: 14px;
+  }
+
+  @media (max-width: 400px){
+    font-size: 12px;
+    font-weight: 600;
+  }
+`
+const Info = styled.div`
+  display: flex;
+  /* background-color: gold; */
+  margin-right: 10px;
+`;
+const Name = styled.div`
+  font-size: 17px;
+  font-weight: 700;
+
+  @media (max-width: 768px){
+    font-size: 14px;
+    font-weight: 700;
+  }
+
+  @media (max-width: 400px){
+    font-size: 12px;
+    font-weight: 600;
   }
 `;
-const Th = styled.th`
-  padding: 10px 15px;
-  
-  font-size: 18px;
-  font-weight: 600;
+const Image = styled.img`
+  /* background-color: gold; */
+  width: 90px;
+  height: 90px;
+  margin-right: 20px;
+
+  @media (max-width: 400px){
+    width: 60px;
+    height: 60px;
+  }
+`
+const Div = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
 `;
-const Head = styled.tr`
-`;
-const Buttom = styled.table`
-  width: 100%;
-  /* padding: 0px 20px; */
-  text-align: center;
-  border-collapse: collapse;
-  border-spacing: 0;
+const Card = styled.div`
+  margin-bottom: 20px;
+  border-bottom: 1px solid lightgray;
+  padding: 15px;
 `;
 const Scroll = styled.div`
   width: 90%;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  scroll-behavior: smooth;
+  background-color: white;
 `;
 const Icon = styled.div`
   width: 130px;
@@ -191,9 +214,11 @@ const Hold = styled.div`
   }
 `;
 const Text = styled.div`
-  font-size: 18px;
-  font-weight: 600;
+  font-size: 20px;
+  font-weight: 700;
   padding-bottom: 40px;
+  margin-left: 15px;
+  margin-top: 10px;
 `;
 const Down = styled.div`
   width: 100%;
@@ -215,4 +240,5 @@ const Container = styled.div`
   align-items: center;
   justify-content: center;
   padding-top: 80px;
+  background-color: #F1F1F2;
 `;

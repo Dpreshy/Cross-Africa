@@ -28,7 +28,7 @@ const Shipping = () => {
     mutationFn: purchasedProduct,
     
     onSuccess: () => {
-      navigate("/allitems")
+      navigate("/payment-review")
     dispatch(removeAllCart(cartItem))
       localStorage.removeItem("order")
     }
@@ -154,7 +154,7 @@ const Content = styled.div`
   align-items: center;
   /* justify-content: center; */
   width: 90%;
-  margin-left: 15px;
+  margin-left: 25px;
 `;
 const Tup = styled.div`
   display: flex;
@@ -189,7 +189,6 @@ const Test = styled.div`
 `;
 const Right = styled.div`
   flex: 1;
-  height: 100vh;
   border-left: 3px solid lightgray;
   /* background-color: blue; */
 
@@ -292,7 +291,7 @@ const Hold = styled.div`
 `;
 const Left = styled.div`
   flex: 1;
-  height: 90vh;
+  /* height: 90vh; */
 
   display: flex;
   flex-direction: column;

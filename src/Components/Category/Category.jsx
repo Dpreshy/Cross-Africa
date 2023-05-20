@@ -7,7 +7,7 @@ const Category = () => {
     <div>
       <Container>
         <Wrapper>
-          <Head>Buying & Selling made easy accross Africa!</Head>
+          <Head>Buying & Selling made easy <div>accross Africa!</div></Head>
           <Holder>
             {/* <Card>
               <Imaged>
@@ -95,23 +95,6 @@ const Image = styled.div`
   background-repeat: no-repeat;
   background-size: cover;
 `;
-const Imaged = styled.div`
-  width: 100%;
-  height: 100%;
-  color: white;
-  padding: 0px 18px;
-  margin: 0 -17px;
-  display: flex;
-  align-items: flex-end;
-  background-image: linear-gradient(
-      to bottom,
-      rgba(61, 61, 62, 0.52),
-      rgba(2, 2, 2, 0.73)
-    ),
-    url("/Frame 112.png");
-  background-repeat: no-repeat;
-  background-size: cover;
-`;
 const Images = styled.div`
   width: 100%;
   height: 100%;
@@ -129,23 +112,6 @@ const Images = styled.div`
   background-repeat: no-repeat;
   background-size: cover;
 `;
-const Imagee = styled.div`
-  width: 100%;
-  height: 100%;
-  color: white;
-  padding: 0px 18px;
-  margin: 0 -17px;
-  display: flex;
-  align-items: flex-end;
-  background-image: linear-gradient(
-      to bottom,
-      rgba(61, 61, 62, 0.52),
-      rgba(2, 2, 2, 0.73)
-    ),
-    url("/Frame 114.png");
-  background-repeat: no-repeat;
-  background-size: cover;
-`;
 const Content = styled.div`
   font-size: 20px;
   font-weight: 400;
@@ -154,19 +120,21 @@ const Content = styled.div`
 
 const Title = styled.div`
   font-size: 35px;
-  font-weight: 500;
+  font-weight: 400;
   margin-bottom: 20px;
 `;
 const TextHold = styled.div`
   /* background-color: gold; */
   margin-bottom: 20px;
+  height: 227px;
+  width: 400px;
 `;
 const Card = styled.div`
-  width: 400px;
+  width: 550px;
   height: 650px;
   color: white;
   padding: 0px 18px;
-  margin: 10px;
+  margin: 10px 0px;
 
   display: flex;
   align-items: flex-end;
@@ -176,24 +144,50 @@ const Card = styled.div`
     height: 100%;
     border-radius: 5px;
   }
+  @media (max-width: 1300px){
+    width: 500px;
+  }
+  @media (max-width: 1190px){
+    width: 450px;
+  }
+  @media (max-width: 1080px){
+    width: 400px;
+  }
+  @media (max-width: 980px){
+    margin: 10px;
+    width: 100%;
+  }
 `;
 const Holder = styled.div`
+  width: 100%;
+  /* background-color: gold; */
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   flex-wrap: wrap;
+
+  @media (max-width: 980px){
+    justify-content: center;
+  }
 `;
 const Head = styled.div`
+  /* background-color: gold; */
+  width: 100%;
   font-size: 20px;
   font-weight: 700;
   margin-top: 30px;
   margin-bottom: 20px;
-  width: 300px;
+  /* width: 300px; */
   /* color: ; */
 `;
 const Wrapper = styled.div`
   width: 90%;
   margin-top: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  
 `;
 const Container = styled.div`
   width: 100%;

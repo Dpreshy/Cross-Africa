@@ -13,6 +13,7 @@ const Header = () => {
   const [categories, setCategories] = useState(false);
   const [ account, setAccount ] = useState(false);
   const [menuChange, setMenuChange] = useState(false)
+  const [barChange, setbarChange] = useState(false)
   const [show_search, setshow_search] = useState(false)
   const user = JSON.parse(localStorage.getItem("user"));
   const myRef = useRef()
@@ -37,8 +38,10 @@ const Header = () => {
       <Container>
         <Wrapper>
           <Logo>
+            <Div>
             <img src="/logo 1.png" />
-            <div>Cross Africa</div>
+              <div>Cross Africa</div>
+            </Div>
           </Logo>
           <Hold>
             <Nav
@@ -131,6 +134,28 @@ const Header = () => {
                 <BiHelpCircle />
               </span>
             </Nav>
+            <BarMenu>
+              <FiMenu size="20px" onMouseOver={ () => {
+                setbarChange(true)
+              } }
+                onMouseLeave={ () => {
+                setbarChange(false)
+              }}/>
+            </BarMenu>
+            {barChange ? <BarShow
+                onMouseOver={() => {
+                  setbarChange(true)
+                }}
+                onMouseLeave={() => {
+                  setbarChange(false)
+                }}
+              >
+                <NavLink to="/electronics" style={ { textDecoration: "none", width: "100%"}}><Navs>Electronics</Navs></NavLink>
+                <NavLink to="/phone" style={{textDecoration: "none",width: "100%"}}><Navs>Mobile Phones</Navs></NavLink>
+                <NavLink to="/clothing" style={{textDecoration: "none",width: "100%"}}><Navs>Clothing & Fashion</Navs></NavLink>
+                <NavLink to="/food" style={{textDecoration: "none",width: "100%"}}><Navs>Food & Groceries</Navs></NavLink>
+              </BarShow> : null}
+            
             <Bar>
               {
                 menuChange ? <FiMenu size="20px" onClick={returnAgain}/>: <FiMenu size="20px" onClick={change}/>
@@ -154,6 +179,37 @@ const Header = () => {
 
 export default Header;
 
+const BarShow = styled.div`
+  width: 210px;
+  height: 210px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background-color: white;
+  border: 1px solid #d975c0;
+  /* border: 1px solid blue; */
+  border-radius: 5px;
+
+  position: absolute;
+  top: 65px;
+  /* left: 60%; */
+  right: 40px;
+  z-index: 1111;
+  @media (max-width: 768px) {
+    display: none;
+  }
+`
+const BarMenu = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 20px;
+  cursor: pointer;    
+  @media (max-width: 1000px) {
+      display: none;
+  }
+`
 const Show = styled.div`
   display: none;
 
@@ -185,7 +241,7 @@ const MyHold = styled.div`
     display: none;
   } 
 `
-const Round = styled.div`
+const Round = styled.main`
   color: white;
   position: absolute;
   font-size: 10px;
@@ -246,8 +302,8 @@ const Menu = styled.div`
   border-radius: 5px;
 
   position: absolute;
-  top: 60px;
-  left: 150px;
+  top: 70px;
+  /* left: 150px; */
   z-index: 1111;
 
   @media (max-width: 768px) {
@@ -256,29 +312,39 @@ const Menu = styled.div`
 `;
 const Container = styled.div`
   width: 100%;
-  height: 90px;
+  height: 140px;
   display: flex;
   align-items: center;
   justify-content: center;
   /* background-color: #383333; */
   border-bottom: 1px solid lightgray;
+
+  @media (max-width: 768px) {
+    height: 70px;
+  }
 `;
 const Wrapper = styled.div`
-  width: 95%;
+  width: 90%;
   display: flex;
   justify-content: space-between;
 `;
-const Logo = styled.div`
-  height: 70px;
+const Div = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
+`;
+const Logo = styled.div`
+  height: 100px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
   flex-direction: column;
   margin-right: 30px;
   flex: 0.2 0.3 auto;
   /* background: gold; */
   /* margin-bottom: 10px; */
-
+ 
   img {
     height: 60px;
     width: 60px;
@@ -287,6 +353,16 @@ const Logo = styled.div`
   div {
     font-weight: 700;
     font-size: 20px;
+  }
+
+  @media (max-width: 768px) {
+    align-items: center;
+    justify-content: center;
+
+    img {
+      height: 40px;
+      width: 40px;
+    }
   }
 
   @media (max-width: 440px){
@@ -299,7 +375,7 @@ const Logo = styled.div`
       font-size: 16px;
     }
   }
-  @media (max-width: 410px){
+  @media (max-width: 414px){
     img{
       width: 30px;
       height: 30px;
@@ -311,6 +387,7 @@ const Logo = styled.div`
   }
 `;
 const Hold = styled.div`
+  height: 70px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -319,6 +396,7 @@ const Hold = styled.div`
   /* background-color: gold; */
   @media (max-width:768px) {
     justify-content: flex-end;
+    height: 80px;
   }
   @media (max-width: 660px) {
     justify-content: flex-end;
@@ -326,11 +404,14 @@ const Hold = styled.div`
   width: 80%;
 `;
 const Bar = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-left: 20px;
-  cursor: pointer;
+  display: none;
+  @media (max-width: 1000px) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 20px;
+    cursor: pointer;    
+  }
 `;
 const Nav = styled.div`
   font-weight: 700;
@@ -358,7 +439,7 @@ const Nav = styled.div`
     }
   }
 
-  @media (max-width: 410px){
+  @media (max-width: 414px){
     div{
       display: none;
     }

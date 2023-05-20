@@ -38,7 +38,7 @@ const Featured = () => {
         <Cardhold>
         {
         filteredData?.map((props, index) => (
-          <ItemsCard id={ props._id } name={ props.name } price={ nf.format(props?.price) } img={ props?.avatar[0].url} />
+          <ItemsCard id={ props._id } name={ props.name } price={ nf.format(props?.price) } img={ props?.avatar[0].url} data={props}/>
         ))
         }
       </Cardhold>
@@ -52,7 +52,7 @@ const Featured = () => {
           
         {
         filteredElectronics?.map((props, index) => (
-          <ItemsCard id={ props._id } name={ props.name } price={ nf.format(props?.price) } img={ props?.avatar[0].url} />
+          <ItemsCard id={ props._id } name={ props.name } price={ nf.format(props?.price) } img={ props?.avatar[0].url} data={props}/>
         ))
         }
       </Cardhold>
@@ -66,7 +66,7 @@ const Featured = () => {
           
           {
           filteredCloths?.map((props, index) => (
-            <ItemsCard id={ props._id } name={ props.name } price={ nf.format(props?.price) } img={ props?.avatar[0].url} />
+            <ItemsCard id={ props._id } name={ props.name } price={ nf.format(props?.price) } img={ props?.avatar[0].url} data={props}/>
           ))
           }
         </Cardhold>
@@ -80,7 +80,7 @@ const Featured = () => {
           
         {
         filteredFood?.map((props, index) => (
-          <ItemsCard id={ props._id } name={ props.name } price={ nf.format(props?.price) } img={ props?.avatar[0].url} />
+          <ItemsCard id={ props._id } name={ props.name } price={ nf.format(props?.price) } img={ props?.avatar[0].url} data={props}/>
         ))
         }
       </Cardhold>

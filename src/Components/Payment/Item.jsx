@@ -1,14 +1,16 @@
 import React from "react";
 import styled from "styled-components";
 
-const Item = ({index, name, price, shippingFee, totalPrice, subtotal,qty, id }) => {
+const Item = ({ index, name, price, shippingFee, totalPrice, subtotal, qty, id, avatar }) => {
+  var nf = Intl.NumberFormat()
+  
   return (
     <div>
       <Hold key={id}>
         <Content>
           <Left>
             <Circle>{qty }</Circle>
-            <Image src="/Frame 1.png" />
+            <Image src={avatar} />
           </Left>
           <Right>
             <Title>{name }</Title>
@@ -24,16 +26,7 @@ const Item = ({index, name, price, shippingFee, totalPrice, subtotal,qty, id }) 
             </Div>
             <Div>
               <Title2>Shipping Fee</Title2>
-              <Price>₦{ shippingFee}</Price>
-            </Div>
-          </Cont>
-        </Content>
-        <Line />
-        <Content>
-          <Cont>
-            <Div>
-              <Title2>Total</Title2>
-              <Price>₦{ totalPrice}</Price>
+              <Price>₦{ nf.format(shippingFee * qty)}</Price>
             </Div>
           </Cont>
         </Content>

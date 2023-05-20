@@ -47,6 +47,9 @@ const GlobalState = createSlice({
             state.qty -= 1;
             state.totalPrice -= payload.price;
         },
+        removeFromCart: (state, { payload }) => {
+          state.cartItem = state.cartItem.filter((el)=> el._id !== payload._id)  
+        },
 
         removeAllCart: (state) => {
             state.cartItem = [];
@@ -80,6 +83,6 @@ const GlobalState = createSlice({
     }
 });
 
-export const { signOut, addProduct, addToCart, removeCart,removeAllCart } = GlobalState.actions;
+export const { signOut, addProduct, addToCart, removeCart,removeAllCart,removeFromCart } = GlobalState.actions;
 
 export default GlobalState.reducer;

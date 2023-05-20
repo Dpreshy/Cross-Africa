@@ -34,7 +34,7 @@ const Categories = () => {
         <Cardhold>
         {
         myData?.map((props, index) => (
-          <ItemsCard id={ props._id } name={ props.name } price={ nf.format(props?.price) } img={ props?.avatar[0].url} />
+          <ItemsCard id={ props._id } name={ props.name } price={ nf.format(props?.price) } img={ props?.avatar[0].url} data={props}/>
         ))
         }
       </Cardhold>
@@ -71,7 +71,7 @@ const Wrapper = styled.div`
   padding: 0 10px;
   margin: 10px 0;
   border-radius: 5px;
-
+  background-color: white;
   
 `;
 
@@ -82,4 +82,5 @@ const Container = styled.div`
   align-items: center;
   justify-content: center;
   padding-top: 80px;
+  background-color: #f1f1f2;
 `;

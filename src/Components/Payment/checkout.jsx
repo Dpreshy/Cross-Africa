@@ -18,7 +18,7 @@ const Checkout = () => {
   var nf = Intl.NumberFormat()
   const cartData = useSelector((state) => state.reducers.cartItem)
   const quantity = useSelector((state) => state.reducers.qty)
-  const totalPrice = cartData?.reduce((price, item) => price + item.qty * item.price + item.shippingFee, 0)
+  const totalPrice = cartData?.reduce((price, item) => price + item.qty * item.price + item.shippingFee * item.qty, 0)
   const [ selectCountry, setSelectCountry ] = useState(countryData)
   let [ findCountry, setFindCountry ] = useState(0)
   const [ email, setemail ] = useState(""); 
@@ -79,7 +79,6 @@ const productOrdered=()=>{
       lastName.length == 0 ||
       email.length == 0 ||
       country.length == 0 ||
-      Localgovt.length == 0 ||
       !payment_Method ||
       state.length == 0 ||
       apartment.length == 0 ||
@@ -227,16 +226,24 @@ const productOrdered=()=>{
                   </span>
                   <div onClick={()=>{navigate(-1)}}>Return to Cart</div>
                 </Div>
-                <Button type="submit" >Continue Shopping</Button>
+                <Button type='submit' disabled={create.status === "loading" ? true: false}>{ create.status === "loading" ? "Loading..." : "Continue"}</Button>
               </Buttons>
             </Hold>
           </Left>
           <Right>
             {
               cartData?.map((props, index) => (
-                <Item index={ index } name={ props.name } price={ nf.format(props.price) } shippingFee={ props?.shippingFee } totalPrice={ nf.format(totalPrice) } subtotal={nf.format(props.price * props.qty)} qty={ props.qty } id={ props._id} />
+                <Item index={ index } name={ props.name } price={ nf.format(props.price) } shippingFee={ props?.shippingFee } totalPrice={ nf.format(totalPrice) } subtotal={nf.format(props.price * props.qty)} qty={ props.qty } avatar={ props.avatar[0].url} id={ props._id} />
               ))
             }
+            <Content>
+          <Cont>
+            <MyDiv>
+              <Title2>Total</Title2>
+              <Price>₦{ nf.format(totalPrice)}</Price>
+            </MyDiv>
+          </Cont>
+        </Content>
           </Right>
         </Wrapper>
       </Container>
@@ -246,6 +253,30 @@ const productOrdered=()=>{
 
 export default Checkout;
 
+const MyDiv = styled.div`
+  width: 250px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* background-color: gold; */
+  margin: 10px 0px;
+`;
+const Price = styled.div`
+  font-weight: 700;
+`;
+const Title2 = styled.div`
+  font-size: 18px;
+  font-weight: 600;
+  /* margin-bottom: 10px; */
+`;
+const Content = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* background-color: gold; */
+  margin-left: 15px;
+  width: 90%;
+`;
 const Image = styled.img`
   width: 40px;
 `;

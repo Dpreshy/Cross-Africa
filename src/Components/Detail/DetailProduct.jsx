@@ -22,7 +22,7 @@ const DetailProduct = () => {
   return (
       <Container>
           <Wrapper>
-        <Downtitle>Mobiles</Downtitle>
+        {/* <Downtitle>Mobiles</Downtitle> */}
         <Cardhold>
         {
         currentPageData?.map((props, index) => (
@@ -47,11 +47,11 @@ const Button = styled.div`
   align-items: center;
   justify-content: flex-end;
   button {
-    width: 9%;
+    /* width: 9%; */
     background-color: #d975c0;
     color: white;
     font-size: 12px;
-    padding: 8px 0;
+    padding: 8px 10px;
     font-weight: bold;
     border: 0;
     border-radius: 5px;
@@ -59,13 +59,10 @@ const Button = styled.div`
     cursor: pointer;
   }
 `;
-const Downtitle = styled.div`
-  font-size: 20px;
-  font-weight: 700;
-  margin-bottom: 7px;
-`;
 const Cardhold = styled.div`
+  margin-top: 10px;
   width: 100%;
+  /* height: 360px; */
   display: flex;
   align-items: center;
   overflow-x: auto;
@@ -80,7 +77,7 @@ const Wrapper = styled.div`
   border: 1.9px solid #d975c0;
   padding: 0 10px;
   margin: 20px 0;
-  border-radius: 5px;
+  border-radius: 2px;
 
   
 `;

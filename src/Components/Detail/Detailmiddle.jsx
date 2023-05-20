@@ -24,6 +24,7 @@ const Detailmiddle = ({id, avatar, data, qty }) => {
     <Container>
       <Wrapper>
         <Middle>
+          <Div>
           {
             avatar?.map((props,index) => (
               <Imghold key={index}>
@@ -33,6 +34,7 @@ const Detailmiddle = ({id, avatar, data, qty }) => {
           </Imghold>
             ))
           }
+          </Div>
           <Others>
             <Select>
               <Option>
@@ -96,14 +98,13 @@ const Detailmiddle = ({id, avatar, data, qty }) => {
             </Select>
             <Quantity>
               <Quantitytext>Quantity</Quantitytext>
-              <Quantitycreament>
+              {cartitem?.qty >= 1 ? <Quantitycreament>
                 <QuantityIncreament onClick={()=> dispatch(addToCart(data))}>+</QuantityIncreament>
                 <QuantityFigure>{ cartitem?.qty}</QuantityFigure>
                 <QuantityDecreament disabled={cartitem?.qty <= 0 ? true : false} onClick={()=> dispatch(removeCart(data))}>-</QuantityDecreament>
-              </Quantitycreament>
-              <Quantitybutton>
+              </Quantitycreament> :  <Quantitybutton>
                 <button onClick={()=> dispatch(addToCart(data))}>Add To Cart</button>
-              </Quantitybutton>
+              </Quantitybutton>}
             </Quantity>
           </Others>
         </Middle>
@@ -113,6 +114,14 @@ const Detailmiddle = ({id, avatar, data, qty }) => {
 };
 
 export default Detailmiddle;
+
+const Div = styled.div`
+
+  @media (max-width: 1076px){
+    display: flex;
+    overflow-x: auto;
+  }
+`
 const QuantityIncreament = styled.button`
   width: 70px;
   height: 70px;
@@ -291,7 +300,7 @@ const Image2 = styled.div`
 const Image1 = styled.div`
   width: 450px;
   height: 330px;
-  background-color: brown;
+  /* background-color: brown; */
   border-radius: 5px;
   margin: 10px;
   img {

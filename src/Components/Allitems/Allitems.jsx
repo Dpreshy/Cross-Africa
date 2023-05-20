@@ -28,53 +28,53 @@ const Allitems = () => {
   var nf = Intl.NumberFormat()
   return (
     <Container>
-      <Wrapper>
+      {/* <Wrapper>
         <Downtitle>Mobiles</Downtitle>
         <Cardhold>
         {
         filteredData?.map((props, index) => (
-          <ItemsCard id={ props._id } index={index} name={ props.name } price={ nf.format(props?.price) } img={ props?.avatar[0].url} />
+          <ItemsCard id={ props._id } index={index} name={ props.name } price={ nf.format(props?.price) } data={props} img={ props?.avatar[0].url} />
         ))
         }
       </Cardhold>
         <Button to="/phone">
           <button>See All</button>
         </Button>
-      </Wrapper>
-      <Wrapper>
+      </Wrapper> */}
+      {/* <Wrapper>
         <Downtitle>Home Appliances</Downtitle>
         <Cardhold>
           
         {
         filteredElectronics?.map((props, index) => (
-          <ItemsCard id={ props._id } index={index} name={ props.name } price={ nf.format(props?.price) } img={ props?.avatar[0].url} />
+          <ItemsCard id={ props._id } index={index} name={ props.name } price={ nf.format(props?.price) } img={ props?.avatar[0].url} data={props}/>
         ))
         }
       </Cardhold>
         <Button to="/electronics">
           <button>See All</button>
         </Button>
-      </Wrapper>
-      <Wrapper>
+      </Wrapper> */}
+      {/* <Wrapper>
         <Downtitle>Accessories</Downtitle>
         <Cardhold>
           
           {
           filteredCloths?.map((props, index) => (
-            <ItemsCard id={ props._id } index={index} name={ props.name } price={ nf.format(props?.price) } img={ props?.avatar[0].url} />
+            <ItemsCard id={ props._id } index={index} name={ props.name } price={ nf.format(props?.price) } img={ props?.avatar[0].url} data={props}/>
           ))
           }
         </Cardhold>
         <Button to="/clothing">
           <button>See All</button>
         </Button>
-      </Wrapper>
+      </Wrapper> */}
       <Wrapper>
         <Downtitle>Foodstuffs</Downtitle>
         <Cardhold>
           {
           filteredFood?.map((props, index) => (
-            <ItemsCard id={ props._id } index={index} name={ props.name } price={ nf.format(props?.price) } img={ props?.avatar[0].url} />
+            <ItemsCard id={ props._id } index={index} name={ props.name } price={ nf.format(props?.price) } img={ props?.avatar[0].url} data={props}/>
           ))
           }
         </Cardhold>
@@ -127,7 +127,7 @@ const Wrapper = styled.div`
   border: 1.9px solid #d975c0;
   padding: 0 10px;
   margin: 20px 0;
-  border-radius: 5px;
+  border-radius: 2px;
 
   
 `;

@@ -20,6 +20,7 @@ import Featured from "../Allitems/Featured";
 import Cart from "../Payment/Cart";
 import Categories from "../Allitems/Categories"
 import Finishshipping from "../Payment/Finishshipping"
+import PaymentReview from "../Review/PaymentReview";
 
 const AllRoutes = () => {
   let element = useRoutes([
@@ -78,6 +79,10 @@ const AllRoutes = () => {
         {
           path: "/allitems",
           element: <Allitems />,
+        },
+        {
+          path: "/payment-review",
+          element: <PaymentReview />,
         },
         
         {
