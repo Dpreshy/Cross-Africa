@@ -68,6 +68,11 @@ const Nav = styled.div`
   span{
     margin-right: 10px;
   }
+
+  @media (max-width: 685px){
+    font-size: 12px;
+    font-weight: 600px;
+  }
 `
 const Content = styled.div``
 const Head = styled.div`
@@ -75,14 +80,34 @@ const Head = styled.div`
   font-weight: 800;
   color: #232121;
   margin-bottom: 20px;
+
+
+  @media (max-width: 763px){
+    font-size: 20px;
+    font-weight: 700px;
+  }
 `
-const Hold = styled.div``
+const Hold = styled.div`
+  margin: 5px;
+
+  @media (max-width: 763px){
+    margin: 10px;
+  }
+`
 const Wrapper = styled.div`
   width: 95%;
   margin-top: 30px;
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
+  /* background-color: gold; */
+
+  @media (max-width: 763px){
+    justify-content: center;
+  }
+  @media (max-width: 500px){
+   text-align: center;
+  }
 `;
 const Container = styled.div`
   width: 100%;

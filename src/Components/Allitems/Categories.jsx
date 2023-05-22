@@ -55,11 +55,15 @@ const Downtitle = styled.div`
   }
 `;
 const Cardhold = styled.div`
-  width: 100%;
+  /* width: 100%; */
   display: flex;
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
+
+  @media (max-width: 768px){
+    justify-content: space-between;
+  }
 `;
 
 const Wrapper = styled.div`
@@ -72,6 +76,10 @@ const Wrapper = styled.div`
   margin: 10px 0;
   border-radius: 5px;
   background-color: white;
+
+  @media (max-width: 768px){
+    width: 95%;
+  }
   
 `;
 
@@ -82,5 +90,5 @@ const Container = styled.div`
   align-items: center;
   justify-content: center;
   padding-top: 80px;
-  background-color: #f1f1f2;
+  /* background-color: #f1f1f2; */
 `;

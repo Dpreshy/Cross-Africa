@@ -1,35 +1,17 @@
-import React, { useEffect, useState } from "react"
+import React from "react"
 import styled from "styled-components"
 import { BsCart } from "react-icons/bs";
 import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { signOut, addProduct, addToCart, removeCart } from "../Global/GlobalState"
-import MobileCard from "./MobileCard";
 
-const ItemsCard = ({ id, index, name, price,img, data }) => {
+const MobileCard = ({ id, index, name, price,img, data }) => {
   const cartData = useSelector((state) => state.reducers.cartItem);
   const cartitem = cartData?.find((el) => el?._id === id)
-  const [isMobile, setIsMobile] = useState(false)
   const dispatch = useDispatch();
-    // console.log(data)
-  useEffect(() => {
-    const checkScreenWidth = () => {
-      const isMobile = window.innerWidth <= 768;
-      setIsMobile(isMobile)
-    }
-    checkScreenWidth();
-    window.addEventListener('resize', checkScreenWidth);
-
-    return () => {
-      window.removeEventListener('resize', checkScreenWidth);
-    };
-  })
-
     return(
       <>
-        {
-          isMobile ? <MobileCard img={img} id={ id } index={ index} name={name} price={price} data={data} /> :
-            <Card key={ index }>
+        <Card key={index}>
           <Nav to={`/detail/${id}`}>
             <Image >
               <img src={img} />
@@ -52,12 +34,11 @@ const ItemsCard = ({ id, index, name, price,img, data }) => {
             </Hold>
           </Div>
         </Card>
-        }
       </>
     )
 }
 
-export default ItemsCard
+export default MobileCard
 
 const Nav = styled(NavLink)`
   text-decoration: none;
@@ -67,6 +48,25 @@ const Div = styled.div`
   width: 90%;
   display: flex;
   flex-direction: column;
+
+  @media (max-width: 730px){
+    width: 200px;
+  }
+  @media (max-width: 550px){
+    width: 170px;
+  }
+  @media (max-width: 440px){
+    width: 150px;
+  }
+  @media (max-width: 417px){
+    width: 130px;
+  }
+  @media (max-width: 380px){
+    width: 120px;
+  }
+  @media (max-width: 314px){
+    width: 100px;
+  }
 `
 const Show = styled.div`
   width: 100%;
@@ -94,9 +94,13 @@ const But = styled.button`
   background-color: #d975c0;
   color: white;
   cursor: pointer;
+  @media (max-width: 370px){
+    font-size: 12px;
+  }
 `
 const Hold = styled.div`
-  display: none;
+  /* display: none; */
+  margin-bottom: 10px;
 `
 const Image = styled.div`
   /* background-color: #cdc8c8; */
@@ -105,14 +109,20 @@ const Image = styled.div`
   justify-content: center;
   border-top-right-radius: 5px;
   border-top-left-radius: 5px;
-  width: 230px;
-  height: 220px;
+  width: 270px;
+  height: 230px;
+  margin: 5px;
   img {
     height: 100%;
     width: 100%;
     object-fit: cover;
     border-top-right-radius: 5px;
     border-top-left-radius: 5px;
+  }
+
+  @media (max-width: 730px){
+    width: 200px;
+    height: 200px;
   }
   @media (max-width: 550px){
     width: 170px;
@@ -122,8 +132,16 @@ const Image = styled.div`
     width: 150px;
     height: 220px;
   }
+  @media (max-width: 417px){
+    width: 130px;
+    height: 200px;
+  }
   @media (max-width: 380px){
     width: 120px;
+    height: 200px;
+  }
+  @media (max-width: 350px){
+    width: 110px;
     height: 200px;
   }
   @media (max-width: 314px){
@@ -158,38 +176,15 @@ const Price = styled.div`
 `;
 
 const Card = styled.div`
-  width: 250px;
-  height: 350px;
+  /* width: 300px; */
+  flex: 1 0 100px;
+  box-sizing: border-box;
+  /* height: 350px; */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-decoration: none;
   margin: 10px;
-
-  :hover{
-    ${Hold}{
-      display: block;
-      width: 100%;
-    }
-  }
-
-  @media (max-width: 600px){
-    width: 180px;
-    height: 270px;
-  }
-  @media (max-width: 530px){
-    width: 170px;
-    height: 270px;
-  }
-  @media (max-width: 440px){
-    width: 150px;
-    height: 100%;
-  }
-  @media (max-width: 380px){
-    width: 120px;
-  }
-  @media (max-width: 314px){
-    width: 100px;
-  }
+  /* background-color: gold; */
 `;

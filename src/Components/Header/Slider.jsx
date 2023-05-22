@@ -49,8 +49,17 @@ const Menu = styled.div`
   top: 0px;
   /* left: 150px; */
   left: -1000px;
-  z-index: 1;
+  z-index: 1111;
   transition: all 350ms ease-in-out;
+
+  ::before{
+    content: "";
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    /* background-color: #6a69649a; */
+    z-index: -1;
+  }
   div{
     display: flex;
     flex-direction: column;

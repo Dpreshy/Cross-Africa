@@ -37,7 +37,7 @@ const Header = () => {
     <div>
       <Container>
         <Wrapper>
-          <Logo>
+          <Logo to="/">
             <Div>
             <img src="/logo 1.png" />
               <div>Cross Africa</div>
@@ -111,16 +111,12 @@ const Header = () => {
             <Nav onClick={ () => {
               setshow_search(true)
             }}>
-           
-              <SearchIcon>
               <div>Search</div>
-              <FiSearch />
-              </SearchIcon>
+              <span><FiSearch /></span>
             </Nav>
             <Nav>
+              <NavLink to="/cart" style={ { textDecoration: "none" } }>
               <div> Cart</div>
-
-              <NavLink to="/cart" style={{ textDecoration: "none" }}>
                 <span>
                   <BsCart color="black" />
                   { cartData.length > 0 ? <Round>{ cartData.length}</Round> : null }
@@ -163,7 +159,7 @@ const Header = () => {
               
             </Bar>
             <div onClick={returnAgain}>
-            <Slider myRef={ myRef} />
+             <Slider myRef={ myRef} />
             </div>
           </Hold>
         </Wrapper>
@@ -223,19 +219,6 @@ const Show = styled.div`
     top: 0px;
   }
 `;
-const SearchIcon = styled.span`
-  display: none;
-
-  @media (max-width:768px) {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    div{
-      margin-right: 10px;
-    }
-  }   
-`
 const MyHold = styled.div`
   @media (max-width:768px) {
     display: none;
@@ -334,7 +317,7 @@ const Div = styled.div`
   justify-content: center;
   flex-direction: column;
 `;
-const Logo = styled.div`
+const Logo = styled(NavLink)`
   height: 100px;
   display: flex;
   align-items: flex-start;
@@ -342,6 +325,8 @@ const Logo = styled.div`
   flex-direction: column;
   margin-right: 30px;
   flex: 0.2 0.3 auto;
+  text-decoration: none;
+  color: black;
   /* background: gold; */
   /* margin-bottom: 10px; */
  
@@ -385,6 +370,16 @@ const Logo = styled.div`
       font-size: 14px;
     }
   }
+  @media (max-width: 283px){
+    img{
+      width: 20px;
+      height: 20px;
+    }
+    div{
+      font-weight: 500;
+      font-size: 12px;
+    }
+  }
 `;
 const Hold = styled.div`
   height: 70px;
@@ -393,23 +388,22 @@ const Hold = styled.div`
   justify-content: space-between;
   /* width: 85%; */
   flex: 1 0 100px;
-  /* background-color: gold; */
   @media (max-width:768px) {
-    justify-content: flex-end;
-    height: 80px;
-  }
-  @media (max-width: 660px) {
-    justify-content: flex-end;
+    flex: 0.5;
+    align-items: flex-end;
+    height: 65px;
   }
   width: 80%;
 `;
 const Bar = styled.div`
   display: none;
   @media (max-width: 1000px) {
+    height: 30px;
     display: flex;
     align-items: center;
     justify-content: center;
     margin-left: 20px;
+    /* background-color: blue; */
     cursor: pointer;    
   }
 `;
@@ -438,49 +432,16 @@ const Nav = styled.div`
       display: none;
     }
   }
+  :nth-child(4) {
+    display: none;
+    @media (max-width: 768px) {
+      display: flex;
+    }
+  }
 
   @media (max-width: 414px){
     div{
       display: none;
     }
-  }
-  
-  /* :nth-child(1){
-    @media (max-width: 1000px){
-      display: none;
-    }
-  } */
-`;
-const SearchHold = styled.div`
-  width: 400px;
-  height: 40px;
-  border: 2px solid #d975c0;
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  /* justify-content: center; */
-  input {
-    /* height: 40px; */
-    width: 350px;
-    outline: none;
-    border: 0;
-    padding-left: 10px;
-  }
-  button {
-    width: 70px;
-    height: 40px;
-    background-color: #d975c0;
-    border: 0px;
-    outline: none;
-
-    border-top-right-radius: 7px;
-    border-bottom-right-radius: 7px;
-  }
-
-  @media (max-width: 660px) {
-    width: 250px;
-  }
-  @media (max-width:768px) {
-    display: none;
   }
 `;
