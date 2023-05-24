@@ -114,16 +114,17 @@ const Header = () => {
               <div>Search</div>
               <span><FiSearch /></span>
             </Nav>
-            <NavLink to="/cart" style={ { textDecoration: "none", color: 'black' } }>
             <Nav>
-              <div> Cart</div>
+            <NavLink to="/cart" style={ { textDecoration: "none", color: 'black' } }>
+                <div> Cart</div>
+              </NavLink>
+              <NavLink to="/cart" style={ { textDecoration: "none", color: 'black' } }>
                 <span>
                   <BsCart color="black" />
                   { cartData.length > 0 ? <Round>{ cartData.length}</Round> : null }
-                  
-                </span>
-              </Nav>
+              </span>
               </NavLink>
+              </Nav>
             <Nav>
               <div>Help</div>
               <span>
