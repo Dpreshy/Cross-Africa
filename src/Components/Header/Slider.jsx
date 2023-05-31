@@ -37,6 +37,9 @@ const Slider = ({ myRef }) => {
 export default Slider;
 
 const Menu = styled.div`
+ display: none;
+
+ @media (max-width: 1000px){
   width: 250px;
   height: 100vh;
   background-color: white;
@@ -64,6 +67,7 @@ const Menu = styled.div`
     display: flex;
     flex-direction: column;
   }
+ }
 `;
 const Navs = styled(NavLink)`
   width: 95%;
