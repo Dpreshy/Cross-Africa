@@ -58,7 +58,7 @@ const AllOrders = () => {
       <Wrapper>
       <Header>
             <Text>Transactions</Text>
-            <SerachHold>
+            {/* <SerachHold>
           <input
               placeholder="Search by name or brand"
               value={ query }
@@ -67,7 +67,7 @@ const AllOrders = () => {
             <button onClick={search}>
             <BiSearch />
             </button>
-        </SerachHold>
+        </SerachHold> */}
           </Header>
       <Buttom>
           
@@ -100,7 +100,7 @@ const AllOrders = () => {
                 return total + (product.price * product.qty);
               }, 0) } quantity={ props.products?.filter((el) => el.sellerID === user._id).reduce((total, product) => {
                 return total + product.qty;
-              }, 0)} />
+              }, 0) } products={ props.products} />
             ))
       }
         </Buttom>

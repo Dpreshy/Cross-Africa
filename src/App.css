@@ -2,6 +2,89 @@
   text-align: center;
 }
 
+.pending{
+  padding: 10px 30px;
+  border: 0px;
+  outline: none;
+  font-size: 18px;
+  font-weight: 500;
+  color:#9747FF;
+  border-radius: 5px;
+}
+.cancled{
+  padding: 10px 30px;
+  border: 0px;
+  outline: none;
+  font-size: 18px;
+  font-weight: 500;
+  color: #CC212D ;
+  border-radius: 5px;
+}
+.rejected{
+  padding: 10px 30px;
+  border: 0px;
+  outline: none;
+  font-size: 18px;
+  font-weight: 500;
+  color: rgb(209, 41, 41);
+  border-radius: 5px;
+}
+.failed{
+  padding: 10px 30px;
+  border: 0px;
+  outline: none;
+  font-size: 18px;
+  font-weight: 500;
+  color: rgb(209, 41, 41);
+  border-radius: 5px;
+}
+.approved{
+  padding: 10px 30px;
+  border: 0px;
+  outline: none;
+  font-size: 18px;
+  font-weight: 500;
+  color: #27AE60;
+  border-radius: 5px;
+}
+.hold{
+  padding: 10px 30px;
+  border: 0px;
+  outline: none;
+  font-size: 18px;
+  font-weight: 500;
+  color: #EE65CC;
+  border-radius: 5px;
+}
+.completed{
+  padding: 10px 30px;
+  border: 0px;
+  outline: none;
+  font-size: 18px;
+  font-weight: 600;
+  color: rgba(13, 224, 58, 0.877);
+  border-radius: 5px;
+}
+.delivered{
+  padding: 10px 30px;
+  border: 0px;
+  outline: none;
+  font-size: 18px;
+  font-weight: 600;
+  color: rgba(13, 224, 58, 0.877);
+  border-radius: 5px;
+}
+.shipped{
+  padding: 10px 30px;
+  border: 0px;
+  outline: none;
+  font-size: 18px;
+  font-weight: 600;
+  color: white;
+  color: rgba(13, 224, 58, 0.877);
+  border-radius: 5px;
+}
+
 .pagination {
   width: 30px;
   /* height: 40px; */
@@ -38,19 +121,6 @@
 .pagination_link_disable a{
   color: rgb(198, 197, 202);
   border: 1px solid rgb(198, 197, 202);
-}
-
-.delivard{
-  color: rgb(16, 165, 16);
-}
-.pending{
-  color: blue;
-}
-.canceled{
-  color: red;
-}
-.hold{
-  color: gold;
 }
 .containerStyle{
   width: 350px;

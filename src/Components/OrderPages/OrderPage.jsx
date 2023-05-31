@@ -7,7 +7,7 @@ import {
 } from "react-icons/ai";
 import "../../App.css"
 
-const OrderPage = ({ avatar, index, order_No, price, pending_days, created, delivery_status, payment_method, tag_No, name, payment_status, quantity, amount }) => {
+const OrderPage = ({ avatar, index, order_No, price, pending_days, created, delivery_status, payment_method, tag_No, name, payment_status, quantity, amount,products }) => {
   const check = JSON.parse(localStorage.getItem("user"))
   const [ edit, setEdit ] = useState(false);
 
@@ -15,8 +15,7 @@ const OrderPage = ({ avatar, index, order_No, price, pending_days, created, deli
   // const orderSums = price.reduce((total, product) => {
   //     return total + (product.price * product.qty);
   //   }, 0);
-  
-  // console.log(orderSums)
+  const filterData = products?.filter((el) => el.sellerID === check._id)
   return (
           <Body key={index} >
             {order_No && <Td>
@@ -36,33 +35,38 @@ const OrderPage = ({ avatar, index, order_No, price, pending_days, created, deli
               {" "}
         <HoldHead>{ tag_No}</HoldHead>{" "}
             </Td>}
-            {avatar && <Td>
-              <UserHold>
+            {products && <Td>
+        {
+          filterData?.map((props) => (
+            <UserHold>
                 <span>
-            <Image src={ avatar} />
+            <Image src={ props.productID?.avatar[0].url} />
                 </span>
-               {name}
+               {props.productID.name}
               </UserHold>
+          ))
+              }
             </Td>}
-            {price && <Td>
-        {/* { filterData?.map((props) => ( */}
-          <HoldHead>{ price}</HoldHead>
-        {/* ))} */}
+            {products && <Td>
+        { filterData?.map((props) => (
+          <HoldHead>{ props.price}</HoldHead>
+        ))}
       </Td> }
             {quantity && <Td>
         <HoldHead>{ quantity}</HoldHead>{" "}
       </Td> }
-      { payment_method && <Td>
-        <HoldHead>{ payment_method }</HoldHead>
-      </Td> }
+      
       { amount && <Td>
         <HoldHead>{ amount }</HoldHead>
+      </Td> }
+      { payment_method && <Td>
+        <HoldHead>{ payment_method }</HoldHead>
       </Td> }
       { payment_status && <Td>
         <HoldHead>{ payment_status }</HoldHead>
       </Td> }
            {delivery_status &&  <Td>
-        <HoldHead><button  className={`${delivery_status}`}>{ delivery_status}</button></HoldHead>
+        <HoldHead className={`${delivery_status}`}>{ delivery_status}</HoldHead>
             </Td>}
       
            

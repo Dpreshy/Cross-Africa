@@ -96,7 +96,7 @@ const myData = filteredData?.filter((el)=> el.delivery_status === "failed")
         </Head>
         {
             searchData?.map((props,index) => (
-              <OrderPage index={ index } key={ index }  delivery_status={ props.delivery_status } order_No={ props.order_No } created={ moment(props.createdAt).format("D MMM YYYY") } payment_method={ props.payment_method } pending_days={ props.pending_days } price={ props.products?.filter((el) => el.sellerID === user._id).reduce((total, product) => {
+              <OrderPage index={ index } key={ index }  delivery_status={ props.delivery_status } order_No={ props.order_No } created={ moment(props.createdAt).format("D MMM YYYY") } payment_method={ props.payment_method } pending_days={ props.pending_days } amount={ props.products?.filter((el) => el.sellerID === user._id).reduce((total, product) => {
                 return total + (product.price * product.qty);
               }, 0)} />
             ))
@@ -166,6 +166,7 @@ const Container = styled.div`
     flex-direction: column;
 `
 const Header = styled.div`
+  width: 90%;
   display: flex;
   align-items: center;
   justify-content: space-between;
