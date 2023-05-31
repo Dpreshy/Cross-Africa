@@ -54,6 +54,7 @@ const myData = filteredData?.filter((el)=> el.delivery_status === "delivered")
   }
   const searchData = search(currentPageData)
 
+  console.log(searchData)
   var nf = Intl.NumberFormat()
   return (
       <Container>
@@ -96,7 +97,9 @@ const myData = filteredData?.filter((el)=> el.delivery_status === "delivered")
         </Head>
         {
             searchData?.map((props,index) => (
-              <OrderPage index={ index } key={ index }  delivery_status={ props.delivery_status } order_No={ props.order_No } created={ moment(props.createdAt).format("D MMM YYYY") } payment_method={ props.payment_method } pending_days={ props.pending_days } price={ nf.format(props.price)} />
+              <OrderPage index={ index } key={ index }  delivery_status={ props.delivery_status } order_No={ props.order_No } created={ moment(props.createdAt).format("D MMM YYYY") } payment_method={ props.payment_method } pending_days={ props.pending_days } price={ props.products?.filter((el) => el.sellerID === user._id).reduce((total, product) => {
+                return total + (product.price * product.qty);
+              }, 0)} />
             ))
       }
         </Buttom>

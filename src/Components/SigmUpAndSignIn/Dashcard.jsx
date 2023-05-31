@@ -1,13 +1,17 @@
 import React from "react";
 import styled from "styled-components";
-const Dashcard = ({ pr, da, ti, bg,sales,name}) => {
+const Dashcard = ({ pr, da, ti, bg, sales, name, sales1,id }) => {
+  
+  // const filteredData = sales1?.products
+
   return (
     <Box>
       <Boxhold>
         <Up>
           <Text>
-            <H1>{name }</H1>
-            <Number>{sales}</Number>
+            <H1>{ name }</H1>
+            {sales1 && <Number>₦{sales1}</Number>}
+            {sales && <Number>{sales}</Number>}
           </Text>
         </Up>
         {/* <Down>

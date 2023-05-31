@@ -50,6 +50,7 @@ const AllOrders = () => {
   );
   return query ? (result?.length ? result : null) : e
   }
+
   const searchData = search(currentPageData)
 
   var nf = Intl.NumberFormat()
@@ -58,16 +59,6 @@ const AllOrders = () => {
       <Uniheader />
       <Header>
             <Text>All Orders</Text>
-            {/* <SerachHold>
-          <input
-              placeholder="Search by name or brand"
-              value={ query }
-              onChange={e=> setQuery(e.target.value)}
-          />
-            <button onClick={search}>
-            <BiSearch />
-            </button>
-        </SerachHold> */}
           </Header>
       <Wrapper>
       <Buttom>
@@ -76,9 +67,9 @@ const AllOrders = () => {
             <Th>
               <HoldHead>Order Number </HoldHead>
             </Th>
-            {/* <Th>
+            <Th>
               <HoldHead>Pending Days</HoldHead>
-            </Th> */}
+            </Th>
             <Th>
               <HoldHead>Order Date</HoldHead>
             </Th>
@@ -94,7 +85,9 @@ const AllOrders = () => {
         </Head>
         {
             searchData?.map((props,index) => (
-              <OrderPage index={ index } key={ index }  delivery_status={ props.delivery_status } order_No={ props.order_No } created={ moment(props.createdAt).format("D MMM YYYY") } payment_method={ props.payment_method } pending_days={ props.pending_days } price={ nf.format(props.price)} />
+              <OrderPage index={ index } key={ index }  delivery_status={ props.delivery_status } order_No={ props.order_No } created={ moment(props.createdAt).format("D MMM YYYY") } payment_method={ props.payment_method } pending_days={ props.pending_days } price={ props.products?.filter((el) => el.sellerID === user._id).reduce((total, product) => {
+                return total + (product.price * product.qty);
+              }, 0)} />
             ))
       }
         </Buttom>

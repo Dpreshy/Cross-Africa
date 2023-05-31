@@ -27,7 +27,7 @@ const AllOrders = () => {
     return filteredProducts.length > 0;
   })
   const [ currentPage, setCurrentPage ] = useState(0)
-  const recordPage = 6
+  const recordPage = 10
   const lastIndex = currentPage * recordPage
   const pageCount = Math.ceil(filteredData?.length / recordPage)
   const currentPageData = filteredData?.slice(lastIndex, lastIndex + recordPage)
@@ -73,10 +73,10 @@ const AllOrders = () => {
           
           <Head>
             <Th>
-              <HoldHead>Date</HoldHead>
+              <HoldHead>Tag</HoldHead>
             </Th>
             <Th>
-              <HoldHead>Tag</HoldHead>
+              <HoldHead>Date</HoldHead>
             </Th>
             <Th>
               <HoldHead>Product</HoldHead>
@@ -96,7 +96,11 @@ const AllOrders = () => {
         </Head>
         {
             searchData?.map((props,index) => (
-              <OrderPage index={ index } key={ index }  delivery_status={ props.delivery_status } order_No={ props.order_No } created={ moment(props.createdAt).format("D MMM YYYY") } payment_method={ props.payment_method } pending_days={ props.pending_days } price={ nf.format(props.price)} />
+              <OrderPage index={ index } key={ index } delivery_status={ props.delivery_status } order_No={ props.order_No } created={ moment(props.createdAt).format("D MMM YYYY") } amount={ props.products?.filter((el) => el.sellerID === user._id).reduce((total, product) => {
+                return total + (product.price * product.qty);
+              }, 0) } quantity={ props.products?.filter((el) => el.sellerID === user._id).reduce((total, product) => {
+                return total + product.qty;
+              }, 0)} />
             ))
       }
         </Buttom>

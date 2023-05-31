@@ -5,6 +5,7 @@ import Uniheader from "./Uniheader";
 import { useQuery } from "@tanstack/react-query";
 import { getAllProduct, sellerProducts } from "../Api/ProductApi";
 import { orders } from "../Api/OrderApi";
+import { useEffect } from "react";
 
 const Dashboard = () => {
 
@@ -31,19 +32,40 @@ const Dashboard = () => {
   // console.log(pending)
 
   const today = new Date().toLocaleDateString();
-  const todayOrders = filteredData?.filter((order) => order.createdAt.includes(today))
+  // const checkData = filteredData?.findindex((el) => {
+  //   const filtereed = el.products.findindex((el) => el.sellerID === id)
+  //   return filtereed
+  // })
   
-  const totalSales = todayOrders?.reduce((total, order) => {
-    return total + order.products.reduce((productTotal, product) => {
+  const totalSales = filteredData?.reduce((total, order) => {
+    return total + order?.products.reduce((productTotal, product) => {
       return productTotal + (product.price * product.quantity)
     }, 0)
   }, 0);
+  const newCheck = () => {
+    let totalPrice = 0;
+
+    for (const data of filteredData) {
+      for (const product of data.products) {
+        totalPrice += product.price * product.qty;
+      }
+    }
+
+    return totalPrice
+  }
+  const numberOfSales =newCheck()
+
+  console.log(numberOfSales)
+  useEffect(() => {
+    newCheck()
+  },[])
+
   var nf = Intl.NumberFormat()
   return (
     <Container>
       <Uniheader />
       <Wrap>
-        <Dashcard pr={ `₦${totalSales}` } da="Mar 16" ti="Today" bg="#3d3dee" sales={ `₦${nf.format(totalSales)}` } name="Totals Sales"/>
+        <Dashcard pr={ `₦${totalSales}` } da="Mar 16" ti="Today" bg="#3d3dee" sales1={ nf.format(numberOfSales) } name="Totals Sales"/>
         <Dashcard pr={ `₦${totalSales}` } da="Mar 16" ti="Today" bg="#3d3dee" sales={ pending }
         name="Pending Products"/>
         <Dashcard pr={ `₦${totalSales}` } da="Mar 16" ti="Today" bg="#3d3dee" sales={ liveProducts } name="Live Products"/>

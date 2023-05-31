@@ -7,9 +7,16 @@ import {
 } from "react-icons/ai";
 import "../../App.css"
 
-const OrderPage = ({ avatar, index, order_No, price, pending_days, created, delivery_status, payment_method,tag_No, name,payment_status,quantity,amount }) => {
+const OrderPage = ({ avatar, index, order_No, price, pending_days, created, delivery_status, payment_method, tag_No, name, payment_status, quantity, amount }) => {
+  const check = JSON.parse(localStorage.getItem("user"))
   const [ edit, setEdit ] = useState(false);
-  // console.log(edit)
+
+  // const filterData = price?.filter((el) => el.sellerID === check._id)
+  // const orderSums = price.reduce((total, product) => {
+  //     return total + (product.price * product.qty);
+  //   }, 0);
+  
+  // console.log(orderSums)
   return (
           <Body key={index} >
             {order_No && <Td>
@@ -38,7 +45,9 @@ const OrderPage = ({ avatar, index, order_No, price, pending_days, created, deli
               </UserHold>
             </Td>}
             {price && <Td>
-        <HoldHead>{ price}</HoldHead>{" "}
+        {/* { filterData?.map((props) => ( */}
+          <HoldHead>{ price}</HoldHead>
+        {/* ))} */}
       </Td> }
             {quantity && <Td>
         <HoldHead>{ quantity}</HoldHead>{" "}
