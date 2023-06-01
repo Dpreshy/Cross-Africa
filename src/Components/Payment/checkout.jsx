@@ -19,6 +19,8 @@ const Checkout = () => {
   const cartData = useSelector((state) => state.reducers.cartItem)
   const quantity = useSelector((state) => state.reducers.qty)
   const totalPrice = cartData?.reduce((price, item) => price + item.qty * item.price + item.shippingFee * item.qty, 0)
+  const shippingFee = cartData?.reduce((fee, item) => fee + item.qty * item.shippingFee, 0)
+  // console.log(shippingFee)
   const [ selectCountry, setSelectCountry ] = useState(countryData)
   let [ findCountry, setFindCountry ] = useState(0)
   const [ email, setemail ] = useState(""); 
@@ -55,9 +57,9 @@ const productOrdered=()=>{
   }
   const create = useMutation({
     mutationKey: ["order"],
-    mutationFn: async ({firstName,lastName,email,order_No,payment_method,country, Localgovt, state, apartment, nearestBusStop,products,subtotal, totalQty,address}) => {
+    mutationFn: async ({firstName,lastName,email,order_No,payment_method,country, Localgovt, state, apartment, nearestBusStop,products,subtotal, totalQty,address,shippingFee}) => {
       // console.log(id);
-      await axios.post(`${baseURL}/api/order/create`,{firstName,lastName,email,order_No,payment_method,country, Localgovt, state, apartment, nearestBusStop,products,subtotal, totalQty,address}).then((res)=>{
+      await axios.post(`${baseURL}/api/order/create`,{firstName,lastName,email,order_No,payment_method,country, Localgovt, state, apartment, nearestBusStop,products,subtotal, totalQty,address,shippingFee}).then((res)=>{
         navigate("/finishshipping")
         console.log(res.data)
         localStorage.setItem("order", JSON.stringify(res.data.data))
@@ -89,7 +91,7 @@ const productOrdered=()=>{
       setError(true)
       alert("All inputs most be filed ")
     }
-    create.mutate({firstName: firstName,lastName: lastName,email: email,order_No: phone_No,payment_method: payment_Method,country: country, Localgovt: Localgovt, state:state, apartment: apartment, nearestBusStop: nearestBusStop, products:products,subtotal: totalPrice, totalQty:quantity, address: address})
+    create.mutate({firstName: firstName,lastName: lastName,email: email,order_No: phone_No,payment_method: payment_Method,country: country, Localgovt: Localgovt, state:state, apartment: apartment, nearestBusStop: nearestBusStop, products:products,subtotal: totalPrice, totalQty:quantity, address: address, shippingFee: shippingFee})
   }
   useEffect(() => {
     getCountryName()
