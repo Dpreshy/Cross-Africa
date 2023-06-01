@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 import styled from "styled-components";
 import { AiFillCaretDown } from "react-icons/ai";
 import { BsCart } from "react-icons/bs";
-import { BiHelpCircle, BiSearch } from "react-icons/bi";
+import { BiHelpCircle, BiSearch,BiArrowBack } from "react-icons/bi";
 import { FiMenu, FiSearch } from "react-icons/fi";
 import { NavLink, useNavigate } from "react-router-dom";
 import Slider from "./Slider";
@@ -218,6 +218,8 @@ const Show = styled.div`
     width: 100%;
     position: fixed;
     top: 0px;
+
+
   }
 `;
 const MyHold = styled.div`

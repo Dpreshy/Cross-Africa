@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useState } from 'react'
-import { BiSearch } from "react-icons/bi";
+import { BiSearch,BiArrowBack } from "react-icons/bi";
 import styled from 'styled-components';
 import { getAllProduct } from './Api/ProductApi';
 import { NavLink } from 'react-router-dom';
@@ -36,16 +36,21 @@ const Search = ({setshow_search}) => {
   // console.log(searchData)
   return (
     <Container>
+      <Hold>
+        <span onClick={()=> setshow_search(false)}><BiArrowBack size="30px" color="white"/></span>
        <SearchHold>
           <input
               placeholder="Search by name or brand"
               value={ query }
               onChange={e=> setQuery(e.target.value)}
           />
-            <button onClick={search}>
+          <button onClick={ () => {
+             search(currentPageData)
+            }}>
             <BiSearch />
             </button>
       </SearchHold>
+    </Hold>
       <div>
       {
           searchData?.map((props, index) => (
@@ -78,12 +83,25 @@ const Navs = styled(NavLink)`
     background-color: lightgray;
   }
 `
+const Hold = styled.div`
+  display: flex;
+`
 const Container = styled.div`
 
   @media (max-width: 768px){
     width: 100%;
     display: flex;
     flex-direction: column;
+
+    span{
+      height: 60px;
+      /* background-color: gold; */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 5px 15px 10px 5px;
+      cursor: pointer;
+    }
   }
 `
 const Div = styled.div`
@@ -131,6 +149,7 @@ const SearchHold = styled.div`
     background-color: #d975c0;
     border: 0px;
     outline: none;
+    cursor: pointer;
 
     border-top-right-radius: 7px;
     border-bottom-right-radius: 7px;
@@ -139,12 +158,9 @@ const SearchHold = styled.div`
   @media (max-width: 768px) {
     width: 100%;
     margin-top: 10px;
-
+    margin-right: 10px;
     input{
       width: 95%;
     }
   }
-  /* @media (max-width:768px) {
-    display: none;
-  } */
 `;
