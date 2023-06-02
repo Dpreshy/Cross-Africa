@@ -49,7 +49,7 @@ const SignUp = () => {
 
     onSuccess: (res) => {
       console.log(res);
-      navigate("/auth/verify");
+      navigate("/auth/personalinfo");
     },
 
     onError: (error) => {

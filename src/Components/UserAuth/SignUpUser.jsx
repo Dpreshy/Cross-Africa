@@ -49,7 +49,7 @@ const SignUpUser = () => {
 
     onSuccess: (res) => {
       console.log(res);
-      navigate("/otp-user");
+      navigate("/login-user");
     },
 
     onError: (error) => {

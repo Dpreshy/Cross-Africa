@@ -42,20 +42,24 @@ const Dashboard = () => {
       return productTotal + (product.price * product.quantity)
     }, 0)
   }, 0);
+  console.log(filteredData)
   const newCheck = () => {
     let totalPrice = 0;
 
-    for (const data of filteredData) {
-      for (const product of data.products) {
-        totalPrice += product.price * product.qty;
+    if (filteredData == undefined) {
+     console.log(filteredData)
+    } else {
+      for (const data of filteredData) {
+        for (const product of data.products) {
+          totalPrice += product.price * product.qty;
+        }
       }
     }
-
     return totalPrice
   }
   const numberOfSales =newCheck()
 
-  console.log(numberOfSales)
+  // console.log(numberOfSales)
   useEffect(() => {
     newCheck()
   },[])
