@@ -6,6 +6,9 @@ import { useQuery } from "@tanstack/react-query";
 import { getAllProduct, sellerProducts } from "../Api/ProductApi";
 import { orders } from "../Api/OrderApi";
 import { useEffect } from "react";
+import {RiWalletLine} from "react-icons/ri"
+import { MdStorefront } from "react-icons/md"
+import { RxSketchLogo, RxAvatar } from "react-icons/rx"
 
 const Dashboard = () => {
 
@@ -42,7 +45,7 @@ const Dashboard = () => {
       return productTotal + (product.price * product.quantity)
     }, 0)
   }, 0);
-  console.log(filteredData)
+  // console.log(filteredData)
   const newCheck = () => {
     let totalPrice = 0;
 
@@ -69,23 +72,23 @@ const Dashboard = () => {
     <Container>
       <Uniheader />
       <Wrap>
-        <Dashcard pr={ `₦${totalSales}` } da="Mar 16" ti="Today" bg="#3d3dee" sales1={ nf.format(numberOfSales) } name="Totals Sales"/>
-        <Dashcard pr={ `₦${totalSales}` } da="Mar 16" ti="Today" bg="#3d3dee" sales={ pending }
+        <Dashcard pr={<RiWalletLine />} da="Mar 16" ti="Today" bg="#3d3dee" sales1={ nf.format(numberOfSales) } name="Totals Sales"/>
+        <Dashcard pr={<MdStorefront /> } da="Mar 16" ti="Today" bg="#3d3dee" sales={ pending }
         name="Pending Products"/>
-        <Dashcard pr={ `₦${totalSales}` } da="Mar 16" ti="Today" bg="#3d3dee" sales={ liveProducts } name="Live Products"/>
-        <Dashcard pr={ `₦${totalSales}` } da="Mar 16" ti="Today" bg="#3d3dee" sales={ pending }
+        <Dashcard pr={ <MdStorefront /> } da="Mar 16" ti="Today" bg="#3d3dee" sales={ liveProducts } name="Live Products"/>
+        <Dashcard pr={ <MdStorefront /> } da="Mar 16" ti="Today" bg="#3d3dee" sales={ pending }
         name="Pending Products"/>
         <Dashcard
-          pr={`₦${totalSales}`} da="Mar 16" ti="Today" bg="#3d3dee" sales={ approved } name="Approved Products"
+          pr={<MdStorefront /> } da="Mar 16" ti="Today" bg="#3d3dee" sales={ approved } name="Approved Products"
         />
         <Dashcard
-         pr={`₦${totalSales}`} da="Mar 16" ti="Today" bg="#3d3dee" sales={ cancled } name="Cancled Products"
+         pr={<MdStorefront /> } da="Mar 16" ti="Today" bg="#3d3dee" sales={ cancled } name="Cancled Products"
         />
         <Dashcard
-         pr={`₦${totalSales}`} da="Mar 16" ti="Today" bg="#3d3dee" sales={ filteredData?.length} name="Orders"
+         pr={<MdStorefront /> } da="Mar 16" ti="Today" bg="#3d3dee" sales={ filteredData?.length} name="Orders"
         />
         <Dashcard
-         pr={`₦${totalSales}`} da="Mar 16" ti="Today" bg="#3d3dee" sales={ returned} name="Returned Products"
+         pr={<MdStorefront /> } da="Mar 16" ti="Today" bg="#3d3dee" sales={ returned} name="Returned Products"
         />
       </Wrap>
     </Container>
