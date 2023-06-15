@@ -1,58 +1,94 @@
-import React from 'react';
-// import logo from './logo.svg';
-import { usePaystackPayment } from 'react-paystack';
-// import './App.css';
+// import { Button } from "antd";
+import React, { useState } from "react";
+// import { useHistory } from "react-router-dom";
+import { usePaystackPayment } from "react-paystack";
+// import ThanksYou from "./ThanksYou";
 
-const config = {
-    reference: (new Date()).getTime().toString(),
-    email: "user@example.com",
-    amount: 20000, //Amount is in the country's lowest currency. E.g Kobo, so 20000 kobo = N200
-    publicKey: 'pk_test_dsdfghuytfd2345678gvxxxxxxxxxx',
-};
+const PayNow = () => {
+  // const history = useHistory();
+  const [amount, setAmount] = useState(0);
+  const [email, setEmail] = useState("");
 
-// you can call this function anything
-const onSuccess = (reference) => {
-  // Implementation for whatever you want to do with reference and after success call.
-  console.log(reference);
-};
+  const onSuccess = (reference) => {
+    // history.push("/thanks");
+    console.log(reference);
+  };
 
-// you can call this function anything
-const onClose = () => {
-  // implementation for  whatever you want to do when the Paystack dialog closed.
-  console.log('closed')
-}
+  const onClose = () => {
+    alert("having any issue?");
+    console.log("closed");
+  };
 
-const PaystackHookExample = () => {
-    const initializePayment = usePaystackPayment(config);
-    return (
-      <div>
-          <button onClick={() => {
-              initializePayment(onSuccess, onClose)
-          }}>Paystack Hooks Implementation</button>
-      </div>
-    );
-};
-
-function Paystack() {
+  const initializePayment = usePaystackPayment({
+    reference: new Date().getTime(),
+    email: email,
+    amount: amount ,
+    publicKey: "pk_test_5ca53f20c464ea3c97e93b0c6524952bc588cb18",
+  });
   return (
-    <div className="App">
-      <header className="App-header">
-        {/* <img src={logo} className="App-logo" alt="logo" /> */}
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <div
+      style={{
+        marginTop: "100px",
+      }}
+    >
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          marginTop: "100px",
+          alignItems: "center",
+          flexDirection: "column",
+        }}
+      >
+        <div
+          style={{
+            marginBottom: "10px",
+          }}
         >
-          Learn React
-        </a>
-      </header>
-      <PaystackHookExample />
+          {" "}
+          You are giving ₦{amount / 100}{" "}
+        </div>
+        <input
+          placeholder="Enter your Email"
+          style={{
+            width: "300px",
+            padding: "10px 10px",
+            marginBottom: "10px",
+          }}
+          value={email}
+          onChange={(e) => {
+            setEmail(e.target.value);
+          }}
+        />
+        <input
+          placeholder="Amount"
+          style={{
+            width: "300px",
+            padding: "10px 10px",
+          }}
+          value={amount}
+          onChange={(e) => {
+            setAmount(e.target.value);
+          }}
+        />
+      </div>
+
+      <div
+        onClick={() => {
+          initializePayment(onSuccess, onClose);
+        }}
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          margin: "auto",
+          marginTop: "30px",
+        }}
+      >
+        Pay Now
+      </div>
     </div>
   );
-}
+};
 
-export default Paystack;
+export default PayNow

@@ -57,9 +57,9 @@ const productOrdered=()=>{
   }
   const create = useMutation({
     mutationKey: ["order"],
-    mutationFn: async ({firstName,lastName,email,phone_No,payment_method,country, Localgovt, state, apartment, nearestBusStop,products,subtotal, totalQty,address,shippingFee}) => {
+    mutationFn: async (formData) => {
       // console.log(id);
-      await axios.post(`${baseURL}/api/order/create`,{firstName,lastName,email,phone_No,payment_method,country, Localgovt, state, apartment, nearestBusStop,products,subtotal, totalQty,address,shippingFee}).then((res)=>{
+      await axios.post(`${baseURL}/api/order/create`,formData).then((res)=>{
         navigate("/finishshipping")
         console.log(res.data)
         localStorage.setItem("order", JSON.stringify(res.data.data))
@@ -67,7 +67,6 @@ const productOrdered=()=>{
           console.log(err)
       })
   },
-
     onError: (error) => {
         console.log(error)
     }
@@ -91,7 +90,8 @@ const productOrdered=()=>{
       setError(true)
       alert("All inputs most be filed ")
     }
-    create.mutate({firstName: firstName,lastName: lastName,email: email,phone_No: phone_No,payment_method: payment_Method,country: country, Localgovt: Localgovt, state:state, apartment: apartment, nearestBusStop: nearestBusStop, products:products,subtotal: totalPrice, totalQty:quantity, address: address, shippingFee: shippingFee})
+    const formData = {firstName: firstName,lastName: lastName,email: email,phone_No: phone_No,payment_method: payment_Method,country: country, Localgovt: Localgovt, state:state, apartment: apartment, nearestBusStop: nearestBusStop, products:products,subtotal: totalPrice, totalQty:quantity, address: address, shippingFee: shippingFee}
+    create.mutate(formData)
   }
   useEffect(() => {
     getCountryName()

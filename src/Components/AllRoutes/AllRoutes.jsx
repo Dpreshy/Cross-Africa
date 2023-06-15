@@ -21,7 +21,7 @@ import Cart from "../Payment/Cart";
 import Categories from "../Allitems/Categories"
 import Finishshipping from "../Payment/Finishshipping"
 import PaymentReview from "../Review/PaymentReview";
-// import Paystack from "../Payment/Paystack"
+import Paystack from "../Payment/Paystack"
 
 const AllRoutes = () => {
   let element = useRoutes([
@@ -116,10 +116,10 @@ const AllRoutes = () => {
           path: "/detail/:id",
           element: <Detail />,
         },
-        // {
-        //   path: "/paystack",
-        //   element: <Paystack />,
-        // },
+        {
+          path: "/paystack",
+          element: <Paystack />,
+        },
         {
           path: "/payment",
           children: [
