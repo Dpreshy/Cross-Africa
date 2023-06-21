@@ -26,7 +26,7 @@ const DetailProduct = () => {
         <Cardhold>
         {
         currentPageData?.map((props, index) => (
-          <ItemsCard id={ props._id } name={ props.name } price={ nf.format(props?.price) } img={ props?.avatar[0].url} />
+          <ItemsCard id={ props._id } name={ props.name } price={ nf.format(props?.price) } img={ props?.avatar[0].url} data={props}/>
         ))
         }
       </Cardhold>

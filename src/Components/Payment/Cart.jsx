@@ -29,7 +29,6 @@ const Cart = () => {
     if (check) {
       if(totalPrice >= 50000){
         navigate("/checkout")
-        // alert("he no work")
       }else{
         alert("You must have a total price of ₦50,000 to perform this action")
       }
@@ -37,7 +36,6 @@ const Cart = () => {
       navigate("/login-user")
     }
   }
-  // console.log(cartData)
   var nf = Intl.NumberFormat()
   return (
     <div>
@@ -142,7 +140,6 @@ const Price = styled.div`
 `
 const Info = styled.div`
   display: flex;
-  /* background-color: gold; */
   margin-right: 10px;
 `;
 const Name = styled.div`
@@ -160,7 +157,6 @@ const Name = styled.div`
   }
 `;
 const Image = styled.img`
-  /* background-color: gold; */
   width: 90px;
   height: 90px;
   margin-right: 20px;
@@ -186,7 +182,6 @@ const Scroll = styled.div`
 `;
 const Icon = styled.div`
   width: 130px;
-  /* background-color: red; */
   display: flex;
   justify-content: space-between;
 `;
@@ -225,7 +220,6 @@ const Down = styled.div`
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  border-bottom: 1.9px solid grey;
   padding: 20px 0;
 `;
 const Wrapper = styled.div`

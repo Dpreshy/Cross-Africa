@@ -93,6 +93,13 @@ const Hold = styled.div`
   @media (max-width: 763px){
     margin: 10px;
   }
+  @media (max-width: 670px){
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
 `
 const Wrapper = styled.div`
   width: 95%;
@@ -100,12 +107,11 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  /* background-color: gold; */
 
   @media (max-width: 763px){
     justify-content: center;
   }
-  @media (max-width: 500px){
+  @media (max-width: 670px){
    text-align: center;
   }
 `;
@@ -116,6 +122,4 @@ const Container = styled.div`
   align-items: center;
   justify-content: center;
   margin-top: 30px;
-  /* background-color: gold; */
-
 `;

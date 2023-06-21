@@ -10,6 +10,7 @@ import { useMutation } from "@tanstack/react-query";
 import { placeOrder } from "../Api/OrderApi";
 import { useEffect } from "react";
 import axios from "axios";
+import { usePaystackPayment } from "react-paystack";
 
 // const baseURL = "http://localhost:5000";
 const baseURL = "https://crossbackend.onrender.com";
@@ -20,7 +21,6 @@ const Checkout = () => {
   const quantity = useSelector((state) => state.reducers.qty)
   const totalPrice = cartData?.reduce((price, item) => price + item.qty * item.price + item.shippingFee * item.qty, 0)
   const shippingFee = cartData?.reduce((fee, item) => fee + item.qty * item.shippingFee, 0)
-  // console.log(shippingFee)
   const [ selectCountry, setSelectCountry ] = useState(countryData)
   let [ findCountry, setFindCountry ] = useState(0)
   const [ email, setemail ] = useState(""); 
@@ -43,7 +43,6 @@ const productOrdered=()=>{
   const Data = cartData.map((el)=> ({productID: el._id, sellerID: el.user,qty: el.qty, price: el.price}))
   setProducts(Data)
   }
-  // console.log(cartData)
 
   const returnCountry = () => {
     setFindCountry(() => findCountry + 1)
@@ -57,21 +56,14 @@ const productOrdered=()=>{
   }
   const create = useMutation({
     mutationKey: ["order"],
-    mutationFn: async (formData) => {
-      // console.log(id);
-      await axios.post(`${baseURL}/api/order/create`,formData).then((res)=>{
-        navigate("/finishshipping")
-        console.log(res.data)
-        localStorage.setItem("order", JSON.stringify(res.data.data))
-      }).catch((err)=>{
-          console.log(err)
-      })
-  },
+    mutationFn: placeOrder,
+    onSuccess: () => {
+      navigate("/finishshipping")
+    },
     onError: (error) => {
         console.log(error)
     }
   })
-  // console.log(payment_Method)
 
   const handleSubmit = (e)=>{
     e.preventDefault()
@@ -93,6 +85,24 @@ const productOrdered=()=>{
     const formData = {firstName: firstName,lastName: lastName,email: email,phone_No: phone_No,payment_method: payment_Method,country: country, Localgovt: Localgovt, state:state, apartment: apartment, nearestBusStop: nearestBusStop, products:products,subtotal: totalPrice, totalQty:quantity, address: address, shippingFee: shippingFee}
     create.mutate(formData)
   }
+  const onSuccess = (reference) => {
+    // history.push("/thanks");
+    const formData = {firstName: firstName,lastName: lastName,email: email,phone_No: phone_No,payment_method: payment_Method,country: country, Localgovt: Localgovt, state:state, apartment: apartment, nearestBusStop: nearestBusStop, products:products,subtotal: totalPrice, totalQty:quantity, address: address, shippingFee: shippingFee, payment_status: "paid"}
+    create.mutate(formData)
+    console.log(reference);
+  };
+
+  const onClose = () => {
+    alert("having any issue?");
+    console.log("closed");
+  };
+
+  const initializePayment = usePaystackPayment({
+    reference: new Date().getTime(),
+    email: email,
+    amount: totalPrice*100,
+    publicKey: "pk_test_5ca53f20c464ea3c97e93b0c6524952bc588cb18",
+  });
   useEffect(() => {
     getCountryName()
     productOrdered()
@@ -107,7 +117,7 @@ const productOrdered=()=>{
                 <Title>Contact Information</Title>
                 <Text>Email</Text>
                 <InputCont>
-                  <Input placeholder="email"  value={email} onChange={(e)=> setemail(e.target.value)}/>
+                  <Input type="email" placeholder="email"  value={email} onChange={(e)=> setemail(e.target.value)}/>
                   {/* <span>Chance</span> */}
                 </InputCont>
               </InputHold>
@@ -228,7 +238,9 @@ const productOrdered=()=>{
                   </span>
                   <div onClick={()=>{navigate(-1)}}>Return to Cart</div>
                 </Div>
-                <Button type='submit' disabled={create.status === "loading" ? true: false}>{ create.status === "loading" ? "Loading..." : "Continue"}</Button>
+                {payment_Method === "Payment before delivery" ? <Button_Div onClick={() => {initializePayment(onSuccess, onClose)}}>{ create.status === "loading" ? "Loading..." : "Continue"}</Button_Div>
+                 :
+                  <Button type='submit' disabled={create.status === "loading" ? true: false}>{ create.status === "loading" ? "Loading..." : "Continue"}</Button>}
               </Buttons>
             </Hold>
           </Left>
@@ -255,12 +267,20 @@ const productOrdered=()=>{
 
 export default Checkout;
 
+const Button_Div = styled.div`
+    padding: 10px 20px;
+  border: #d975c0;
+  background-color: #d975c0;
+  border-radius: 5px;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+`
 const MyDiv = styled.div`
   width: 250px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  /* background-color: gold; */
   margin: 10px 0px;
 `;
 const Price = styled.div`
@@ -269,13 +289,11 @@ const Price = styled.div`
 const Title2 = styled.div`
   font-size: 18px;
   font-weight: 600;
-  /* margin-bottom: 10px; */
 `;
 const Content = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  /* background-color: gold; */
   margin-left: 15px;
   width: 90%;
 `;
@@ -304,7 +322,6 @@ const Optionav = styled.div`
   border-radius: 5px;
   align-items: center;
   justify-content: space-between;
-  // background-color: gold;
   height: 30px;
 
   span {
@@ -327,7 +344,6 @@ const Right = styled.div`
   @media (max-width: 768px ){
     display: none;
   }
-  /* background-color: blue; */
 `;
 const Button = styled.button`
   padding: 15px 20px;
@@ -445,7 +461,6 @@ const Left = styled.div`
   border-right: 2px solid lightgray;
   display: flex;
   justify-content: center;
-  /* background-color: gold; */
 `;
 const Wrapper = styled.div`
   width: 95%;
