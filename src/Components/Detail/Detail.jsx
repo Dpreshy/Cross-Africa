@@ -20,7 +20,7 @@ const Detail = () => {
     queryFn: ()=> getSingleProduct(id),
   })
 
-  // console.log(data)
+  console.log(data)
   var nf = Intl.NumberFormat()
 
   return (
